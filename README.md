@@ -1,2 +1,8 @@
 # c-sharp-patterns
-a fast game with c sharp, tested Nuget packages and patterns
+Just some practices for patterns in C sharp
+
+## DI_MVP:
+
+MVP with MicrosoftInjection and SimpleInjection
+
+## DI_MVC:
