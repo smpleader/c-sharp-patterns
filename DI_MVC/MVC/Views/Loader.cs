@@ -15,42 +15,39 @@ namespace DI_MVC.MVC.Views
         public Loader()
         {
             InitializeComponent();
-            /* Await for some seconds 
-             * */
         }
         public string Title { get { return Text; } set { Text = value; } }
 
         public Form Form { get { return this; } }
 
-        private void Loader_Load(object sender, EventArgs e)
+        private async void Loader_Load(object sender, EventArgs e)
         {
             // Do some check asynchonize:
-            // - Crashed file
+            // - History file
             // - Setup ready
             // - Library ready
-            checkCrash();
 
-            gi
-            Thread.Sleep(1000);
-            Backbone.Start("Starter");
+            await checkCrash();
+            await checkSetup();
+            await Task.Delay(3000);
+            Backbone.Run("Starter");
         }
 
-        private string Msg;
-
-        private void checkCrash()
+        private async Task checkCrash()
         {
-            ShowAfter("Start Crash Check", 1);
-            ShowAfter("Checking Crash..", 2);
-            ShowAfter("Nothing Crash!!", 1);
+            label1.Text = "Start Crash Check..";
+            await Task.Delay(3000);
+            label1.Text = "Nothing Crash!!";
         }
 
-        private void ShowAfter(string msg, int sec) {
-            var tmr = new System.Windows.Forms.Timer();
-            tmr.Tick += delegate {
-                label1.Text = msg;
-            };
-            tmr.Interval = (int)TimeSpan.FromMinutes(sec).TotalMilliseconds;
-            tmr.Start();
+        private async Task checkSetup()
+        {
+            // WARNING: this demo for a new thread, which won't use current object access
+            await Task.Run(() => { 
+                // new thread here
+                // THIS DO NOT SUPPORT CLOSURE !!!!
+            });
         }
+
     }
 }

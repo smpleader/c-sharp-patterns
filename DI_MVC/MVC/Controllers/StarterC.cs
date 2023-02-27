@@ -12,6 +12,11 @@ namespace DI_MVC.MVC.Controllers
         public override string Name { get { return "Starter"; } }
         private Starter _view = new Starter();
         public override IView View { get { return _view; } }
-        
+
+        public override void Open()
+        {
+            if( Closed ) _view = new Starter();
+            View.Form.Show();
+        }
     }
 }

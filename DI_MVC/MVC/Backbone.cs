@@ -39,23 +39,6 @@ namespace DI_MVC.MVC
             th.Start(); 
         }
 
-        public static void Start(string obj)
-        {
-            if (obj == "Loader" || current == obj)
-            {
-                MessageBox.Show("Invalid logic calling controller");
-            }
-
-                Controller(current).View.Form.Close();
-            //MessageBox.Show(current+ " :: " +count().ToString());
-            //Run(current, "Close");
-            current = obj;
-                Controller(current).View.Form.Show();
-            // MessageBox.Show(current + " >> " + count().ToString());
-           // NewThread();
-                //StartCurrentThread();
-        }
-
         public static void StartCurrentThread()
         {
             Application.Run(Controller(current).View.Form);
@@ -63,7 +46,7 @@ namespace DI_MVC.MVC
 
         public static void Run(string obj = "Starter", string cmd = "Open")
         {
-            var ctrl = Controller(obj);
+            var ctrl = (obj == "Loader" ) ? null : Controller(obj);
             if ( null == ctrl)
             {
                 MessageBox.Show("Controller not found");
@@ -71,8 +54,25 @@ namespace DI_MVC.MVC
             }
             else
             {
-                current= ctrl.Name; //ctrl.GetType().Name
-                ctrl.Fire(cmd);
+                if ( cmd == "Open")
+                {
+                    if (current == "Loader" )
+                    {
+                        Controller(current).View.Form.Hide();
+                    }
+                    else
+                    {
+                        Controller(current).Close();
+                    }
+                    current = ctrl.Name;
+                    Controller(current).Open(); 
+
+                }
+                else
+                {
+                    current = ctrl.Name; //ctrl.GetType().Name   
+                    ctrl.Fire(cmd);
+                }
             }
         }
     }

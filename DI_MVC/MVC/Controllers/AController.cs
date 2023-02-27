@@ -11,6 +11,7 @@ namespace DI_MVC.MVC.Controllers
     internal class AController : IController
     {
         public virtual string Name { get; }
+        public virtual bool Closed { get; set; } = false;
         public virtual IView View { get; }
         public void Fire(string command) {
             try
@@ -26,18 +27,14 @@ namespace DI_MVC.MVC.Controllers
             }
         }
 
-        public void Switch()
+        public virtual void Open()
         {
-            //View.Close();
-            View.Form.Visible = false; //Hide();
-        }
-        /*public void Show()
-        {
+            // TODO: check Closed to reassign view in child
             View.Form.Show();
-            //View.Form.Dispose();
-        }*/
+        }
         public void Close()
         {
+            Closed = true;
             View.Close();
             View.Form.Dispose();
         }

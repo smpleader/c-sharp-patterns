@@ -24,7 +24,7 @@ namespace DI_MVC.MVC.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Backbone.Start("Starter"); 
+            Backbone.Run("Starter"); 
         }
     }
 }

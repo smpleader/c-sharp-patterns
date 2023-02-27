@@ -12,6 +12,11 @@ namespace DI_MVC.MVC.Controllers
         public override string Name { get { return "User"; } }
         private User _view = new User();
         public override IView View { get { return _view;  } }
-         
+
+        public override void Open()
+        {
+            if (Closed) _view = new User();
+            View.Form.Show();
+        }
     }
 }

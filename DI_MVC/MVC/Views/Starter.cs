@@ -13,7 +13,7 @@ namespace DI_MVC.MVC.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Backbone.Start("User");
+            Backbone.Run("User");
         }
     }
 }
