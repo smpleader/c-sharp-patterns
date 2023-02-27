@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using DI.MVP_SI.Application;
+using DI.MVP_SI.Services;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +16,16 @@ namespace DI.MVP_SI.Views
     public partial class UserView : Form, IView
     {
         private Presenters.PMain _presenter;
+        private SApplication App;
         public UserView()
         {
             InitializeComponent();
             _presenter = new Presenters.PMain(this);
+            App = SimpleInjectionDI.container.GetInstance<SApplication>();
+            if (!App.State.SwitchScreen)
+            {
+                button3.Visible= false;
+            }
         }
         public Form Form
         {
@@ -38,6 +46,11 @@ namespace DI.MVP_SI.Views
         {
             var post = _presenter.GetPostData();
             MessageBox.Show(post.ToString());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            App.OpenScreen(this, new StarterView());
         }
     }
 }

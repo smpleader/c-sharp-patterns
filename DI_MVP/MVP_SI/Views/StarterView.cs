@@ -40,8 +40,6 @@ namespace DI.MVP_SI.Views
             {
                 App.OpenScreen(new UserView());
             }
-
-            //new UserView().Show();
         }
     }
 }
