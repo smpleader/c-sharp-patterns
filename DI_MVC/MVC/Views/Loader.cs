@@ -15,6 +15,7 @@ namespace DI_MVC.MVC.Views
         public Loader()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.None;
         }
         public string Title { get { return Text; } set { Text = value; } }
 
