@@ -27,13 +27,17 @@ namespace DI_MVC.MVC.Controllers
             }
         }
 
+        // NOTICE: has to overwrite this function in child
         public virtual void Open()
         {
-            // TODO: check Closed to reassign view in child
-            View.Form.Show();
+            // check Closed to reassign view in child
+            // if( Closed ) _view = new A_VIEW_TYPE();
+            // View.Form.Show();
+            MessageBox.Show("You did not overwrite function Open of Controller");
         }
         public void Close()
         {
+            
             Closed = true;
             View.Close();
             View.Form.Dispose();

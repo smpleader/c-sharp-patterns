@@ -10,17 +10,12 @@ using System.Windows.Forms;
 
 namespace DI_MVC.MVC.Views
 {
-    public partial class User : Form, IView
+    public partial class User : AView
     {
         public User()
         {
             InitializeComponent();
         }
-
-        public string Title { get { return Text; } set { Text = value; } }
-
-        public Form Form { get { return this; } }
-
 
         private void button1_Click(object sender, EventArgs e)
         {

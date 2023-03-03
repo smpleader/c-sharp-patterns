@@ -11,11 +11,6 @@ namespace DI_MVC.MVC
 {
     internal class Backbone
     {
-        public static int count()
-        {
-            IEnumerable<IController> lc = SimpleInjectionDI.container.GetAllInstances<IController>();
-    return lc.Count();
-        }
         public static IController? Controller(string name)
         {
             IEnumerable<IController> lc = SimpleInjectionDI.container.GetAllInstances<IController>();
@@ -41,7 +36,7 @@ namespace DI_MVC.MVC
 
         public static void StartCurrentThread()
         {
-            Application.Run(Controller(current).View.Form);
+            Application.Run(CurrentController().View.Form);
         }
 
         public static void Run(string obj = "Starter", string cmd = "Open")
@@ -58,14 +53,14 @@ namespace DI_MVC.MVC
                 {
                     if (current == "Loader" )
                     {
-                        Controller(current).View.Form.Hide();
+                        CurrentController().View.Form.Hide();
                     }
                     else
                     {
-                        Controller(current).Close();
+                        CurrentController().Close();
                     }
                     current = ctrl.Name;
-                    Controller(current).Open(); 
+                    CurrentController().Open(); 
 
                 }
                 else
@@ -74,6 +69,46 @@ namespace DI_MVC.MVC
                     ctrl.Fire(cmd);
                 }
             }
+        }
+
+        public enum StopOption
+        {
+            Close,
+            Dispose,
+            Exit
+        }
+
+        public static void Stop(StopOption opt)
+        {
+            switch(opt)
+            {
+                default:
+                case StopOption.Exit:
+                    // This close all methods, Form.Closed + Form.Closing not being fired
+                    Application.Exit();
+                    break;
+                case StopOption.Close:
+                    // If we are going to reuse the object
+                    CurrentController().View.Form.Hide();
+                    break;
+                case StopOption.Dispose:
+                    // If we are going to free up the resource the object
+                    CurrentController().Close();
+                    break;
+            }
+        }
+
+        public static IController CurrentController()
+        {
+            IController? c = Controller(current);
+            if( c == null)
+            {
+                MessageBox.Show("System Error: Controller not ready");
+                Application.Exit();
+            }
+#pragma warning disable CS8603 // Possible null reference return.
+            return c;
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

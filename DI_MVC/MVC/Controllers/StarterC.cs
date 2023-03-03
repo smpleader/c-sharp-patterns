@@ -15,7 +15,11 @@ namespace DI_MVC.MVC.Controllers
 
         public override void Open()
         {
-            if( Closed ) _view = new Starter();
+            if (Closed)
+            {
+                _view = new Starter();
+                Closed= false;
+            }
             View.Form.Show();
         }
     }

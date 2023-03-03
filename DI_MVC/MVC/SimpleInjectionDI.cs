@@ -6,11 +6,9 @@ namespace DI_MVC.MVC
 {
     internal class SimpleInjectionDI
     {
-        public static Container container;
+        public static Container container = new Container();
         public static void ConfigureServices()
         {
-            container = new Container();
-
             //container.Register<UserC>(Lifestyle.Scoped);
             container.Collection.Register<IController>(new LoaderC(), new StarterC(), new UserC(), new PostC() ); //
 
