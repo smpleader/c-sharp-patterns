@@ -10,7 +10,7 @@ namespace DI_Storage.MVC
         public static void ConfigureServices()
         {
             //container.Register<UserC>(Lifestyle.Scoped);
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new UserC(), new PostC() ); //
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new PostC() ); //
 
             //container.Register<SIUser, SUser>(Lifestyle.Transient);
             // 

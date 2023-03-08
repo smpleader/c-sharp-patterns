@@ -29,7 +29,7 @@ namespace DI_Storage.MVC.Views
                 }
                 else
                 {
-                    MessageBox.Show("Continue application");
+                    //MessageBox.Show("Continue application");
                 }
             }
         }

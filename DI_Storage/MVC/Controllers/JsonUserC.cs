@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace DI_Storage.MVC.Controllers
 {
-    internal class UserC : AController
+    internal class JsonUserC : AController
     {
-        public override string Name { get { return "User"; } }
-        private User _view = new User();
+        public override string Name { get { return "JsonUser"; } }
+        private JsonUser _view = new JsonUser();
         public override IView View { get { return _view;  } }
 
         public override void Open()
         {
-            if (Closed) _view = new User();
+            if (Closed) _view = new JsonUser();
             View.Form.Show();
         }
     }

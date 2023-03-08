@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DI_Storage.MVC.Models
+namespace DI_Storage.DB.SQL
 {
-    internal class UserM
+    internal interface ISQL
     {
+        string query { get; set; }
     }
 }

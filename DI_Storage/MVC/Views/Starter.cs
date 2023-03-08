@@ -10,13 +10,13 @@ namespace DI_Storage.MVC.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Backbone.Run("User");
+            Backbone.Run("JsonUser");
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Backbone.Run("User");
+            Backbone.Run("SqliteUser");
         }
 
         private void Starter_FormClosing(object sender, FormClosingEventArgs e)

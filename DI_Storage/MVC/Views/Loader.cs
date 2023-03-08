@@ -24,13 +24,10 @@ namespace DI_Storage.MVC.Views
         private async void Loader_Load(object sender, EventArgs e)
         {
             // Do some check asynchonize:
-            // - History file
-            // - Setup ready
-            // - Library ready
 
-            await checkCrash();
-            await checkSetup();
-            await Task.Delay(3000);
+            //await checkCrash();
+            //await checkSetup();
+            await Task.Delay(1000);
             Backbone.Run("Starter");
         }
 
@@ -44,7 +41,8 @@ namespace DI_Storage.MVC.Views
         private async Task checkSetup()
         {
             // WARNING: this demo for a new thread, which won't use current object access
-            await Task.Run(() => { 
+            await Task.Run(() =>
+            {
                 // new thread here
                 // THIS DO NOT SUPPORT CLOSURE !!!!
             });
