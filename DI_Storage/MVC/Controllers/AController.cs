@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DI_Storage.MVC.Views;
 
 namespace DI_Storage.MVC.Controllers
@@ -11,6 +12,11 @@ namespace DI_Storage.MVC.Controllers
     internal class AController : IController
     {
         public virtual string Name { get; }
+        protected virtual string DefaultView { get; }
+
+        protected virtual IView _view { get; set; }
+
+        //TODO: auto create view from DefaultView
         public virtual bool Closed { get; set; } = false;
         public virtual IView View { get; }
         public void Fire(string command) {
@@ -27,20 +33,53 @@ namespace DI_Storage.MVC.Controllers
             }
         }
 
-        // NOTICE: has to overwrite this function in child
+        protected virtual IView GetView(string name = "")
+        {
+            if( name == "")
+            {
+                name = DefaultView;
+            }
+
+            if (name == "" || name == null)
+            {
+                name = Name;
+            }
+
+            if (name == "" || name == null)
+            {
+                throw new InvalidOperationException("Invalid View Name");
+            }
+
+            name = "DI_Storage.MVC.Views." + name;
+            Type t = Type.GetType(name);
+            MessageBox.Show("Type view is " + t.ToString());
+            if (t == null)
+            {
+                throw new InvalidOperationException("Invalid View Type " + name);
+            }
+
+            IView sth = (IView) Activator.CreateInstance(t);
+            MessageBox.Show("View is " + sth.ToString());
+            if (null == sth)
+            {
+                throw new InvalidOperationException("Invalid View " + name);
+            }
+
+            return sth;
+        }
         public virtual void Open()
         {
-            // check Closed to reassign view in child
-            // if( Closed ) _view = new A_VIEW_TYPE();
-            // View.Form.Show();
-            MessageBox.Show("You did not overwrite function Open of Controller");
+            Closed = false;
+            View.Form.Show();
         }
         public void Close()
         {
             
-            Closed = true;
-            View.Close();
-            View.Form.Dispose();
+            Closed = true;;
+            View.Form.Hide();
+            // THINKING: hide is enough, recreate composed objet is bad
+            //View.Close()
+            //View.Form.Dispose();
         }
     }
 }

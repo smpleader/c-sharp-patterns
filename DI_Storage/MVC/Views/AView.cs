@@ -22,7 +22,7 @@ namespace DI_Storage.MVC.Views
             // Prompt user to save his data
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                if( !Backbone.CurrentController().Closed )
+                if ( !Backbone.CurrentController().Closed )
                 {
                     // Shut down main thread
                     Backbone.Controller("Loader").View.Form.Close();

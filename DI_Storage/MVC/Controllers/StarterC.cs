@@ -13,7 +13,7 @@ namespace DI_Storage.MVC.Controllers
         private Starter _view = new Starter();
         public override IView View { get { return _view; } }
 
-        public override void Open()
+        /*public override void Open()
         {
             if (Closed)
             {
@@ -21,6 +21,6 @@ namespace DI_Storage.MVC.Controllers
                 Closed= false;
             }
             View.Form.Show();
-        }
+        }*/
     }
 }
