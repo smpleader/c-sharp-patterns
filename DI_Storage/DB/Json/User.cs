@@ -30,8 +30,8 @@ namespace DI_Storage.DB.Json
             }
             else
             {
-                UserEntity lastUsr = ById("last");
-                usr.Id = lastUsr.Id++;
+                usr.Id = Users.Max(r => r.Id);
+                usr.Id++;
                 Users.Add(usr);
             }
 
