@@ -22,7 +22,12 @@ namespace DI_Storage.MVC.Views
         private void Starter_FormClosing(object sender, FormClosingEventArgs e)
         {
             // how we do something before close
-            MessageBox.Show(sender.GetType().Name);
+            //MessageBox.Show(sender.GetType().Name);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Backbone.Run("JsonUserPresenter");
         }
     }
 }

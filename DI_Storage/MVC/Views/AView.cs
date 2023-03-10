@@ -13,6 +13,27 @@ namespace DI_Storage.MVC.Views
 
         public Form Form { get { return this; } }
 
+        public void SetText(string name, string value)
+        {
+            Control ctn = this.Controls[name];
+            ctn.Text = value;
+        }
+        public string GetText(string name)
+        {
+            Control ctn = this.Controls[name];
+            return ctn.Text;
+        }
+        public void SetValue(string name, string value)
+        {
+            Control ctn = this.Controls[name];
+            ctn.Text = value;
+        }
+        public string GetValue(string name, string value)
+        {
+            Control ctn = this.Controls[name];
+            return ctn.Text;
+        }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             // This is from OS

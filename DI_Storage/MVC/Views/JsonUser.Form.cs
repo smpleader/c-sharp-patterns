@@ -57,7 +57,7 @@ namespace DI_Storage.MVC.Views
         {
 			User editedUser = userModel.db().Save(getData());
 
-			MessageBox.Show("Saved: "+ editedUser.ToString());
+			//MessageBox.Show("Saved: "+ editedUser.ToString());
             comboBox1.DataSource = null;
 			comboBox1.DataSource = userModel.ComboboxList();
             comboBox1.SelectedIndex = comboBox1.FindStringExact(editedUser.ComboBoxDisplay);

@@ -1,6 +1,7 @@
 ﻿using SimpleInjector;
 using DI_Storage.MVC.Controllers;
 using DI_Storage.MVC.Models;
+using DI_Storage.MVC.Views;
 
 namespace DI_Storage.MVC
 {
@@ -10,7 +11,7 @@ namespace DI_Storage.MVC
         public static void ConfigureServices()
         {
             // CONTROLLERS
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC());
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new JsonUserPresenterC());
             
             // this cause duplicate instance
             //container.Collection.Register<IController>(typeof( LoaderC ), typeof( StarterC), typeof( JsonUserC));
