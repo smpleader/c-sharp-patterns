@@ -9,9 +9,20 @@ namespace DI_Storage.MVC
         public static Container container = new Container();
         public static void ConfigureServices()
         {
-            //container.Register<UserC>(Lifestyle.Scoped);
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC() ); //
+            // CONTROLLERS
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC());
+            
+            // this cause duplicate instance
+            //container.Collection.Register<IController>(typeof( LoaderC ), typeof( StarterC), typeof( JsonUserC));
 
+            // MODELS
+            //container.RegisterInstance<TestM>(new TestM());
+            //container.RegisterInstance<JsonUserM>(new JsonUserM());
+            container.Register<TestM>(Lifestyle.Transient);
+            container.Register<JsonUserM>();
+
+
+            //container.Register<UserC>(Lifestyle.Scoped);
             //container.Register<SIUser, SUser>(Lifestyle.Transient);
             // 
             // container.Register<SApplication>(Lifestyle.Singleton); // IApp,
@@ -21,6 +32,8 @@ namespace DI_Storage.MVC
             //registration.SuppressDiagnosticWarning(DiagnosticType.DisposableTransientComponent,
             //        "Presenters will call Dispose on these services.");
 
+            // Reverting to the pre-v5 behavior
+            //container.Options.ResolveUnregisteredConcreteTypes = true;
             container.Verify();
         }
     }

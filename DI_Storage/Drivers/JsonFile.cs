@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace DI_Storage.Drivers
                 items = JsonConvert.DeserializeObject<List<T>>(json);
             }
             return items;
+        }
+
+        public static void store(object obj, string path)
+        {
+            using (StreamWriter file = File.CreateText(path))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, obj);
+            }
         }
     }
 }

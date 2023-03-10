@@ -10,7 +10,7 @@ namespace DI_Storage.MVC.Controllers
     internal interface IController
     {
         string Name { get; }
-        //protected string DefaultView { get; }
+
         bool Closed { get; set; }
         public IView View { get; }
 

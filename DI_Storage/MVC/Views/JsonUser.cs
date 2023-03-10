@@ -1,13 +1,15 @@
-﻿using DI_Storage.MVC.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DI_Storage.MVC.Views
 {
@@ -16,16 +18,16 @@ namespace DI_Storage.MVC.Views
         public JsonUser()
         {
             InitializeComponent();
-            startup();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Backbone.Run("Starter");
         }
-        private void startup()
-        {
-            label1.Text = JsonUserM.GetInfo();
+
+        private void JsonUser_Load(object sender, EventArgs e)
+        { 
+            initUserForm();
         }
     }
 }
