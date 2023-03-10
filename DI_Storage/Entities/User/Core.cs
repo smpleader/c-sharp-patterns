@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DI_Storage.Entities
+namespace DI_Storage.Entities.User
 {
-    internal class User : ICloneable
+    internal class Core
     {
         public int Id { get; set; } = 0;
         public string Name { get; set; } = "";
@@ -14,26 +14,14 @@ namespace DI_Storage.Entities
         public string Password { get; set; } = "";
         public string UserName { get; set; } = "";
 
-        public override string ToString() { return ComboBoxDisplay; }// Name + " " + Email ; }
-        public User()
-        { }
-        public string ComboBoxDisplay { get { return Id > 0 ? ( Id + " - " + Name ) : ("New"); } }
-            
-        public User Clone() { return new User(this); }
-
-        public User(User other)
+        public Core() { }
+        public Core(WinForm other)
         {
             Id = other.Id;
             Name = other.Name;
             Email = other.Email;
             Password = other.Password;
             UserName = other.UserName;
-           // ComboBoxDisplay = other.ComboBoxDisplay;
         }
-
-        object ICloneable.Clone(){ return Clone();}
-
-
-
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DI_Storage.MVC.Presenters.JsonUser;
-using DI_Storage.Entities;
+using User =  DI_Storage.Entities.User.WinForm;
 
 namespace DI_Storage.MVC.Views
 {

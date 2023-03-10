@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DI_Storage.MVC.Models;
-using DI_Storage.Entities;
+using User = DI_Storage.Entities.User.WinForm;
 
 namespace DI_Storage.MVC.Views
 {
@@ -32,18 +32,12 @@ namespace DI_Storage.MVC.Views
             testModel = SimpleInjectionDI.container.GetInstance<TestM>();
             userModel = SimpleInjectionDI.container.GetInstance<JsonUserM>();
 
-            User defaultUsr = userModel.db().ById("first");
-			
+            User defaultUsr = new User( userModel.db().ById("first") );
 
             comboBox1.DataSource = userModel.ComboboxList();
             comboBox1.DisplayMember = "ComboBoxDisplay";
 			comboBox1.SelectedIndex = comboBox1.FindStringExact(defaultUsr.ComboBoxDisplay);
             bindData(defaultUsr);
-        }
-		private void initComboBox(User usr)
-        {
-            List<User> users = userModel.db().List();
-
         }
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,7 +49,7 @@ namespace DI_Storage.MVC.Views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-			User editedUser = userModel.db().Save(getData());
+			User editedUser = new User( userModel.db().Save(getData()) );
 
 			//MessageBox.Show("Saved: "+ editedUser.ToString());
             comboBox1.DataSource = null;

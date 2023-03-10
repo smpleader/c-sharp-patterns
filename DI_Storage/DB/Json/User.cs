@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserEntity = DI_Storage.Entities.User;
+using UserEntity = DI_Storage.Entities.User.Core;
 using DI_Storage.Drivers;
 using System.Data.Common;
 

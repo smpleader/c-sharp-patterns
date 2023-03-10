@@ -12,7 +12,6 @@ namespace DI_Storage.MVC.Controllers
     internal class AController : IController
     {
         public virtual string Name { get; }
-        protected virtual string DefaultView { get; }
 
         protected virtual IView _view { get; set; }
 
@@ -32,7 +31,9 @@ namespace DI_Storage.MVC.Controllers
                 Application.Exit();
             }
         }
-
+        /*
+         * A Controller should work with any views
+        protected virtual string DefaultView { get; }
         protected virtual IView GetView(string name = "")
         {
             if( name == "")
@@ -52,21 +53,21 @@ namespace DI_Storage.MVC.Controllers
 
             name = "DI_Storage.MVC.Views." + name;
             Type t = Type.GetType(name);
-            MessageBox.Show("Type view is " + t.ToString());
+            //MessageBox.Show("Type view is " + t.ToString());
             if (t == null)
             {
                 throw new InvalidOperationException("Invalid View Type " + name);
             }
 
             IView sth = (IView) Activator.CreateInstance(t);
-            MessageBox.Show("View is " + sth.ToString());
+            //MessageBox.Show("View is " + sth.ToString());
             if (null == sth)
             {
                 throw new InvalidOperationException("Invalid View " + name);
             }
 
             return sth;
-        }
+        }*/
         public virtual void Open()
         {
             Closed = false;

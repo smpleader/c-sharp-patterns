@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace DI_Storage.MVC.Controllers
 {
-    internal class JsonUserC : AController
+    internal class SqliteUserC : AController
     {
-        public override string Name { get { return "JsonUser"; } }
+        public override string Name { get { return "SqliteUser"; } }
 
         protected JsonUser _view = new JsonUser();
-        public override IView View { get { return _view;  } }
-         
+        public override IView View { get { return _view; } }
     }
 }

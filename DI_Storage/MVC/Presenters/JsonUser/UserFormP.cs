@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using DI_Storage.MVC.Models;
-using DI_Storage.Entities;
+using User = DI_Storage.Entities.User.WinForm;
+using UserCore = DI_Storage.Entities.User.Core;
 using DI_Storage.MVC.Views;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -24,6 +25,7 @@ namespace DI_Storage.MVC.Presenters.JsonUser
         public UserFormP(JsonUserPresenter view)
         {
             _view = view;
+            // Notice: do not assign Model here
         }
 
         public void test()
@@ -38,10 +40,10 @@ namespace DI_Storage.MVC.Presenters.JsonUser
             currentId = usr.Id;
         }
 
-        private User getData()
+        private UserCore getData()
         {
             // TODO filter value to prevent wrong values
-            return new User() { Id = currentId, UserName = _view.GetText("txtUserName"), Name = _view.GetText("txtName"), Email = _view.GetText("txtEmail") };
+            return new UserCore() { Id = currentId, UserName = _view.GetText("txtUserName"), Name = _view.GetText("txtName"), Email = _view.GetText("txtEmail") };
         }
 
         public void initUserForm()
@@ -49,21 +51,17 @@ namespace DI_Storage.MVC.Presenters.JsonUser
             testModel = SimpleInjectionDI.container.GetInstance<TestM>();
             userModel = SimpleInjectionDI.container.GetInstance<JsonUserM>();
 
-            User defaultUsr = userModel.db().ById("first");
+            User defaultUsr = new User( userModel.db().ById("first") );
 
             _view.comboBox1.DataSource = userModel.ComboboxList();
             _view.comboBox1.DisplayMember = "ComboBoxDisplay";
             _view.comboBox1.SelectedIndex = _view.comboBox1.FindStringExact(defaultUsr.ComboBoxDisplay);
             bindData(defaultUsr);
         }
-        private void initComboBox(User usr)
-        {
-            List<User> users = userModel.db().List();
-        }
 
         public void Save()
         {
-            User editedUser = userModel.db().Save(getData());
+            User editedUser = new User(userModel.db().Save(getData()));
 
             MessageBox.Show("Saved: " + editedUser.ToString());
             _view.comboBox1.DataSource = null;
