@@ -10,7 +10,7 @@ namespace DI_Storage.MVC.Views
 {
     partial class JsonUser : AView
 	{
-		private int currentId;
+		private long currentId;
 		private TestM testModel;
 		private JsonUserM userModel;
         private void bindData(User usr)

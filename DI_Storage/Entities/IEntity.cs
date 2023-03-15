@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DI_Storage.DB.SQL
+namespace DI_Storage.Entities
 {
-    internal interface ISQL
+    internal class IEntity
     {
-        string query { get; set; }
     }
 }

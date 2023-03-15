@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DI_Storage.Entities.User
 {
-    internal class WinForm : Core
+    internal class WinForm : Schema
     {
         public override string ToString() { return ComboBoxDisplay; }
        
@@ -21,7 +21,7 @@ namespace DI_Storage.Entities.User
             Password = other.Password;
             UserName = other.UserName;
         }
-        public WinForm(Core other)
+        public WinForm(Schema other)
         {
             Id = other.Id;
             Name = other.Name;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DI_Storage.Entities.User
 {
-    internal class Cloneable : Core, ICloneable
+    internal class Cloneable : Schema, ICloneable
     {
         public Cloneable(){ }
         public Cloneable Clone() { return new Cloneable(this); }

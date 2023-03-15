@@ -1,27 +1,24 @@
 ﻿using DI_Storage.MVC.Models;
+using DI_Storage.MVC.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using DI_Storage.MVC.Models;
 using User = DI_Storage.Entities.User.WinForm;
 using UserCore = DI_Storage.Entities.User.Schema;
-using DI_Storage.MVC.Views;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using View = DI_Storage.MVC.Views.SqliteUser;
 
-namespace DI_Storage.MVC.Presenters.JsonUser
+namespace DI_Storage.MVC.Presenters.SqliteUser
 {
-    internal class UserFormP
+    internal class UserP
     {
-        private long currentId;
-        private JsonUserM userModel;
+        private long currentId; 
+        private SqliteUserM userModel;
 
-        private JsonUserPresenter _view;
+        private View _view;
 
-        public UserFormP(JsonUserPresenter view)
+        public UserP(View view)
         {
             _view = view;
             // Notice: do not assign Model here
@@ -47,9 +44,9 @@ namespace DI_Storage.MVC.Presenters.JsonUser
 
         public void initUserForm()
         {
-            userModel = SimpleInjectionDI.container.GetInstance<JsonUserM>();
+            userModel = SimpleInjectionDI.container.GetInstance<SqliteUserM>();
 
-            User defaultUsr = new User( userModel.db().ById("first") );
+            User defaultUsr = new User(userModel.table().ById("first"));
 
             _view.comboBox1.DataSource = userModel.ComboboxList();
             _view.comboBox1.DisplayMember = "ComboBoxDisplay";
@@ -59,9 +56,10 @@ namespace DI_Storage.MVC.Presenters.JsonUser
 
         public void Save()
         {
-            User editedUser = new User(userModel.db().Save(getData()));
+            long Id = userModel.table().Save(getData());
+            MessageBox.Show(Id.ToString());
+            User editedUser =   new User(userModel.table().ById(Id));
 
-            MessageBox.Show("Saved: " + editedUser.ToString());
             _view.comboBox1.DataSource = null;
             _view.comboBox1.DataSource = userModel.ComboboxList();
             _view.comboBox1.SelectedIndex = _view.comboBox1.FindStringExact(editedUser.ComboBoxDisplay);

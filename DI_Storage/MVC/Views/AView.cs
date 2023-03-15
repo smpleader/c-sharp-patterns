@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DI_Storage.MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,28 @@ namespace DI_Storage.MVC.Views
 
         public void SetText(string name, string value)
         {
-            Control ctn = this.Controls[name];
-            ctn.Text = value;
+            if(this.Controls[name] == null)
+            {
+                MessageBox.Show(name + "is not Form Control");
+            }
+            else
+            {
+                Control ctn = this.Controls[name];
+                ctn.Text = value;
+            }
         }
         public string GetText(string name)
         {
-            Control ctn = this.Controls[name];
-            return ctn.Text;
+            if (this.Controls[name] == null)
+            {
+                MessageBox.Show(name + "is not Form Control");
+                return "";
+            }
+            else
+            {
+                Control ctn = this.Controls[name];
+                return ctn.Text;
+            }
         }
         public void SetValue(string name, string value)
         {
@@ -45,6 +61,9 @@ namespace DI_Storage.MVC.Views
             {
                 if ( !Backbone.CurrentController().Closed )
                 {
+                    // Close db connection
+                    Drivers.Sqlite sqlDriver = SimpleInjectionDI.container.GetInstance<Drivers.Sqlite>();
+                    sqlDriver.Disconnect();
                     // Shut down main thread
                     Backbone.Controller("Loader").View.Form.Close();
                 }

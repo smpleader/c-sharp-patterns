@@ -11,7 +11,7 @@ namespace DI_Storage.MVC.Controllers
     {
         public override string Name { get { return "SqliteUser"; } }
 
-        protected JsonUser _view = new JsonUser();
+        protected SqliteUser _view = new SqliteUser();
         public override IView View { get { return _view; } }
     }
 }

@@ -5,30 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using UserEntity = DI_Storage.Entities.User.WinForm;
 using UserCore = DI_Storage.Entities.User.Schema;
-using DI_Storage.DB.Json;
+using DI_Storage.DB.SQLite;
 using DI_Storage.Util;
 
 namespace DI_Storage.MVC.Models
 {
-    internal class JsonUserM
+    internal class SqliteUserM
     {
-        public User userDB = new User(AppConst.path+"/Data/users.json");  
+        public User tblUser;
+        public SqliteUserM(Drivers.Sqlite sqlDriver) 
+        {
+            tblUser = new User(sqlDriver);
+        }
 
-        public User db()
+        public User table()
         { 
-            return userDB; 
+            return tblUser; 
         }
         public List<UserEntity> ComboboxList()
         {
 
-            List <UserCore> origin = userDB.List();
+            List <UserCore> origin = tblUser.List();
             List<UserEntity> combobox = new List<UserEntity>();
 
-            //origin.Select(item => (UserEntity)item.Clone()).ToList();
             foreach (UserCore item in origin)
             {
-                UserEntity newOne = new UserEntity(item);
-                combobox.Add(newOne);
+                combobox.Add(new UserEntity(item));
             }
 
             combobox.Insert(0, new UserEntity());
