@@ -26,7 +26,6 @@ namespace DI_Storage.MVC.Views
             filePresenter.SetupCombo();
 
             sheetPresenter = new SheetP(this);
-            sheetPresenter.LoadData();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -37,6 +36,10 @@ namespace DI_Storage.MVC.Views
         private void button1_Click(object sender, EventArgs e)
         {
             Backbone.Run("Starter");
+        }
+        private void SheetUser_Shown(Object sender, EventArgs e)
+        {
+            sheetPresenter.LoadData();
         }
     }
 }

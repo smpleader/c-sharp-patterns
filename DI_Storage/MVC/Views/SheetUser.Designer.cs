@@ -105,6 +105,7 @@
             Text = "SheetUser";
             Title = "SheetUser";
             Load += SheetUser_Load;
+            Shown += SheetUser_Shown;
             ResumeLayout(false);
         }
 
