@@ -12,7 +12,7 @@ namespace DI_Storage.MVC
         public static void ConfigureServices()
         {
             // CONTROLLERS
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new JsonUserPresenterC(), new SqliteUserC());
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new JsonUserPresenterC(), new SqliteUserC(), new SheetUserC());
 
             // this cause duplicate instance
             //container.Collection.Register<IController>(typeof( LoaderC ), typeof( StarterC), typeof( JsonUserC));
@@ -24,9 +24,8 @@ namespace DI_Storage.MVC
             // MODELS
             container.Register<TestM>(Lifestyle.Transient);
             container.Register<JsonUserM>();
-
             container.RegisterInstance<SqliteUserM>(new SqliteUserM(sqlDriver));
-            //container.Register<SqliteUserM>();
+            container.Register<SheetUserM>();
 
 
 

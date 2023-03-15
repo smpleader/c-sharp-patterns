@@ -12,7 +12,7 @@ namespace DI_Storage.MVC.Models
 {
     internal class JsonUserM
     {
-        public User userDB = new User(AppConst.path+"/Data/users.json");  
+        public User userDB = new User( AppConst.dataFolder + "/users.json");  
 
         public User db()
         { 

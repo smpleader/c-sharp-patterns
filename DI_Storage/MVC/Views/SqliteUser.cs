@@ -19,7 +19,6 @@ namespace DI_Storage.MVC.Views
         public SqliteUser()
         {
             InitializeComponent();
-            uform = new UserP(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,6 +39,7 @@ namespace DI_Storage.MVC.Views
 
         private void SqliteUser_Load(object sender, EventArgs e)
         {
+            uform = new UserP(this);
             uform.initUserForm();
         }
 

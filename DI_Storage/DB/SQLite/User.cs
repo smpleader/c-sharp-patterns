@@ -23,7 +23,7 @@ namespace DI_Storage.DB.SQLite
         protected override Sqlite _db { get; set; }
         protected override IEntity _row { get; set; } = new UserSqlite();
 
-        public bool Ready() 
+        public override bool Ready() 
         {
             // TODO: catch exception this query
             _db.execute(

@@ -17,7 +17,7 @@ namespace DI_Storage.MVC.Controllers
 
         //TODO: auto create view from DefaultView
         public virtual bool Closed { get; set; } = false;
-        public virtual IView View { get; }
+        public IView View { get { return _view; } }
         public void Fire(string command) {
             try
             {

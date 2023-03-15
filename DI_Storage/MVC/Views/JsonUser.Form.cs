@@ -12,7 +12,7 @@ namespace DI_Storage.MVC.Views
 	{
 		private long currentId;
 		private TestM testModel;
-		private JsonUserM userModel;
+		private JsonUserM model;
         private void bindData(User usr)
 		{
 			txtEmail.Text = usr.Email;
@@ -30,11 +30,11 @@ namespace DI_Storage.MVC.Views
 		private void initUserForm()
         {
             testModel = SimpleInjectionDI.container.GetInstance<TestM>();
-            userModel = SimpleInjectionDI.container.GetInstance<JsonUserM>();
+            model = SimpleInjectionDI.container.GetInstance<JsonUserM>();
 
-            User defaultUsr = new User( userModel.db().ById("first") );
+            User defaultUsr = new User( model.db().ById("first") );
 
-            comboBox1.DataSource = userModel.ComboboxList();
+            comboBox1.DataSource = model.ComboboxList();
             comboBox1.DisplayMember = "ComboBoxDisplay";
 			comboBox1.SelectedIndex = comboBox1.FindStringExact(defaultUsr.ComboBoxDisplay);
             bindData(defaultUsr);
@@ -49,11 +49,11 @@ namespace DI_Storage.MVC.Views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-			User editedUser = new User( userModel.db().Save(getData()) );
+			User editedUser = new User( model.db().Save(getData()) );
 
 			//MessageBox.Show("Saved: "+ editedUser.ToString());
             comboBox1.DataSource = null;
-			comboBox1.DataSource = userModel.ComboboxList();
+			comboBox1.DataSource = model.ComboboxList();
             comboBox1.SelectedIndex = comboBox1.FindStringExact(editedUser.ComboBoxDisplay);
 
         }

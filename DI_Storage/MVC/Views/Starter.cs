@@ -29,5 +29,10 @@ namespace DI_Storage.MVC.Views
         {
             Backbone.Run("JsonUserPresenter");
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Backbone.Run("SheetUser");
+        }
     }
 }

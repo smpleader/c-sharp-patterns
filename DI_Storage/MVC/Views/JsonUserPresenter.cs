@@ -20,7 +20,6 @@ namespace DI_Storage.MVC.Views
         public JsonUserPresenter()
         {
             InitializeComponent();
-            uform = new UserFormP(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +40,7 @@ namespace DI_Storage.MVC.Views
 
         private void JsonUserPresenter_Load(object sender, EventArgs e)
         {
+            uform = new UserFormP(this);
             uform.initUserForm();
         }
 

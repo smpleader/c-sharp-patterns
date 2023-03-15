@@ -11,8 +11,7 @@ namespace DI_Storage.MVC.Controllers
     {
         public override string Name { get { return "JsonUserPresenter"; } }
 
-        protected JsonUserPresenter _view = new JsonUserPresenter();
-        public override IView View { get { return _view;  } }
+        protected override IView _view { get; set; } = new JsonUserPresenter();
 
     }
 }

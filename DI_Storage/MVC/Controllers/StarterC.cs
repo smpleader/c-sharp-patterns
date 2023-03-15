@@ -10,7 +10,6 @@ namespace DI_Storage.MVC.Controllers
     internal class StarterC : AController
     {
         public override string Name { get { return "Starter"; } }
-        private Starter _view = new Starter();
-        public override IView View { get { return _view; } } 
+        protected override IView _view { get; set; } = new Starter();
     }
 }

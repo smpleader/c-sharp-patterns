@@ -24,7 +24,7 @@ namespace DI_Storage.DB.SQL
 
         /*  public SqliteTable(Sqlite drv){  _db = drv; }  */
 
-        public bool Ready() { return true; }
+        public virtual bool Ready() { return true; }
 
         public SqliteTable Bind(IEntity ent)
         {

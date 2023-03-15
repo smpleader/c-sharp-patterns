@@ -19,6 +19,7 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="SimpleInjector" Version="5.4.1" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
+        <PackageReference Include="unvell.ReoGrid.dll" Version="3.0.0" />
     </ItemGroup>
 
 </Project>
