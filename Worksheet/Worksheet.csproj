@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="samples\**" />
+      <EmbeddedResource Remove="samples\**" />
+      <None Remove="samples\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+	    <None Update="Content/Template/input/*.*">
+		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    </None>
+		<None Update="Content/Template/output/*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content/Formulation/*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content/Type/*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content/Tmp/test02.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content/*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.0.123" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="SimpleInjector" Version="5.4.1" />
+        <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
+        <PackageReference Include="unvell.ReoGrid.dll" Version="3.0.0" />
+    </ItemGroup>
+	<ItemGroup>
+		<COMReference Include="Microsoft.Office.Interop.Excel">
+			<EmbedInteropTypes>true</EmbedInteropTypes>
+			<Guid>00020813-0000-0000-c000-000000000046</Guid>
+			<Isolated>false</Isolated>
+			<Lcid>0</Lcid>
+			<WrapperTool>primary</WrapperTool>
+			<VersionMajor>1</VersionMajor>
+			<VersionMinor>9</VersionMinor>
+		</COMReference>
+	</ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Content\Type\" />
+    </ItemGroup> 
+
+</Project>

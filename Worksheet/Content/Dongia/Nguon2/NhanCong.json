@@ -1,0 +1,35 @@
+{
+    "NC1": [
+        {
+            "stt": "1",
+            "ma": "N2457",
+            "ten": "Nhân công bậc 4,5/7 - Nhóm 2",
+            "donvi": "công",
+            "haophi": "15,75",
+            "giagoc": "277516",
+            "gia": ""
+        }
+    ],
+    "NC2": [
+        {
+            "stt": "1",
+            "ma": "N2407",
+            "ten": "Nhân công bậc 4,0/7 - Nhóm 2",
+            "donvi": "công",
+            "haophi": "0,656",
+            "giagoc": "255099",
+            "gia": ""
+        }
+    ],
+    "NC3": [
+        {
+            "stt": "1",
+            "ma": "N2357",
+            "ten": "Nhân công bậc 3,5/7 - Nhóm 2",
+            "donvi": "công",
+            "haophi": "0,2",
+            "giagoc": "235000",
+            "gia": ""
+        }
+    ]
+}
