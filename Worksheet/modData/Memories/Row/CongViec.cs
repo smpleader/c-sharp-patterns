@@ -8,11 +8,9 @@ namespace Worksheet.modData.Memories.Row
 {
     internal class CongViec : ARow
     {
-        public CongViec(int index, string hangMuc)
-        {
-            Path = "HangMuc." + hangMuc + ".CongViec." + index;
-            Index = index;
-
+        public CongViec() : base() { }
+        public void init()
+        { 
             ColText["stt"] = "";
             ColText["ma"] = "";
             ColText["ten"] = "";

@@ -8,11 +8,8 @@ namespace Worksheet.modData.Memories.Row
 {
     internal class CaMay : ARow
     {
-        public CaMay(int index, string hangMuc, string congViec)
+        public void init()
         {
-            Path = "HangMuc." + hangMuc + ".CongViec." + congViec + ".CaMay." + index;
-            Index = index;
-
             ColText["stt"] = "";
             ColText["ma"] = "";
             ColText["ten"] = "";

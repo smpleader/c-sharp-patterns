@@ -8,9 +8,10 @@ namespace Worksheet.modData.Memories
 {
     class ARow
     {
-        // Ordering in a sheet
+        public ARow() { init(); }
+        // Unique ID of a row
         public int Id { get; set; }
-        // Unique code of an object
+        // Unique code of an object, can be duplicated
         public string Code { get; set; }
         // Search engine
         public string Path { get; set; }

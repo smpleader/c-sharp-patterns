@@ -9,16 +9,14 @@ namespace Worksheet.modData.Memories.Row
     // Danh sách kiểu công trình dùng cho dự toán
     internal class BaoGia : ARow
     {
-        public BaoGia(int index, string NguonBaoGia)
+        public void init()
         {
-            Path = "NguonBaoGia." + NguonBaoGia + ".BaoGia." + index;
-            Index = index;
+            ColText["ten"] = "";
+            ColText["ma"] = "";
+            ColText["ten"] = "";
+            ColText["donvi"] = "";
+             
+            ColNum["giagoc"] = 0; 
         }
-
-        protected string ten { get; set; }
-        protected string ma { get; set; }
-        protected string donvi { get; set; }
-        protected string giagoc { get; set; }
-        protected string gia { get; set; }
     }
 }

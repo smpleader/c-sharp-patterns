@@ -9,13 +9,11 @@ namespace Worksheet.modData.Memories.Row
     // Danh sách kiểu công trình dùng cho dự toán
     internal class LoaiCongTrinh : ARow
     {
-        public LoaiCongTrinh(int index)
+        public LoaiCongTrinh() : base() { }
+        public void init()
         {
-            Path = "Loaicongtrinh." + index;
-            Index = index;
+            ColText["ten"] = "";
+            ColText["ma"] = ""; 
         }
-
-        protected string ten { get; set; }
-        protected string ma { get; set; }
     }
 }

@@ -9,14 +9,12 @@ namespace Worksheet.modData.Memories.Row
     // Danh sách kiểu công trình dùng cho dự toán
     internal class NguonDonGia : ARow
     {
-        public NguonDonGia(int index)
+        public NguonDonGia() : base() { }
+        public void init()
         {
-            Path = "NguonDonGia." + index;
-            Index = index;
+            ColText["ten"] = "";
+            ColText["ma"] = "";
+            ColText["ghichu"] = "";
         }
-
-        protected string ten { get; set; }
-        protected string ma { get; set; }
-        protected string ghichu { get; set; }
     }
 }

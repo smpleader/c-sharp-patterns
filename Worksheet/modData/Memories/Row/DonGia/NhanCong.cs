@@ -8,22 +8,18 @@ namespace Worksheet.modData.Memories.Row.DonGia
 {
     internal class NhanCong : ARow
     {
-        public NhanCong(int index, string nguonDonGia, string congViec)
+        public NhanCong() : base() { }
+        public void init()
         {
-            Path = "NguonDonGia." + nguonDonGia + ".CongViec." + congViec + ".NhanCong." + index;
-            Index = index;
+            ColText["stt"] = "";
+            ColText["ma"] = "";
+            ColText["ten"] = "";
+            ColText["donvi"] = ""; 
+
+            ColNum["haophi"] = 0;
+            ColNum["giagoc"] = 0;
+            ColNum["gia"] = 0; 
         }
-        protected string stt { get; set; }
-
-        protected string ma { get; set; }
-
-        protected string ten { get; set; }
-
-        protected string donvi { get; set; }
-
-        protected string haophi { get; set; }
-        protected string giagoc { get; set; }
-        protected string gia { get; set; }
 
     }
 }

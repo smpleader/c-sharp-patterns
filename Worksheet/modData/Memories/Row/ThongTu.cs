@@ -9,13 +9,11 @@ namespace Worksheet.modData.Memories.Row
     // Danh sách thông tư, ND dùng cho dự toán
     internal class ThongTu : ARow
     {
-        public ThongTu(int index)
-        {
-            Path = "ThongTu." + index;
-            Index = index;
+        public ThongTu() : base() { }
+        public void init()
+        { 
+            ColText["ma"] = "";
+            ColText["ten"] = ""; 
         }
-
-        protected string ten { get; set; }
-        protected string ma { get; set; }
     }
 }

@@ -9,15 +9,13 @@ namespace Worksheet.modData.Memories.Row
     // Dùng tron bảng THKP Hạng mục
     internal class HesoChiphi : ARow
     {
-        public HesoChiphi(int index, string ThongTu, string LoaiCongTrinh)
+        public HesoChiphi() : base() { } 
+        public void init()
         {
-            Path = "ThongTu." + ThongTu + ".LoaiCongTrinh." + LoaiCongTrinh + ".HesoChiphi." + index;
-            Index = index;
+            ColText["stt"] = "";
+            ColText["kyhieu"] = "";
+            ColText["giatri"] = "";
+            ColText["ghichu"] = "";
         }
-
-        protected string stt { get; set; }
-        protected string kyhieu { get; set; }
-        protected string giatri { get; set; }
-        protected string ghichu { get; set; }
     }
 }

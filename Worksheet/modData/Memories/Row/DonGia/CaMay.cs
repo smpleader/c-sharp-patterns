@@ -8,23 +8,20 @@ namespace Worksheet.modData.Memories.Row.DonGia
 {
     internal class CaMay : ARow
     {
-        public CaMay(int index, string nguonDonGia, string congViec)
+        public CaMay() : base() { }
+
+        protected void init()
         {
-            Path = "NguonDonGia." + nguonDonGia + ".CongViec." + congViec + ".CaMay." + index;
-            Index = index;
+            ColText["stt"] = "";
+            ColText["ma"] = "";
+            ColText["ten"] = "";
+            ColText["donvi"] = ""; 
+
+            ColNum["haophi"] = 0;
+            ColNum["giagoc"] = 0;
+            ColNum["gia"] = 0;
+            ColNum["haophikhac"] = 0;
         }
-        protected string stt { get; set; }
-
-        protected string ma { get; set; }
-
-        protected string ten { get; set; }
-
-        protected string donvi { get; set; }
-
-        protected string haophi { get; set; }
-        protected string giagoc { get; set; }
-        protected string gia { get; set; }
-        protected string haophikhac { get; set; }
 
     }
 }

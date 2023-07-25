@@ -11,10 +11,7 @@ namespace Worksheet.modData.Memories.Pointer
         public Base()
         {
             List<ARow> rows = Storage.R.FindAll(filterType);
-            if (rows.Count > 0)
-            {
-                Id = rows.Last().Id;
-            }
+            Id = rows.Count > 0 ? ( rows.Last().Id + 1 ) : 1;
         }
 
         protected int Id = 0; 

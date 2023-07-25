@@ -8,11 +8,10 @@ namespace Worksheet.modData.Memories.Row
 {
     internal class HangMuc : ARow
     {
-        public HangMuc(int index)
+        public HangMuc() : base() { }
+        public void init()
         {
-            Path = "HangMuc." + index;
-            Index = index;
-
+            ColText["ten"] = "";
             ColText["kieuhangmuc"] = "";
         }
     }
