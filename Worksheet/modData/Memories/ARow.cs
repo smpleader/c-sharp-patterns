@@ -19,35 +19,24 @@ namespace Worksheet.modData.Memories
         public Dictionary<string, string> ColText { get; set; }
         public Dictionary<string, decimal> ColNum { get; set; }
 
-        public string? txt(string name, string? str = null)
+        public string txt(string name)
         {
-            if (str == null)
-            {
-                str = ColNum.ContainsKey(name) ? ColText[name] : "";
-            }
-            else
-            {
-                ColText[name] = str;
-            }
-            return str;
-        }
-        public decimal? num(string name, decimal? val = null)
-        {
-            if (val == null)
-            {
-                val = ColNum.ContainsKey(name) ? ColNum[name] : 0;
-            }
-            else
-            {
-                ColNum[name] = (decimal)val;
-            }
-
-            return val;
+            return ColNum.ContainsKey(name) ? ColText[name] : "-"; 
         }
 
-        protected void init()
+        public void txt(string name, string str)
         {
-
+            ColText[name] = str;
         }
+        public decimal num(string name)
+        {
+            return ColNum.ContainsKey(name) ? ColNum[name] : -1;
+        }
+        public void num(string name, decimal val)
+        {
+            ColNum[name] = val; 
+        }
+
+        protected void init() { }
     }
 }

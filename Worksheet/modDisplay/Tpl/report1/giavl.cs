@@ -8,7 +8,7 @@ namespace Worksheet.modDisplay.Tpl.report1
 {
     /* Giá vật liệu */
 
-    internal class giavl: ITpl
+    internal class giavl: ITplFile
     {
         string startCol;
         string endCol;

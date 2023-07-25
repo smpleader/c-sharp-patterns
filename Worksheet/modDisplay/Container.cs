@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modDisplay
 {
-    internal class Display
+    internal class Container
     {
         private static Dictionary<string, ITpl> _instances;
 
@@ -24,8 +24,6 @@ namespace Worksheet.modDisplay
                     { "THNC", "thnc"}
             
             };
-
-
         }
 
     }
