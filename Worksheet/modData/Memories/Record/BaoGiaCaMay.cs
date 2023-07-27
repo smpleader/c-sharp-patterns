@@ -4,23 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet.modData.Memories.Row
+namespace Worksheet.modData.Memories.Record
 {
-    internal class VatLieu : ARow
+    internal class BaoGiaCaMay : ARecord
     {
-        public VatLieu() : base() { }
-        public void init()
+        public int BGId;
+        public BaoGiaCaMay(int bgId)
+        {
+            BGId = bgId;
+        }
+
+        public override string Path { get { return "BaoGia." + BGId + ".CaMay." + Id; } }
+
+
+        protected void init()
         {
             ColText["stt"] = "";
             ColText["ma"] = "";
             ColText["ten"] = "";
             ColText["donvi"] = "";
-            ColText["loai"] = "";
 
             ColNum["haophi"] = 0;
             ColNum["giagoc"] = 0;
-            ColNum["giatb"] = 0;
-            ColNum["giaht"] = 0;
+            ColNum["gia"] = 0;
             ColNum["haophikhac"] = 0;
         }
 

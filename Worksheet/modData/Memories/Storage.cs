@@ -8,6 +8,6 @@ namespace Worksheet.modData.Memories
 {
     internal class Storage
     {
-        public static List<ARow> R { get; set; } = new List<ARow>();
+        public static List<ARecord> R { get; set; } = new List<ARecord>();
     }
 }

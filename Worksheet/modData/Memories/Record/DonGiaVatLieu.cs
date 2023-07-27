@@ -4,21 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet.modData.Memories.Row
+namespace Worksheet.modData.Memories.Record
 {
-    internal class CaMay : ARow
+    internal class DonGiaVatLieu : ARecord
     {
-        public void init()
+        public int DGId;
+        public DonGiaVatLieu(int dgId)
+        {
+            DGId = dgId;
+        }
+
+        public override string Path { get { return "DonGia." + DGId + ".VatLieu." + Id; } }
+        public void setDefault()
         {
             ColText["stt"] = "";
             ColText["ma"] = "";
             ColText["ten"] = "";
             ColText["donvi"] = "";
+            ColText["loai"] = "";
 
             ColNum["haophi"] = 0;
             ColNum["giagoc"] = 0;
-            ColNum["giatb"] = 0;
+            ColNum["gia"] = 0;
             ColNum["giaht"] = 0;
+            ColNum["giatb"] = 0;
             ColNum["haophikhac"] = 0;
         }
     }

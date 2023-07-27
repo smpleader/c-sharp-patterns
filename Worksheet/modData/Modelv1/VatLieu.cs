@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RowVatLieu = Worksheet.modData.Memories.Row.VatLieu;
+using RowVatLieu = Worksheet.modData.Memories.Record.VatLieu;
 using Worksheet.modData.Memories;
 using System.Reflection;
 using Worksheet.modData.Memories.Pointer;
@@ -12,21 +12,18 @@ namespace Worksheet.modData.Modelv1
 {
     internal class VatLieu
     {
-        public static string idx(string? index = null, string? HangMuc = null, string? CongViec = null)
+        public static void point(int index)
         {
-            if (null == index) index = Current.Vatlieu();
-            if (null == HangMuc) HangMuc = Current.Hangmuc();
-            if (null == CongViec) CongViec = Current.Congviec();
-            return "HangMuc." + HangMuc + ".CongViec." + CongViec + ".Vatlieu." + index;
+            Current.VL.id(index);
         }
-        public static List<RowVatLieu> danhsach(string? index = null, string? HangMuc = null)
+        public static List<RowVatLieu> danhsach()
         {
-            List<ARow> rows = Storage.R.FindAll(r => r.Path.Contains(idx(index, HangMuc)));
+            List<ARecord> rows = Storage.R.FindAll(Current.VL.filterType);
             return rows.Cast<RowVatLieu>().ToList();
         }
-        public static RowVatLieu? chitiet(string? index = null, string? HangMuc = null)
+        public static RowVatLieu? chitiet()
         {
-            ARow? row = Storage.R.Find(r => r.Path == idx(index, HangMuc));
+            ARecord? row = Storage.R.Find(Current.VL.filterItem);
             return null == row ? null : (RowVatLieu)row;
         }
 
@@ -51,9 +48,9 @@ namespace Worksheet.modData.Modelv1
                 return true;
             }
         }
-        public static void xoa(string index, string? HangMuc = null)
+        public static void xoa()
         {
-            Storage.R.RemoveAll(r => r.Path.Contains(idx(index, HangMuc)));
+            Storage.R.RemoveAll(Current.VL.filterItem);
             // recalculate BL
         }
 

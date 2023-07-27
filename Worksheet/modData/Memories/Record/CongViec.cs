@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Worksheet.modData.Memories.Pointer;
 
-namespace Worksheet.modData.Memories.Row
+namespace Worksheet.modData.Memories.Record
 {
-    internal class CongViec : ARow
+    internal class CongViec : ARecord
     {
-        public CongViec() : base() { }
-        public void init()
+        public int HMId { get; }
+
+        public CongViec(int HangMucId)
+        {
+            HMId = HangMucId;
+            Id = Current.CV.id(true);
+            setDefault();
+        }
+        public override string Path { get { return "HangMuc."+ HMId + ".CongViec."+Id; } }
+        public void setDefault()
         { 
             ColText["stt"] = "";
             ColText["ma"] = "";

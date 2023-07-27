@@ -3,36 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RowHangMuc = Worksheet.modData.Memories.Row.HangMuc;
+using RowHangMuc = Worksheet.modData.Memories.Record.HangMuc; 
+using Worksheet.modData.Memories.Pointer;
 using Worksheet.modData.Memories;
 
 namespace Worksheet.modData.Modelv1
 {
     internal class HangMuc
     {
-        public static string idx(string index)
+        public static void point(int id)
         {
-            return "HangMuc." + index;
+            Current.HM.id(id);
+            // reset pointer
+            Current.CV = new modData.Memories.Pointer.CongViec();
+            Current.NC = new modData.Memories.Pointer.NhanCong();
+            Current.VL = new modData.Memories.Pointer.VatLieu();
+            Current.CM = new modData.Memories.Pointer.CaMay();
         }
-        public static List<RowHangMuc> danhsach(string index)
+        public static List<RowHangMuc> danhsach()
         {
-            List<ARow> rows = Storage.R.FindAll(r => r.Path.Contains(idx(index));
+            List<ARecord> rows = Storage.R.FindAll(Current.HM.filterType);
             return rows.Cast<RowHangMuc>().ToList();
         }
         public static RowHangMuc? chitiet(string index)
         {
-            ARow? row = Storage.R.Find(r => r.Path == idx(index));
+            ARecord? row = Storage.R.Find(Current.HM.filterItem);
             return null == row ? null : (RowHangMuc)row;
         }
 
         public static void them(RowHangMuc r)
         {
+            point(r.Id);
             Storage.R.Add(r);
             // recalculate BL
         }
         public static void xoa(string index)
         {
-            Storage.R.RemoveAll(r => r.Path.Contains(idx(index)));
+            Storage.R.RemoveAll(Current.HM.filterFamily);
             // recalculate BL
         }
     }

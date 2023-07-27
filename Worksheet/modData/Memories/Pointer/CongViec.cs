@@ -4,19 +4,25 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CVrecord = Worksheet.modData.Memories.Record.CongViec;
 
 namespace Worksheet.modData.Memories.Pointer
 {
     // level 3
-    internal class CongViec:HangMuc
+    internal class CongViec:Base
     {
-        public CongViec():base(){ }
-        public bool filterType(ARow r) { return r.Path.Contains(HMid()) && r.Path.isLevel3(); }
-        public bool filterItem(ARow r) { return r.Path.Contains(CVid()) && r.Path.isLevel3(); }
-        public bool filterFamily(ARow r) { return r.Path.Contains(CVid()); }
-        public string CVid()
+        public override bool filterType(ARecord r) { return r.Path.Contains(".CongViec.") && r.Path.isLevel3(); }
+        public override bool filterSibling(ARecord r) { return r.Path.Contains(Current.HM.path() + ".CongViec.") && r.Path.isLevel3(); }
+        public override bool filterItem(ARecord r) { return r.Path == path(); }
+        public override bool filterFamily(ARecord r) { return r.Path.Contains(path()); }
+        public override string path(int id = -1)
         {
-            return "HangMuc." + Current.HM.id() + ".CongViec." + Current.CV.id();
+            return "HangMuc." + Current.HM.id() + ".CongViec." + (-1 == id ? Id : id);
+        }
+        public CVrecord? load(int id = -1)
+        {
+            ARecord? row = Storage.R.Find(r => r.Path == path(id));
+            return null == row ? null : (CVrecord)row;
         }
     }
 }

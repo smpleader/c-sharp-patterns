@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modData.Memories
 {
-    class ARow
+    class ARecord
     {
-        public ARow() { init(); }
         // Unique ID of a row
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
         // Unique code of an object, can be duplicated
-        public string Code { get; set; }
+        public virtual string Code { get; set; }
         // Search engine
-        public string Path { get; set; }
+        public virtual string Path { get; }
 
-        public Dictionary<string, string> ColText { get; set; }
-        public Dictionary<string, decimal> ColNum { get; set; }
+        public virtual Dictionary<string, string> ColText { get; set; } = new Dictionary<string, string>();
+        public virtual Dictionary<string, decimal> ColNum { get; set; } = new Dictionary<string, decimal>();
 
         public string txt(string name)
         {
-            return ColNum.ContainsKey(name) ? ColText[name] : "-"; 
+            return ColText.ContainsKey(name) ? ColText[name] : "-"; 
         }
 
         public void txt(string name, string str)
@@ -37,6 +36,6 @@ namespace Worksheet.modData.Memories
             ColNum[name] = val; 
         }
 
-        protected void init() { }
+        public virtual void init() { }
     }
 }
