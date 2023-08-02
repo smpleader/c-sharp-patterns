@@ -3,9 +3,14 @@ Just some practices for patterns in C sharp
 
 ## Worksheet:
 
-How we deal with 2 dimensions of data model, which you can't apply POV or RDBM
-Bonus: how can print a grid of data.
-Consider SyncFusion instead of ReoGrid
+How we deal with 2 dimensions of data model, which you can't apply POV or RDBM.
+
+Pattern for data mapping in strong type language.
+
+Todo:
+
+- Print a grid of data to paper.
+- Consider SyncFusion instead of ReoGrid
 
 ## DI_MVP:
 
