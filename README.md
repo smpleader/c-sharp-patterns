@@ -1,4 +1,4 @@
-# c-sharp-patterns
+# C sharp patterns & practises
 Just some practices for patterns in C sharp
 
 ## Worksheet:
