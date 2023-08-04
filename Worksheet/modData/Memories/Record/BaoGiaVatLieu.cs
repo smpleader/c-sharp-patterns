@@ -17,7 +17,7 @@ namespace Worksheet.modData.Memories.Record
         public override string Path { get { return "BaoGia." + DGId + ".VatLieu." + Id; } }
         public void setDefault()
         {
-            ColText["stt"] = ""; global
+            ColText["stt"] = "";
             ColText["ma"] = "";
             ColText["ten"] = "";
             ColText["donvi"] = "";

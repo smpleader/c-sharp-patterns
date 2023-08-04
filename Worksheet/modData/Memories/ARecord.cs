@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modData.Memories
 {
-    class ARecord
+    public class ARecord
     {
         // Unique ID of a row
         public virtual int Id { get; set; }

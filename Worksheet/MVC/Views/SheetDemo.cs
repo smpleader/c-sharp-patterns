@@ -87,9 +87,13 @@ namespace Worksheet.MVC.Views
         {
 
             MessageBox.Show(
-                "Input:"+ sheetPresenter.sheetInput.logs + "\nOuput:" + sheetPresenter.sheetOutput.logs
+                "Input:" + sheetPresenter.sheetInput.logs + "\nOuput:" + sheetPresenter.sheetOutput.logs
                 );
         }
-        
+
+        private void btnNguon_Click(object sender, EventArgs e)
+        {
+            Backbone.Run("ResourceForm");
+        }
     }
 }

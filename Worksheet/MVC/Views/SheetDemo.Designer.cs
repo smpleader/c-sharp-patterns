@@ -40,6 +40,7 @@
             btnTest = new Button();
             reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             btnLog = new Button();
+            btnNguon = new Button();
             SuspendLayout();
             // 
             // reoGridControl1
@@ -108,7 +109,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(537, 19);
+            label1.Location = new Point(672, 16);
             label1.Name = "label1";
             label1.Size = new Size(88, 20);
             label1.TabIndex = 5;
@@ -185,11 +186,22 @@
             btnLog.UseVisualStyleBackColor = true;
             btnLog.Click += btnLog_Click;
             // 
+            // btnNguon
+            // 
+            btnNguon.Location = new Point(537, 12);
+            btnNguon.Name = "btnNguon";
+            btnNguon.Size = new Size(129, 29);
+            btnNguon.TabIndex = 14;
+            btnNguon.Text = "File nguồn";
+            btnNguon.UseVisualStyleBackColor = true;
+            btnNguon.Click += btnNguon_Click;
+            // 
             // SheetDemo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1601, 968);
+            Controls.Add(btnNguon);
             Controls.Add(btnLog);
             Controls.Add(reoGridControl2);
             Controls.Add(btnTest);
@@ -228,5 +240,6 @@
         private Button btnTest;
         public unvell.ReoGrid.ReoGridControl reoGridControl2;
         private Button btnLog;
+        private Button btnNguon;
     }
 }

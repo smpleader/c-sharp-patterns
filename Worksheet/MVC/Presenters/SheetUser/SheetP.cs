@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using UserView = Worksheet.MVC.Views.SheetDemo;
-using User = Worksheet.Data.Entities.User.WinForm;
-using UserCore = Worksheet.Data.Entities.User.Schema;
+using User = Worksheet.modData.Entities.User.WinForm;
+using UserCore = Worksheet.modData.Entities.User.Schema;
 using Worksheet.MVC.Models;
 using Worksheet.Util;
 using unvell.ReoGrid;
@@ -34,8 +34,8 @@ namespace Worksheet.MVC.Presenters.SheetUser
         }
         public void Setup()
         {
-            _view.cbData.DataSource = model.ComboboxTemplateList("input");
-            _view.cbReport.DataSource = model.ComboboxTemplateList("output");
+            _view.cbData.DataSource = model.ComboboxTemplateList(AppConst.templateFolder + "/input");
+            _view.cbReport.DataSource = model.ComboboxTemplateList(AppConst.templateFolder + "/output");
             sheetInputReload();
             sheetOutputReload();
         }

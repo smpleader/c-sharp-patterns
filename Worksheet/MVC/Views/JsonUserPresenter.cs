@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Worksheet.MVC.Presenters.JsonUser;
-using User = Worksheet.Data.Entities.User.WinForm;
+using User = Worksheet.modData.Entities.User.WinForm;
 
 namespace Worksheet.MVC.Views
 {

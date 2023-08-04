@@ -10,10 +10,12 @@ namespace Worksheet.MVC.Models
 {
     internal class DemoM
     {
-        public List<string> ComboboxTemplateList(string folder)
+        public List<string> ComboboxTemplateList(string path)
         {
-            List<string> list = AFile.GetFiles(AppConst.templateFolder + "/" + folder, new List<string> { "*.xlsx"}); // , "*.csv", "*.ods", "*.xls" 
+            List<string> list = AFile.GetFiles(path, new List<string> { "*.xlsx"}); // , "*.csv", "*.ods", "*.xls" 
             return list;
         }
+
+
     }
 }

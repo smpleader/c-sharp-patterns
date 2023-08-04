@@ -1,0 +1,32 @@
+{
+    "CV1": [
+        {
+            "ten": "Cáp thép dự ứng lực cọc bê tông 50x50cm (kéo trước)",
+            "ma": "AG.13551",
+            "donvi": "tấn",
+            "dinhmuc": "",
+            "gia": "",
+            "giagoc": ""
+        }
+    ],
+    "CV2": [
+        {
+            "ten": "Thí nghiệm gạch gốm ốp lát, gạch men, đá ốp lát tự nhiên, đá ốp lát nhân tạo trên cơ sở chất kết dính hữa cơ, chỉ tiêu độ hút nước",
+            "ma": "DA.19001",
+            "donvi": "chỉ tiêu",
+            "dinhmuc": "",
+            "gia": "",
+            "giagoc": ""
+        }
+    ],
+    "CV3": [
+        {
+            "ten": "Lắp đặt quạt trần",
+            "ma": "BA.11110",
+            "donvi": "cái",
+            "dinhmuc": "",
+            "gia": "",
+            "giagoc": ""
+        }
+    ]
+}

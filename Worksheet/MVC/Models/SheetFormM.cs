@@ -17,6 +17,7 @@ namespace Worksheet.MVC.Models
         int topBtn = 0; //13;
         ReoGridControl rg;
         ComboBox cb;
+        protected Button currentBtn = new  Button();
         protected Stack<Button> btnList = new Stack<Button>();
         ControlCollection ctrl;
         string id;
@@ -67,6 +68,7 @@ namespace Worksheet.MVC.Models
             newBtn.Size = new System.Drawing.Size(94, 30);
             newBtn.Location = new System.Drawing.Point(start, topBtn);
             newBtn.Click += clickToChoose;//new EventHandler();
+            newBtn.BackColor = Control.DefaultBackColor;
             ctrl.Add(newBtn);
             btnList.Push(newBtn);
         }
@@ -76,7 +78,10 @@ namespace Worksheet.MVC.Models
             System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
             if (btn != null)
             {
+                currentBtn.BackColor = Control.DefaultBackColor;
                 chooseSheet(btn.Text);
+                currentBtn = btn;
+                currentBtn.BackColor = Color.White;
             }
         }
 

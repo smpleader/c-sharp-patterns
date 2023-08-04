@@ -1,5 +1,6 @@
 ﻿using SimpleInjector;
 using Worksheet.MVC.Controllers;
+using Worksheet.MVC.Controllers.BE;
 using Worksheet.MVC.Models;
 using Worksheet.MVC.Views;
 using Worksheet.Util;
@@ -13,7 +14,7 @@ namespace Worksheet.MVC
         public static void ConfigureServices()
         {
             // CONTROLLERS
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new SqliteUserC(), new SheetDemoC());
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new SqliteUserC(), new SheetDemoC(), new ResourceC());
 
             // this cause duplicate instance
             //container.Collection.Register<IController>(typeof( LoaderC ), typeof( StarterC), typeof( JsonUserC));

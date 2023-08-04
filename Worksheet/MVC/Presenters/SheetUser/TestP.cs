@@ -28,16 +28,16 @@ namespace Worksheet.MVC.Presenters.SheetUser
 
         public void test()
         {
-            HangMuc.add(
-                 new modData.Memories.Repositories.Row.HangMuc(1)
-                 );
-            HangMuc.add(
-                 new modData.Memories.Repositories.Row.HangMuc(2)
-                 );
+            modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
+            t.txt("test", "oo1");
+            HangMuc.them(t);
+            t = new modData.Memories.Record.HangMuc("ten 2", "kieu 2");
+            t.txt("test", "oo2");
+            HangMuc.them(t);
 
             string debug = "";
 
-            modData.Memories.Storage.R.ForEach(r => debug += r.Path + "\n");
+            modData.Memories.DB.Storage.ForEach(r => debug += "Record ID "+ r.Id + " | " + r.Path + " | " + r.txt("test") + "\n");
 
             MessageBox.Show(debug);
         }

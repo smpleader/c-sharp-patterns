@@ -26,7 +26,12 @@ namespace Worksheet.modData.Memories.Pointer
         public static Other NguonDG = new Other("NguonDonGia");
         public static Other DG = new Other("DonGia");
         public static Other ThongTu = new Other("ThongTu");
+        public static unvell.ReoGrid.ReoGridControl WControl;
+        public static unvell.ReoGrid.WorksheetCollection WB;
         public static unvell.ReoGrid.Worksheet WS;
+        public static unvell.ReoGrid.Cell Cell;
+        public static string Col;
+        public static int Row;
 
         public void point (string name, int id)
         {

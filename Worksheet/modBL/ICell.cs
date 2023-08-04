@@ -10,9 +10,9 @@ namespace Worksheet.modBL
      đại diện cho 1 ô có thể thay thế cách tính và giá trị, 
     dựa theo biểu mẫu cũng như phương pháp tính
      */
-    internal interface ICell
+    interface ICell
     {
-        string Option { get; }
+        string option { get; }
         // return forumalation of cell
          string fml();
         // return value of cell

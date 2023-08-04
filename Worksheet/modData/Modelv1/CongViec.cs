@@ -21,12 +21,12 @@ namespace Worksheet.modData.Modelv1
         }
         public static List<RowCongViec> danhsach(string index, string? HangMuc = null)
         {
-            List<ARecord> rows = Storage.R.FindAll(Current.CV.filterType);
+            List<ARecord> rows = DB.Storage.FindAll(Current.CV.filterType);
             return rows.Cast<RowCongViec>().ToList();
         }
         public static RowCongViec? chitiet(string index, string? HangMuc = null)
         {
-            ARecord? row = Storage.R.Find(Current.CV.filterItem);
+            ARecord? row = DB.Storage.Find(Current.CV.filterItem);
             return null == row ? null : (RowCongViec)row;
         }
 
@@ -35,14 +35,14 @@ namespace Worksheet.modData.Modelv1
             int id = Current.CV.id();
             point(id++);
             r.Id = id;
-            Storage.R.Add(r);
+            DB.Storage.Add(r);
             // recalculate BL
         }
         public static void xoa()
         {
             int id = Current.CV.id();
             point(id--);
-            Storage.R.RemoveAll(Current.CV.filterItem);
+            DB.Storage.RemoveAll(Current.CV.filterItem);
             // recalculate BL
         }
     }

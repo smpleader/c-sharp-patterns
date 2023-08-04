@@ -27,7 +27,10 @@
 		<None Update="Content/Type/*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Content/Tmp/test02.xlsx">
+		<None Update="Content/Template/baogia.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content/Template/dongia.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content/*.*">
@@ -56,6 +59,7 @@
 
     <ItemGroup>
       <Folder Include="Content\Type\" />
+      <Folder Include="DataSample\Dongia\" />
     </ItemGroup> 
 
 </Project>

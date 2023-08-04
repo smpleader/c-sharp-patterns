@@ -9,8 +9,10 @@ namespace Worksheet.modDisplay
     interface ISheet
     {
         string Name { get; }
-        string head(string name);
-        string foot(string name);
-        Dictionary<string, ARow> content(string name);
+        void init();
+        void beforeSave();
+        void afterSave();
+        void selectCell();
+        void afterCellInput();
     }
 }
