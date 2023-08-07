@@ -9,7 +9,8 @@ namespace Worksheet.modDisplay
     interface ISheet
     {
         string Name { get; }
-        void init();
+        void init(string tabName);
+        void loadData();
         void beforeSave();
         void afterSave();
         void selectCell();

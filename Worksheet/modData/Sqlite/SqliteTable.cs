@@ -1,4 +1,4 @@
-﻿using Worksheet.DB.SQLite;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Worksheet.Util;
 using System.Data;
 using Worksheet.modData.Entities;
-using Worksheet.Util.Drivers;
+using Worksheet.modData.Drivers;
 
 namespace Worksheet.modData.Sqlite
 {
@@ -19,7 +19,7 @@ namespace Worksheet.modData.Sqlite
     {
         protected virtual string _table { get; set; } = "sqlite_table";
         protected virtual string _pk { get; set; } = "pk_id";
-        protected virtual Sqlite _db { get; set; }
+        protected virtual Drivers.Sqlite _db { get; set; }
         protected virtual IEntity  _row { get; set; }
 
         /*  public SqliteTable(Sqlite drv){  _db = drv; }  */

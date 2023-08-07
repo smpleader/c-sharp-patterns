@@ -93,7 +93,7 @@ namespace Worksheet.MVC.Views
 
         private void btnNguon_Click(object sender, EventArgs e)
         {
-            Backbone.Run("ResourceForm");
+            Backbone.Run("Resource");
         }
     }
 }

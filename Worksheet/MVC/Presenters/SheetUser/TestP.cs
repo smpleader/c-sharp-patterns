@@ -11,7 +11,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using Microsoft.Office.Interop.Excel;
-using Worksheet.modData.Modelv1;
+using Worksheet.modData.Memories.Models;
 
 namespace Worksheet.MVC.Presenters.SheetUser
 {
@@ -37,7 +37,7 @@ namespace Worksheet.MVC.Presenters.SheetUser
 
             string debug = "";
 
-            modData.Memories.DB.Storage.ForEach(r => debug += "Record ID "+ r.Id + " | " + r.Path + " | " + r.txt("test") + "\n");
+            modData.memories.Storage.ForEach(r => debug += "Record ID "+ r.Id + " | " + r.Path + " | " + r.txt("test") + "\n");
 
             MessageBox.Show(debug);
         }

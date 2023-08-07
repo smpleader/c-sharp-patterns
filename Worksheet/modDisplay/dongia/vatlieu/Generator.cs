@@ -11,13 +11,13 @@ namespace Worksheet.modDisplay.dongia.vatlieu
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
-        public override string Name { get { return "Vật liệu"; } }
+        public override string Name { get { return "dongia/vatlieu"; } }
 
-        public override void init()
+        public override void init(string tabName)
         {
-            if (Current.WB[Name] != null)
+            if (Display.WB[tabName] != null)
             {
-                ws = Current.WB[Name];
+                ws = Display.WB[tabName];
 
                 ws.SetCols(5);
                 ws.ColumnHeaders[0].Text = "Mã";

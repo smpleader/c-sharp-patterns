@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Worksheet.modData.Entities;
-using Worksheet.Util.Drivers;
 
 namespace Worksheet.modData.Sqlite
 {
@@ -13,7 +12,7 @@ namespace Worksheet.modData.Sqlite
     {
         string _table;
         string _pk;
-        Sqlite _db;
+        Drivers.Sqlite _db;
         IEntity _row;
 
         public abstract bool Ready();

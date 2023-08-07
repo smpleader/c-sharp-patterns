@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet.modData.Modelv1
+namespace Worksheet.modData.Memories.Models
 {
     internal class Dongia
     {
-        public static void capnhat(int id )
+        public static void capnhat(int id)
         {
 
         }

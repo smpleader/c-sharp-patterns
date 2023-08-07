@@ -1,6 +1,6 @@
 ﻿namespace Worksheet.MVC.Views.BE
 {
-    partial class ResourceForm
+    partial class Resource
     {
         /// <summary>
         /// Required designer variable.

@@ -10,8 +10,8 @@ namespace Worksheet.MVC.Controllers.BE
 {
     internal class ResourceC : AController
     {
-        public override string Name { get { return "ResourceForm"; } }
+        public override string Name { get { return "Resource"; } }
 
-        protected override IView _view { get; set; } = new ResourceForm();
+        protected override IView _view { get; set; } = new Resource();
     }
 }

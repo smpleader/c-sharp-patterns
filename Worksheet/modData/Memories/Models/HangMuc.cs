@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using RowHangMuc = Worksheet.modData.Memories.Record.HangMuc; 
 using Worksheet.modData.Memories.Pointer;
 using Worksheet.modData.Memories;
-using Database = Worksheet.modData.Memories.DB;
 
-namespace Worksheet.modData.Modelv1
+namespace Worksheet.modData.Memories.Models
 {
     internal class HangMuc
     {
@@ -23,24 +22,24 @@ namespace Worksheet.modData.Modelv1
         }
         public static List<RowHangMuc> danhsach()
         {
-            List<ARecord> rows = Memories.DB.Storage.FindAll(Current.HM.filterType);
+            List<ARecord> rows = memories.Storage.FindAll(Current.HM.filterType);
             return rows.Cast<RowHangMuc>().ToList();
         }
         public static RowHangMuc? chitiet(string index)
         {
-            ARecord? row = Database.Storage.Find(Current.HM.filterItem);
+            ARecord? row = memories.Storage.Find(Current.HM.filterItem);
             return null == row ? null : (RowHangMuc)row;
         }
 
         public static void them(RowHangMuc r)
         {
             point(r.Id);
-            Database.Storage.Add(r);
+            memories.Storage.Add(r);
             // recalculate BL
         }
         public static void xoa(string index)
         {
-            Database.Storage.RemoveAll(Current.HM.filterFamily);
+            memories.Storage.RemoveAll(Current.HM.filterFamily);
             // recalculate BL
         }
     }

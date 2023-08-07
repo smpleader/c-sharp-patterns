@@ -1,4 +1,4 @@
-﻿using Worksheet.DB.SQL;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
@@ -13,7 +13,6 @@ using UserSqlite = Worksheet.modData.Entities.User.Sqlite;
 using Worksheet.Util;
 using Worksheet.modData.Entities.User;
 using Worksheet.modData.Entities;
-using SqlDrive = Worksheet.Util.Drivers.Sqlite;
 
 namespace Worksheet.modData.Sqlite
 {
@@ -21,7 +20,7 @@ namespace Worksheet.modData.Sqlite
     {
         protected override string _table { get; set; } = "user";
         protected override string _pk { get; set; } = "Id";
-        protected override SqlDrive _db { get; set; }
+        protected override Drivers.Sqlite _db { get; set; }
         protected override IEntity _row { get; set; } = new UserSqlite();
 
         public override bool Ready() 
@@ -39,7 +38,7 @@ namespace Worksheet.modData.Sqlite
             return true; 
         }
 
-        public User(SqlDrive drv) 
+        public User(Drivers.Sqlite drv) 
         {
             _db = drv;
 

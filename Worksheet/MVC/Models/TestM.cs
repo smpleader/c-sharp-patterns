@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Worksheet.DB.SQLite;
-using Worksheet.Util.Drivers;
+
+using Worksheet.modData.Drivers;
 
 namespace Worksheet.MVC.Models
 {
@@ -12,7 +12,7 @@ namespace Worksheet.MVC.Models
     {
         public void dosth()
         {
-            User tblUser = new User(new  Sqlite("Data Source=database.dat;Version=3;New=True"));
+            modData.Sqlite.User tblUser = new modData.Sqlite.User(new  Sqlite("Data Source=database.dat;Version=3;New=True"));
             MessageBox.Show("dosth" + tblUser.Pk().ToString());
         }
     }

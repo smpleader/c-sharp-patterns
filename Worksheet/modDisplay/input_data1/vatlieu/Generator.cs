@@ -9,10 +9,6 @@ namespace Worksheet.modDisplay.input_data1.vatlieu
     internal class Generator : AGenerator
     {
         public override string Name { get { return ""; } }
-
-        public override void init()
-        {
-            //return "";
-        }
+         
     }
 }

@@ -11,36 +11,20 @@ using Worksheet.MVC.Views.BE;
 
 namespace Worksheet.MVC.Presenters.BE
 {
-    internal class ResourcePresenter:APresenter<ResourceForm>
+    internal class ResourcePresenter:APresenter<Resource>
     {
-        protected ResourceForm _view;
-        public ResourcePresenter(ResourceForm view) : base(view)
+        protected Resource _view;
+        public ResourcePresenter(Resource view) : base(view)
         {
+            // This should be put at Screen Startup
+            Display.init();
+
             _view = view;
 
             _view.ws.SheetTabNewButtonVisible = false;
-            _view.ws.CurrentWorksheet.CellMouseDown += onClick;
 
-            Display.setup(_view.ws, new string[]
-            {
-                "dg/congviec",
-                "dg/vatlieu",
-                "dg/nhancong",
-                "dg/camay",
-                "dg/tonghop"
-            }); 
+            //MessageBox.Show(_view.ws.CurrentWorksheet.Name);
 
         }
-
-        public void onClick(object sender, CellMouseEventArgs e)
-        {
-            // unsafe: cell instance may be null
-            // var cell = e.Cell;
-            // safe: cell instance created from position if not existed 
-            modData.Memories.Pointer.Current.Cell = _view.ws.CurrentWorksheet.CreateAndGetCell(e.CellPosition);
-            modData.Memories.Pointer.Current.WS = _view.ws.CurrentWorksheet;
-            Display.hook("SelectCell");
-        } 
-
     }
 }

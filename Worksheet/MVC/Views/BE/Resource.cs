@@ -15,11 +15,12 @@ using Worksheet.Util;
 
 namespace Worksheet.MVC.Views.BE
 {
-    public partial class ResourceForm : AView
+    public partial class Resource : AView
     {
         Presenters.BE.ResourcePresenter rp;
         DemoM model;
-        public ResourceForm()
+        bool loaded = false;
+        public Resource()
         {
             InitializeComponent();
         }
@@ -114,12 +115,16 @@ namespace Worksheet.MVC.Views.BE
         private void ResourceForm_Load(object sender, EventArgs e)
         {
             model = new DemoM();
+            rp = new Presenters.BE.ResourcePresenter(this);
 
             loadCombobox();
             ws.CurrentWorksheet.SetRows(10000);
             ws.WorkbookSaved += AfterSave;
+            ws.WorkbookLoaded += AfterLoad;
 
-            rp = new Presenters.BE.ResourcePresenter(this);
+            Display.setup(ws, cbFile.SelectedValue.ToString());
+            Display.hook("LoadData");
+
         }
 
         private void loadCombobox(string item = "")
@@ -169,6 +174,16 @@ namespace Worksheet.MVC.Views.BE
         {
             Display.hook("AfterSave");
             MessageBox.Show("Saved " + cbFile.SelectedValue.ToString());
+        }
+        public async void AfterLoad(object sender, EventArgs e)
+        {
+            //MessageBox.Show("load file: " + cbFile.SelectedValue.ToString());
+            
+            // a little time to be sure file get loaded
+            await Task.Delay(500);
+            Display.setup(cbFile.SelectedValue.ToString());
+
+            Display.hook("LoadData");
         }
     }
 }

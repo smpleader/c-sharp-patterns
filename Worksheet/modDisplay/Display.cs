@@ -1,50 +1,111 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid;
+using unvell.ReoGrid.Events;
+using Worksheet.modBL;
 using Worksheet.modBL.prime.vatlieu;
 using Worksheet.modData.Memories.Pointer;
+using Worksheet.Util;
 
 namespace Worksheet.modDisplay
 {
     internal class Display
     {
-        private static Dictionary<string, ISheet> _instances = new Dictionary<string, ISheet>()
-                {
-                    {"default", new AGenerator()  },
-                    {"dg/congviec", new dongia.congviec.Generator()  },
-                    {"dg/vatlieu", new dongia.vatlieu.Generator()  },
-                    {"dg/tonghop", new dongia.tonghop.Generator()  },
-                    { "DG", new input_data1.vatlieu.Generator() },
-                    { "thvl", new input_data1.vatlieu.Generator()},
-                    { "THNC", new input_data1.vatlieu.Generator()}
-                };
-
-        static string[] activates;
-
-        public static ISheet tab(string name)
+        public static void init()
         {
-           return _instances.ContainsKey(name) ? _instances[name] : _instances["default"];
+            // TODO: scan files in folders and index, save them in resources.files
+            foreach (var file in Resources.Files)
+            {
+                if (!String.IsNullOrEmpty(file.Value.Path) && File.Exists(file.Value.Path))
+                {
+                    file.Value.Exists = true;
+                }
+
+            }
         }
 
-        public static void setup(unvell.ReoGrid.ReoGridControl control, string[] str)
+        static FileTemplate currentTemplate;
+        public static ReoGridControl WControl;
+        public static WorksheetCollection WB;
+        public static unvell.ReoGrid.Worksheet WS;
+        public static unvell.ReoGrid.Cell Cell;
+        public static string Col;
+        public static int Row;
+
+
+        private static void setTemplate(string filePath)
         {
-            Current.WControl = control;
-            Current.WB = control.Worksheets;
+            string systemName = filePath.Replace(AppConst.contentFolder, "");
+            string[] slugs = systemName.Split("/");
+            currentTemplate = Resources.Files[""];
 
-            activates = str;
-
-            foreach (string s in str) {
-                tab(s).init();
+            switch (slugs[0])
+            {
+                case "Dongia":
+                    currentTemplate = Resources.Files["Dongia"];
+                    break;
+                case "Baogia":
+                    currentTemplate = Resources.Files["Baogia"];
+                    break;
+                default:
+                    if (Resources.Files.ContainsKey(systemName))
+                    {
+                        currentTemplate = Resources.Files[systemName];
+                    }
+                    break;
             }
+        }
+
+        private static void setControl(ReoGridControl control)
+        {
+            WControl = control;
+            WB = control.Worksheets;
+        }
+
+        public static void setup(ReoGridControl control, string filePath)
+        {
+            setControl(control);
+            setTemplate(filePath);
+            attachEvent();
+        }
+        public static void setup(ReoGridControl control)
+        {
+            if (currentTemplate == null)
+            {
+                throw new Exception("Template file not set");
+            }
+
+            setControl(control);
+            attachEvent();
+        }
+        public static void setup(string filePath)
+        {
+            if (null == WControl)
+            {
+                throw new Exception("Workbook control not set");
+            }
+
+            setTemplate(filePath);
+            attachEvent();
+        }
+
+        public static ISheet tab(string name = "")
+        {
+            if (name == "")
+            {
+                name = WControl.CurrentWorksheet.Name;
+            }
+            return currentTemplate.Tabs.ContainsKey(name) ? currentTemplate.Tabs[name] : new AGenerator();
         }
 
         public Dictionary<String, String> State = new Dictionary<String, String>();
         public string state(string key, string? val = null)
         {
-            if(null == val)
+            if (null == val)
             {
                 val = null == State[key] ? "- not found -" : State[key];
             }
@@ -55,49 +116,68 @@ namespace Worksheet.modDisplay
         {
             switch (name)
             {
+                case "loadData":
+                case "LoadData":
+                    if (WB != null)
+                    {
+                        foreach (var tab in currentTemplate.Tabs)
+                        {
+                            tab.Value.loadData();
+                        };
+                    }
+                    break;
                 case "beforeSave":
                 case "BeforeSave":
-
-                    foreach (string s in activates)
+                    foreach (var tab in currentTemplate.Tabs)
                     {
-                        tab(s).beforeSave();
+                        tab.Value.beforeSave();
                     };
                     break;
                 case "afterSave":
                 case "AfterSave":
-
-                    foreach (string s in activates)
+                    foreach (var tab in currentTemplate.Tabs)
                     {
-                        tab(s).afterSave();
+                        tab.Value.afterSave();
                     };
                     break;
                 case "selectCell":
                 case "SelectCell":
 
-                    Current.Col = new string(Current.Cell.Address.ToString().Where(chr => Char.IsLetter(chr)).ToArray());
-                    Current.Row = Int32.Parse(new String(Current.Cell.Address.ToString().Where(chr => Char.IsDigit(chr)).ToArray()));
+                    //var t = tab(); MessageBox.Show(t.Name);
+                    tab().selectCell();
 
-                    foreach (string s in activates)
-                    {
-                        if(  tab(s).Name == Current.WControl.CurrentWorksheet.Name)
-                        {
-                            tab(s).selectCell();
-                            return;
-                        }
-                    };
                     break;
                 case "afterCellInput":
                 case "AfterCellInput":
-                    foreach (string s in activates)
-                    {
-                        if (tab(s).Name == Current.WControl.CurrentWorksheet.Name)
-                        {
-                            tab(s).afterCellInput();
-                            return;
-                        }
-                    };
+                    tab().afterCellInput();
                     break;
             }
+        }
+
+        private static void attachEvent()
+        {
+            foreach (var tab in currentTemplate.Tabs)
+            {
+                tab.Value.init(tab.Key);
+            };
+
+            foreach (var sheet in WB)
+            {
+                sheet.CellMouseDown += onClick;
+
+            }
+        }
+
+        public static void onClick(object sender, CellMouseEventArgs e)
+        {
+            // unsafe: cell instance may be null
+            // var cell = e.Cell;
+            // safe: cell instance created from position if not existed 
+            Cell = WControl.CurrentWorksheet.CreateAndGetCell(e.CellPosition);
+            WS = WControl.CurrentWorksheet;
+            Col = new string(Cell.Address.ToString().Where(chr => Char.IsLetter(chr)).ToArray());
+            Row = Int32.Parse(new String(Cell.Address.ToString().Where(chr => Char.IsDigit(chr)).ToArray()));
+            Display.hook("SelectCell"); 
         }
     }
 }

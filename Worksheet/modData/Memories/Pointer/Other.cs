@@ -22,7 +22,7 @@ namespace Worksheet.modData.Memories.Pointer
         public override bool filterFamily(ARecord r) { return r.Path.Contains(Name + "."); }
         public ARecord load(int id = -1)
         {
-            return DB.Storage.Find(r => r.Path == path(id));
+            return memories.Storage.Find(r => r.Path == path(id));
         }
     }
 }

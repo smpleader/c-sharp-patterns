@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using UserEntity = Worksheet.modData.Entities.User.WinForm;
 using UserCore = Worksheet.modData.Entities.User.Schema;
-using Worksheet.DB.SQLite;
+
 using Worksheet.Util;
-using SqlDrive = Worksheet.Util.Drivers.Sqlite;
+using SqlDrive = Worksheet.modData.Drivers.Sqlite;
 
 namespace Worksheet.MVC.Models
 {
     internal class SqliteUserM
     {
-        public User tblUser;
+        public modData.Sqlite.User tblUser;
         public SqliteUserM(SqlDrive sqlDriver) 
         {
-            tblUser = new User(sqlDriver);
+            tblUser = new modData.Sqlite.User(sqlDriver);
         }
 
-        public User table()
+        public modData.Sqlite.User table()
         { 
             return tblUser; 
         }

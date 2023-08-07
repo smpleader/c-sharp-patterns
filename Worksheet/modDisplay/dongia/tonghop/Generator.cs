@@ -11,19 +11,19 @@ namespace Worksheet.modDisplay.dongia.tonghop
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
-        public override string Name { get { return "Tong-hop"; } }
+        public override string Name { get { return "dongia/tonghop"; } }
 
-        public override void init()
+        public override void init(string tabName)
         {
-            if (Current.WB[Name] == null)
+            if (Display.WB[tabName] == null)
             {
-                ws = Current.WControl.CreateWorksheet(Name);
+                ws = Display.WControl.CreateWorksheet(tabName);
             }
             else 
             { 
-                ws = Current.WB[Name];
+                ws = Display.WB[tabName];
                 // detach from control, need to add back when save
-                Current.WControl.RemoveWorksheet(ws);
+                Display.WControl.RemoveWorksheet(ws);
             }
 
             ws.SetCols(5);
@@ -37,11 +37,14 @@ namespace Worksheet.modDisplay.dongia.tonghop
         public override void beforeSave()
         {
             //ws["A1"] = "xxx11x"; test
-            Current.WControl.AddWorksheet(ws);
+
+            // attach to control to save into file
+            Display.WControl.AddWorksheet(ws);
         }
         public override void afterSave()
         {
-            Current.WControl.RemoveWorksheet(ws);
+            // detach from control
+            Display.WControl.RemoveWorksheet(ws);
         }
     }
 }

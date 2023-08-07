@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using UserEntity = Worksheet.modData.Entities.User.WinForm;
 using UserSchema = Worksheet.modData.Entities.User.Schema;
-using Worksheet.DB.Json;
+using Worksheet.modData.Drivers;
 using Worksheet.Util;
 
 namespace Worksheet.MVC.Models
 {
     internal class JsonUserM
     {
-        public User userDB = new User( AppConst.contentFolder + "/users.json");  
+        public modData.Json.User userDB = new modData.Json.User( AppConst.contentFolder + "/users.json");  
 
-        public User db()
+        public modData.Json.User db()
         { 
             return userDB; 
         }

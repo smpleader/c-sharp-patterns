@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Worksheet.modData.Memories;
 
-namespace Worksheet.modData.Memories
+namespace Worksheet.modData
 {
-    public static class DB
+    /**
+     * Lớp dữ liệu dạng memories chứa thông tin dựa theo cơ chế Path
+     */
+    internal class memories
     {
         public static List<ARecord> Storage = new List<ARecord>();
-    } 
+
+    }
 }

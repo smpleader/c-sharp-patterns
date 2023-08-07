@@ -12,7 +12,7 @@ namespace Worksheet.modData.Memories.Pointer
         public int id(bool nextId = false) {
             if(Id == -1)
             {
-                List<ARecord> rows = DB.Storage.FindAll(filterType);
+                List<ARecord> rows = memories.Storage.FindAll(filterType);
                 Id = rows.Count > 0 ? rows.Last().Id : 0;
             }
             return nextId ? Id+1 : Id; 

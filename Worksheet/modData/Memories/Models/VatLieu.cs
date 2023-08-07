@@ -8,7 +8,7 @@ using Worksheet.modData.Memories;
 using System.Reflection;
 using Worksheet.modData.Memories.Pointer;
 
-namespace Worksheet.modData.Modelv1
+namespace Worksheet.modData.Memories.Models
 {
     internal class VatLieu
     {
@@ -18,39 +18,40 @@ namespace Worksheet.modData.Modelv1
         }
         public static List<RowVatLieu> danhsach()
         {
-            List<ARecord> rows = DB.Storage.FindAll(Current.VL.filterType);
+            List<ARecord> rows = memories.Storage.FindAll(Current.VL.filterType);
             return rows.Cast<RowVatLieu>().ToList();
         }
         public static RowVatLieu? chitiet()
         {
-            ARecord? row = DB.Storage.Find(Current.VL.filterItem);
+            ARecord? row = memories.Storage.Find(Current.VL.filterItem);
             return null == row ? null : (RowVatLieu)row;
         }
 
         public static void them(RowVatLieu r)
         {
-            DB.Storage.Add(r);
+            memories.Storage.Add(r);
             // recalculate BL
         }
         public static bool capnhat(RowVatLieu r)
         {
-            int index = DB.Storage.FindIndex(x => x.Path == r.Path);
+            int index = memories.Storage.FindIndex(x => x.Path == r.Path);
             if (index == -1)
+
             {
                 MessageBox.Show(r.Path + " not found.");
                 return false;
             }
             else
             {
-                DB.Storage.ElementAt(index).ColText = r.ColText;
-                DB.Storage.ElementAt(index).ColNum = r.ColNum;
+                memories.Storage.ElementAt(index).ColText = r.ColText;
+                memories.Storage.ElementAt(index).ColNum = r.ColNum;
                 // recalculate BL
                 return true;
             }
         }
         public static void xoa()
         {
-            DB.Storage.RemoveAll(Current.VL.filterItem);
+            memories.Storage.RemoveAll(Current.VL.filterItem);
             // recalculate BL
         }
 

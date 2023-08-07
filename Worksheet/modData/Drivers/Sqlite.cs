@@ -7,7 +7,7 @@ using System.Data.SQLite;
 using System.Data;
 using System.Drawing;
 
-namespace Worksheet.Util.Drivers
+namespace Worksheet.modData.Drivers
 {
     internal class Sqlite
     {

@@ -22,7 +22,7 @@ namespace Worksheet.modData.Memories.Pointer
 
         public CMrecord? load(int id = -1)
         {
-            ARecord? row = DB.Storage.Find(r => r.Path == path(id));
+            ARecord? row = memories.Storage.Find(r => r.Path == path(id));
             return null == row ? null : (CMrecord)row;
         }
     }
