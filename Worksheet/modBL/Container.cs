@@ -14,7 +14,7 @@ namespace Worksheet.modBL
             {"test2", new prime.vatlieu.colA() },
         };
 
-        public static bool exist(string name) { return _instance.ContainsKey(name); }
+        public static bool exists(string name) { return _instance.ContainsKey(name); }
         public static ICell Get(string name) {  return _instance[name]; }
 
     }

@@ -15,5 +15,6 @@ namespace Worksheet.modDisplay
         void afterSave();
         void selectCell();
         void afterCellInput();
+        void addMenu();
     }
 }

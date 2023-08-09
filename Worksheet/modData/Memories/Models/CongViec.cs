@@ -45,5 +45,18 @@ namespace Worksheet.modData.Memories.Models
             memories.Storage.RemoveAll(Current.CV.filterItem);
             // recalculate BL
         }
+
+        public static void capnhat(RowCongViec row)
+        {
+            ARecord? find = Current.CV.load();// memories.Storage.Find(r=>r.Path == Current.CV.path(row.Id));
+            if(find==null)
+            {
+                memories.Storage.Add(row);
+            }
+            else
+            {
+
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Worksheet.modData.Memories
 
         public void txt(string name, string str)
         {
-            ColText[name] = str;
+            ColText[name] = str; 
         }
         public decimal num(string name)
         {

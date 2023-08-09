@@ -12,14 +12,14 @@ namespace Worksheet.modDisplay.dongia.congviec
 {
     internal class Generator : AGenerator
     {
-        public unvell.ReoGrid.Worksheet ws; 
-        public override string Name { get { return "dongia/congviec"; } } 
+        public unvell.ReoGrid.Worksheet ws;
+        public override string Name { get { return "dongia/congviec"; } }
 
         private Dictionary<int, Row> objects = new Dictionary<int, Row>();
 
         public Row obj(int id = 0)
         {
-            if(0 == id)
+            if (0 == id)
             {
                 id = Display.Row;
             }
@@ -30,7 +30,7 @@ namespace Worksheet.modDisplay.dongia.congviec
             {
                 objects[id] = new Row(id);
             }
-                
+
             return objects[id];
         }
 
@@ -49,19 +49,50 @@ namespace Worksheet.modDisplay.dongia.congviec
             }
         }
 
-        public override void loadData()
-        { 
+        public void click1(object sender, EventArgs e)
+        {
+            // sjpw form 
+          //  MainAppActions/
+        } 
 
-            MessageBox.Show(ws.Name + " total row " + ws.MaxContentCol + 
+    public void click(string name)
+        {
+           // container.Keys.Contains(name) ;
+        }
+
+        public override void addMenu()
+        {
+
+            Display.menuItems = new ToolStripItemCollection(Display.contextMenu,
+                    new ToolStripItem[]{
+                        new ToolStripMenuItem("Congviec 1", null, click1),
+                        new ToolStripMenuItem("Congviec 2"),
+
+                    });
+        }
+
+        public override void loadData()
+        {
+            if(ws.UsedRange.Rows > 0)
+            {
+                for(int i =1; i < ws.UsedRange.Rows; i++)
+                {
+                    objects[i] = new Row(i);
+                    objects[i].bind(ws);
+                }
+            }
+
+            /* ws.GetRo("");
+
+                MessageBox.Show(ws.Name + " total row " + ws.MaxContentCol + 
                 " total cols " + ws.MaxContentRow + 
                 " row count " + ws.RowCount +
                 " rows " + ws.Rows +
                 " \n range used col " + ws.UsedRange.Cols +
                 " range used row " + ws.UsedRange.Rows +
-                " data cell " + ws["A" + ws.UsedRange.Rows]
+                " data cell " + ws["1" + ws.UsedRange.Rows]
 
-
-                );
+                );*/
 
         }
 
@@ -86,12 +117,10 @@ namespace Worksheet.modDisplay.dongia.congviec
             switch (Display.Col)
             {
                 case "A": 
-                    //DonGiaCongViec 
-                    obj().A = Display.Cell.Data.ToString(); break;
-                case "B": //obj().C.click();
-                case "C": //obj().C.click();
-
+                case "B":
+                    obj().bind(ws);
                     break;
+                case "C": obj().C.click(); break;
                 case "D": obj().D.click(); break;
                 case "E": obj().E.click(); break;
             }

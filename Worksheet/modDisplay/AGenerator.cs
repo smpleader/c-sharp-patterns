@@ -21,5 +21,6 @@ namespace Worksheet.modDisplay
         public virtual void afterSave() { }
         public virtual void selectCell() { }
         public virtual void afterCellInput() { } 
+        public virtual void addMenu() { }
     }
 }

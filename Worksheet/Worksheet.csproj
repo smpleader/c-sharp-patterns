@@ -60,6 +60,7 @@
     <ItemGroup>
       <Folder Include="Content\Type\" />
       <Folder Include="DataSample\Dongia\" />
+      <Folder Include="modBL\dongia\" />
     </ItemGroup> 
 
 </Project>

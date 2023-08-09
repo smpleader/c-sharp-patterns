@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using unvell.ReoGrid;
 using Worksheet.modData.Memories.Pointer;
 
@@ -26,6 +28,17 @@ namespace Worksheet.modDisplay.dongia.vatlieu
                 ws.ColumnHeaders[3].Text = "Định mức";
                 ws.ColumnHeaders[4].Text = "Giá";
             }
+        }
+
+        public override void addMenu()
+        {
+
+            Display.menuItems = new ToolStripItemCollection(Display.contextMenu,
+                    new ToolStripItem[]{
+                        new ToolStripMenuItem("Vat lieu 1"),
+                        new ToolStripMenuItem("Vat lieu 2"),
+
+                    }); 
         }
     }
 }

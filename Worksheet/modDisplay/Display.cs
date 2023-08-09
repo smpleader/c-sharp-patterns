@@ -36,6 +36,24 @@ namespace Worksheet.modDisplay
         public static string Col;
         public static int Row;
 
+        public static ContextMenuStrip contextMenu = new ContextMenuStrip();
+        public static ToolStripItemCollection menuItems
+        {
+            get
+            {
+                return contextMenu.Items;
+            }
+            set
+            {
+                contextMenu.Items.Clear();
+                ToolStripItemCollection tsc = (ToolStripItemCollection)value;
+                foreach (ToolStripItem tsi in tsc)
+                {
+                    contextMenu.Items.Add(tsi);
+                }
+            }
+        }
+
 
         private static void setTemplate(string filePath)
         {
@@ -63,7 +81,7 @@ namespace Worksheet.modDisplay
         private static void setControl(ReoGridControl control)
         {
             WControl = control;
-            WB = control.Worksheets;
+            WB = control.Worksheets; 
         }
 
         public static void setup(ReoGridControl control, string filePath)
@@ -164,8 +182,13 @@ namespace Worksheet.modDisplay
             foreach (var sheet in WB)
             {
                 sheet.CellMouseDown += onClick;
-
             }
+
+            contextMenu.Opening += contextMenuOpen;
+        }
+        public static void contextMenuOpen(object sender, EventArgs e)
+        {
+            tab().addMenu();
         }
 
         public static void onClick(object sender, CellMouseEventArgs e)

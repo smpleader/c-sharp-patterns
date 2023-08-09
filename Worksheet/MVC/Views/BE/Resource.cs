@@ -121,6 +121,7 @@ namespace Worksheet.MVC.Views.BE
             ws.CurrentWorksheet.SetRows(10000);
             ws.WorkbookSaved += AfterSave;
             ws.WorkbookLoaded += AfterLoad;
+            ws.ContextMenuStrip = Display.contextMenu;
 
             Display.setup(ws, cbFile.SelectedValue.ToString());
             Display.hook("LoadData");
