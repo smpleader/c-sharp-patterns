@@ -21,10 +21,14 @@ namespace Worksheet.MVC.Presenters.BE
 
             _view = view;
 
-            _view.ws.SheetTabNewButtonVisible = false;
 
             //MessageBox.Show(_view.ws.CurrentWorksheet.Name);
 
+        }
+
+        public void test(string s1, string s2)
+        {
+            MessageBox.Show("Got " + s1 + " and " + s2);
         }
     }
 }

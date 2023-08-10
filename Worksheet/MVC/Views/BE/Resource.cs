@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using Worksheet.modDisplay;
 using Worksheet.MVC.Models;
+using Worksheet.MVC.Presenters;
 using Worksheet.Util;
 
 namespace Worksheet.MVC.Views.BE
@@ -22,6 +23,7 @@ namespace Worksheet.MVC.Views.BE
         bool loaded = false;
         public Resource()
         {
+            registerPresenters(true);
             InitializeComponent();
         }
 
@@ -111,21 +113,32 @@ namespace Worksheet.MVC.Views.BE
                 ws.Load(cbFile.SelectedValue.ToString());
             }
         }
+        public override void registerPresenters(bool init)
+        {
+            if (init)
+            {
+                Publisher.register("BE.Resource", "Resource");
+            }
+            else
+            {
+                if (null == rp) rp = new Presenters.BE.ResourcePresenter(this);
+                Publisher.register("BE.Resource", rp);
+            }
+        }
 
         private void ResourceForm_Load(object sender, EventArgs e)
         {
             model = new DemoM();
-            rp = new Presenters.BE.ResourcePresenter(this);
 
             loadCombobox();
             ws.CurrentWorksheet.SetRows(10000);
             ws.WorkbookSaved += AfterSave;
             ws.WorkbookLoaded += AfterLoad;
             ws.ContextMenuStrip = Display.contextMenu;
+            ws.SheetTabNewButtonVisible = false;
 
             Display.setup(ws, cbFile.SelectedValue.ToString());
             Display.hook("LoadData");
-
         }
 
         private void loadCombobox(string item = "")

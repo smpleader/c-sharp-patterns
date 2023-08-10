@@ -4,7 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Views;
 
 namespace Worksheet.MVC.Controllers
