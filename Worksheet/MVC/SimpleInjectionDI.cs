@@ -21,7 +21,8 @@ namespace Worksheet.MVC
         public static void ConfigureServices()
         {
             // CONTROLLERS
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new SqliteUserC(), new SheetDemoC(), new ResourceC());
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new JsonUserC(), new SqliteUserC(), new SheetDemoC(), new ResourceC(),
+                new TienLuongC());
 
             // this cause duplicate instance
             //container.Collection.Register<IController>(typeof( LoaderC ), typeof( StarterC), typeof( JsonUserC));

@@ -179,7 +179,7 @@ namespace Worksheet.MVC.Views.BE
         public async void AfterLoad(object sender, EventArgs e)
         {
             //MessageBox.Show("load file: " + cbFile.SelectedValue.ToString());
-            
+
             // a little time to be sure file get loaded
             await Task.Delay(500);
             Display.setup(cbFile.SelectedValue.ToString());

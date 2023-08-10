@@ -58,6 +58,21 @@ namespace Worksheet.modDisplay
                         {"Tong-hop", new dongia.tonghop.Generator()  },
                     }
                 }
+            },
+            { "Template/TienLuong",
+                new FileTemplate(){
+                    Id = 2,
+                    Name = "Template Tiên lượng",
+                    Path = "Content/Template/TienLuong.xlsx",
+                    Version = "0.1",
+                    Release = "20230702",
+                    Group = {},
+                    Note = "Dùng cho việc nhập liệu báo giá",
+                    Tabs = new Dictionary<string, ISheet>()
+                    {
+                        {"Tiên lượng", new templates.tienluong.Generator()},
+                    }
+                }
             }
         };
 

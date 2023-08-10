@@ -95,5 +95,10 @@ namespace Worksheet.MVC.Views
         {
             Backbone.Run("Resource");
         }
+
+        private void btn_LoadTienLuong_Click(object sender, EventArgs e)
+        {
+            Backbone.Run("TienLuong");
+        }
     }
 }

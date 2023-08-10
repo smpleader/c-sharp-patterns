@@ -41,6 +41,7 @@
             reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             btnLog = new Button();
             btnNguon = new Button();
+            btn_LoadTienLuong = new Button();
             SuspendLayout();
             // 
             // reoGridControl1
@@ -109,7 +110,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(672, 16);
+            label1.Location = new Point(833, 15);
             label1.Name = "label1";
             label1.Size = new Size(88, 20);
             label1.TabIndex = 5;
@@ -196,11 +197,22 @@
             btnNguon.UseVisualStyleBackColor = true;
             btnNguon.Click += btnNguon_Click;
             // 
+            // btn_LoadTienLuong
+            // 
+            btn_LoadTienLuong.Location = new Point(682, 11);
+            btn_LoadTienLuong.Name = "btn_LoadTienLuong";
+            btn_LoadTienLuong.Size = new Size(145, 29);
+            btn_LoadTienLuong.TabIndex = 15;
+            btn_LoadTienLuong.Text = "Demo Tiên lượng";
+            btn_LoadTienLuong.UseVisualStyleBackColor = true;
+            btn_LoadTienLuong.Click += btn_LoadTienLuong_Click;
+            // 
             // SheetDemo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1601, 968);
+            Controls.Add(btn_LoadTienLuong);
             Controls.Add(btnNguon);
             Controls.Add(btnLog);
             Controls.Add(reoGridControl2);
@@ -241,5 +253,6 @@
         public unvell.ReoGrid.ReoGridControl reoGridControl2;
         private Button btnLog;
         private Button btnNguon;
+        private Button btn_LoadTienLuong;
     }
 }

@@ -9,8 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="DataSample\**" />
+      <Compile Remove="modBL\dongia\**" />
       <Compile Remove="samples\**" />
+      <EmbeddedResource Remove="DataSample\**" />
+      <EmbeddedResource Remove="modBL\dongia\**" />
       <EmbeddedResource Remove="samples\**" />
+      <None Remove="DataSample\**" />
+      <None Remove="modBL\dongia\**" />
       <None Remove="samples\**" />
     </ItemGroup>
 
@@ -32,6 +38,9 @@
 		</None>
 		<None Update="Content/Template/dongia.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Template\TienLuong.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content/*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -59,8 +68,6 @@
 
     <ItemGroup>
       <Folder Include="Content\Type\" />
-      <Folder Include="DataSample\Dongia\" />
-      <Folder Include="modBL\dongia\" />
     </ItemGroup> 
 
 </Project>

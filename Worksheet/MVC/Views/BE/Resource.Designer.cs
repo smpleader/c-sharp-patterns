@@ -42,7 +42,7 @@
             ws.BackColor = Color.FromArgb(255, 255, 255);
             ws.ColumnHeaderContextMenuStrip = null;
             ws.LeadHeaderContextMenuStrip = null;
-            ws.Location = new Point(12, 48);
+            ws.Location = new Point(-475, 12);
             ws.Name = "ws";
             ws.RowHeaderContextMenuStrip = null;
             ws.Script = null;
@@ -105,7 +105,7 @@
             btnBG.UseVisualStyleBackColor = true;
             btnBG.Click += btnBG_Click;
             // 
-            // ResourceForm
+            // Resource
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -116,7 +116,7 @@
             Controls.Add(cbFile);
             Controls.Add(btnDG);
             Controls.Add(ws);
-            Name = "ResourceForm";
+            Name = "Resource";
             Text = "Form1";
             Title = "Form1";
             Load += ResourceForm_Load;
