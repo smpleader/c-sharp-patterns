@@ -67,10 +67,25 @@ namespace Worksheet.modDisplay
                     Version = "0.1",
                     Release = "20230702",
                     Group = {},
-                    Note = "Dùng cho việc nhập liệu báo giá",
+                    Note = "Dùng cho việc thêm sửa công việc",
                     Tabs = new Dictionary<string, ISheet>()
                     {
                         {"Tiên lượng", new templates.tienluong.Generator()},
+                    }
+                }
+            },
+            { "Template/GiaVatLieu",
+                new FileTemplate(){
+                    Id = 2,
+                    Name = "Template Giá vật liệu",
+                    Path = "Content/Template/GiaVatLieu.xlsx",
+                    Version = "0.1",
+                    Release = "20230702",
+                    Group = {},
+                    Note = "Dùng cho việc cập nhật thông tin vật liệu",
+                    Tabs = new Dictionary<string, ISheet>()
+                    {
+                        {"Vật liệu", new templates.tienluong.Generator()},
                     }
                 }
             }
