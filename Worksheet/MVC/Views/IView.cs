@@ -13,5 +13,7 @@ namespace Worksheet.MVC.Views
         Form Form { get; }
 
         void Close();
+
+        void registerPresenters(bool init) { }
     }
 }

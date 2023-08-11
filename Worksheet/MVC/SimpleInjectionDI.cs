@@ -8,13 +8,6 @@ using Worksheet.modData.Drivers;
 
 namespace Worksheet.MVC
 {
-    class DI
-    {
-        public static void model(string name, out object j)
-        {
-            j = SimpleInjectionDI.container.GetInstance<JsonUserM>();
-        }
-    }
     internal class SimpleInjectionDI
     {
         public static Container container = new Container();

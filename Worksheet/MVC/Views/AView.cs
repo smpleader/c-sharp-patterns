@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using Worksheet.modData.Drivers;
+using System.Security.Policy;
+using Worksheet.MVC.Presenters;
 
 namespace Worksheet.MVC.Views
 {
@@ -50,6 +52,8 @@ namespace Worksheet.MVC.Views
             Control ctn = this.Controls[name];
             return ctn.Text;
         }
+        
+        public virtual void registerPresenters(bool init){ }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {

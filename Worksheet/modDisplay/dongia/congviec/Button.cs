@@ -12,6 +12,7 @@ namespace Worksheet.modDisplay.dongia.congviec
         public Button(string name) { Name = name; } 
         public void click()
         {
+
             MessageBox.Show(Name + " get clicked");
         }
     }

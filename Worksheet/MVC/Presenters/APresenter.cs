@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Worksheet.MVC.Presenters
 {
-    abstract class APresenter<IView>
+    abstract class APresenter<IView> : IPresenter
     { 
         IView _view;
         public APresenter(IView view)
         {
             _view = view;
         }
+
+        public virtual void init() {  }
     }
 }
