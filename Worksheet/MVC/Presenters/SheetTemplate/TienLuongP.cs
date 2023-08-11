@@ -29,6 +29,7 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         {
             pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
             _view.sheet_TienLuong.Load(pathToTemplate, FileFormat.Excel2007);
+            _view.sheet_TienLuong.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
         }
 
     }

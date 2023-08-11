@@ -26,6 +26,7 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         {
             pathToTemplate = AppConst.templateFolder + "GiaVatLieu.xlsx";
             _view.sheet_VatLieu.Load(pathToTemplate, FileFormat.Excel2007);
+            _view.sheet_VatLieu.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
         }
     }
 }

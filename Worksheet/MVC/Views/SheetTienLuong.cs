@@ -46,7 +46,7 @@ namespace Worksheet.MVC.Views
         }
         public void AfterSave(object sender, EventArgs e)
         {
-            Display.hook("AfterSave");
+            //Display.hook("AfterSave");
         }
         public async void AfterLoad(object sender, EventArgs e)
         {
@@ -54,7 +54,7 @@ namespace Worksheet.MVC.Views
             await Task.Delay(500);
             Display.setup(AppConst.templateFolder + "TienLuong");
 
-            Display.hook("LoadData");
+            //Display.hook("LoadData");
         }
 
         private void btn_BackDemo_Click(object sender, EventArgs e)
