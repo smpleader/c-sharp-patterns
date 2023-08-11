@@ -39,8 +39,9 @@ namespace Worksheet.modData.Memories.Record
             // Hệ số điều chỉnh, trong sheet Tiên lượng
             ColNum["hsdcVatlieu"] = 0;
             ColNum["hsdcNhancong"] = 0;
-            // TODO: diễn giải khối lượng + KL + KL phụ
             ColNum["hsdcMay"] = 0;
+            // TODO: diễn giải khối lượng + KL + KL phụ
+
         }
     }
 }

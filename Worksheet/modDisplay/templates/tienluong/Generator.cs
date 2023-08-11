@@ -64,14 +64,14 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public override void loadData()
         {
-            if (ws.UsedRange.Rows > 0)
-            {
-                for (int i = 1; i < ws.UsedRange.Rows; i++)
-                {
-                    objects[i] = new Row(i);
-                    objects[i].bind(ws);
-                }
-            }
+            //if (ws.UsedRange.Rows > 0)
+            //{
+            //    for (int i = 1; i < ws.UsedRange.Rows; i++)
+            //    {
+            //        objects[i] = new Row(i);
+            //        objects[i].bind(ws);
+            //    }
+            //}
 
             /* ws.GetRo("");
 
@@ -100,9 +100,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                     Display.Cell.IsReadOnly = true;
                     //obj().D.click();
                     break;
-                case "AA":
-                    Display.Cell.IsReadOnly = true;
-                    obj().AA.click(); break;
+               
             }
         }
         public override void afterCellInput()
@@ -115,7 +113,6 @@ namespace Worksheet.modDisplay.templates.tienluong
                     break;
                 //case "C": obj().C.click(); break;
                 //case "D": obj().D.click(); break;
-                case "AA": obj().AA.click(); break;
             }
         }
 

@@ -8,15 +8,10 @@ namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Row : ARowObject
     {
-        //public Row(VatLieu r) { ColNum = r.ColNum; ColText = r.ColText; }
         public Row(int id)
         {
             Id = id;
         }
-
-        Button btnVL = new Button("VL");
-        Button btnNC = new Button("NC");
-        Button btnCM = new Button("CM");
 
         public string A { get { return txt("kiHieuBanVe"); } set { txt("kiHieuBanVe", value); } }
         public string B { get { return txt("stt"); } set { txt("stt", value); } }
@@ -43,7 +38,6 @@ namespace Worksheet.modDisplay.templates.tienluong
         public string W { get { return txt("heSoDieuChinhNhanCong"); } set { txt("heSoDieuChinhNhanCong", value); } }
         public string X { get { return txt("heSoDieuChinhMay"); } set { txt("heSoDieuChinhMay", value); } }
         public string Y { get { return txt("thongTinDonGia"); } set { txt("thongTinDonGia", value); } }
-        public Button AA { get { return btnCM; } }
 
         public void bind(unvell.ReoGrid.Worksheet data)
         {

@@ -100,9 +100,6 @@ namespace Worksheet.modDisplay.templates.vatlieu
                     Display.Cell.IsReadOnly = true;
                     //obj().D.click();
                     break;
-                case "AA":
-                    Display.Cell.IsReadOnly = true;
-                    obj().AA.click(); break;
             }
         }
         public override void afterCellInput()
@@ -113,9 +110,6 @@ namespace Worksheet.modDisplay.templates.vatlieu
                 case "B":
                     obj().bind(ws);
                     break;
-                //case "C": obj().C.click(); break;
-                //case "D": obj().D.click(); break;
-                case "AA": obj().AA.click(); break;
             }
         }
 
