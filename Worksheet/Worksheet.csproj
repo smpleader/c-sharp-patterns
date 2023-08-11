@@ -39,6 +39,9 @@
 		<None Update="Content/Template/dongia.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Template\GiaVatLieu.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Template\TienLuong.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

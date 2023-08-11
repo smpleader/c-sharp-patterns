@@ -85,7 +85,7 @@ namespace Worksheet.modDisplay
                     Note = "Dùng cho việc cập nhật thông tin vật liệu",
                     Tabs = new Dictionary<string, ISheet>()
                     {
-                        {"Vật liệu", new templates.tienluong.Generator()},
+                        {"Giá vật liệu", new templates.tienluong.Generator()},
                     }
                 }
             }
