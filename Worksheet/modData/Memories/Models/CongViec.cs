@@ -24,7 +24,12 @@ namespace Worksheet.modData.Memories.Models
             List<ARecord> rows = memories.Storage.FindAll(Current.CV.filterType);
             return rows.Cast<RowCongViec>().ToList();
         }
-        public static RowCongViec? chitiet(string index, string? HangMuc = null)
+        public static List<RowCongViec> danhSachCongViecHangMuc()
+        {
+            List<ARecord> rows = memories.Storage.FindAll(Current.CV.filterSibling);
+            return rows.Cast<RowCongViec>().ToList();
+        }
+        public static RowCongViec? chitiet(string index = "", string? HangMuc = null)
         {
             ARecord? row = memories.Storage.Find(Current.CV.filterItem);
             return null == row ? null : (RowCongViec)row;
@@ -32,9 +37,9 @@ namespace Worksheet.modData.Memories.Models
 
         public static void them(RowCongViec r)
         {
-            int id = Current.CV.id();
-            point(id++);
-            r.Id = id;
+            //int id = Current.CV.id();
+            ////point(id++);
+            //r.Id = id;
             memories.Storage.Add(r);
             // recalculate BL
         }
