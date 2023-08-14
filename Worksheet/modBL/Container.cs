@@ -12,6 +12,8 @@ namespace Worksheet.modBL
         private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>() {
             {"", new DefaultCell() },
             {"test2", new prime.vatlieu.colA() },
+            {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
+
         };
 
         public static bool exists(string name) { return _instance.ContainsKey(name); }

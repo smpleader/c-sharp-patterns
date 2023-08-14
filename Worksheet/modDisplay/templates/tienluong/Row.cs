@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using unvell.ReoGrid.Utility;
+using Worksheet.modData.Memories.Pointer;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
@@ -15,28 +17,112 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public string A { get { return txt("kiHieuBanVe"); } set { txt("kiHieuBanVe", value); } }
         public string B { get { return txt("stt"); } set { txt("stt", value); } }
-        public string C { get { return txt("maSoCongViec"); } set { txt("maSoCongViec", value); } }
-        public string D { get { return txt("tenCongViec"); } set { txt("tenCongViec", value); } }
+        public string C { get { return txt("ma"); } set { txt("ma", value); } }
+        public string D { get { return txt("ten"); } set { txt("ten", value); } }
         public string E { get { return txt("donVi"); } set { txt("donVi", value); } }
         public string F { get { return txt("tenCauKien"); } set { txt("tenCauKien", value); } }
-        public string G { get { return txt("soCauKien"); } set { txt("soCauKien", value); } }
-        public string H { get { return txt("dai"); } set { txt("dai", value); } }
-        public string I { get { return txt("rong"); } set { txt("rong", value); } }
-        public string J { get { return txt("cao"); } set { txt("cao", value); } }
-        public string K { get { return txt("heSoPhu"); } set { txt("heSoPhu", value); } }
-        public string L { get { return txt("khoiLuongPhu"); } set { txt("khoiLuongPhu", value); } }
-        public string M { get { return txt("khoiLuong"); } set { txt("khoiLuong", value); } }
-        public string N { get { return txt("donGiaVatLieu"); } set { txt("donGiaVatLieu", value); } }
-        public string O { get { return txt("donGiaVatLieuPhu"); } set { txt("donGiaVatLieuPhu", value); } }
-        public string P { get { return txt("donGiaNhanCong"); } set { txt("donVidonGiaNhanCong", value); } }
-        public string Q { get { return txt("donGiaMay"); } set { txt("donGiaMay", value); } }
-        public string R { get { return txt("thanhTienVatLieu"); } set { txt("thanhTienVatLieu", value); } }
-        public string S { get { return txt("thanhTienVatLieuPhu"); } set { txt("thanhTienVatLieuPhu", value); } }
-        public string T { get { return txt("thanhTienNhanCong"); } set { txt("thanhTienNhanCong", value); } }
-        public string U { get { return txt("thanhTienMay"); } set { txt("thanhTienMay", value); } }
-        public string V { get { return txt("heSoDieuChinhVatLieu"); } set { txt("heSoDieuChinhVatLieu", value); } }
-        public string W { get { return txt("heSoDieuChinhNhanCong"); } set { txt("heSoDieuChinhNhanCong", value); } }
-        public string X { get { return txt("heSoDieuChinhMay"); } set { txt("heSoDieuChinhMay", value); } }
+        public decimal G { get { return num("soCauKien"); } set { num("num", value); } }
+        public decimal H { get { return num("dai"); } set { num("dai", value); } }
+        public decimal I { get { return num("rong"); } set { num("rong", value); } }
+        public decimal J { get { return num("cao"); } set { num("cao", value); } }
+        public decimal K { get { return num("heSoPhu"); } set { num("heSoPhu", value); } }
+        public decimal L { get { return num("khoiLuongPhu"); } set { num("khoiLuongPhu", value); } }
+        public decimal M { get { return num("khoiLuong"); } set { num("khoiLuong", value); } }
+        public string N { 
+            get 
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieu").fml(),Id, congViec.ColNum["tongGiaVatLieu"]);
+                return formula;
+            } 
+            set { txt("donGiaVatLieu", value); } 
+        }
+
+        public string O
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieuPhu").fml(), Id, congViec.ColNum["tongGiaVatLieuPhu"]);
+                return formula;
+            }
+            set { txt("donGiaVatLieuPhu", value); }
+        }
+
+        public string P
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaNhanCong").fml(), Id, congViec.ColNum["tongGiaNhanCong"]);
+                return formula;
+            }
+            set { txt("donVidonGiaNhanCong", value); }
+        }
+
+        public string Q
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaMay").fml(), Id, congViec.ColNum["tongGiaMay"]);
+                return formula;
+            }
+            set { txt("donGiaMay", value); }
+        }
+
+        public string R
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieu").fml(), Id, Id);
+                return formula;
+            }
+            set { txt("thanhTienVatLieu", value); }
+        }
+        public string S
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieuPhu").fml(), Id, Id);
+                return formula;
+            }
+            set { txt("thanhTienVatLieuPhu", value); }
+        }
+        public string T
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienNhanCong").fml(), Id, Id);
+                return formula;
+            }
+            set { txt("thanhTienNhanCong", value); }
+        }
+        public string U
+        {
+            get
+            {
+                Current.CV.id(Id);
+                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaMay").fml(), Id, Id);
+                return formula;
+            }
+            set { txt("thanhTienMay", value); }
+        }
+
+        public decimal V { get { return num("hsdcVatLieu"); } set { num("hsdcVatLieu", value); } }
+        public decimal W { get { return num("hsdcNhanCong"); } set { num("hsdcNhanCong", value); } }
+        public decimal X { get { return num("hsdcMay"); } set { num("hsdcMay", value); } }
         public string Y { get { return txt("thongTinDonGia"); } set { txt("thongTinDonGia", value); } }
 
         public void bind(unvell.ReoGrid.Worksheet data)
@@ -46,6 +132,29 @@ namespace Worksheet.modDisplay.templates.tienluong
             //  A = data.Cells["A"+Id].Data.ToString();
             // B = data.Cells["B"+Id].Data.ToString();
 
+            B = CellUtility.ConvertData<string>(data["B"+Id]);
+            C = CellUtility.ConvertData<string>(data["C" + Id]);
+            D = CellUtility.ConvertData<string>(data["D" + Id]);
+            E = CellUtility.ConvertData<string>(data["E" + Id]);
+            F = CellUtility.ConvertData<string>(data["F" + Id]);
+            G = CellUtility.ConvertData<decimal>(data["G" + Id]);
+            H = CellUtility.ConvertData<decimal>(data["H" + Id]);
+            I = CellUtility.ConvertData<decimal>(data["I" + Id]);
+            J = CellUtility.ConvertData<decimal>(data["J" + Id]);
+            K = CellUtility.ConvertData<decimal>(data["K" + Id]);
+            L = CellUtility.ConvertData<decimal>(data["L" + Id]);
+            M = CellUtility.ConvertData<decimal>(data["M" + Id]);
+            //N = CellUtility.ConvertData<decimal>(data["N" + Id]);
+            //O = CellUtility.ConvertData<decimal>(data["O" + Id]);
+            //P = CellUtility.ConvertData<decimal>(data["P" + Id]);
+            //Q = CellUtility.ConvertData<decimal>(data["Q" + Id]);
+            //R = CellUtility.ConvertData<decimal>(data["R" + Id]);
+            //S = CellUtility.ConvertData<decimal>(data["S" + Id]);
+            //T = CellUtility.ConvertData<decimal>(data["T" + Id]);
+            //U = CellUtility.ConvertData<decimal>(data["U" + Id]);
+            V = CellUtility.ConvertData<decimal>(data["V" + Id]);
+            W = CellUtility.ConvertData<decimal>(data["W" + Id]);
+            Y = CellUtility.ConvertData<string>(data["Y" + Id]);
             // modData.Memories.Models.CongViec.capnhat(this);
         }
     }

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Worksheet.modData.Memories.Pointer;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
+
+        private int StartRowBody = 5;
+
         public override string Name { get { return "templates/tienluong"; } }
 
         private Dictionary<int, Row> objects = new Dictionary<int, Row>();
@@ -64,14 +64,14 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public override void loadData()
         {
-            //if (ws.UsedRange.Rows > 0)
-            //{
-            //    for (int i = 1; i < ws.UsedRange.Rows; i++)
-            //    {
-            //        objects[i] = new Row(i);
-            //        objects[i].bind(ws);
-            //    }
-            //}
+            if (ws.UsedRange.Rows > 0)
+            {
+                for (int i = 1; i < ws.UsedRange.Rows; i++)
+                {
+                    objects[i] = new Row(i);
+                    objects[i].bind(ws);
+                }
+            }
 
             /* ws.GetRo("");
 
@@ -87,6 +87,100 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         }
 
+        public void render()
+        {
+            ws["B2"] = "CÔNG TRÌNH: " + "Công trình 1";//applicationData.Content.CongTrinh.Ten;
+            Worksheet.modData.Memories.Record.CongViec congViec;
+            Current.HM.id(1);
+            List<Worksheet.modData.Memories.Record.CongViec> danhSachCongViec = Worksheet.modData.Memories.Models.CongViec.danhSachCongViecHangMuc();
+            for (int indexCongViec = 0; indexCongViec < danhSachCongViec.Count; indexCongViec++)
+            {
+                congViec = danhSachCongViec[indexCongViec];
+                string row = congViec.ColText["startRow"];
+                ws["B" + row] = indexCongViec + 1;
+                ws["C" + row] = objects[indexCongViec].C;
+                ws["D" + row] = objects[indexCongViec].D;
+                ws["E" + row] = objects[indexCongViec].E;
+
+                ws["F" + row] = objects[indexCongViec].F;
+                ws["G" + row] = objects[indexCongViec].G;
+                ws["H" + row] = objects[indexCongViec].H;
+                ws["I" + row] = objects[indexCongViec].I;
+                ws["J" + row] = objects[indexCongViec].J;
+                ws["K" + row] = objects[indexCongViec].K;
+                ws["L" + row] = objects[indexCongViec].L;
+                ws["M" + row] = objects[indexCongViec].M;
+
+                ws["N" + row] = objects[indexCongViec].N;
+                ws["O" + row] = objects[indexCongViec].O;
+                ws["P" + row] = objects[indexCongViec].P;
+                ws["Q" + row] = objects[indexCongViec].Q;
+
+                ws["R" + row] = objects[indexCongViec].R;
+                ws["S" + row] = objects[indexCongViec].S;
+                ws["T" + row] = objects[indexCongViec].T;
+                ws["U" + row] = objects[indexCongViec].U;
+
+                ws["V" + row] = objects[indexCongViec].V;
+                ws["W" + row] = objects[indexCongViec].W;
+                ws["X" + row] = objects[indexCongViec].X;
+
+                ws["Y" + row] = objects[indexCongViec].Y;
+            }
+            if (true)
+            {
+                int beginRow = 1;
+                for (int indexRow = 6; indexRow <ws.RowCount; indexRow++)
+                {
+                    congViec = danhSachCongViec.Find(x => x.ColText["startRow"] == indexRow.ToString());
+                    if (ws["C" + indexRow] != null)
+                    {
+                       ws["B" + indexRow] = beginRow;
+                       ws.AutoFitRowHeight(indexRow - 1, false);
+                        congViec.ColText["STT"] = beginRow.ToString();
+                        beginRow++;
+                    }
+                }
+            }
+
+            List<int> startRows = new List<int>();
+            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
+            {
+                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
+                int.TryParse(ws["B" + indexRow].ToString(), out int row);
+                bool laBatDauCongViec = row >= 1;
+                if (laBatDauCongViec)
+                {
+                    startRows.Add(indexRow);
+                }
+            }
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
+            for (int i = 0; i < startRows.Count; i++)
+            {
+                congViec = danhSachCongViec.Find(x => x.ColText["startRow"] == startRows[i].ToString());
+
+                if (i == startRows.Count - 1)
+                {
+                    congViec.ColText["startRow"] = startRows[i].ToString();
+                    congViec.ColText["EndRow"] = (ws.RowCount - 1).ToString();
+                }
+                else
+                {
+                    if (startRows[i] == (ws.RowCount - 1))
+                    {
+                        congViec.ColText["startRow"] = startRows[i].ToString();
+                        congViec.ColText["EndRow"] = startRows[i].ToString();
+                    }
+                    else
+                    {
+                        congViec.ColText["startRow"] = startRows[i].ToString();
+                        congViec.ColText["EndRow"] = (startRows[i + 1] - 1).ToString();
+                    }
+                }
+            }
+        }
+
         public override void selectCell()
         {
             //MessageBox.Show(Display.Col + Display.Row);
@@ -96,9 +190,11 @@ namespace Worksheet.modDisplay.templates.tienluong
                     //Display.Cell.IsReadOnly = true;
                     //obj().C.click();
                     //break;
-                case "D":
+                case "R":
+                case "S":
+                case "T":
+                case "U":
                     Display.Cell.IsReadOnly = true;
-                    //obj().D.click();
                     break;
                
             }
