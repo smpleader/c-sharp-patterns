@@ -169,6 +169,10 @@ namespace Worksheet.modDisplay
                 case "AfterCellInput":
                     tab().afterCellInput();
                     break;
+                case "CellDataChanged":
+                case "cellDataChanged":
+                    tab().cellDataChanged();
+                    break;
             }
         }
 
@@ -183,9 +187,30 @@ namespace Worksheet.modDisplay
             {
                 sheet.CellMouseDown += onClick;
             }
+            foreach (var sheet in WB)
+            {
+                sheet.AfterCellEdit += AfterCellEdit;
+            }
+
+            foreach (var sheet in WB)
+            {
+                sheet.CellDataChanged += CellDataChanged;
+            }
 
             contextMenu.Opening += contextMenuOpen;
         }
+
+        private static void CellDataChanged(object? sender, CellEventArgs e)
+        {
+            Display.hook("CellDataChanged");
+
+        }
+       
+        private static void AfterCellEdit(object? sender, CellAfterEditEventArgs e)
+        {
+            Display.hook("AfterCellInput");
+        }
+
         public static void contextMenuOpen(object sender, EventArgs e)
         {
             tab().addMenu();

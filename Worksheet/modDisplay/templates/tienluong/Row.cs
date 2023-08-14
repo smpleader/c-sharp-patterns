@@ -21,7 +21,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         public string D { get { return txt("ten"); } set { txt("ten", value); } }
         public string E { get { return txt("donVi"); } set { txt("donVi", value); } }
         public string F { get { return txt("tenCauKien"); } set { txt("tenCauKien", value); } }
-        public decimal G { get { return num("soCauKien"); } set { num("num", value); } }
+        public decimal G { get { return num("soCauKien"); } set { num("soCauKien", value); } }
         public decimal H { get { return num("dai"); } set { num("dai", value); } }
         public decimal I { get { return num("rong"); } set { num("rong", value); } }
         public decimal J { get { return num("cao"); } set { num("cao", value); } }
@@ -114,7 +114,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 Current.CV.id(Id);
                 var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaMay").fml(), Id, Id);
+                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienMay").fml(), Id, Id);
                 return formula;
             }
             set { txt("thanhTienMay", value); }
@@ -144,18 +144,18 @@ namespace Worksheet.modDisplay.templates.tienluong
             K = CellUtility.ConvertData<decimal>(data["K" + Id]);
             L = CellUtility.ConvertData<decimal>(data["L" + Id]);
             M = CellUtility.ConvertData<decimal>(data["M" + Id]);
-            //N = CellUtility.ConvertData<decimal>(data["N" + Id]);
-            //O = CellUtility.ConvertData<decimal>(data["O" + Id]);
-            //P = CellUtility.ConvertData<decimal>(data["P" + Id]);
-            //Q = CellUtility.ConvertData<decimal>(data["Q" + Id]);
-            //R = CellUtility.ConvertData<decimal>(data["R" + Id]);
-            //S = CellUtility.ConvertData<decimal>(data["S" + Id]);
-            //T = CellUtility.ConvertData<decimal>(data["T" + Id]);
-            //U = CellUtility.ConvertData<decimal>(data["U" + Id]);
+            N = CellUtility.ConvertData<string>(data["N" + Id]);
+            O = CellUtility.ConvertData<string>(data["O" + Id]);
+            P = CellUtility.ConvertData<string>(data["P" + Id]);
+            Q = CellUtility.ConvertData<string>(data["Q" + Id]);
+            R = CellUtility.ConvertData<string>(data["R" + Id]);
+            S = CellUtility.ConvertData<string>(data["S" + Id]);
+            T = CellUtility.ConvertData<string>(data["T" + Id]);
+            U = CellUtility.ConvertData<string>(data["U" + Id]);
             V = CellUtility.ConvertData<decimal>(data["V" + Id]);
             W = CellUtility.ConvertData<decimal>(data["W" + Id]);
             Y = CellUtility.ConvertData<string>(data["Y" + Id]);
-            // modData.Memories.Models.CongViec.capnhat(this);
+            modData.Memories.Models.CongViec.capnhat(this);
         }
     }
 }
