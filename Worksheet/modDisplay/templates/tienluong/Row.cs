@@ -127,11 +127,6 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public void bind(unvell.ReoGrid.Worksheet data)
         {
-            // TODO: consider a link to cell address, not a data hold
-            // Current status: map column to BL/cell
-            //  A = data.Cells["A"+Id].Data.ToString();
-            // B = data.Cells["B"+Id].Data.ToString();
-
             B = CellUtility.ConvertData<string>(data["B"+Id]);
             C = CellUtility.ConvertData<string>(data["C" + Id]);
             D = CellUtility.ConvertData<string>(data["D" + Id]);

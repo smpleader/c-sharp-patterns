@@ -39,20 +39,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (Display.WB[tabName] != null)
             {
                 ws = Display.WB[tabName];
-
-                //ws.SetCols(5);
-                //ws.ColumnHeaders[0].Text = "Mã";
-                //ws.ColumnHeaders[1].Text = "Tên";
-                //ws.ColumnHeaders[2].Text = "VL";
-                //ws.ColumnHeaders[3].Text = "NC";
-                //ws.ColumnHeaders[4].Text = "CM";
             }
-        }
-
-        public void click1(object sender, EventArgs e)
-        {
-            // sjpw form 
-            //  MainAppActions/
         }
 
         public override void addMenu()
@@ -60,35 +47,12 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             Display.menuItems = new ToolStripItemCollection(Display.contextMenu,
                     new ToolStripItem[]{
-                        new ToolStripMenuItem("Congviec 1", null, click1),
                         new ToolStripMenuItem("Congviec 2"),
-
                     });
         }
-
         public override void loadData()
         {
-            //if (ws.UsedRange.Rows > 0)
-            //{
-            //    for (int i = 1; i < ws.UsedRange.Rows; i++)
-            //    {
-            //        objects[i] = new Row(i);
-            //        objects[i].bind(ws);
-            //    }
-            //}
-
-            /* ws.GetRo("");
-
-                MessageBox.Show(ws.Name + " total row " + ws.MaxContentCol + 
-                " total cols " + ws.MaxContentRow + 
-                " row count " + ws.RowCount +
-                " rows " + ws.Rows +
-                " \n range used col " + ws.UsedRange.Cols +
-                " range used row " + ws.UsedRange.Rows +
-                " data cell " + ws["1" + ws.UsedRange.Rows]
-
-                );*/
-
+            ws.HideColumns(5, 7);
         }
         public void prepareData()
         {
@@ -130,8 +94,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         public void render()
         {
             DangThemCongViec = true;
-            ws.HideColumns(5, 7);
-            ws["B2"] = "CÔNG TRÌNH: " + "Công trình 1";//applicationData.Content.CongTrinh.Ten;
+            ws["B2"] = "CÔNG TRÌNH: " + "Công trình 1";
             Worksheet.modData.Memories.Record.CongViec congViec;
             Current.HM.id(1);
             List<Worksheet.modData.Memories.Record.CongViec> danhSachCongViec = Worksheet.modData.Memories.Models.CongViec.danhSachCongViecHangMuc();
@@ -179,7 +142,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 congViec.ColNum["thanhTienNhanCong"] = CellUtility.ConvertData<decimal>(ws["T" + row]); 
                 congViec.ColNum["thanhTienMay"] = CellUtility.ConvertData<decimal>(ws["U" + row]); 
             }
-            if (true)
+            if(true)
             {
                 int beginRow = 1;
                 for (int indexRow = 6; indexRow <ws.RowCount; indexRow++)
@@ -236,13 +199,8 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public override void selectCell()
         {
-            //MessageBox.Show(Display.Col + Display.Row);
             switch (Display.Col)
             {
-                //case "C":
-                    //Display.Cell.IsReadOnly = true;
-                    //obj().C.click();
-                    //break;
                 case "R":
                 case "S":
                 case "T":
@@ -259,10 +217,10 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 obj().bind(ws);
                 string debug = "";
-                ARecord? find = Current.CV.load(Display.Row);// memories.Storage.Find(r=>r.Path == Current.CV.path(row.Id));
+                ARecord? find = Current.CV.load(Display.Row);
                 if (find != null)
                 {
-                    debug += "MSCV " + find.ColText["ma"] + " | " + find.Path + " | " + find.txt("ten") + find.txt("khoiLuong") + "\n";
+                    debug += "MSCV: " + find.ColText["ma"] + " | " + find.Path +" | Khối lượng: " + find.num("khoiLuong") + "\n";
                 }
                 MessageBox.Show(debug);
             }
@@ -278,23 +236,8 @@ namespace Worksheet.modDisplay.templates.tienluong
                 case "M":
                     obj().bind(ws);
                     break;
-                //case "C": obj().C.click(); break;
-                //case "D": obj().D.click(); break;
             }
            
-        }
-
-        public override void beforeSave()
-        {
-            //ws["A1"] = "xxx11x"; test
-
-            // attach to control to save into file
-            Display.WControl.AddWorksheet(ws);
-        }
-        public override void afterSave()
-        {
-            // detach from control
-            Display.WControl.RemoveWorksheet(ws);
         }
     }
 }

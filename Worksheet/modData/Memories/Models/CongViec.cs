@@ -55,7 +55,7 @@ namespace Worksheet.modData.Memories.Models
 
         public static void capnhat(modDisplay.templates.tienluong.Row row)
         {
-            ARecord? find = Current.CV.load(row.Id);// memories.Storage.Find(r=>r.Path == Current.CV.path(row.Id));
+            ARecord? find = Current.CV.load(row.Id);
             if(find==null)
             {
                 memories.Storage.Add(row);
