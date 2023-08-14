@@ -13,7 +13,13 @@ namespace Worksheet.modBL
             {"", new DefaultCell() },
             {"test2", new prime.vatlieu.colA() },
             {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
-
+            {"CongViec_DonGiaVatLieuPhu", new prime.tienluong.colO()},
+            {"CongViec_DonGiaNhanCong", new prime.tienluong.colP()},
+            {"CongViec_DonGiaMay", new prime.tienluong.colQ()},
+            {"CongViec_ThanhTienVatLieu", new prime.tienluong.colR()},
+            {"CongViec_ThanhTienVatLieuPhu", new prime.tienluong.colS()},
+            {"CongViec_ThanhTienNhanCong", new prime.tienluong.colT()},
+            {"CongViec_ThanhTienMay", new prime.tienluong.colU()},
         };
 
         public static bool exists(string name) { return _instance.ContainsKey(name); }
