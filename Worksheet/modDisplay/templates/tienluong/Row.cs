@@ -85,9 +85,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                Current.CV.id(Id);
-                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieu").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieu").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieu").fml(), Id, Id);
                 return formula;
             }
             set { txt("thanhTienVatLieu", value); }
@@ -96,9 +94,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                Current.CV.id(Id);
-                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieuPhu").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieuPhu").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieuPhu").fml(), Id, Id);
                 return formula;
             }
             set { txt("thanhTienVatLieuPhu", value); }
@@ -107,9 +103,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                Current.CV.id(Id);
-                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienNhanCong").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienNhanCong").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienNhanCong").fml(), Id, Id);
                 return formula;
             }
             set { txt("thanhTienNhanCong", value); }
@@ -118,9 +112,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                Current.CV.id(Id);
-                var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_ThanhTienMay").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienMay").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienMay").fml(), Id, Id);
                 return formula;
             }
             set { txt("thanhTienMay", value); }

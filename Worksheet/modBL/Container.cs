@@ -20,6 +20,10 @@ namespace Worksheet.modBL
             {"CongViec_ThanhTienVatLieuPhu", new prime.tienluong.colS()},
             {"CongViec_ThanhTienNhanCong", new prime.tienluong.colT()},
             {"CongViec_ThanhTienMay", new prime.tienluong.colU()},
+            {"NhomCongViec_ThanhTienVatLieu", new prime.tienluong.colGR()},
+            {"NhomCongViec_ThanhTienVatLieuPhu", new prime.tienluong.colGS()},
+            {"NhomCongViec_ThanhTienNhanCong", new prime.tienluong.colGT()},
+            {"NhomCongViec_ThanhTienMay", new prime.tienluong.colGU()},
         };
 
         public static bool exists(string name) { return _instance.ContainsKey(name); }
