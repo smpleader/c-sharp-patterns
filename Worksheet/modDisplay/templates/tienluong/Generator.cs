@@ -55,8 +55,11 @@ namespace Worksheet.modDisplay.templates.tienluong
             ws.HideColumns(5, 7);
             int lastRow = 0; 
             List<int> startRows = new List<int>();
+            List<int> startGroups = new List<int>();
+
             for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
             {
+                // Tìm dòng cuối của template
                 if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
                 {
                     if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
@@ -64,15 +67,32 @@ namespace Worksheet.modDisplay.templates.tienluong
                         lastRow = indexRow;
                     }
                 }
+
+                //Tìm dòng bắt đầu group có tính tổng tiền các công việc trong group đó
                 if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
-                int.TryParse(ws["B" + indexRow].ToString(), out int row);
-                bool laBatDauCongViec = row >= 1;
-                if (laBatDauCongViec)
+                if (ws.IsMergedCell("B" + indexRow))
                 {
-                    startRows.Add(indexRow);
+                    startGroups.Add(indexRow);
+                }
+                else
+                {
+                    if (int.TryParse(ws["B" + indexRow].ToString(), out int row))
+                    {
+                        bool laBatDauCongViec = row >= 1;
+                        if (laBatDauCongViec)
+                        {
+                            startRows.Add(indexRow);
+                        }
+                    }
                 }
             }
-            
+
+            for (int i = 0; i < startGroups.Count; i++)
+            {
+                objects[startGroups[i]] = obj(startGroups[i]);
+                objects[startGroups[i]].bind(ws);
+            }
+
             for (int i = 0; i < startRows.Count; i++)
             {
                 objects[startRows[i]] = obj(startRows[i]);
@@ -100,6 +120,31 @@ namespace Worksheet.modDisplay.templates.tienluong
                     {
                         congViec.start = startRows[i];
                         congViec.end = startRows[i + 1] - 1;
+                    }
+                }
+            }
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
+            for (int i = 0; i < startGroups.Count; i++)
+            {
+                Row groupCV = obj(startGroups[i]);
+
+                if (i == startGroups.Count - 1)
+                {
+                    groupCV.start = startGroups[i];
+                    groupCV.end = lastRow - 1;
+                }
+                else
+                {
+                    if (startGroups[i] == (lastRow - 1))
+                    {
+                        groupCV.start = startGroups[i];
+                        groupCV.end = startGroups[i];
+                    }
+                    else
+                    {
+                        groupCV.start = startGroups[i];
+                        groupCV.end = startGroups[i + 1] - 1;
                     }
                 }
             }
@@ -151,7 +196,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 congViec = danhSachCongViec[indexCongViec];
                 int row = congViec.Id;
-                ws["B" + row] = indexCongViec + 1 ;
+                ws["B" + row] = indexCongViec + 1;
                 ws["C" + row] = objects[row].C;
                 ws["D" + row] = objects[row].D;
                 ws["E" + row] = objects[row].E;
@@ -208,8 +253,11 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
             int lastRow = 0;
             List<int> startRows = new List<int>();
+            List<int> startGroups = new List<int>();
+
             for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
             {
+                // Tìm dòng cuối của template
                 if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
                 {
                     if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
@@ -217,14 +265,24 @@ namespace Worksheet.modDisplay.templates.tienluong
                         lastRow = indexRow;
                     }
                 }
-                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
-                int.TryParse(ws["B" + indexRow].ToString(), out int row);
-                bool laBatDauCongViec = row >= 1;
-                if (laBatDauCongViec)
-                {
-                    startRows.Add(indexRow);
-                }
 
+                //Tìm dòng bắt đầu group có tính tổng tiền các công việc trong group đó
+                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
+                if (ws.IsMergedCell("B" + indexRow))
+                {
+                    startGroups.Add(indexRow);
+                }
+                else
+                {
+                    if (int.TryParse(ws["B" + indexRow].ToString(), out int row))
+                    {
+                        bool laBatDauCongViec = row >= 6;
+                        if (laBatDauCongViec)
+                        {
+                            startRows.Add(indexRow);
+                        }
+                    }
+                }
             }
 
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
@@ -248,6 +306,31 @@ namespace Worksheet.modDisplay.templates.tienluong
                     {
                         cv.start = startRows[i];
                         cv.end = startRows[i + 1] - 1;
+                    }
+                }
+            }
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
+            for (int i = 0; i < startGroups.Count; i++)
+            {
+                Row groupCV = obj(startGroups[i]);
+
+                if (i == startGroups.Count - 1)
+                {
+                    groupCV.start = startGroups[i];
+                    groupCV.end = lastRow - 1;
+                }
+                else
+                {
+                    if (startGroups[i] == (lastRow - 1))
+                    {
+                        groupCV.start = startGroups[i];
+                        groupCV.end = startGroups[i];
+                    }
+                    else
+                    {
+                        groupCV.start = startGroups[i];
+                        groupCV.end = startGroups[i + 1] - 1;
                     }
                 }
             }
@@ -280,7 +363,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 if (find != null)
                 {
                     debug += "MSCV: " + find.ColText["ma"] + " | " + find.Path +" | Khối lượng: " + find.num("khoiLuong") + "\n";
-                    MessageBox.Show(debug);
+                    //MessageBox.Show(debug);
                 }
             }
         }

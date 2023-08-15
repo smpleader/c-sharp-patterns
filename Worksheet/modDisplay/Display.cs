@@ -24,7 +24,6 @@ namespace Worksheet.modDisplay
                 {
                     file.Value.Exists = true;
                 }
-
             }
         }
 

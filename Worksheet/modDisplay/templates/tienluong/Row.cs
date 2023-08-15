@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using unvell.ReoGrid;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
 
@@ -17,7 +19,6 @@ namespace Worksheet.modDisplay.templates.tienluong
         }
         public int HMId { get; }
 
-    
         public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
 
         public string A { get { return txt("kiHieuBanVe"); } set { txt("kiHieuBanVe", value); } }
@@ -130,10 +131,68 @@ namespace Worksheet.modDisplay.templates.tienluong
         public decimal X { get { return num("hsdcMay"); } set { num("hsdcMay", value); } }
         public string Y { get { return txt("thongTinDonGia"); } set { txt("thongTinDonGia", value); } }
 
+        public bool isGroup = false;
         public void bind(unvell.ReoGrid.Worksheet data)
         {
-            B = CellUtility.ConvertData<string>(data["B"+Id]);
             C = CellUtility.ConvertData<string>(data["C" + Id]);
+            if( C!=null && C.StartsWith("*"))
+            {
+                isGroup = true;
+                string nameGroup = C.Substring(1);
+                if(nameGroup.Length == 0)
+                {
+                    nameGroup = "(Nhóm không tên)";
+                }
+                data.MergeRange("B"+Id +":"+"Q"+Id);
+                data["B"+Id]=nameGroup;
+                data.SetRangeStyles("B" + Id, new WorksheetRangeStyle
+                {
+                    Flag = PlainStyleFlag.AlignAll,
+                    HAlign = ReoGridHorAlign.Left,
+                });
+                data.SetRangeStyles("A" + Id + ":" + "X" + Id, new WorksheetRangeStyle
+                {
+                    // style item flag
+                    Flag = PlainStyleFlag.BackColor,
+                    // style item
+                    BackColor = Color.FromArgb(213, 247, 183),
+                });
+                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideHorizontal,
+                new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Dotted,
+                });
+                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Left,
+                new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Solid,
+                });
+                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Right,
+                new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Solid,
+                });
+                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideVertical,
+                new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Solid,
+                });
+                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Outside,
+                new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Solid,
+                });
+            }
+            if (data["B" + Id] != null && data.IsMergedCell("B" + Id))
+            {
+                isGroup = true;
+            }
+            B = CellUtility.ConvertData<string>(data["B"+Id]);
             D = CellUtility.ConvertData<string>(data["D" + Id]);
             E = CellUtility.ConvertData<string>(data["E" + Id]);
             F = CellUtility.ConvertData<string>(data["F" + Id]);

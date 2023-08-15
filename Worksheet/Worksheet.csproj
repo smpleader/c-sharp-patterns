@@ -9,12 +9,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Content\Type\**" />
       <Compile Remove="DataSample\**" />
       <Compile Remove="modBL\dongia\**" />
       <Compile Remove="samples\**" />
+      <EmbeddedResource Remove="Content\Type\**" />
       <EmbeddedResource Remove="DataSample\**" />
       <EmbeddedResource Remove="modBL\dongia\**" />
       <EmbeddedResource Remove="samples\**" />
+      <None Remove="Content\Type\**" />
       <None Remove="DataSample\**" />
       <None Remove="modBL\dongia\**" />
       <None Remove="samples\**" />
@@ -67,10 +70,6 @@
 			<VersionMajor>1</VersionMajor>
 			<VersionMinor>9</VersionMinor>
 		</COMReference>
-	</ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Content\Type\" />
-    </ItemGroup> 
+	</ItemGroup> 
 
 </Project>
