@@ -40,7 +40,7 @@ namespace Worksheet.modData.Memories.Models
         public static void them(RowCongViec r)
         {
             //int id = Current.CV.id();
-            ////point(id++);
+            point(r.Id);
             //r.Id = id;
             memories.Storage.Add(r);
             // recalculate BL

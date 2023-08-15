@@ -4,6 +4,7 @@ using Worksheet.modData.Memories;
 using Worksheet.modData;
 using Worksheet.modData.Memories.Pointer;
 using unvell.ReoGrid.Utility;
+using System.Configuration;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
@@ -70,21 +71,13 @@ namespace Worksheet.modDisplay.templates.tienluong
                 {
                     startRows.Add(indexRow);
                 }
-               
             }
-            if(startRows.Count>0)
-            {
-                modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
-                t.txt("test", "oo1");
-                Worksheet.modData.Memories.Models.HangMuc.them(t);
-            }    
+            
             for (int i = 0; i < startRows.Count; i++)
             {
-                objects[startRows[i]] = new Row(startRows[i]);
-                objects[startRows[i]].Id = startRows[i];
+                objects[startRows[i]] = obj(startRows[i]);
                 objects[startRows[i]].bind(ws);
             }
-
 
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
             for (int i = 0; i < startRows.Count; i++)
@@ -121,31 +114,28 @@ namespace Worksheet.modDisplay.templates.tienluong
             for (int indexCongViec = 0; indexCongViec < danhSachCongViec.Count; indexCongViec++)
             {
                 congViec = danhSachCongViec[indexCongViec];
-                
                 Row obj;
-                if (int.TryParse(congViec.ColText["startRow"], out int indexRow))
+                int indexRow = congViec.Id;
+                if (!objects.TryGetValue(indexRow, out obj))
                 {
-                    if (!objects.TryGetValue(indexRow, out obj))
-                    {
-                        objects[indexRow] = new Row(indexRow);
-                        //objects[indexRow].A = congViec.ColText()
-                        objects[indexRow].B = congViec.ColText["stt"];
-                        objects[indexRow].C = congViec.ColText["ma"];
-                        objects[indexRow].D = congViec.ColText["ten"];
-                        objects[indexRow].E = congViec.ColText["donVi"];
-                        objects[indexRow].F = congViec.ColText["tenCauKien"];
-                        objects[indexRow].G = congViec.ColNum["soCauKien"];
-                        objects[indexRow].H = congViec.ColNum["dai"];
-                        objects[indexRow].I = congViec.ColNum["rong"];
-                        objects[indexRow].J = congViec.ColNum["cao"];
-                        objects[indexRow].K = congViec.ColNum["heSoPhu"];
-                        objects[indexRow].L = congViec.ColNum["khoiLuongPhu"];
-                        objects[indexRow].M = congViec.ColNum["khoiLuong"];
-                        objects[indexRow].V = congViec.ColNum["hsdcVatLieu"];
-                        objects[indexRow].W = congViec.ColNum["hsdcNhanCong"];
-                        objects[indexRow].X = congViec.ColNum["hsdcMay"];
-                        objects[indexRow].Y = congViec.ColText["thongTinDonGia"];
-                    }
+                    objects[indexRow] = new Row(indexRow);
+                    //objects[indexRow].A = congViec.ColText()
+                    objects[indexRow].B = congViec.ColText["stt"];
+                    objects[indexRow].C = congViec.ColText["ma"];
+                    objects[indexRow].D = congViec.ColText["ten"];
+                    objects[indexRow].E = congViec.ColText["donVi"];
+                    objects[indexRow].F = congViec.ColText["tenCauKien"];
+                    objects[indexRow].G = congViec.ColNum["soCauKien"];
+                    objects[indexRow].H = congViec.ColNum["dai"];
+                    objects[indexRow].I = congViec.ColNum["rong"];
+                    objects[indexRow].J = congViec.ColNum["cao"];
+                    objects[indexRow].K = congViec.ColNum["heSoPhu"];
+                    objects[indexRow].L = congViec.ColNum["khoiLuongPhu"];
+                    objects[indexRow].M = congViec.ColNum["khoiLuong"];
+                    objects[indexRow].V = congViec.ColNum["hsdcVatLieu"];
+                    objects[indexRow].W = congViec.ColNum["hsdcNhanCong"];
+                    objects[indexRow].X = congViec.ColNum["hsdcMay"];
+                    objects[indexRow].Y = congViec.ColText["thongTinDonGia"];
                 }
             }
         }
@@ -160,7 +150,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             for (int indexCongViec = 0; indexCongViec < danhSachCongViec.Count; indexCongViec++)
             {
                 congViec = danhSachCongViec[indexCongViec];
-                int row = int.Parse(congViec.ColText["startRow"]);
+                int row = congViec.Id;
                 ws["B" + row] = indexCongViec + 1 ;
                 ws["C" + row] = objects[row].C;
                 ws["D" + row] = objects[row].D;
@@ -206,7 +196,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 int beginRow = 1;
                 for (int indexRow = 6; indexRow <ws.RowCount; indexRow++)
                 {
-                    congViec = danhSachCongViec.Find(x => x.ColText["startRow"] == indexRow.ToString());
+                    congViec = danhSachCongViec.Find(x => x.Id == indexRow);
                     if (ws["C" + indexRow] != null)
                     {
                        ws["B" + indexRow] = beginRow;
@@ -216,8 +206,52 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                 }
             }
+            int lastRow = 0;
+            List<int> startRows = new List<int>();
+            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
+            {
+                if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
+                {
+                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
+                    {
+                        lastRow = indexRow;
+                    }
+                }
+                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
+                int.TryParse(ws["B" + indexRow].ToString(), out int row);
+                bool laBatDauCongViec = row >= 1;
+                if (laBatDauCongViec)
+                {
+                    startRows.Add(indexRow);
+                }
 
-           
+            }
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
+            for (int i = 0; i < startRows.Count; i++)
+            {
+                Row cv = obj(startRows[i]);
+
+                if (i == startRows.Count - 1)
+                {
+                    cv.start = startRows[i];
+                    cv.end = lastRow - 1;
+                }
+                else
+                {
+                    if (startRows[i] == (lastRow - 1))
+                    {
+                        cv.start = startRows[i];
+                        cv.end = startRows[i];
+                    }
+                    else
+                    {
+                        cv.start = startRows[i];
+                        cv.end = startRows[i + 1] - 1;
+                    }
+                }
+            }
+
             DangThemCongViec = false;
         }
 

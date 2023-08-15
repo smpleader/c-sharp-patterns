@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Worksheet.modData.Memories.Models;
+using Worksheet.modData.Memories.Pointer;
 using Worksheet.modDisplay;
 using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Presenters.SheetTemplate;
@@ -19,6 +20,8 @@ namespace Worksheet.MVC.Views
     {
         private TienLuongP tienLuongP;
         private VatLieuP vatLieuP;
+        int startRow = 6;
+        int endRow = 15;
 
         public SheetTienLuong()
         {
@@ -45,14 +48,19 @@ namespace Worksheet.MVC.Views
         {
             modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
             t.txt("test", "oo1");
-            HangMuc.them(t);
-            t = new modData.Memories.Record.HangMuc("ten 2", "kieu 2");
-            t.txt("test", "oo2");
-            HangMuc.them(t);
-
+            modData.Memories.Models.HangMuc.them(t);
+            //t = new modData.Memories.Record.HangMuc("ten 2", "kieu 2");
+            //t.txt("test", "oo2");
+            //HangMuc.them(t);
+            Current.HM.id(1);
+            List<Worksheet.modData.Memories.Record.CongViec> dsCongViec = modData.Memories.Models.CongViec.danhSachCongViecHangMuc();
+            if (dsCongViec.Count>0 && dsCongViec[dsCongViec.Count-1].Id >= endRow)
+            {
+                // todo: xử lý insert dòng sau này
+                MessageBox.Show("Hết dòng cho phép");
+                return;
+            }    
             modData.Memories.Record.CongViec cv = new modData.Memories.Record.CongViec(1);
-            CongViec.them(cv);
-
             cv.ColText["ma"] = "AG.11111";
             cv.ColText["stt"] = "1";
             cv.ColText["ten"] = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
@@ -64,28 +72,25 @@ namespace Worksheet.MVC.Views
             cv.ColNum["tongGiaVatLieuPhu"] = 0;
             cv.ColNum["tongGiaNhanCong"] = 288111;
             cv.ColNum["tongGiaMay"] = 70230;
-            cv.ColText["startRow"] = "6";
-            cv.ColText["EndRow"] = "6";
-            cv.Id = 6;
+            cv.Id = modData.Memories.Models.CongViec.danhSachCongViecHangMuc().Count >= 1 ? Current.CV.id(true): startRow;
+            cv.ColText["EndRow"] = cv.Id.ToString();
+            modData.Memories.Models.CongViec.them(cv);
 
-            cv = new modData.Memories.Record.CongViec(1);
+            //cv = new modData.Memories.Record.CongViec(1);
+            //cv.ColText["ma"] = "MA.01005";
+            //cv.ColText["stt"] = "2";
+            //cv.ColText["ten"] = "Lắp đặt máy công cụ và máy gia công kim loại - Khối lượng máy ≤20 tấn";
+            //cv.ColText["donVi"] = "tấn";
 
-            cv.ColText["ma"] = "MA.01005";
-            cv.ColText["stt"] = "2";
-            cv.ColText["ten"] = "Lắp đặt máy công cụ và máy gia công kim loại - Khối lượng máy ≤20 tấn";
-            cv.ColText["donVi"] = "tấn";
+            //cv.ColText["thongTinDonGia"] = "DinhMuc_2021XD_D12";
 
-            cv.ColText["thongTinDonGia"] = "DinhMuc_2021XD_D12";
-
-            cv.ColNum["tongGiaVatLieu"] = 100103;
-            cv.ColNum["tongGiaVatLieuPhu"] = 0;
-            cv.ColNum["tongGiaNhanCong"] = 3022200;
-            cv.ColNum["tongGiaMay"] = 635528;
-            cv.ColText["startRow"] = "7";
-            cv.ColText["EndRow"] = "7";
-            cv.ColText["EndRow"] = "7";
-            cv.Id = 7;
-            CongViec.them(cv);
+            //cv.ColNum["tongGiaVatLieu"] = 100103;
+            //cv.ColNum["tongGiaVatLieuPhu"] = 0;
+            //cv.ColNum["tongGiaNhanCong"] = 3022200;
+            //cv.ColNum["tongGiaMay"] = 635528;
+            //cv.Id = 7;
+            //cv.ColText["EndRow"] = "7";
+            //CongViec.them(cv);
 
             string debug = "";
 
@@ -170,6 +175,9 @@ namespace Worksheet.MVC.Views
                     try
                     {
                         sheet_TienLuong.Load(openFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
+                        modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
+                        t.txt("test", "oo1");
+                        Worksheet.modData.Memories.Models.HangMuc.them(t);
                     }
                     catch (Exception ex)
                     {
