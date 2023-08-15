@@ -56,9 +56,13 @@ namespace Worksheet.modData.Memories.Models
         public static void capnhat(modDisplay.templates.tienluong.Row row)
         {
             ARecord? find = Current.CV.load(row.Id);
-            if(find==null)
+            if(find == null)
             {
-                memories.Storage.Add(row);
+                RowCongViec rowCongViec = new RowCongViec(Current.HM.id());
+                rowCongViec.ColText = row.ColText;
+                rowCongViec.ColNum = row.ColNum;
+                rowCongViec.Id = row.Id;
+                memories.Storage.Add(rowCongViec);
             }
             else
             {
@@ -91,7 +95,6 @@ namespace Worksheet.modData.Memories.Models
                 find.ColNum["hsdcVatLieu"] = row.V;
                 find.ColNum["hsdcNhanCong"] = row.W;
                 find.ColNum["hsdcMay"] = row.X;
-
             }
         }
     }

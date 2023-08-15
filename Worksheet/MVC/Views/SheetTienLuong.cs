@@ -105,7 +105,7 @@ namespace Worksheet.MVC.Views
             await Task.Delay(500);
             Display.setup(AppConst.templateFolder + "TienLuong");
 
-            //Display.hook("LoadData");
+            Display.hook("LoadData");
         }
 
         private void btn_BackDemo_Click(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace Worksheet.MVC.Views
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(tabControl1.SelectedTab.Text)
+            switch (tabControl1.SelectedTab.Text)
             {
                 case "Tiên lượng":
                     Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
@@ -137,7 +137,47 @@ namespace Worksheet.MVC.Views
                 case "Vật liệu":
                     Display.setup(sheet_VatLieu, AppConst.templateFolder + "GiaVatLieu");
                     break;
-            }    
+            }
+        }
+
+        private void btn_LuuFile_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Excel Files|*.xlsx" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Display.WControl.Save(saveFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
+                        MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Lưu lỗi. {ex}");
+                        MessageBox.Show("Lưu thất bại! " + ex);
+
+                    }
+                }
+            }
+        }
+
+        private void btn_MoFile_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Excel Files|*.xlsx" })
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        sheet_TienLuong.Load(openFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Mở thất bại! " + ex);
+                        Console.WriteLine($"The decryption failed. {ex}");
+                    }
+                }
+            }
         }
     }
 }

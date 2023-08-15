@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btn_LuuFile = new Button();
+            btn_MoFile = new Button();
             btn_BackDemo = new Button();
             btn_ThemCongViec = new Button();
             sheet_TienLuong = new unvell.ReoGrid.ReoGridControl();
@@ -44,17 +46,39 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btn_LuuFile);
+            panel1.Controls.Add(btn_MoFile);
             panel1.Controls.Add(btn_BackDemo);
             panel1.Controls.Add(btn_ThemCongViec);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1517, 62);
+            panel1.Size = new Size(1517, 42);
             panel1.TabIndex = 0;
+            // 
+            // btn_LuuFile
+            // 
+            btn_LuuFile.Location = new Point(212, 5);
+            btn_LuuFile.Name = "btn_LuuFile";
+            btn_LuuFile.Size = new Size(94, 29);
+            btn_LuuFile.TabIndex = 3;
+            btn_LuuFile.Text = "Lưu file";
+            btn_LuuFile.UseVisualStyleBackColor = true;
+            btn_LuuFile.Click += btn_LuuFile_Click;
+            // 
+            // btn_MoFile
+            // 
+            btn_MoFile.Location = new Point(112, 5);
+            btn_MoFile.Name = "btn_MoFile";
+            btn_MoFile.Size = new Size(94, 29);
+            btn_MoFile.TabIndex = 2;
+            btn_MoFile.Text = "Mở file";
+            btn_MoFile.UseVisualStyleBackColor = true;
+            btn_MoFile.Click += btn_MoFile_Click;
             // 
             // btn_BackDemo
             // 
-            btn_BackDemo.Location = new Point(12, 12);
+            btn_BackDemo.Location = new Point(12, 5);
             btn_BackDemo.Name = "btn_BackDemo";
             btn_BackDemo.Size = new Size(94, 29);
             btn_BackDemo.TabIndex = 1;
@@ -65,7 +89,7 @@
             // btn_ThemCongViec
             // 
             btn_ThemCongViec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btn_ThemCongViec.Location = new Point(1357, 12);
+            btn_ThemCongViec.Location = new Point(1357, 5);
             btn_ThemCongViec.Name = "btn_ThemCongViec";
             btn_ThemCongViec.Size = new Size(148, 29);
             btn_ThemCongViec.TabIndex = 0;
@@ -88,7 +112,7 @@
             sheet_TienLuong.SheetTabVisible = true;
             sheet_TienLuong.SheetTabWidth = 60;
             sheet_TienLuong.ShowScrollEndSpacing = true;
-            sheet_TienLuong.Size = new Size(1503, 597);
+            sheet_TienLuong.Size = new Size(1503, 617);
             sheet_TienLuong.TabIndex = 1;
             sheet_TienLuong.Text = "reoGridControl1";
             // 
@@ -97,10 +121,10 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 62);
+            tabControl1.Location = new Point(0, 42);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1517, 636);
+            tabControl1.Size = new Size(1517, 656);
             tabControl1.TabIndex = 2;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -110,7 +134,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1509, 603);
+            tabPage1.Size = new Size(1509, 623);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Tiên lượng";
             tabPage1.UseVisualStyleBackColor = true;
@@ -173,5 +197,7 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         public unvell.ReoGrid.ReoGridControl sheet_VatLieu;
+        private Button btn_LuuFile;
+        private Button btn_MoFile;
     }
 }

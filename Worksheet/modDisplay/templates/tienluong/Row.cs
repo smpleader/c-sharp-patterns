@@ -13,7 +13,12 @@ namespace Worksheet.modDisplay.templates.tienluong
         public Row(int id)
         {
             Id = id;
+            HMId = Current.HM.id();
         }
+        public int HMId { get; }
+
+    
+        public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
 
         public string A { get { return txt("kiHieuBanVe"); } set { txt("kiHieuBanVe", value); } }
         public string B { get { return txt("stt"); } set { txt("stt", value); } }
@@ -149,6 +154,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             U = CellUtility.ConvertData<string>(data["U" + Id]);
             V = CellUtility.ConvertData<decimal>(data["V" + Id]);
             W = CellUtility.ConvertData<decimal>(data["W" + Id]);
+            X = CellUtility.ConvertData<decimal>(data["X" + Id]);
             Y = CellUtility.ConvertData<string>(data["Y" + Id]);
             modData.Memories.Models.CongViec.capnhat(this);
         }

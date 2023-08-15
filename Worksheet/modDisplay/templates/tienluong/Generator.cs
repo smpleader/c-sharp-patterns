@@ -44,15 +44,74 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public override void addMenu()
         {
-
             Display.menuItems = new ToolStripItemCollection(Display.contextMenu,
-                    new ToolStripItem[]{
-                        new ToolStripMenuItem("Congviec 2"),
-                    });
+                new ToolStripItem[]{
+                    new ToolStripMenuItem("Congviec 2"),
+                });
         }
         public override void loadData()
         {
             ws.HideColumns(5, 7);
+            int lastRow = 0; 
+            List<int> startRows = new List<int>();
+            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
+            {
+                if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
+                {
+                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
+                    {
+                        lastRow = indexRow;
+                    }
+                }
+                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
+                int.TryParse(ws["B" + indexRow].ToString(), out int row);
+                bool laBatDauCongViec = row >= 1;
+                if (laBatDauCongViec)
+                {
+                    startRows.Add(indexRow);
+                }
+               
+            }
+            if(startRows.Count>0)
+            {
+                modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
+                t.txt("test", "oo1");
+                Worksheet.modData.Memories.Models.HangMuc.them(t);
+            }    
+            for (int i = 0; i < startRows.Count; i++)
+            {
+                objects[startRows[i]] = new Row(startRows[i]);
+                objects[startRows[i]].Id = startRows[i];
+                objects[startRows[i]].bind(ws);
+            }
+
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
+            for (int i = 0; i < startRows.Count; i++)
+            {
+                Row congViec = obj(startRows[i]);
+
+                if (i == startRows.Count - 1)
+                {
+                    congViec.start = startRows[i];
+                    congViec.end = lastRow - 1;
+                }
+                else
+                {
+                    if (startRows[i] == (lastRow - 1))
+                    {
+                        congViec.start = startRows[i];
+                        congViec.end = startRows[i];
+                    }
+                    else
+                    {
+                        congViec.start = startRows[i];
+                        congViec.end = startRows[i + 1] - 1;
+                    }
+                }
+            }
+
+            var a = objects;
         }
         public void prepareData()
         {
@@ -158,42 +217,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 }
             }
 
-            List<int> startRows = new List<int>();
-            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
-            {
-                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
-                int.TryParse(ws["B" + indexRow].ToString(), out int row);
-                bool laBatDauCongViec = row >= 1;
-                if (laBatDauCongViec)
-                {
-                    startRows.Add(indexRow);
-                }
-            }
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
-            for (int i = 0; i < startRows.Count; i++)
-            {
-                congViec = danhSachCongViec.Find(x => x.ColText["startRow"] == startRows[i].ToString());
-
-                if (i == startRows.Count - 1)
-                {
-                    congViec.ColText["startRow"] = startRows[i].ToString();
-                    congViec.ColText["EndRow"] = (ws.RowCount - 1).ToString();
-                }
-                else
-                {
-                    if (startRows[i] == (ws.RowCount - 1))
-                    {
-                        congViec.ColText["startRow"] = startRows[i].ToString();
-                        congViec.ColText["EndRow"] = startRows[i].ToString();
-                    }
-                    else
-                    {
-                        congViec.ColText["startRow"] = startRows[i].ToString();
-                        congViec.ColText["EndRow"] = (startRows[i + 1] - 1).ToString();
-                    }
-                }
-            }
+           
             DangThemCongViec = false;
         }
 
@@ -207,22 +231,23 @@ namespace Worksheet.modDisplay.templates.tienluong
                 case "U":
                     Display.Cell.IsReadOnly = true;
                     break;
-               
             }
         }
         bool DangThemCongViec = false;
         public override void cellDataChanged()
+        
         {
             if (!DangThemCongViec)
             {
                 obj().bind(ws);
                 string debug = "";
+                
                 ARecord? find = Current.CV.load(Display.Row);
                 if (find != null)
                 {
                     debug += "MSCV: " + find.ColText["ma"] + " | " + find.Path +" | Khối lượng: " + find.num("khoiLuong") + "\n";
+                    MessageBox.Show(debug);
                 }
-                MessageBox.Show(debug);
             }
         }
 
