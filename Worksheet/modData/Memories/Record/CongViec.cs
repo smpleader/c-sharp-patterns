@@ -33,7 +33,7 @@ namespace Worksheet.modData.Memories.Record
             ColNum["heSoPhu"] = 0;
             ColNum["khoiLuongPhu"] = 0;
 
-            ColNum["khoiLuong"] = 0;
+            ColText["khoiLuong"] = "0";
 
             ColNum["donGiaVatLieu"] = 0;
             ColNum["donGiaVatLieuPhu"] = 0;

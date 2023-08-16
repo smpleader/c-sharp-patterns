@@ -12,6 +12,7 @@ namespace Worksheet.modBL
         private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>() {
             {"", new DefaultCell() },
             {"test2", new prime.vatlieu.colA() },
+            {"CongViec_KhoiLuong", new prime.tienluong.ColM()},
             {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
             {"CongViec_DonGiaVatLieuPhu", new prime.tienluong.colO()},
             {"CongViec_DonGiaNhanCong", new prime.tienluong.colP()},

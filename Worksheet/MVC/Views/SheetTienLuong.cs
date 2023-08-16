@@ -75,7 +75,7 @@ namespace Worksheet.MVC.Views
             cv.Id = modData.Memories.Models.CongViec.danhSachCongViecHangMuc().Count >= 1 ? Current.CV.id(true) : startRow;
             cv.ColText["EndRow"] = cv.Id.ToString();
             modData.Memories.Models.CongViec.them(cv);
-
+            var a = modData.Memories.Models.CongViec.danhSachCongViecHangMuc();
             //cv = new modData.Memories.Record.CongViec(1);
             //cv.ColText["ma"] = "MA.01005";
             //cv.ColText["stt"] = "2";
@@ -185,6 +185,18 @@ namespace Worksheet.MVC.Views
                         Console.WriteLine($"The decryption failed. {ex}");
                     }
                 }
+            }
+        }
+
+        private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkbx_KichThuoc.Checked)
+            {
+                sheet_TienLuong.CurrentWorksheet.ShowColumns(5, 7);
+            }
+            else
+            {
+                sheet_TienLuong.CurrentWorksheet.HideColumns(5, 7);
             }
         }
     }

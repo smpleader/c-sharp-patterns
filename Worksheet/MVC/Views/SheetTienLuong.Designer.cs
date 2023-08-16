@@ -36,19 +36,21 @@
             sheet_TienLuong = new unvell.ReoGrid.ReoGridControl();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            panel2 = new Panel();
+            formulaBarControl1 = new EtaDt.MVCP.Views.Common.FormulaBarControl();
             tabPage2 = new TabPage();
             sheet_VatLieu = new unvell.ReoGrid.ReoGridControl();
-            formulaBarControl1 = new EtaDt.MVCP.Views.Common.FormulaBarControl();
-            panel2 = new Panel();
+            chkbx_KichThuoc = new CheckBox();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
             panel2.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(chkbx_KichThuoc);
             panel1.Controls.Add(btn_LuuFile);
             panel1.Controls.Add(btn_MoFile);
             panel1.Controls.Add(btn_BackDemo);
@@ -143,6 +145,27 @@
             tabPage1.Text = "Tiên lượng";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(sheet_TienLuong);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 39);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1503, 581);
+            panel2.TabIndex = 3;
+            // 
+            // formulaBarControl1
+            // 
+            formulaBarControl1.BackColor = SystemColors.Window;
+            formulaBarControl1.Dock = DockStyle.Top;
+            formulaBarControl1.FocusToGridAfterInputValue = false;
+            formulaBarControl1.GridControl = sheet_TienLuong;
+            formulaBarControl1.Location = new Point(3, 3);
+            formulaBarControl1.Margin = new Padding(4, 5, 4, 5);
+            formulaBarControl1.Name = "formulaBarControl1";
+            formulaBarControl1.Size = new Size(1503, 36);
+            formulaBarControl1.TabIndex = 2;
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(sheet_VatLieu);
@@ -173,26 +196,16 @@
             sheet_VatLieu.TabIndex = 2;
             sheet_VatLieu.Text = "reoGridControl1";
             // 
-            // formulaBarControl1
+            // chkbx_KichThuoc
             // 
-            formulaBarControl1.BackColor = SystemColors.Window;
-            formulaBarControl1.Dock = DockStyle.Top;
-            formulaBarControl1.FocusToGridAfterInputValue = false;
-            formulaBarControl1.GridControl = sheet_TienLuong;
-            formulaBarControl1.Location = new Point(3, 3);
-            formulaBarControl1.Margin = new Padding(4, 5, 4, 5);
-            formulaBarControl1.Name = "formulaBarControl1";
-            formulaBarControl1.Size = new Size(1503, 36);
-            formulaBarControl1.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(sheet_TienLuong);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(3, 39);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1503, 581);
-            panel2.TabIndex = 3;
+            chkbx_KichThuoc.AutoSize = true;
+            chkbx_KichThuoc.Location = new Point(330, 8);
+            chkbx_KichThuoc.Name = "chkbx_KichThuoc";
+            chkbx_KichThuoc.Size = new Size(101, 24);
+            chkbx_KichThuoc.TabIndex = 4;
+            chkbx_KichThuoc.Text = "Kích thước";
+            chkbx_KichThuoc.UseVisualStyleBackColor = true;
+            chkbx_KichThuoc.CheckedChanged += chkbx_KichThuoc_CheckedChanged;
             // 
             // SheetTienLuong
             // 
@@ -206,10 +219,11 @@
             Title = "Demo sheet Tiên lượng";
             Load += SheetTienLuong_Load;
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -227,5 +241,6 @@
         private Button btn_MoFile;
         private Panel panel2;
         private EtaDt.MVCP.Views.Common.FormulaBarControl formulaBarControl1;
+        private CheckBox chkbx_KichThuoc;
     }
 }
