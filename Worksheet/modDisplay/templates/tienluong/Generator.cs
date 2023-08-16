@@ -285,92 +285,8 @@ namespace Worksheet.modDisplay.templates.tienluong
                 }
             }
             renderFormula();
-            return;
-            int lastRow = 0;
-            List<int> startRows = new List<int>();
-            List<int> startGroups = new List<int>();
-
-            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
-            {
-                // Tìm dòng cuối của template
-                if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
-                {
-                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
-                    {
-                        lastRow = indexRow;
-                    }
-                }
-
-                //Tìm dòng bắt đầu group có tính tổng tiền các công việc trong group đó
-                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
-                if (ws.IsMergedCell("B" + indexRow))
-                {
-                    startGroups.Add(indexRow);
-                }
-                else
-                {
-                    if (int.TryParse(ws["B" + indexRow].ToString(), out int row))
-                    {
-                        bool laBatDauCongViec = row >= 1;
-                        if (laBatDauCongViec)
-                        {
-                            startRows.Add(indexRow);
-                        }
-                    }
-                }
-            }
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
-            for (int i = 0; i < startRows.Count; i++)
-            {
-                Row cv = obj(startRows[i]);
-
-                if (i == startRows.Count - 1)
-                {
-                    cv.start = startRows[i];
-                    cv.end = lastRow - 1;
-                }
-                else
-                {
-                    if (startRows[i] == (lastRow - 1))
-                    {
-                        cv.start = startRows[i];
-                        cv.end = startRows[i];
-                    }
-                    else
-                    {
-                        cv.start = startRows[i];
-                        cv.end = startRows[i + 1] - 1;
-                    }
-                }
-            }
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
-            for (int i = 0; i < startGroups.Count; i++)
-            {
-                Row groupCV = obj(startGroups[i]);
-
-                if (i == startGroups.Count - 1)
-                {
-                    groupCV.start = startGroups[i];
-                    groupCV.end = lastRow - 1;
-                }
-                else
-                {
-                    if (startGroups[i] == (lastRow - 1))
-                    {
-                        groupCV.start = startGroups[i];
-                        groupCV.end = startGroups[i];
-                    }
-                    else
-                    {
-                        groupCV.start = startGroups[i];
-                        groupCV.end = startGroups[i + 1] - 1;
-                    }
-                }
-            }
-
             DangThemCongViec = false;
+            return;
         }
 
         public override void selectCell()
@@ -399,7 +315,6 @@ namespace Worksheet.modDisplay.templates.tienluong
                 DangThemCongViec = true;
                 obj().bind(ws);
                 renderFormula();
-
 
                 string debug = "";
                 

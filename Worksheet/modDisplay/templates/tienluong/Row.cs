@@ -155,8 +155,8 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public void bind(unvell.ReoGrid.Worksheet data)
         {
-            
-            if(data.IsMergedCell("B" + Id))
+            // check group object khi mở từ file excel ( bind)
+            if (data.IsMergedCell("B" + Id))
             {
                 if(data["B" + Id] != null && data["B" + Id] != "")
                 {
@@ -165,6 +165,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
             else
             {
+                // check group object khi nhập vào
                 C = CellUtility.ConvertData<string>(data["C" + Id]);
                 if (C != null && C.StartsWith("*"))
                 {
@@ -176,6 +177,8 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                     data.MergeRange("B" + Id + ":" + "Q" + Id);
                     data["B" + Id] = nameGroup;
+                    #region style lại cho group object
+
                     data.SetRangeStyles("B" + Id, new WorksheetRangeStyle
                     {
                         Flag = PlainStyleFlag.AlignAll,
@@ -218,32 +221,40 @@ namespace Worksheet.modDisplay.templates.tienluong
                         Color = Color.Black,
                         Style = BorderLineStyle.Solid,
                     });
+
+                    #endregion
                 }
-                if ((data["C" + Id] == null || data["C" + Id] == "") && (data["D" + Id] != null && data["D" + Id] != ""))
+                if (C == null )
                 {
-                    string interpretiveFormula = CellUtility.ConvertData<string>(data["D" + Id]);
-                    var segment = interpretiveFormula.Split(":").ToList();
-                    if(segment.Count>1)
+                    // check công thức diễn giải khi nhập vào
+                    if(data["D" + Id] != null && data["D" + Id] != "")
                     {
-                        // check segment 2 
-                        if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim())) 
+                        string interpretiveFormula = CellUtility.ConvertData<string>(data["D" + Id]);
+                        var segment = interpretiveFormula.Split(":").ToList();
+                        if (segment.Count > 1)
                         {
-                            double result = EvaluateExpression(segment[1].Trim());
-                            data["D" + Id] = interpretiveFormula + " = " + FormatResult(result);
-                            data["L" + Id] = "=" + segment[1].Trim();
+                            // check segment 2 
+                            if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim()))
+                            {
+                                double result = EvaluateExpression(segment[1].Trim());
+                                data["D" + Id] = interpretiveFormula + " = " + FormatResult(result);
+                                data["L" + Id] = "=" + segment[1].Trim();
+                            }
+                            else
+                            {
+                                data["D" + Id] = interpretiveFormula + " :";
+                            }
                         }
                         else
                         {
                             data["D" + Id] = interpretiveFormula + " :";
                         }
-                    }
-                    else
-                    {
-                        data["D" + Id] = interpretiveFormula + " :";
                     }    
                     isInterpretiveFormula = true;
                 }
             }
+
+            // bind thông tin tổng giá vật liệu, tổng giá vật liệu phụ, tổng giá nhân công, tổng giá máy 
             if(!isGroup && !isInterpretiveFormula)
             {
                 N = CellUtility.ConvertData<string>(data["N" + Id]);
@@ -262,7 +273,6 @@ namespace Worksheet.modDisplay.templates.tienluong
 
                 var cellQ = data.Cells["Q" + Id];
                 tongGiaMay = cellQ.HasFormula ? decimal.Parse(data.GetCellFormula("Q" + Id).Split("*").ToList()[1]) : (cellQ.Data == null ? 0 : decimal.Parse((string)cellQ.Data));
-                
             }
             B = CellUtility.ConvertData<string>(data["B"+Id]);
             D = CellUtility.ConvertData<string>(data["D" + Id]);
