@@ -54,7 +54,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         public override void loadData()
         {
             ws.HideColumns(5, 7);
-            int lastRow = 0; 
+            int lastRow = 0;
+            List<int> startInterpretiveFormulas = new List<int>();
             List<int> startRows = new List<int>();
             List<int> startGroups = new List<int>();
 
@@ -85,9 +86,24 @@ namespace Worksheet.modDisplay.templates.tienluong
                             startRows.Add(indexRow);
                         }
                     }
+                    string C = CellUtility.ConvertData<string>(ws["C" + indexRow]);
+                    if (C == null)
+                    {
+                        // check công thức diễn giải khi nhập vào
+                        if (ws["D" + indexRow] != null && ws["D" + indexRow] != "")
+                        {
+                            startInterpretiveFormulas.Add(indexRow);
+                        }
+                    }
                 }
             }
 
+            for (int i = 0; i < startInterpretiveFormulas.Count; i++)
+            {
+                objects[startInterpretiveFormulas[i]] = obj(startInterpretiveFormulas[i]);
+                objects[startInterpretiveFormulas[i]].isInterpretiveFormula = true;
+                objects[startInterpretiveFormulas[i]].bind(ws);
+            }
             for (int i = 0; i < startGroups.Count; i++)
             {
                 objects[startGroups[i]] = obj(startGroups[i]);
@@ -99,6 +115,8 @@ namespace Worksheet.modDisplay.templates.tienluong
                 objects[startRows[i]] = obj(startRows[i]);
                 objects[startRows[i]].bind(ws);
             }
+
+
 
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
             for (int i = 0; i < startRows.Count; i++)
@@ -149,7 +167,28 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                 }
             }
+            for (int rowIndex = 0; rowIndex < objects.Count; rowIndex++)
+            {
+                KeyValuePair<int, Row> row = objects.ElementAt(rowIndex);
 
+                bool haveInterpretiveFormula = false;
+                if (!row.Value.isGroup && !row.Value.isInterpretiveFormula)
+                {
+                    for (int i = row.Value.start + 1; i <= row.Value.end; i++)
+                    {
+                        if (obj(i).isInterpretiveFormula)
+                        {
+                            haveInterpretiveFormula = true;
+                            break;
+                        }
+                    }
+                }
+                row.Value.HaveInterpretiveFormula = haveInterpretiveFormula;
+                if (haveInterpretiveFormula)
+                {
+                    ws["M" + row.Key] = string.Format(modBL.Container.Get("CongViec_KhoiLuong").fml(), row.Value.start + 1, row.Value.end);
+                }
+            }
             var a = objects;
         }
         public void prepareData()

@@ -16,5 +16,9 @@ namespace Worksheet.modDisplay
         {
             // todo : asign column from worksheet
         }
+        public virtual Type isType()
+        {
+            return this.GetType();
+        }
     }
 }

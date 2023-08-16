@@ -224,7 +224,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
                     #endregion
                 }
-                if (C == null )
+                if (C == null)
                 {
                     // check công thức diễn giải khi nhập vào
                     if(data["D" + Id] != null && data["D" + Id] != "")
