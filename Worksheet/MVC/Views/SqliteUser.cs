@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using User = Worksheet.modData.Entities.User.WinForm;
+using User = Worksheet.modData.Sqlite.Entities.User.WinForm;
 
 namespace Worksheet.MVC.Views
 {

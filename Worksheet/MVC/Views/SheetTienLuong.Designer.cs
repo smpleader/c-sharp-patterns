@@ -38,10 +38,13 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             sheet_VatLieu = new unvell.ReoGrid.ReoGridControl();
+            formulaBarControl1 = new EtaDt.MVCP.Views.Common.FormulaBarControl();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -103,7 +106,7 @@
             sheet_TienLuong.ColumnHeaderContextMenuStrip = null;
             sheet_TienLuong.Dock = DockStyle.Fill;
             sheet_TienLuong.LeadHeaderContextMenuStrip = null;
-            sheet_TienLuong.Location = new Point(3, 3);
+            sheet_TienLuong.Location = new Point(0, 0);
             sheet_TienLuong.Name = "sheet_TienLuong";
             sheet_TienLuong.RowHeaderContextMenuStrip = null;
             sheet_TienLuong.Script = null;
@@ -112,7 +115,7 @@
             sheet_TienLuong.SheetTabVisible = true;
             sheet_TienLuong.SheetTabWidth = 60;
             sheet_TienLuong.ShowScrollEndSpacing = true;
-            sheet_TienLuong.Size = new Size(1503, 617);
+            sheet_TienLuong.Size = new Size(1503, 581);
             sheet_TienLuong.TabIndex = 1;
             sheet_TienLuong.Text = "reoGridControl1";
             // 
@@ -130,7 +133,8 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(sheet_TienLuong);
+            tabPage1.Controls.Add(panel2);
+            tabPage1.Controls.Add(formulaBarControl1);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -145,7 +149,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1509, 603);
+            tabPage2.Size = new Size(1509, 623);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Vật liệu";
             tabPage2.UseVisualStyleBackColor = true;
@@ -165,9 +169,30 @@
             sheet_VatLieu.SheetTabVisible = true;
             sheet_VatLieu.SheetTabWidth = 60;
             sheet_VatLieu.ShowScrollEndSpacing = true;
-            sheet_VatLieu.Size = new Size(1503, 597);
+            sheet_VatLieu.Size = new Size(1503, 617);
             sheet_VatLieu.TabIndex = 2;
             sheet_VatLieu.Text = "reoGridControl1";
+            // 
+            // formulaBarControl1
+            // 
+            formulaBarControl1.BackColor = SystemColors.Window;
+            formulaBarControl1.Dock = DockStyle.Top;
+            formulaBarControl1.FocusToGridAfterInputValue = false;
+            formulaBarControl1.GridControl = sheet_TienLuong;
+            formulaBarControl1.Location = new Point(3, 3);
+            formulaBarControl1.Margin = new Padding(4, 5, 4, 5);
+            formulaBarControl1.Name = "formulaBarControl1";
+            formulaBarControl1.Size = new Size(1503, 36);
+            formulaBarControl1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(sheet_TienLuong);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 39);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1503, 581);
+            panel2.TabIndex = 3;
             // 
             // SheetTienLuong
             // 
@@ -184,6 +209,7 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -199,5 +225,7 @@
         public unvell.ReoGrid.ReoGridControl sheet_VatLieu;
         private Button btn_LuuFile;
         private Button btn_MoFile;
+        private Panel panel2;
+        private EtaDt.MVCP.Views.Common.FormulaBarControl formulaBarControl1;
     }
 }

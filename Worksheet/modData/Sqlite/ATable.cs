@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Worksheet.modData.Entities;
+using Worksheet.modData.Sqlite.Entities;
 
 namespace Worksheet.modData.Sqlite
 {

@@ -8,11 +8,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using UserEntity = Worksheet.modData.Entities.User.Schema;
-using UserSqlite = Worksheet.modData.Entities.User.Sqlite;
+using UserEntity = Worksheet.modData.Sqlite.Entities.User.Schema;
+using UserSqlite = Worksheet.modData.Sqlite.Entities.User.Sqlite;
 using Worksheet.Util;
-using Worksheet.modData.Entities.User;
-using Worksheet.modData.Entities;
+using Worksheet.modData.Sqlite.Entities;
 
 namespace Worksheet.modData.Sqlite
 {

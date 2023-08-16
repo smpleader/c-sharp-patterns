@@ -20,7 +20,7 @@ namespace Worksheet.MVC.Views
     {
         private TienLuongP tienLuongP;
         private VatLieuP vatLieuP;
-        int startRow = 6;
+        int startRow = 8;
         int endRow = 15;
 
         public SheetTienLuong()
@@ -54,12 +54,12 @@ namespace Worksheet.MVC.Views
             //HangMuc.them(t);
             Current.HM.id(1);
             List<Worksheet.modData.Memories.Record.CongViec> dsCongViec = modData.Memories.Models.CongViec.danhSachCongViecHangMuc();
-            if (dsCongViec.Count>0 && dsCongViec[dsCongViec.Count-1].Id >= endRow)
+            if (dsCongViec.Count > 0 && dsCongViec[dsCongViec.Count - 1].Id >= endRow)
             {
                 // todo: xử lý insert dòng sau này
                 MessageBox.Show("Hết dòng cho phép");
                 return;
-            }    
+            }
             modData.Memories.Record.CongViec cv = new modData.Memories.Record.CongViec(1);
             cv.ColText["ma"] = "AG.11111";
             cv.ColText["stt"] = "1";
@@ -72,7 +72,7 @@ namespace Worksheet.MVC.Views
             cv.ColNum["tongGiaVatLieuPhu"] = 0;
             cv.ColNum["tongGiaNhanCong"] = 288111;
             cv.ColNum["tongGiaMay"] = 70230;
-            cv.Id = modData.Memories.Models.CongViec.danhSachCongViecHangMuc().Count >= 1 ? Current.CV.id(true): startRow;
+            cv.Id = modData.Memories.Models.CongViec.danhSachCongViecHangMuc().Count >= 1 ? Current.CV.id(true) : startRow;
             cv.ColText["EndRow"] = cv.Id.ToString();
             modData.Memories.Models.CongViec.them(cv);
 

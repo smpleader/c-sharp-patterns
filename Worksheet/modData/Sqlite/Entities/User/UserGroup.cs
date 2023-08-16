@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 
-namespace Worksheet.modData.Entities.User
+namespace Worksheet.modData.Sqlite.Entities.User
 {
     internal class UserGroup
     {

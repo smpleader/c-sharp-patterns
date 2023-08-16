@@ -12,7 +12,7 @@ namespace Worksheet.modBL.prime.tienluong
         // return forumalation of cell
         public string fml()
         {
-            return "= SUMIF(B{0}:B{1};\">0\";S{0}:S{1})";
+            return "= SUMIF(B{0}:B{1},\">0\",S{0}:S{1})";
         }
         // return value of cell
         public decimal val()

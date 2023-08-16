@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Worksheet.Util;
 using System.Data;
-using Worksheet.modData.Entities;
 using Worksheet.modData.Drivers;
+using Worksheet.modData.Sqlite.Entities;
 
 namespace Worksheet.modData.Sqlite
 {

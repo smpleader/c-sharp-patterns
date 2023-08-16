@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet.modData.Entities
+namespace Worksheet.modData.Sqlite.Entities
 {
     internal class IEntity
     {

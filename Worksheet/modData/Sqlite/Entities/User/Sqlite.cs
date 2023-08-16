@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace Worksheet.modData.Entities.User
+namespace Worksheet.modData.Sqlite.Entities.User
 {
     internal class Sqlite : Schema
     {

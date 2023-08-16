@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using User = Worksheet.modData.Entities.User.WinForm;
-using UserCore = Worksheet.modData.Entities.User.Schema;
+using User = Worksheet.modData.Sqlite.Entities.User.WinForm;
+using UserCore = Worksheet.modData.Sqlite.Entities.User.Schema;
 using UserView = Worksheet.MVC.Views.SqliteUser;
 
 namespace Worksheet.MVC.Presenters.SqliteUser

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Worksheet.modData.Sqlite.Entities;
 
-namespace Worksheet.modData.Entities.User
+namespace Worksheet.modData.Sqlite.Entities.User
 {
     internal class Schema : IEntity
     {

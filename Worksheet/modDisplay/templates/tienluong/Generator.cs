@@ -196,45 +196,51 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 congViec = danhSachCongViec[indexCongViec];
                 int row = congViec.Id;
-                ws["B" + row] = indexCongViec + 1;
-                ws["C" + row] = objects[row].C;
-                ws["D" + row] = objects[row].D;
-                ws["E" + row] = objects[row].E;
+                if(objects[row].isGroup)
+                {
+                    ws["B" + row] = objects[row].B;
+                }    
+                else
+                {
+                    ws["B" + row] = indexCongViec + 1;
+                    ws["C" + row] = objects[row].C;
+                    ws["D" + row] = objects[row].D;
+                    ws["E" + row] = objects[row].E;
 
-                ws["F" + row] = objects[row].F;
-                ws["G" + row] = objects[row].G;
-                ws["H" + row] = objects[row].H;
-                ws["I" + row] = objects[row].I;
-                ws["J" + row] = objects[row].J;
-                ws["K" + row] = objects[row].K;
-                ws["L" + row] = objects[row].L;
-                ws["M" + row] = objects[row].M;
+                    ws["F" + row] = objects[row].F;
+                    ws["G" + row] = objects[row].G;
+                    ws["H" + row] = objects[row].H;
+                    ws["I" + row] = objects[row].I;
+                    ws["J" + row] = objects[row].J;
+                    ws["K" + row] = objects[row].K;
+                    ws["L" + row] = objects[row].L;
+                    ws["M" + row] = objects[row].M;
 
-                ws["N" + row] = objects[row].N;
-                ws["O" + row] = objects[row].O;
-                ws["P" + row] = objects[row].P;
-                ws["Q" + row] = objects[row].Q;
+                    ws["N" + row] = objects[row].N;
+                    ws["O" + row] = objects[row].O;
+                    ws["P" + row] = objects[row].P;
+                    ws["Q" + row] = objects[row].Q;
 
-                ws["R" + row] = objects[row].R;
-                ws["S" + row] = objects[row].S;
-                ws["T" + row] = objects[row].T;
-                ws["U" + row] = objects[row].U;
+                    ws["R" + row] = objects[row].R;
+                    ws["S" + row] = objects[row].S;
+                    ws["T" + row] = objects[row].T;
+                    ws["U" + row] = objects[row].U;
 
-                ws["V" + row] = objects[row].V;
-                ws["W" + row] = objects[row].W;
-                ws["X" + row] = objects[row].X;
+                    ws["V" + row] = objects[row].V;
+                    ws["W" + row] = objects[row].W;
+                    ws["X" + row] = objects[row].X;
 
-                ws["Y" + row] = objects[row].Y;
+                    ws["Y" + row] = objects[row].Y;
+                    congViec.ColNum["donGiaVatLieu"] = CellUtility.ConvertData<decimal>(ws["N" + row]);
+                    congViec.ColNum["donGiaVatLieuPhu"] = CellUtility.ConvertData<decimal>(ws["O" + row]);
+                    congViec.ColNum["donGiaNhanCong"] = CellUtility.ConvertData<decimal>(ws["P" + row]);
+                    congViec.ColNum["donGiaMay"] = CellUtility.ConvertData<decimal>(ws["Q" + row]);
 
-                congViec.ColNum["donGiaVatLieu"] = CellUtility.ConvertData<decimal>(ws["N" + row]);
-                congViec.ColNum["donGiaVatLieuPhu"] = CellUtility.ConvertData<decimal>(ws["O" + row]); 
-                congViec.ColNum["donGiaNhanCong"] = CellUtility.ConvertData<decimal>(ws["P" + row]); 
-                congViec.ColNum["donGiaMay"] = CellUtility.ConvertData<decimal>(ws["Q" + row]); 
-
-                congViec.ColNum["thanhTienVatLieu"] = CellUtility.ConvertData<decimal>(ws["R" + row]); 
-                congViec.ColNum["thanhTienVatlieuPhu"] = CellUtility.ConvertData<decimal>(ws["S" + row]); 
-                congViec.ColNum["thanhTienNhanCong"] = CellUtility.ConvertData<decimal>(ws["T" + row]); 
-                congViec.ColNum["thanhTienMay"] = CellUtility.ConvertData<decimal>(ws["U" + row]); 
+                    congViec.ColNum["thanhTienVatLieu"] = CellUtility.ConvertData<decimal>(ws["R" + row]);
+                    congViec.ColNum["thanhTienVatlieuPhu"] = CellUtility.ConvertData<decimal>(ws["S" + row]);
+                    congViec.ColNum["thanhTienNhanCong"] = CellUtility.ConvertData<decimal>(ws["T" + row]);
+                    congViec.ColNum["thanhTienMay"] = CellUtility.ConvertData<decimal>(ws["U" + row]);
+                }
             }
             if(true)
             {
@@ -346,23 +352,77 @@ namespace Worksheet.modDisplay.templates.tienluong
                 case "S":
                 case "T":
                 case "U":
-                    Display.Cell.IsReadOnly = true;
+                    //Display.Cell.IsReadOnly = true;
                     break;
             }
         }
         bool DangThemCongViec = false;
         public override void cellDataChanged()
-        
         {
             if (!DangThemCongViec)
             {
                 obj().bind(ws);
+                int lastRow = 0;
+                List<int> startGroups = new List<int>();
+
+                for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
+                {
+                    // Tìm dòng cuối của template
+                    if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
+                    {
+                        if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
+                        {
+                            lastRow = indexRow;
+                        }
+                    }
+                    //Tìm dòng bắt đầu group có tính tổng tiền các công việc trong group đó
+                    if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
+                    if (ws.IsMergedCell("B" + indexRow))
+                    {
+                        startGroups.Add(indexRow);
+                    }
+                }
+
+                // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
+                for (int i = 0; i < startGroups.Count; i++)
+                {
+                    Row groupCV = obj(startGroups[i]);
+
+                    if (i == startGroups.Count - 1)
+                    {
+                        groupCV.start = startGroups[i];
+                        groupCV.end = lastRow - 1;
+                    }
+                    else
+                    {
+                        if (startGroups[i] == (lastRow - 1))
+                        {
+                            groupCV.start = startGroups[i];
+                            groupCV.end = startGroups[i];
+                        }
+                        else
+                        {
+                            groupCV.start = startGroups[i];
+                            groupCV.end = startGroups[i + 1] - 1;
+                        }
+                    }
+                }
+                if(obj(Display.Row).isGroup)
+                {
+                    DangThemCongViec = true;
+                    ws["R" + Display.Row] = obj(Display.Row).R;
+                    ws["S" + Display.Row] = obj(Display.Row).S;
+                    ws["T" + Display.Row] = obj(Display.Row).T;
+                    ws["U" + Display.Row] = obj(Display.Row).U;
+                    DangThemCongViec = false;
+                }
+
                 string debug = "";
                 
                 ARecord? find = Current.CV.load(Display.Row);
                 if (find != null)
                 {
-                    debug += "MSCV: " + find.ColText["ma"] + " | " + find.Path +" | Khối lượng: " + find.num("khoiLuong") + "\n";
+                    debug += "MSCV: " + find?.txt("ma") + " | " + find?.Path +" | Khối lượng: " + find?.num("khoiLuong") + "\n";
                     //MessageBox.Show(debug);
                 }
             }
@@ -376,7 +436,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 case "D":
                 case "E":
                 case "M":
-                    obj().bind(ws);
+                    //obj().bind(ws);
                     break;
             }
            

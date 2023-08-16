@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserEntity = Worksheet.modData.Entities.User.WinForm;
-using UserSchema = Worksheet.modData.Entities.User.Schema;
+using UserEntity = Worksheet.modData.Sqlite.Entities.User.WinForm;
+using UserSchema = Worksheet.modData.Sqlite.Entities.User.Schema;
 using Worksheet.modData.Drivers;
 using Worksheet.Util;
 

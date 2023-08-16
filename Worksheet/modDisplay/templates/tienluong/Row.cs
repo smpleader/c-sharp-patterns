@@ -39,7 +39,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 Current.CV.id(Id);
                 var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieu").fml(),Id, congViec.ColNum["tongGiaVatLieu"]);
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieu").fml(),Id, congViec.num("tongGiaVatLieu"));
                 return formula;
             } 
             set { txt("donGiaVatLieu", value); } 
@@ -51,7 +51,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 Current.CV.id(Id);
                 var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieuPhu").fml(), Id, congViec.ColNum["tongGiaVatLieuPhu"]);
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaVatLieuPhu").fml(), Id, congViec.num("tongGiaVatLieuPhu"));
                 return formula;
             }
             set { txt("donGiaVatLieuPhu", value); }
@@ -63,7 +63,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 Current.CV.id(Id);
                 var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaNhanCong").fml(), Id, congViec.ColNum["tongGiaNhanCong"]);
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaNhanCong").fml(), Id, congViec.num("tongGiaNhanCong"));
                 return formula;
             }
             set { txt("donVidonGiaNhanCong", value); }
@@ -75,7 +75,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 Current.CV.id(Id);
                 var congViec = Worksheet.modData.Memories.Models.CongViec.chitiet();
-                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaMay").fml(), Id, congViec.ColNum["tongGiaMay"]);
+                string formula = string.Format(modBL.Container.Get("CongViec_DonGiaMay").fml(), Id, congViec.num("tongGiaMay"));
                 return formula;
             }
             set { txt("donGiaMay", value); }
@@ -85,7 +85,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieu").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieu").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieu").fml(), start + 1, end) : 
+                    (isInterpretiveFormula ? "": string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieu").fml(), Id, Id));
                 return formula;
             }
             set { txt("thanhTienVatLieu", value); }
@@ -94,7 +95,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieuPhu").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieuPhu").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieuPhu").fml(), start + 1, end) :
+                    (isInterpretiveFormula ? "" : string.Format(modBL.Container.Get("CongViec_ThanhTienVatLieuPhu").fml(), Id, Id));
                 return formula;
             }
             set { txt("thanhTienVatLieuPhu", value); }
@@ -103,7 +105,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienNhanCong").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienNhanCong").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienNhanCong").fml(), start + 1, end) :
+                    (isInterpretiveFormula ? "" : string.Format(modBL.Container.Get("CongViec_ThanhTienNhanCong").fml(), Id, Id));
                 return formula;
             }
             set { txt("thanhTienNhanCong", value); }
@@ -112,7 +115,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             get
             {
-                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienMay").fml(), start, end) : string.Format(modBL.Container.Get("CongViec_ThanhTienMay").fml(), Id, Id);
+                string formula = isGroup ? string.Format(modBL.Container.Get("NhomCongViec_ThanhTienMay").fml(), start + 1, end) :
+                    (isInterpretiveFormula ? "" : string.Format(modBL.Container.Get("CongViec_ThanhTienMay").fml(), Id, Id));
                 return formula;
             }
             set { txt("thanhTienMay", value); }
@@ -124,66 +128,80 @@ namespace Worksheet.modDisplay.templates.tienluong
         public string Y { get { return txt("thongTinDonGia"); } set { txt("thongTinDonGia", value); } }
 
         public bool isGroup = false;
+        public bool isInterpretiveFormula = false;
+
         public void bind(unvell.ReoGrid.Worksheet data)
         {
-            C = CellUtility.ConvertData<string>(data["C" + Id]);
-            if( C!=null && C.StartsWith("*"))
+            
+            if(data.IsMergedCell("B" + Id))
             {
-                isGroup = true;
-                string nameGroup = C.Substring(1);
-                if(nameGroup.Length == 0)
+                if(data["B" + Id] != null && data["B" + Id] != "")
                 {
-                    nameGroup = "(Nhóm không tên)";
+                    isGroup = true;
                 }
-                data.MergeRange("B"+Id +":"+"Q"+Id);
-                data["B"+Id]=nameGroup;
-                data.SetRangeStyles("B" + Id, new WorksheetRangeStyle
-                {
-                    Flag = PlainStyleFlag.AlignAll,
-                    HAlign = ReoGridHorAlign.Left,
-                });
-                data.SetRangeStyles("A" + Id + ":" + "X" + Id, new WorksheetRangeStyle
-                {
-                    // style item flag
-                    Flag = PlainStyleFlag.BackColor,
-                    // style item
-                    BackColor = Color.FromArgb(213, 247, 183),
-                });
-                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideHorizontal,
-                new RangeBorderStyle
-                {
-                    Color = Color.Black,
-                    Style = BorderLineStyle.Dotted,
-                });
-                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Left,
-                new RangeBorderStyle
-                {
-                    Color = Color.Black,
-                    Style = BorderLineStyle.Solid,
-                });
-                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Right,
-                new RangeBorderStyle
-                {
-                    Color = Color.Black,
-                    Style = BorderLineStyle.Solid,
-                });
-                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideVertical,
-                new RangeBorderStyle
-                {
-                    Color = Color.Black,
-                    Style = BorderLineStyle.Solid,
-                });
-                data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Outside,
-                new RangeBorderStyle
-                {
-                    Color = Color.Black,
-                    Style = BorderLineStyle.Solid,
-                });
             }
-            if (data["B" + Id] != null && data.IsMergedCell("B" + Id))
+            else
             {
-                isGroup = true;
+                C = CellUtility.ConvertData<string>(data["C" + Id]);
+                if (C != null && C.StartsWith("*"))
+                {
+                    isGroup = true;
+                    string nameGroup = C.Substring(1);
+                    if (nameGroup.Length == 0)
+                    {
+                        nameGroup = "(Nhóm không tên)";
+                    }
+                    data.MergeRange("B" + Id + ":" + "Q" + Id);
+                    data["B" + Id] = nameGroup;
+                    data.SetRangeStyles("B" + Id, new WorksheetRangeStyle
+                    {
+                        Flag = PlainStyleFlag.AlignAll,
+                        HAlign = ReoGridHorAlign.Left,
+                    });
+                    data.SetRangeStyles("A" + Id + ":" + "X" + Id, new WorksheetRangeStyle
+                    {
+                        // style item flag
+                        Flag = PlainStyleFlag.BackColor,
+                        // style item
+                        BackColor = Color.FromArgb(213, 247, 183),
+                    });
+                    data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideHorizontal,
+                    new RangeBorderStyle
+                    {
+                        Color = Color.Black,
+                        Style = BorderLineStyle.Dotted,
+                    });
+                    data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Left,
+                    new RangeBorderStyle
+                    {
+                        Color = Color.Black,
+                        Style = BorderLineStyle.Solid,
+                    });
+                    data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Right,
+                    new RangeBorderStyle
+                    {
+                        Color = Color.Black,
+                        Style = BorderLineStyle.Solid,
+                    });
+                    data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.InsideVertical,
+                    new RangeBorderStyle
+                    {
+                        Color = Color.Black,
+                        Style = BorderLineStyle.Solid,
+                    });
+                    data.SetRangeBorders("A" + Id + ":" + "X" + Id, BorderPositions.Outside,
+                    new RangeBorderStyle
+                    {
+                        Color = Color.Black,
+                        Style = BorderLineStyle.Solid,
+                    });
+                }
+                if ((data["C" + Id] == null || data["C" + Id] == "") && (data["D" + Id] != null && data["D" + Id] != ""))
+                {
+                    isInterpretiveFormula = true;
+                }
             }
+
             B = CellUtility.ConvertData<string>(data["B"+Id]);
             D = CellUtility.ConvertData<string>(data["D" + Id]);
             E = CellUtility.ConvertData<string>(data["E" + Id]);
