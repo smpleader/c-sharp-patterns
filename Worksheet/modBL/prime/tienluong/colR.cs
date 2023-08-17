@@ -14,11 +14,18 @@ namespace Worksheet.modBL.prime.tienluong
         {
             return "=M{0}*N{1}";
         }
-        // return value of cell
+
+        /// <summary>
+        /// chỉ có 1 phần từ
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public string fml(string[] args)
         {
-            throw new NotImplementedException();
+            return $"=M{args[0]}*N{args[0]}";
         }
+
+        // return value of cell
         public decimal val()
         {
             return 0;

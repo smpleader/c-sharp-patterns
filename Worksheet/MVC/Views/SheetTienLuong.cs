@@ -44,7 +44,6 @@ namespace Worksheet.MVC.Views
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
         {
             ((Worksheet.modDisplay.templates.tienluong.Generator)Display.tab("Tiên lượng")).updateData();
-            //((Worksheet.modDisplay.templates.tienluong.Generator)Display.tab("Tiên lượng")).render();
         }
         public void AfterSave(object sender, EventArgs e)
         {

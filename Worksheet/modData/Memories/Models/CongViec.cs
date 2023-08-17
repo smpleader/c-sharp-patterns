@@ -62,59 +62,12 @@ namespace Worksheet.modData.Memories.Models
                 rowCongViec.ColText = row.ColText;
                 rowCongViec.ColNum = row.ColNum;
                 rowCongViec.Id = row.Id;
-                rowCongViec.num("tongGiaVatLieu", row.tongGiaVatLieu);
-                rowCongViec.num("tongGiaVatLieuPhu", row.tongGiaVatLieuPhu);
-                rowCongViec.num("tongGiaNhanCong", row.tongGiaNhanCong);
-                rowCongViec.num("tongGiaMay", row.tongGiaMay);
+               
                 memories.Storage.Add(rowCongViec);
             }
             else
             {
-                if(!row.isGroup && !row.isInterpretiveFormula)
-                {
-                    //find.ColText["stt"] = row.B;
-                    //find.ColText["ma"] = row.C;
-                    //find.ColText["ten"] = row.D;
-                    //find.ColText["donVi"] = row.E;
-
-                    //find.ColText["tenCauKien"] = row.F;
-                    //find.ColNum["soCauKien"] = row.G;
-                    //find.ColNum["dai"] = row.H;
-                    //find.ColNum["rong"] = row.I;
-                    //find.ColNum["cao"] = row.J;
-                    //find.ColNum["heSoPhu"] = row.K;
-                    //find.ColNum["khoiLuongPhu"] = row.L;
-
-                    //find.ColNum["khoiLuong"] = decimal.Parse(row.M);
-
-                    //find.ColNum["donGiaVatLieu"] = decimal.Parse(row.N);
-                    //find.ColNum["donGiaVatLieuPhu"] = decimal.Parse(row.O);
-                    //find.ColNum["donGiaNhanCong"] = decimal.Parse(row.P);
-                    //find.ColNum["donGiaMay"] = decimal.Parse(row.Q);
-
-                    //find.ColNum["thanhTienVatLieu"] = decimal.Parse(row.R);
-                    //find.ColNum["thanhTienVatlieuPhu"] = decimal.Parse(row.S);
-                    //find.ColNum["thanhTienNhanCong"] = decimal.Parse(row.T);
-                    //find.ColNum["thanhTienMay"] = decimal.Parse(row.U);
-                    // Hệ số định mức, sheet ở dưới 
-                    // Hệ số điều chỉnh, trong sheet Tiên lượng
-                    //find.ColNum["hsdcVatLieu"] = row.V;
-                    //find.ColNum["hsdcNhanCong"] = row.W;
-                    //find.ColNum["hsdcMay"] = row.X;
-                }    
-                else
-                {
-                    if(row.isGroup)
-                    {
-                        //find.ColText["ma"] = row.B;
-                    }
-                    if(row.isInterpretiveFormula)
-                    {
-                        //find.ColText["ten"] = row.D;
-                        //find.ColNum["khoiLuongPhu"] = row.L;
-                    }
-                }
-               
+                
             }
         }
     }

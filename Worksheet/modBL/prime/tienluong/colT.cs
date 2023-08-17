@@ -15,9 +15,14 @@ namespace Worksheet.modBL.prime.tienluong
             return "=M{0}*P{1}";
         }
 
+        /// <summary>
+        /// chỉ có 1 phần từ
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public string fml(string[] args)
         {
-            throw new NotImplementedException();
+            return $"=M{args[0]}*P{args[0]}";
         }
 
         // return value of cell

@@ -16,12 +16,6 @@ namespace Worksheet.modDisplay.templates.tienluong
             Id = id;
             HMId = Current.HM.id();
         }
-        public virtual Type isType()
-        {
-            return this.GetType();
-        }
-        public void bind(unvell.ReoGrid.Worksheet data)
-        {
-        }
+       
     }
 }

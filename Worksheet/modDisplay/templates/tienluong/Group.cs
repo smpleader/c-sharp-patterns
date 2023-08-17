@@ -60,14 +60,14 @@ namespace Worksheet.modDisplay.templates.tienluong
             return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
         }    
        
-        public void bind(unvell.ReoGrid.Worksheet data)
+        public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
             // check group object khi mở từ file excel ( bind)
             string addressColB = Address("B");
 
-            if (data.IsMergedCell(addressColB))
+            if (worksheet.IsMergedCell(addressColB))
             {
-                if(data[addressColB] != null && data[addressColB] != "")
+                if(worksheet[addressColB] != null && worksheet[addressColB] != "")
                 {
                     //isGroup = true;
                 }
@@ -80,7 +80,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 string addressColQ = Address("Q");
                 string addressColX = Address("X");
 
-                string C = CellUtility.ConvertData<string>(data[addressColC]);
+                string C = CellUtility.ConvertData<string>(worksheet[addressColC]);
                 if (C != null && C.StartsWith("*"))
                 {
                     //isGroup = true;
@@ -89,12 +89,12 @@ namespace Worksheet.modDisplay.templates.tienluong
                     {
                         nameGroup = "(Nhóm không tên)";
                     }
-                    data.MergeRange(addressColB+ ":" + addressColQ);
-                    data[addressColB] = nameGroup;
+                    worksheet.MergeRange(addressColB+ ":" + addressColQ);
+                    worksheet[addressColB] = nameGroup;
 
                     #region style lại cho group object
 
-                    data.SetRangeStyles(addressColB, new WorksheetRangeStyle
+                    worksheet.SetRangeStyles(addressColB, new WorksheetRangeStyle
                     {
                         Flag = PlainStyleFlag.AlignAll,
                         HAlign = ReoGridHorAlign.Left,
@@ -102,7 +102,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
                     string rangeGroup = addressColA + ":" + addressColX;
 
-                    data.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
+                    worksheet.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
                     {
                         // style item flag
                         Flag = PlainStyleFlag.BackColor,
@@ -115,23 +115,27 @@ namespace Worksheet.modDisplay.templates.tienluong
                         Color = Color.Black,
                         Style = BorderLineStyle.Dotted,
                     };
-                    data.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
+                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
 
                     var blackSolidBoder = new RangeBorderStyle
                     {
                         Color = Color.Black,
                         Style = BorderLineStyle.Solid,
                     };
-                    data.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
-                    data.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
-                    data.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
-                    data.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
+                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
+                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
+                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
+                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
 
                     #endregion
                 }
-               
             }
-            //modData.Memories.Models.CongViec.capnhat(this);
+
+            List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
+            foreach (string col in colsHaveFormula)
+            {
+                worksheet[Address(col)] = GetFormula(col);
+            }
         }
     }
 }

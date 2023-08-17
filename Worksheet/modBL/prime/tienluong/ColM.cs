@@ -17,7 +17,7 @@ namespace Worksheet.modBL.prime.tienluong
         // return value of cell
         public string fml(string[] args)
         {
-            throw new NotImplementedException();
+            return $"=SUM(L{args[0]}:L{args[1]})";
         }
         public decimal val()
         {

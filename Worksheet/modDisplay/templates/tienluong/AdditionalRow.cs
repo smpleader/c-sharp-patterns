@@ -43,43 +43,44 @@ namespace Worksheet.modDisplay.templates.tienluong
             string[] parameters = new string[1] { Id.ToString() };
             return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").fml(parameters));
         }
-        public void bind(unvell.ReoGrid.Worksheet data)
+        public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
             // check group object khi mở từ file excel ( bind)
-            if (!data.IsMergedCell("B" + Id))
+            if ( !worksheet.IsMergedCell("B" + Id))
             {
                 // check group object khi nhập vào
-                string C = CellUtility.ConvertData<string>(data["C" + Id]);
+                string C = CellUtility.ConvertData<string>(worksheet["C" + Id]);
                 if (C == null)
                 {
                     // check công thức diễn giải khi nhập vào
-                    if(data["D" + Id] != null && data["D" + Id] != "")
+                    if(worksheet["D" + Id] != null && worksheet["D" + Id] != "")
                     {
-                        string interpretiveFormula = CellUtility.ConvertData<string>(data["D" + Id]);
+                        string interpretiveFormula = CellUtility.ConvertData<string>(worksheet["D" + Id]);
                         var segment = interpretiveFormula.Split(":").ToList();
                         if (segment.Count > 1)
                         {
                             // check segment 2 
-                            if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim()))
+                            if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim().Split("=")[0]))
                             {
-                                double result = EvaluateExpression(segment[1].Trim());
-                                data["D" + Id] = interpretiveFormula + " = " + FormatResult(result);
-                                data["L" + Id] = "=" + segment[1].Trim();
+                                double result = EvaluateExpression(segment[1].Trim().Split("=")[0]);
+                                worksheet["D" + Id] = segment[1].Trim().Split("=").Length > 1? interpretiveFormula: interpretiveFormula + " = " + FormatResult(result);
+                                worksheet["L" + Id] = "=" + segment[1].Trim().Split("=")[0];
+                                IsInterpretiveFormula = true;
                             }
                             else
                             {
-                                data["D" + Id] = interpretiveFormula + " :";
+                                worksheet["D" + Id] = interpretiveFormula + " :";
+                                IsInterpretiveFormula = true;
                             }
                         }
                         else
                         {
-                            data["D" + Id] = interpretiveFormula + " :";
+                            worksheet["D" + Id] = interpretiveFormula + " :";
+                            IsInterpretiveFormula = true;
                         }
                     }    
                 }
             }
-
-            //modData.Memories.Models.CongViec.capnhat(this);
         }
         static string FormatResult(double number)
         {
@@ -106,7 +107,6 @@ namespace Worksheet.modDisplay.templates.tienluong
                 return false;
             }
         }
-
         static double EvaluateExpression(string expression)
         {
             // Sử dụng DataTable.Compute để tính toán giá trị biểu thức

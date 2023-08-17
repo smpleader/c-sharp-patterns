@@ -14,16 +14,19 @@ namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Row : ARow
     {
+
         public Row(int id) : base(id)
         {
             Id = id;
             HMId = Current.HM.id();
         }
         public override int HMId { get; }
+        public bool HaveInterpretiveFormula = false;
+
         public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
 
         /// <summary>
-        /// Địa chỉ ô cho phép lấy A, B, C, D, E, N, O, P, Q, R, S, T, U, V, W, X, Y
+        /// Địa chỉ ô cho phép lấy A, B, C, D, E, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC
         /// </summary>
         /// <param name="col"></param>
         /// <returns> col + indexRow</returns>
@@ -41,8 +44,6 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             string uniqueName = "";
             string formula;
-            Current.CV.id(Id);
-            var congViec = modData.Memories.Models.CongViec.chitiet();
             string[] parameters = new string[1] { Id.ToString() };
             switch (col)
             {
@@ -55,23 +56,27 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                     else
                     {
-                        return "0";
+                        return CellUtility.ConvertData<string>(((Generator)Display.tab("Tiên lượng")).ws[Address("M")]);
                     }
                 case "N":
                     uniqueName = "CongViec_DonGiaVatLieu";
-                    parameters = new string[2] { Id.ToString(), congViec.num("tongGiaVatLieu").ToString() };
+                    decimal tongGiaVatLieu = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("Z")]);
+                    parameters = new string[2] { Id.ToString(), tongGiaVatLieu.ToString() };
                     break;
                 case "O":
                     uniqueName = "CongViec_DonGiaVatLieuPhu";
-                    parameters = new string[2] { Id.ToString(), congViec.num("tongGiaVatLieuPhu").ToString() };
+                    decimal tongGiaVatLieuPhu = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AA")]);
+                    parameters = new string[2] { Id.ToString(), tongGiaVatLieuPhu.ToString() };
                     break;
                 case "P":
                     uniqueName = "CongViec_DonGiaNhanCong";
-                    parameters = new string[2] { Id.ToString(), congViec.num("tongGiaNhanCong").ToString() };
+                    decimal tongGiaNhanCong = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AB")]);
+                    parameters = new string[2] { Id.ToString(), tongGiaNhanCong.ToString() };
                     break;
                 case "Q":
                     uniqueName = "CongViec_DonGiaMay";
-                    parameters = new string[2] { Id.ToString(), congViec.num("tongGiaMay").ToString() };
+                    decimal tongGiaMay = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AC")]);
+                    parameters = new string[2] { Id.ToString(), tongGiaMay.ToString() };
                     break;
                 case "R":
                     uniqueName = "CongViec_ThanhTienVatLieu";
@@ -91,43 +96,13 @@ namespace Worksheet.modDisplay.templates.tienluong
             return formula;
         }
 
-        public bool isGroup = false;
-        public bool isInterpretiveFormula = false;
-        public bool HaveInterpretiveFormula = false;
-        public decimal tongGiaVatLieu; // Z
-        public decimal tongGiaVatLieuPhu; // AA
-        public decimal tongGiaNhanCong;  // AB
-        public decimal tongGiaMay; // AC
-
-        public void bind(unvell.ReoGrid.Worksheet data)
+        public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
-            // bind thông tin tổng giá vật liệu, tổng giá vật liệu phụ, tổng giá nhân công, tổng giá máy 
-            if(!isGroup && !isInterpretiveFormula)
+            List<string> colsHaveFormula = new List<string>() { "M", "N", "O", "P", "Q", "R", "S", "T", "U" };
+            foreach(string col in colsHaveFormula)
             {
-
+                worksheet[Address(col)] = GetFormula(col);
             }
-            //B = CellUtility.ConvertData<string>(data["B"+Id]);
-            //D = CellUtility.ConvertData<string>(data["D" + Id]);
-            //E = CellUtility.ConvertData<string>(data["E" + Id]);
-            //F = CellUtility.ConvertData<string>(data["F" + Id]);
-            //G = CellUtility.ConvertData<decimal>(data["G" + Id]);
-            //H = CellUtility.ConvertData<decimal>(data["H" + Id]);
-            //I = CellUtility.ConvertData<decimal>(data["I" + Id]);
-            //J = CellUtility.ConvertData<decimal>(data["J" + Id]);
-            //K = CellUtility.ConvertData<decimal>(data["K" + Id]);
-            //L = CellUtility.ConvertData<decimal>(data["L" + Id]);
-
-            //M = CellUtility.ConvertData<string>(data["M" + Id]);
-
-            //R = CellUtility.ConvertData<string>(data["R" + Id]);
-            //S = CellUtility.ConvertData<string>(data["S" + Id]);
-            //T = CellUtility.ConvertData<string>(data["T" + Id]);
-            //U = CellUtility.ConvertData<string>(data["U" + Id]);
-
-            //V = CellUtility.ConvertData<decimal>(data["V" + Id]);
-            //W = CellUtility.ConvertData<decimal>(data["W" + Id]);
-            //X = CellUtility.ConvertData<decimal>(data["X" + Id]);
-            //Y = CellUtility.ConvertData<string>(data["Y" + Id]);
         }
     }
 }
