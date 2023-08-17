@@ -188,6 +188,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                 }
             }
+            EndIndexRowBody = lastRow;
 
             for (int indexRow = 6; indexRow <= lastRow; indexRow++)
             {
