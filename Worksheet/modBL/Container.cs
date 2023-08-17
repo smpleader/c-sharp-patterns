@@ -12,6 +12,8 @@ namespace Worksheet.modBL
         private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>() {
             {"", new DefaultCell() },
             {"test2", new prime.vatlieu.colA() },
+
+            // row tiên lượng
             {"CongViec_KhoiLuongPhu", new prime.tienluong.ColM()},
             {"CongViec_KhoiLuong", new prime.tienluong.ColM()},
             {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
@@ -22,10 +24,18 @@ namespace Worksheet.modBL
             {"CongViec_ThanhTienVatLieuPhu", new prime.tienluong.colS()},
             {"CongViec_ThanhTienNhanCong", new prime.tienluong.colT()},
             {"CongViec_ThanhTienMay", new prime.tienluong.colU()},
+
+            //group tiên lượng
             {"NhomCongViec_ThanhTienVatLieu", new prime.tienluong.colGR()},
             {"NhomCongViec_ThanhTienVatLieuPhu", new prime.tienluong.colGS()},
             {"NhomCongViec_ThanhTienNhanCong", new prime.tienluong.colGT()},
             {"NhomCongViec_ThanhTienMay", new prime.tienluong.colGU()},
+
+            // foot tiên lượng
+            {"CongViec_TongThanhTienVatLieu", new prime.tienluong.colFR()},
+            {"CongViec_TongThanhTienVatLieuPhu", new prime.tienluong.colFS()},
+            {"CongViec_TongThanhTienNhanCong", new prime.tienluong.colFT()},
+            {"CongViec_TongThanhTienMay", new prime.tienluong.colFU()},
         };
 
         public static bool exists(string name) { return _instance.ContainsKey(name); }
