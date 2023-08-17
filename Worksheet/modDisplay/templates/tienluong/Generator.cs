@@ -358,7 +358,8 @@ namespace Worksheet.modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
             for (int i = 0; i < startRows.Count; i++)
             {
-                Row cv = (Row)obj(startRows[i]);
+                objects[startRows[i]] = new Row(startRows[i]);
+                Row cv = (Row)objects[startRows[i]];
                 int start, end;
                 // tính toán dòng bắt đầu kết thúc
                 if (i == startRows.Count - 1)
