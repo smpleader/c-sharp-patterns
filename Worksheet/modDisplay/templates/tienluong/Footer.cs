@@ -9,9 +9,10 @@ namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Footer : ARow
     {
-        public Footer(int id) : base(id)
+        public Footer(int id = 16) : base(id)
         {
             Id = id;
+            start = 6;
         }
         /// <summary>
         /// Địa chỉ ô cho phép lấy B
@@ -51,17 +52,47 @@ namespace Worksheet.modDisplay.templates.tienluong
             formula = string.Format(modBL.Container.Get(uniqueName).fml(parameters));
             return formula;
         }
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        public void bind(unvell.ReoGrid.Worksheet ws)
         {
+            for (int indexRow = start; indexRow <= ws.MaxContentRow; indexRow++)
+            {
+                // Tìm dòng cuối của template
+                if (!IsCellEmptyOrNull(ws, "A" + indexRow))
+                {
+                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
+                    {
+                        Id = indexRow;
+                        end = indexRow - 1;
+                    }
+                }
+            }
+        }
+
+        public void render(unvell.ReoGrid.Worksheet worksheet)
+        {
+            // todo: render lại khi thêm hoặc xóa dòng
             List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
             foreach (string col in colsHaveFormula)
             {
                 worksheet[Address(col)] = GetFormula(col);
             }
         }
-        public void render(unvell.ReoGrid.Worksheet worksheet)
+
+        /// <summary>
+        /// Kiểm tra cell có null hoặc empty không
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="cellAddress"></param>
+        /// <returns></returns>
+        static bool IsCellEmptyOrNull(unvell.ReoGrid.Worksheet worksheet, string cellAddress)
         {
-            // todo: render khi thêm hoặc xóa dòng
+            var cell = CellUtility.ConvertData<string>(worksheet[cellAddress]);
+            if (cell == null || cell == "")
+            {
+                return true;
+            }
+
+            return string.IsNullOrEmpty(cell);
         }
     }
 }

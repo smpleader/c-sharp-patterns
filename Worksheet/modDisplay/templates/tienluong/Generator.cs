@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using unvell.ReoGrid;
 using Worksheet.modDisplay.templates.tienluong.row;
 using Microsoft.Office.Interop.Excel;
+using System.Windows.Documents;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
@@ -23,7 +24,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         private Dictionary<int, Header> headers = new Dictionary<int, Header>();
         
-        private Dictionary<int, Footer> footers = new Dictionary<int, Footer>();
+        Footer footer;
         private Body body;
 
         public override void init(string tabName)
@@ -53,34 +54,21 @@ namespace Worksheet.modDisplay.templates.tienluong
             foreach(var item in headers)
             {
                 item.Value.bind(ws);
-            }
-            // footer
-            for (int indexRow = EndIndexRowBody; indexRow <= ws.RowCount; indexRow++)
-            {
-                // Tìm dòng cuối của template
-                if ( !IsCellEmptyOrNull(ws, "A" + indexRow))
-                {
-                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
-                    {
-                        EndIndexRowBody = indexRow;
-                        footers[indexRow] = new Footer(indexRow);
-                        footers[indexRow].start = StartIndexRowBody;
-                        footers[indexRow].end = EndIndexRowBody - 1;
-                        (footers[indexRow]).bind(ws);
-                    }
-                }
+                item.Value.render(ws);
             }
 
             // body 
             body = new Body(ws);
-            body.start = StartIndexRowBody;
             body.end = EndIndexRowBody - 1;
             body.bind();
-
-            // render
             body.render();
-            DangThemCongViec = false;
 
+            // footer
+            footer = new Footer();
+            footer.bind(ws);
+            footer.render(ws);
+
+            DangThemCongViec = false;
         }
         public void updateData()
         {
@@ -129,23 +117,6 @@ namespace Worksheet.modDisplay.templates.tienluong
                 body.render();
                 DangThemCongViec = false;
             }
-        }
-
-        /// <summary>
-        /// Kiểm tra cell có null hoặc empty không
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="cellAddress"></param>
-        /// <returns></returns>
-        static bool IsCellEmptyOrNull(unvell.ReoGrid.Worksheet worksheet, string cellAddress)
-        {
-            var cell = CellUtility.ConvertData<string>(worksheet[cellAddress]) ;
-            if (cell == null || cell == "")
-            {
-                return true;
-            }
-
-            return string.IsNullOrEmpty(cell);
         }
 
     }

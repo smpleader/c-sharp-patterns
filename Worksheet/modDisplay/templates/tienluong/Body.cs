@@ -11,7 +11,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Body
     {
-        public int start;
+        public const int start = 6;
         public int end;
         public unvell.ReoGrid.Worksheet ws;
         public Dictionary<int, Group> groups = new Dictionary<int, Group>();
