@@ -57,123 +57,6 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             ws.HideColumns(5, 7);
             renderFormula();
-            var a = objects;
-            return;
-            int lastRow = 0;
-            List<int> startAdditionalRows = new List<int>();
-            List<int> startRows = new List<int>();
-            List<int> startGroups = new List<int>();
-
-            for (int indexRow = 6; indexRow <= ws.RowCount; indexRow++)
-            {
-                // Tìm dòng cuối của template
-                if (ws["A" + indexRow] != null && ws["A" + indexRow] != "")
-                {
-                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
-                    {
-                        lastRow = indexRow;
-                    }
-                }
-            }
-
-            for (int indexRow = 6; indexRow < lastRow; indexRow++)
-            {
-                //Tìm dòng bắt đầu group có tính tổng tiền các công việc trong group đó
-                if (ws["B" + indexRow] == null || ws["B" + indexRow] == "") continue;
-                if (ws.IsMergedCell("B" + indexRow))
-                {
-                    startGroups.Add(indexRow);
-                }
-                else
-                {
-                    if (int.TryParse(ws["B" + indexRow].ToString(), out int row))
-                    {
-                        bool laBatDauCongViec = row >= 1;
-                        if (laBatDauCongViec)
-                        {
-                            startRows.Add(indexRow);
-                            continue;
-                        }
-                    }
-                    if ( IsCellEmptyOrNull(ws, "C" + indexRow))
-                    {
-                        // check công thức diễn giải khi nhập vào
-                        if ( !IsCellEmptyOrNull(ws, "D" + indexRow))
-                        {
-                            startAdditionalRows.Add(indexRow);
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < startAdditionalRows.Count; i++)
-            {
-                objects[startAdditionalRows[i]] = obj(startAdditionalRows[i]);
-                ((AdditionalRow)objects[startAdditionalRows[i]]).bind(ws);
-            }
-            for (int i = 0; i < startGroups.Count; i++)
-            {
-                objects[startGroups[i]] = obj(startGroups[i]);
-                ((Group)objects[startGroups[i]]).bind(ws);
-            }
-
-            for (int i = 0; i < startRows.Count; i++)
-            {
-                objects[startRows[i]] = obj(startRows[i]);
-                ((Row)objects[startRows[i]]).bind(ws);
-            }
-
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
-            for (int i = 0; i < startRows.Count; i++)
-            {
-                Row congViec = (Row)obj(startRows[i]);
-
-                if (i == startRows.Count - 1)
-                {
-                    congViec.start = startRows[i];
-                    congViec.end = lastRow - 1;
-                }
-                else
-                {
-                    if (startRows[i] == (lastRow - 1))
-                    {
-                        congViec.start = startRows[i];
-                        congViec.end = startRows[i];
-                    }
-                    else
-                    {
-                        congViec.start = startRows[i];
-                        congViec.end = startRows[i + 1] - 1;
-                    }
-                }
-            }
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
-            for (int i = 0; i < startGroups.Count; i++)
-            {
-                Group groupCV = (Group)obj(startGroups[i]);
-
-                if (i == startGroups.Count - 1)
-                {
-                    groupCV.start = startGroups[i];
-                    groupCV.end = lastRow - 1;
-                }
-                else
-                {
-                    if (startGroups[i] == (lastRow - 1))
-                    {
-                        groupCV.start = startGroups[i];
-                        groupCV.end = startGroups[i];
-                    }
-                    else
-                    {
-                        groupCV.start = startGroups[i];
-                        groupCV.end = startGroups[i + 1] - 1;
-                    }
-                }
-            }
-            
         }
         public void updateData()
         {
@@ -228,12 +111,12 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             switch (Display.Col)
             {
-                //case "B":
-                //    if(!(obj(Display.Row) is Group))
-                //    {
-                //        Display.Cell.IsReadOnly = true;
-                //    }
-                //    break;
+                case "B":
+                    if (!(obj(Display.Row) is Group))
+                    {
+                        Display.Cell.IsReadOnly = true;
+                    }
+                    break;
                 case "R":
                 case "S":
                 case "T":
@@ -248,7 +131,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (!DangThemCongViec)
             {
                 DangThemCongViec = true;
-                //obj().bind(ws);
+
                 renderFormula();
 
                 DangThemCongViec = false;
