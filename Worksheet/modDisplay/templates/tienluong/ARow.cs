@@ -9,13 +9,18 @@ namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class ARow : ARowObject
     {
-        public virtual int HMId { get; }
-
         public ARow(int id)
         {
             Id = id;
-            HMId = Current.HM.id();
         }
-       
+        public virtual string Address(string col)
+        {
+            return col + Id;
+        }
+        public virtual string GetFormula(string col)
+        {
+            return "";
+        }
+
     }
 }

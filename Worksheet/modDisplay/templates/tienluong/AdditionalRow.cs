@@ -17,28 +17,25 @@ namespace Worksheet.modDisplay.templates.tienluong
         public AdditionalRow(int id) : base(id)
         {
             Id = id;
-            HMId = Current.HM.id();
         }
-        public override int HMId { get; }
         public bool IsInterpretiveFormula { get; set; } = true;
-        public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
 
         /// <summary>
         /// Địa chỉ ô cho phép lấy C, D, F, G, H, I, J, K, L
         /// </summary>
         /// <param name="col"></param>
         /// <returns> col + indexRow</returns>
-        public string Address(string col)
-        {
-            return col + Id;
-        }
+        //public string Address(string col)
+        //{
+        //    return col + Id;
+        //}
 
         /// <summary>
         /// Lấy công thức cho các cột R, S, T, U
         /// </summary>
         /// <param name="col"></param>
         /// <returns></returns>
-        public string GetFormula(string col)
+        public override string GetFormula(string col)
         {
             string[] parameters = new string[1] { Id.ToString() };
             return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").fml(parameters));

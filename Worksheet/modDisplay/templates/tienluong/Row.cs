@@ -18,29 +18,25 @@ namespace Worksheet.modDisplay.templates.tienluong
         public Row(int id) : base(id)
         {
             Id = id;
-            HMId = Current.HM.id();
         }
-        public override int HMId { get; }
         public bool HaveInterpretiveFormula = false;
-
-        public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
 
         /// <summary>
         /// Địa chỉ ô cho phép lấy A, B, C, D, E, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC
         /// </summary>
         /// <param name="col"></param>
         /// <returns> col + indexRow</returns>
-        public string Address(string col)
-        {
-            return col + Id;
-        }
+        //public string Address(string col)
+        //{
+        //    return col + Id;
+        //}
 
         /// <summary>
         /// Lấy công thức cho các cột M, N, O, P,
         /// </summary>
         /// <param name="col"></param>
         /// <returns></returns>
-        public string GetFormula(string col)
+        public override string GetFormula(string col)
         {
             string uniqueName = "";
             string formula;

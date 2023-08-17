@@ -17,27 +17,24 @@ namespace Worksheet.modDisplay.templates.tienluong
         public Group(int id) : base(id) 
         {
             Id = id;
-            HMId = Current.HM.id();
         }
-        public override int HMId { get; }
-        public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
       
         /// <summary>
         /// Địa chỉ ô cho phép lấy A, B, C, Q, X, R, S, T, U
         /// </summary>
         /// <param name="col"></param>
         /// <returns> col + indexRow</returns>
-        public string Address(string col)
-        {
-            return col + Id;
-        }
+        //public string Address(string col)
+        //{
+        //    return col + Id;
+        //}
 
         /// <summary>
         /// Lấy công thức cho các cột R, S, T, U
         /// </summary>
         /// <param name="col"></param>
         /// <returns></returns>
-        public string GetFormula(string col)
+        public override string GetFormula(string col)
         {
             string uniqueName = "";
             switch(col)

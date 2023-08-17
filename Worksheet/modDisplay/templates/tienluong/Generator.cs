@@ -157,20 +157,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         private void renderFormula()
         {
-            // Đánh lại số  thứ tự cho các công việc
-            int beginRow = 1;
-            for (int rowIndex = 0; rowIndex < objects.Count; rowIndex++)
-            {
-                KeyValuePair<int, ARow> row = objects.ElementAt(rowIndex);
-                int indexRow = row.Key;
-                ARow rowObject = row.Value;
-                if (rowObject is Row)
-                {
-                    ws[((Row)rowObject).Address("B")] = beginRow.ToString();
-                    ws.AutoFitRowHeight(indexRow - 1, false);
-                    beginRow++;
-                }
-            }
+            
 
             int lastRow = 0;
             List<int> startAdditionalRows = new List<int>();
@@ -216,20 +203,20 @@ namespace Worksheet.modDisplay.templates.tienluong
                         }
                         else
                         {
-                            //startRows.Add(indexRow);
-                            //continue;
-                        }
-                    }    
-                    
-                    if ( !IsCellEmptyOrNull(ws, "B" + indexRow) && int.TryParse(ws["B" + indexRow]?.ToString(), out int row))
-                    {
-                        bool laBatDauCongViec = row >= 1;
-                        if (laBatDauCongViec)
-                        {
                             startRows.Add(indexRow);
                             continue;
                         }
-                    }
+                    }    
+                    
+                    //if ( !IsCellEmptyOrNull(ws, "B" + indexRow) && int.TryParse(ws["B" + indexRow]?.ToString(), out int row))
+                    //{
+                    //    bool laBatDauCongViec = row >= 1;
+                    //    if (laBatDauCongViec)
+                    //    {
+                    //        startRows.Add(indexRow);
+                    //        continue;
+                    //    }
+                    //}
                 }
             }
 
@@ -308,6 +295,25 @@ namespace Worksheet.modDisplay.templates.tienluong
                 groupCV.start = start;
                 groupCV.end = end;
                 groupCV.bind(ws);
+            }
+
+            // Đánh lại số  thứ tự cho các công việc
+            int beginRow = 1;
+            for (int rowIndex = 6; rowIndex < EndIndexRowBody; rowIndex++)
+            {
+                if(objects.ContainsKey(rowIndex))
+                {
+                    objects.TryGetValue(rowIndex,out ARow row);
+
+                    ARow rowObject = row;
+                    if (rowObject is Row)
+                    {
+                        ws[((Row)rowObject).Address("B")] = beginRow.ToString();
+                        ws.AutoFitRowHeight(rowIndex - 1, false);
+                        beginRow++;
+                    }
+                }    
+               
             }
         }
     }
