@@ -32,7 +32,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         //}
 
         /// <summary>
-        /// Lấy công thức cho các cột M, N, O, P,
+        /// Lấy công thức cho các cột M, N, O, P, Q, R, S, T, U
         /// </summary>
         /// <param name="col"></param>
         /// <returns></returns>

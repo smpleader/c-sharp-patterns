@@ -112,7 +112,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             switch (Display.Col)
             {
                 case "B":
-                    if (!(obj(Display.Row) is Group))
+                    if (!(objects[Display.Row] is Group))
                     {
                         Display.Cell.IsReadOnly = true;
                     }
@@ -131,9 +131,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (!DangThemCongViec)
             {
                 DangThemCongViec = true;
-
                 renderFormula();
-
                 DangThemCongViec = false;
             }
         }
@@ -258,7 +256,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 bool haveInterpretiveFormula = false;
                 for (int index = start + 1; index <= end; index++)
                 {
-                    if (obj(index) is AdditionalRow)
+                    if (objects[index] is AdditionalRow)
                     {
                         haveInterpretiveFormula = true;
                         break;
@@ -272,7 +270,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             for (int i = 0; i < startGroups.Count; i++)
             {
                 objects[startGroups[i]] = new Group(startGroups[i]);
-                Group groupCV = (Group)obj(startGroups[i]);
+                Group groupCV = (Group)objects[startGroups[i]];
                 int start, end;
                 if (i == startGroups.Count - 1)
                 {
