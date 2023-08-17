@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid.Utility;
 
-namespace Worksheet.modDisplay.templates.tienluong.row
+namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Footer : ARow
     {
@@ -51,6 +51,17 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             formula = string.Format(modBL.Container.Get(uniqueName).fml(parameters));
             return formula;
         }
-
+        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        {
+            List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
+            foreach (string col in colsHaveFormula)
+            {
+                worksheet[Address(col)] = GetFormula(col);
+            }
+        }
+        public void render(unvell.ReoGrid.Worksheet worksheet)
+        {
+            // todo: render khi thêm hoặc xóa dòng
+        }
     }
 }

@@ -113,5 +113,10 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             table.Rows.Add(row);
             return double.Parse((string)row["expression"]);
         }
+
+        internal void render(unvell.ReoGrid.Worksheet ws)
+        {
+            
+        }
     }
 }

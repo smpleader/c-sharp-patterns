@@ -53,7 +53,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                     break;
                 default: return uniqueName;
             }
-            string[] parameters = new string[2] { (start + 1).ToString(), end.ToString() };
+            string[] parameters = new string[2] { start.ToString(), end.ToString() };
             return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
         }
 
@@ -62,72 +62,70 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             // check group object khi mở từ file excel ( bind)
             string addressColB = Address("B");
 
-            if (worksheet.IsMergedCell(addressColB))
+            // check group object khi nhập vào
+            string addressColA = Address("A");
+            string addressColC = Address("C");
+            string addressColQ = Address("Q");
+            string addressColX = Address("X");
+
+            string C = CellUtility.ConvertData<string>(worksheet[addressColC]);
+            if (C != null && C.StartsWith("*"))
             {
-                if (worksheet[addressColB] != null && worksheet[addressColB] != "")
+                string nameGroup = C.Substring(1);
+                if (nameGroup.Length == 0)
                 {
-                    //isGroup = true;
+                    nameGroup = "(Nhóm không tên)";
                 }
-            }
-            else
-            {
-                // check group object khi nhập vào
-                string addressColA = Address("A");
-                string addressColC = Address("C");
-                string addressColQ = Address("Q");
-                string addressColX = Address("X");
+                worksheet.MergeRange(addressColB + ":" + addressColQ);
+                worksheet[addressColB] = nameGroup;
 
-                string C = CellUtility.ConvertData<string>(worksheet[addressColC]);
-                if (C != null && C.StartsWith("*"))
+                #region style lại cho group object
+
+                worksheet.SetRangeStyles(addressColB, new WorksheetRangeStyle
                 {
-                    //isGroup = true;
-                    string nameGroup = C.Substring(1);
-                    if (nameGroup.Length == 0)
-                    {
-                        nameGroup = "(Nhóm không tên)";
-                    }
-                    worksheet.MergeRange(addressColB + ":" + addressColQ);
-                    worksheet[addressColB] = nameGroup;
+                    Flag = PlainStyleFlag.AlignAll,
+                    HAlign = ReoGridHorAlign.Left,
+                });
 
-                    #region style lại cho group object
+                string rangeGroup = addressColA + ":" + addressColX;
 
-                    worksheet.SetRangeStyles(addressColB, new WorksheetRangeStyle
-                    {
-                        Flag = PlainStyleFlag.AlignAll,
-                        HAlign = ReoGridHorAlign.Left,
-                    });
+                worksheet.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
+                {
+                    // style item flag
+                    Flag = PlainStyleFlag.BackColor,
+                    // style item
+                    BackColor = Color.FromArgb(213, 247, 183),
+                });
 
-                    string rangeGroup = addressColA + ":" + addressColX;
+                var blackDottedBoder = new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Dotted,
+                };
+                worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
 
-                    worksheet.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
-                    {
-                        // style item flag
-                        Flag = PlainStyleFlag.BackColor,
-                        // style item
-                        BackColor = Color.FromArgb(213, 247, 183),
-                    });
+                var blackSolidBoder = new RangeBorderStyle
+                {
+                    Color = Color.Black,
+                    Style = BorderLineStyle.Solid,
+                };
+                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
+                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
+                worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
+                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
 
-                    var blackDottedBoder = new RangeBorderStyle
-                    {
-                        Color = Color.Black,
-                        Style = BorderLineStyle.Dotted,
-                    };
-                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
-
-                    var blackSolidBoder = new RangeBorderStyle
-                    {
-                        Color = Color.Black,
-                        Style = BorderLineStyle.Solid,
-                    };
-                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
-                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
-                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
-                    worksheet.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
-
-                    #endregion
-                }
+                #endregion
             }
 
+            //List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
+            //foreach (string col in colsHaveFormula)
+            //{
+            //    worksheet[Address(col)] = GetFormula(col);
+            //}
+        }
+
+        public void render(unvell.ReoGrid.Worksheet worksheet)
+        {
             List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
             foreach (string col in colsHaveFormula)
             {
