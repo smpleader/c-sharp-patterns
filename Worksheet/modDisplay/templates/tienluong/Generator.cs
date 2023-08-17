@@ -256,7 +256,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 bool haveInterpretiveFormula = false;
                 for (int index = start + 1; index <= end; index++)
                 {
-                    if (objects[index] is AdditionalRow)
+                    if (obj(index) is AdditionalRow)
                     {
                         haveInterpretiveFormula = true;
                         break;
