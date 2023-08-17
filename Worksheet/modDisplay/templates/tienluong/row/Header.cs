@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Header : ARow
     {

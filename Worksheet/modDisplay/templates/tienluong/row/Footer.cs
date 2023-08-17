@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid.Utility;
 
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Footer : ARow
     {

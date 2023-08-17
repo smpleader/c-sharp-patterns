@@ -10,15 +10,15 @@ using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
 
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Group : ARow
     {
-        public Group(int id) : base(id) 
+        public Group(int id) : base(id)
         {
             Id = id;
         }
-      
+
         /// <summary>
         /// Địa chỉ ô cho phép lấy A, B, C, Q, X, R, S, T, U
         /// </summary>
@@ -37,17 +37,17 @@ namespace Worksheet.modDisplay.templates.tienluong
         public override string GetFormula(string col)
         {
             string uniqueName = "";
-            switch(col)
+            switch (col)
             {
                 case "R":
                     uniqueName = "NhomCongViec_ThanhTienVatLieu";
-                    break; 
+                    break;
                 case "S":
                     uniqueName = "NhomCongViec_ThanhTienVatLieuPhu";
-                    break; 
+                    break;
                 case "T":
                     uniqueName = "NhomCongViec_ThanhTienNhanCong";
-                    break; 
+                    break;
                 case "U":
                     uniqueName = "NhomCongViec_ThanhTienMay";
                     break;
@@ -55,8 +55,8 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
             string[] parameters = new string[2] { (start + 1).ToString(), end.ToString() };
             return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
-        }    
-       
+        }
+
         public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
             // check group object khi mở từ file excel ( bind)
@@ -64,7 +64,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             if (worksheet.IsMergedCell(addressColB))
             {
-                if(worksheet[addressColB] != null && worksheet[addressColB] != "")
+                if (worksheet[addressColB] != null && worksheet[addressColB] != "")
                 {
                     //isGroup = true;
                 }
@@ -86,7 +86,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                     {
                         nameGroup = "(Nhóm không tên)";
                     }
-                    worksheet.MergeRange(addressColB+ ":" + addressColQ);
+                    worksheet.MergeRange(addressColB + ":" + addressColQ);
                     worksheet[addressColB] = nameGroup;
 
                     #region style lại cho group object

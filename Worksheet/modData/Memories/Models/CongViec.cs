@@ -8,6 +8,7 @@ using Worksheet.modData.Memories;
 using Worksheet.modData.Memories.Pointer;
 using Worksheet.modDisplay;
 using System.Xml;
+using Worksheet.modDisplay.templates.tienluong.row;
 
 namespace Worksheet.modData.Memories.Models
 {
@@ -53,7 +54,7 @@ namespace Worksheet.modData.Memories.Models
             // recalculate BL
         }
 
-        public static void capnhat(modDisplay.templates.tienluong.Row row)
+        public static void capnhat(Row row)
         {
             ARecord? find = Current.CV.load(row.Id);
             if(find == null)

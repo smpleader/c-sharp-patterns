@@ -10,7 +10,7 @@ using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
 
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class AdditionalRow : ARow
     {
@@ -43,14 +43,14 @@ namespace Worksheet.modDisplay.templates.tienluong
         public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
             // check group object khi mở từ file excel ( bind)
-            if ( !worksheet.IsMergedCell("B" + Id))
+            if (!worksheet.IsMergedCell("B" + Id))
             {
                 // check group object khi nhập vào
                 string C = CellUtility.ConvertData<string>(worksheet["C" + Id]);
                 if (C == null)
                 {
                     // check công thức diễn giải khi nhập vào
-                    if(worksheet["D" + Id] != null && worksheet["D" + Id] != "")
+                    if (worksheet["D" + Id] != null && worksheet["D" + Id] != "")
                     {
                         string interpretiveFormula = CellUtility.ConvertData<string>(worksheet["D" + Id]);
                         var segment = interpretiveFormula.Split(":").ToList();
@@ -60,7 +60,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                             if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim().Split("=")[0]))
                             {
                                 double result = EvaluateExpression(segment[1].Trim().Split("=")[0]);
-                                worksheet["D" + Id] = segment[1].Trim().Split("=").Length > 1? interpretiveFormula: interpretiveFormula + " = " + FormatResult(result);
+                                worksheet["D" + Id] = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
                                 worksheet["L" + Id] = "=" + segment[1].Trim().Split("=")[0];
                                 IsInterpretiveFormula = true;
                             }
@@ -75,7 +75,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                             worksheet["D" + Id] = interpretiveFormula + " :";
                             IsInterpretiveFormula = true;
                         }
-                    }    
+                    }
                 }
             }
         }

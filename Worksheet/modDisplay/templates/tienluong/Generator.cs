@@ -7,6 +7,7 @@ using unvell.ReoGrid.Utility;
 using System.Configuration;
 using System.Collections.Generic;
 using unvell.ReoGrid;
+using Worksheet.modDisplay.templates.tienluong.row;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {

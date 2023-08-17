@@ -10,7 +10,7 @@ using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
 
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Row : ARow
     {
@@ -86,7 +86,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 case "U":
                     uniqueName = "CongViec_ThanhTienMay";
                     break;
-                default:  break;
+                default: break;
             }
             formula = string.Format(modBL.Container.Get(uniqueName).fml(parameters));
             return formula;
@@ -95,7 +95,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         public void bind(unvell.ReoGrid.Worksheet worksheet)
         {
             List<string> colsHaveFormula = new List<string>() { "M", "N", "O", "P", "Q", "R", "S", "T", "U" };
-            foreach(string col in colsHaveFormula)
+            foreach (string col in colsHaveFormula)
             {
                 worksheet[Address(col)] = GetFormula(col);
             }
