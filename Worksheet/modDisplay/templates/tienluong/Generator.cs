@@ -10,22 +10,18 @@ using unvell.ReoGrid;
 using Worksheet.modDisplay.templates.tienluong.row;
 using Microsoft.Office.Interop.Excel;
 using System.Windows.Documents;
+using HeaderGroup = Worksheet.modDisplay.templates.tienluong.Header;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
-
-        private const int StartIndexRowBody = 6;
-        private int EndIndexRowBody = 16;
-
+        bool DangThemCongViec = false;
         public override string Name { get { return "templates/tienluong"; } }
-
-        private Dictionary<int, Header> headers = new Dictionary<int, Header>();
-        
+        HeaderGroup header;
         Footer footer;
-        private Body body;
+        Body body;
 
         public override void init(string tabName)
         {
@@ -49,24 +45,20 @@ namespace Worksheet.modDisplay.templates.tienluong
             // bind
 
             // header
-            headers[2] = new Header(2);
-            headers[3] = new Header(3);
-            foreach(var item in headers)
-            {
-                item.Value.bind(ws);
-                item.Value.render(ws);
-            }
-
-            // body 
-            body = new Body(ws);
-            body.end = EndIndexRowBody - 1;
-            body.bind();
-            body.render();
+            header = new HeaderGroup(ws);
+            header.bind();
+            header.render();
 
             // footer
             footer = new Footer();
             footer.bind(ws);
             footer.render(ws);
+
+            // body 
+            body = new Body(ws);
+            body.end = footer.Id - 1;
+            body.bind();
+            body.render();
 
             DangThemCongViec = false;
         }
@@ -74,7 +66,7 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             // thêm công việc vào dòng đang chọn
             int selectedIndexRow = Display.Row;
-            if (selectedIndexRow >= StartIndexRowBody && selectedIndexRow <= EndIndexRowBody)
+            if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm công việc
                 DangThemCongViec = true;
@@ -107,7 +99,6 @@ namespace Worksheet.modDisplay.templates.tienluong
                     break;
             }
         }
-        bool DangThemCongViec = false;
         public override void cellDataChanged()
         {
             if (!DangThemCongViec)
@@ -118,6 +109,5 @@ namespace Worksheet.modDisplay.templates.tienluong
                 DangThemCongViec = false;
             }
         }
-
     }
 }

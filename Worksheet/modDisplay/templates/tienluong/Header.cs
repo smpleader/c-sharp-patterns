@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HeaderRow = Worksheet.modDisplay.templates.tienluong.row.Header;
 namespace Worksheet.modDisplay.templates.tienluong
 {
-    internal class Header : ARow
+    internal class Header
     {
-        public Header(int id) : base(id)
+        public unvell.ReoGrid.Worksheet ws;
+
+        public Header(unvell.ReoGrid.Worksheet worksheet)
         {
-            Id = id;
+            ws = worksheet;
         }
-        /// <summary>
-        /// Địa chỉ ô cho phép lấy B
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns> col + indexRow</returns>
-        //public string Address(string col)
-        //{
-        //    return col + Id;
-        //}
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
+        public void bind()
         {
             // todo: Lưu giá trị của header tới global state
+            headers[2] = new HeaderRow(2);
+            headers[3] = new HeaderRow(3);
+            foreach (var item in headers)
+            {
+                item.Value.bind(ws);
+            }
         }
 
-        public void render(unvell.ReoGrid.Worksheet worksheet)
+        public void render()
         {
             // todo: render khi thay đổi tên công trình, hạng mục từ 1 số màn hình khác
+            foreach (var item in headers)
+            {
+                item.Value.render(ws);
+            }
         }
     }
 }

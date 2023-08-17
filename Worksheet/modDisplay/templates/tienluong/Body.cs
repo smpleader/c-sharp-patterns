@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using unvell.ReoGrid.Utility;
 using Worksheet.modDisplay.templates.tienluong.row;
 
+
 namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Body
     {
-        public const int start = 6;
+        public readonly int start = 6;
         public int end;
         public unvell.ReoGrid.Worksheet ws;
         public Dictionary<int, Group> groups = new Dictionary<int, Group>();
