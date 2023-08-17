@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.tienluong
 {
-    internal class colT : ICell
+    internal class ColL : ICell
     {
         public string option { get { return ""; } }
         // return forumalation of cell
         public string fml()
         {
-            return "=M{0}*P{1}";
+            return "";
         }
 
         public string fml(string[] args)
         {
-            throw new NotImplementedException();
+            return $"=G{args[0]}*H{args[0]}*I{args[0]}*J{args[0]}*K{args[0]}";
         }
 
         // return value of cell

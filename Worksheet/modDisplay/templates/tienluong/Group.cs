@@ -12,56 +12,62 @@ using Worksheet.modData.Memories.Pointer;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
-    internal class Group : ARowObject
+    internal class Group : ARow
     {
-        public Group(int id)
+        public Group(int id) : base(id) 
         {
             Id = id;
             HMId = Current.HM.id();
         }
-        public int HMId { get; }
+        public override int HMId { get; }
         public override string Path { get { return "HangMuc." + HMId + ".CongViec." + Id; } }
-        public string A { get { return "A" + Id; } }
-        public string B { get { return "B" + Id; } }
-        public string C { get { return "C" + Id; } }
-        public string Q { get { return "Q" + Id; } }
-        public string X { get { return "X" + Id; } }
+      
+        /// <summary>
+        /// Địa chỉ ô cho phép lấy A, B, C, Q, X, R, S, T, U
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns> col + indexRow</returns>
+        public string Address(string col)
+        {
+            return col + Id;
+        }
 
-        public string R
+        /// <summary>
+        /// Lấy công thức cho các cột R, S, T, U
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        public string GetFormula(string col)
         {
-            get
+            string uniqueName = "";
+            switch(col)
             {
-                return string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieu").fml(), start + 1, end); 
+                case "R":
+                    uniqueName = "NhomCongViec_ThanhTienVatLieu";
+                    break; 
+                case "S":
+                    uniqueName = "NhomCongViec_ThanhTienVatLieuPhu";
+                    break; 
+                case "T":
+                    uniqueName = "NhomCongViec_ThanhTienNhanCong";
+                    break; 
+                case "U":
+                    uniqueName = "NhomCongViec_ThanhTienMay";
+                    break;
+                default: return uniqueName;
             }
-        }
-        public string S
-        {
-            get
-            {
-                return string.Format(modBL.Container.Get("NhomCongViec_ThanhTienVatLieuPhu").fml(), start + 1, end);
-            }
-        }
-        public string T
-        {
-            get
-            {
-                return string.Format(modBL.Container.Get("NhomCongViec_ThanhTienNhanCong").fml(), start + 1, end);
-            }
-        }
-        public string U
-        {
-            get
-            {
-                return string.Format(modBL.Container.Get("NhomCongViec_ThanhTienMay").fml(), start + 1, end);
-            }
-        }
+            string[] parameters = new string[2] { (start + 1).ToString(), end.ToString() };
+            return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
+        }    
        
         public void bind(unvell.ReoGrid.Worksheet data)
         {
             // check group object khi mở từ file excel ( bind)
-            if (data.IsMergedCell("B" + Id))
+            string addressColB = Address("B");
+
+            if (data.IsMergedCell(addressColB))
             {
-                if(data["B" + Id] != null && data["B" + Id] != "")
+                if(data[addressColB] != null && data[addressColB] != "")
                 {
                     //isGroup = true;
                 }
@@ -69,7 +75,12 @@ namespace Worksheet.modDisplay.templates.tienluong
             else
             {
                 // check group object khi nhập vào
-                string C = CellUtility.ConvertData<string>(data["C" + Id]);
+                string addressColA = Address("A");
+                string addressColC = Address("C");
+                string addressColQ = Address("Q");
+                string addressColX = Address("X");
+
+                string C = CellUtility.ConvertData<string>(data[addressColC]);
                 if (C != null && C.StartsWith("*"))
                 {
                     //isGroup = true;
@@ -78,18 +89,18 @@ namespace Worksheet.modDisplay.templates.tienluong
                     {
                         nameGroup = "(Nhóm không tên)";
                     }
-                    data.MergeRange(B+ ":" + Q);
-                    data[B] = nameGroup;
+                    data.MergeRange(addressColB+ ":" + addressColQ);
+                    data[addressColB] = nameGroup;
 
                     #region style lại cho group object
 
-                    data.SetRangeStyles(B, new WorksheetRangeStyle
+                    data.SetRangeStyles(addressColB, new WorksheetRangeStyle
                     {
                         Flag = PlainStyleFlag.AlignAll,
                         HAlign = ReoGridHorAlign.Left,
                     });
 
-                    string rangeGroup = A + ":" + X;
+                    string rangeGroup = addressColA + ":" + addressColX;
 
                     data.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
                     {
@@ -122,6 +133,5 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
             //modData.Memories.Models.CongViec.capnhat(this);
         }
-       
     }
 }

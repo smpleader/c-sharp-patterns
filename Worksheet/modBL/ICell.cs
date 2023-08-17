@@ -14,8 +14,10 @@ namespace Worksheet.modBL
     {
         string option { get; }
         // return forumalation of cell
-         string fml();
+        string fml();
         // return value of cell
-         decimal val();
+        decimal val();
+        string fml(string[] args);
+
     }
 }

@@ -14,6 +14,12 @@ namespace Worksheet.modBL.prime.tienluong
         {
             return "=M{0}*Q{1}";
         }
+
+        public string fml(string[] args)
+        {
+            throw new NotImplementedException();
+        }
+
         // return value of cell
         public decimal val()
         {

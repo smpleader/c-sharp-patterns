@@ -72,10 +72,10 @@ namespace Worksheet.modData.Memories.Models
             {
                 if(!row.isGroup && !row.isInterpretiveFormula)
                 {
-                    find.ColText["stt"] = row.B;
-                    find.ColText["ma"] = row.C;
-                    find.ColText["ten"] = row.D;
-                    find.ColText["donVi"] = row.E;
+                    //find.ColText["stt"] = row.B;
+                    //find.ColText["ma"] = row.C;
+                    //find.ColText["ten"] = row.D;
+                    //find.ColText["donVi"] = row.E;
 
                     //find.ColText["tenCauKien"] = row.F;
                     //find.ColNum["soCauKien"] = row.G;
@@ -85,7 +85,7 @@ namespace Worksheet.modData.Memories.Models
                     //find.ColNum["heSoPhu"] = row.K;
                     //find.ColNum["khoiLuongPhu"] = row.L;
 
-                    find.ColNum["khoiLuong"] = decimal.Parse(row.M);
+                    //find.ColNum["khoiLuong"] = decimal.Parse(row.M);
 
                     //find.ColNum["donGiaVatLieu"] = decimal.Parse(row.N);
                     //find.ColNum["donGiaVatLieuPhu"] = decimal.Parse(row.O);
@@ -98,20 +98,20 @@ namespace Worksheet.modData.Memories.Models
                     //find.ColNum["thanhTienMay"] = decimal.Parse(row.U);
                     // Hệ số định mức, sheet ở dưới 
                     // Hệ số điều chỉnh, trong sheet Tiên lượng
-                    find.ColNum["hsdcVatLieu"] = row.V;
-                    find.ColNum["hsdcNhanCong"] = row.W;
-                    find.ColNum["hsdcMay"] = row.X;
+                    //find.ColNum["hsdcVatLieu"] = row.V;
+                    //find.ColNum["hsdcNhanCong"] = row.W;
+                    //find.ColNum["hsdcMay"] = row.X;
                 }    
                 else
                 {
                     if(row.isGroup)
                     {
-                        find.ColText["ma"] = row.B;
+                        //find.ColText["ma"] = row.B;
                     }
                     if(row.isInterpretiveFormula)
                     {
-                        find.ColText["ten"] = row.D;
-                        find.ColNum["khoiLuongPhu"] = row.L;
+                        //find.ColText["ten"] = row.D;
+                        //find.ColNum["khoiLuongPhu"] = row.L;
                     }
                 }
                

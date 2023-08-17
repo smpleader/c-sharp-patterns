@@ -19,5 +19,10 @@ namespace Worksheet.modBL
         {
             return 0;
         }
+
+        string ICell.fml(string[] args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

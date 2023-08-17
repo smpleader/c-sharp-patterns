@@ -14,6 +14,12 @@ namespace Worksheet.modBL.prime.tienluong
         {
             return "=SUMIF(B{0}:B{1},\">0\",U{0}:U{1})";
         }
+
+        public string fml(string[] args)
+        {
+            return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", U{args[0]}:U{args[1]})";
+        }
+
         // return value of cell
         public decimal val()
         {

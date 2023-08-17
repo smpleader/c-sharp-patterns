@@ -15,6 +15,10 @@ namespace Worksheet.modBL.prime.tienluong
             return "=M{0}*O{1}";
         }
         // return value of cell
+        public string fml(string[] args)
+        {
+            throw new NotImplementedException();
+        }
         public decimal val()
         {
             return 0;
