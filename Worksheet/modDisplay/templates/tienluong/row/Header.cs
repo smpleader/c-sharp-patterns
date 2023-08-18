@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using unvell.ReoGrid;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
 {
-    internal class Header : ARow
+    internal class Header : ARowObject
     {
-        public Header(int id) : base(id)
+        public Header(unvell.ReoGrid.Worksheet worksheet, int id)
         {
+            ws = worksheet;
             Id = id;
         }
         /// <summary>
-        /// Địa chỉ ô cho phép lấy B
+        /// Tên công trình hoặc tên hạng mục
         /// </summary>
-        /// <param name="col"></param>
-        /// <returns> col + indexRow</returns>
-        //public string Address(string col)
-        //{
-        //    return col + Id;
-        //}
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        public Cell B { get { return GetCell("B"); } }
+        public void bind()
         {
             // todo: Lưu giá trị của header tới global state
-           
         }
 
-        public void render(unvell.ReoGrid.Worksheet worksheet)
+        public void render()
         {
             // todo: render khi thay đổi tên công trình, hạng mục từ 1 số màn hình khác
         }

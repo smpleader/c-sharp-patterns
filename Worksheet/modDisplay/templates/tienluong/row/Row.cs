@@ -9,27 +9,129 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Cell = unvell.ReoGrid.Cell;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
 {
-    internal class Row : ARow
+    internal class Row : ARowObject
     {
-
-        public Row(int id) : base(id)
+        public Row(unvell.ReoGrid.Worksheet worksheet, int id)
         {
+            ws = worksheet;
             Id = id;
         }
         public bool HaveInterpretiveFormula = false;
 
         /// <summary>
-        /// Địa chỉ ô cho phép lấy A, B, C, D, E, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC
+        /// Ký hiệu bản vẽ
         /// </summary>
-        /// <param name="col"></param>
-        /// <returns> col + indexRow</returns>
-        //public string Address(string col)
-        //{
-        //    return col + Id;
-        //}
+        public Cell A { get {return GetCell("A");} }
+        /// <summary>
+        /// STT
+        /// </summary>
+        public Cell B { get { return GetCell("B"); } }
+        /// <summary>
+        /// MSCV
+        /// </summary>
+        public Cell C { get { return GetCell("C"); } }
+        /// <summary>
+        /// Tên công việc
+        /// </summary>
+        public Cell D { get { return GetCell("D"); } }
+        /// <summary>
+        /// Đơn vị
+        /// </summary>
+        public Cell E { get { return GetCell("E"); } }
+        /// <summary>
+        /// Tên CK
+        /// </summary>
+        public Cell F { get { return GetCell("F"); } }
+        /// <summary>
+        /// Số CK
+        /// </summary>
+        public Cell G { get { return GetCell("G"); } }
+        /// <summary>
+        /// Dài
+        /// </summary>
+        public Cell H { get { return GetCell("H"); } }
+        /// <summary>
+        /// Rộng
+        /// </summary>
+        public Cell I { get { return GetCell("I"); } }
+        /// <summary>
+        /// Cao
+        /// </summary>
+        public Cell J { get { return GetCell("J"); } }
+        /// <summary>
+        /// HS phụ
+        /// </summary>
+        public Cell K { get { return GetCell("K"); } }
+        /// <summary>
+        /// KL Phụ
+        /// </summary>
+        public Cell L { get { return GetCell("L"); } }
+        /// <summary>
+        /// Khối lượng
+        /// </summary>
+        public Cell M { get { return GetCell("M"); } }
+        /// <summary>
+        /// Đơn giá vật liệu
+        /// </summary>
+        public Cell N { get { return GetCell("N"); } }
+        /// <summary>
+        /// Đơn giá vật liệu phụ
+        /// </summary>
+        public Cell O { get { return GetCell("O"); } }
+        /// <summary>
+        /// Đơn giá nhân công
+        /// </summary>
+        public Cell P { get { return GetCell("P"); } }
+        /// <summary>
+        /// Đơn giá máy
+        /// </summary>
+        public Cell Q { get { return GetCell("Q"); } }
+        /// Thành tiền vật liệu
+        public Cell R { get { return GetCell("R"); } }
+        /// Thành tiền vật liệu phụ
+        public Cell S { get { return GetCell("S"); } }
+        /// <summary>
+        /// Thành tiền nhân công
+        /// </summary>
+        public Cell T { get { return GetCell("T"); } }
+        /// <summary>
+        /// Thành tiền máy
+        /// </summary>
+        public Cell U { get { return GetCell("U"); } }
+        /// <summary>
+        /// Hệ số điều chỉnh vật liệu
+        /// </summary>
+        public Cell V { get { return GetCell("V"); } }
+        /// <summary>
+        /// Hệ số điều chỉnh nhân công
+        /// </summary>
+        public Cell W { get { return GetCell("W"); } }
+        /// <summary>
+        /// Hệ số điều chỉnh máy
+        /// </summary>
+        public Cell X { get { return GetCell("X"); } }
+        /// <summary>
+        /// Thông tin đơn giá
+        /// </summary>
+        public Cell Y { get { return GetCell("Y"); } }
+        /// <summary>
+        /// Tổng giá của tất cả các vật liệu
+        /// </summary>
+        public Cell Z { get { return GetCell("Z"); } }
+        /// <summary>
+        /// Tổng giá của tất cả các vật liệu phụ
+        /// </summary>
+        public Cell AA { get { return GetCell("AA"); } }
+        /// <summary>
+        /// Tổng giá của tất cả các nhân công
+        /// </summary>
+        public Cell AB { get { return GetCell("AB"); } }
+        /// Tổng giá của tất cả các máy
+        public Cell AC { get { return GetCell("AC"); } }
 
         /// <summary>
         /// Lấy công thức cho các cột M, N, O, P, Q, R, S, T, U
@@ -52,26 +154,26 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                     }
                     else
                     {
-                        return CellUtility.ConvertData<string>(((Generator)Display.tab("Tiên lượng")).ws[Address("M")]);
+                        return M.GetData<string>();
                     }
                 case "N":
                     uniqueName = "CongViec_DonGiaVatLieu";
-                    decimal tongGiaVatLieu = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("Z")]);
+                    decimal tongGiaVatLieu = Z.GetData<decimal>();
                     parameters = new string[2] { Id.ToString(), tongGiaVatLieu.ToString() };
                     break;
                 case "O":
                     uniqueName = "CongViec_DonGiaVatLieuPhu";
-                    decimal tongGiaVatLieuPhu = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AA")]);
+                    decimal tongGiaVatLieuPhu = AA.GetData<decimal>();
                     parameters = new string[2] { Id.ToString(), tongGiaVatLieuPhu.ToString() };
                     break;
                 case "P":
                     uniqueName = "CongViec_DonGiaNhanCong";
-                    decimal tongGiaNhanCong = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AB")]);
+                    decimal tongGiaNhanCong = AB.GetData<decimal>();
                     parameters = new string[2] { Id.ToString(), tongGiaNhanCong.ToString() };
                     break;
                 case "Q":
                     uniqueName = "CongViec_DonGiaMay";
-                    decimal tongGiaMay = CellUtility.ConvertData<decimal>(((Generator)Display.tab("Tiên lượng")).ws[Address("AC")]);
+                    decimal tongGiaMay = AC.GetData<decimal>();
                     parameters = new string[2] { Id.ToString(), tongGiaMay.ToString() };
                     break;
                 case "R":
@@ -92,46 +194,46 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             return formula;
         }
 
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        public void bind()
         {
             
         }
-        public void render(unvell.ReoGrid.Worksheet worksheet)
+        public void render()
         {
             List<string> colsHaveFormula = new List<string>() { "M", "N", "O", "P", "Q", "R", "S", "T", "U" };
             foreach (string col in colsHaveFormula)
             {
-                worksheet[Address(col)] = GetFormula(col);
+                ws[Address(col)] = GetFormula(col);
             }
         }
 
         public void AddSimpleData(unvell.ReoGrid.Worksheet ws)
         {
             // mã công việc
-            ws[Address("C")] = "AG.11111";
+            C.Data = "AG.11111";
             // tên công việc
-            ws[Address("D")] = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
+            D.Data = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
             // đơn vị
-            ws[Address("E")] = "m3";
+            E.Data = "m3";
 
             // HSDC vật liệu
-            ws[Address("V")] = 1;
+            V.Data = 1;
             // HSDC nhân công
-            ws[Address("W")] = 1;
+            W.Data = 1;
             // HSDC máy
-            ws[Address("X")] = 1;
+            X.Data = 1;
 
             // thông tin đơn giá
-            ws[Address("Y")] = "DinhMuc_2021XD_D12";
+            Y.Data = "DinhMuc_2021XD_D12";
 
             // tổng giá tất cả vật liệu của công việc 
-            ws[Address("Z")] = 685204;
+            Z.Data = 685204;
             // tổng giá tất cả vật liệu phụ của công việc 
-            ws[Address("AA")] = 0;
+            AA.Data = 0;
             // tổng giá tất cả nhân công của công việc 
-            ws[Address("AB")] = 288111;
+            AB.Data = 288111;
             // tổng giá tất cả máy của công việc 
-            ws[Address("AC")] = 70230;
+            AC.Data = 70230;
 
             // set màu chữ thành không màu
             ws.SetRangeStyles(Address("Z") + ":" + Address("AC"), new WorksheetRangeStyle()

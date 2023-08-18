@@ -9,26 +9,52 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Cell = unvell.ReoGrid.Cell;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
 {
-    internal class Group : ARow
+    internal class Group : ARowObject
     {
-        public Group(int id) : base(id)
+        public Group(unvell.ReoGrid.Worksheet worksheet, int id)
         {
+            ws = worksheet;
             Id = id;
         }
 
         /// <summary>
-        /// Địa chỉ ô cho phép lấy A, B, C, Q, X, R, S, T, U
+        /// Ký hiệu bản vẽ
         /// </summary>
-        /// <param name="col"></param>
-        /// <returns> col + indexRow</returns>
-        //public string Address(string col)
-        //{
-        //    return col + Id;
-        //}
-
+        public Cell A { get { return GetCell("A"); } }
+        /// <summary>
+        /// STT
+        /// </summary>
+        public Cell B { get { return GetCell("B"); } }
+        /// <summary>
+        /// MSCV
+        /// </summary>
+        public Cell C { get { return GetCell("C"); } }
+        /// <summary>
+        /// Đơn giá máy
+        /// </summary>
+        public Cell Q { get { return GetCell("Q"); } }
+        /// <summary>
+        /// Tổng thành tiền vật liệu của nhóm
+        /// </summary>
+        public Cell R { get { return GetCell("R"); } }
+        /// Tổng thành tiền vật liệu phụ của nhóm
+        public Cell S { get { return GetCell("S"); } }
+        /// <summary>
+        /// Tổng thành tiền nhân công của nhóm
+        /// </summary>
+        public Cell T { get { return GetCell("T"); } }
+        /// <summary>
+        /// Tổng thành tiền máy của nhóm
+        /// </summary>
+        public Cell U { get { return GetCell("U"); } }
+        /// <summary>
+        /// Hệ số điều chỉnh máy
+        /// </summary>
+        public Cell X { get { return GetCell("X"); } }
         /// <summary>
         /// Lấy công thức cho các cột R, S, T, U
         /// </summary>
@@ -57,18 +83,11 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
         }
 
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        public void bind()
         {
             // check group object khi mở từ file excel ( bind)
-            string addressColB = Address("B");
 
-            // check group object khi nhập vào
-            string addressColA = Address("A");
-            string addressColC = Address("C");
-            string addressColQ = Address("Q");
-            string addressColX = Address("X");
-
-            string C = CellUtility.ConvertData<string>(worksheet[addressColC]);
+            string C = this.C.GetData<string>();
             if (C != null && C.StartsWith("*"))
             {
                 string nameGroup = C.Substring(1);
@@ -76,20 +95,20 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 {
                     nameGroup = "(Nhóm không tên)";
                 }
-                worksheet.MergeRange(addressColB + ":" + addressColQ);
-                worksheet[addressColB] = nameGroup;
+                ws.MergeRange(B.Position.ToAddress() + ":" + Q.Position.ToAddress());
+                B.Data = nameGroup;
 
                 #region style lại cho group object
 
-                worksheet.SetRangeStyles(addressColB, new WorksheetRangeStyle
+                ws.SetRangeStyles(B.Position.ToAddress(), new WorksheetRangeStyle
                 {
                     Flag = PlainStyleFlag.AlignAll,
                     HAlign = ReoGridHorAlign.Left,
                 });
 
-                string rangeGroup = addressColA + ":" + addressColX;
+                string rangeGroup = A.Position.ToAddress() + ":" + X.Position.ToAddress();
 
-                worksheet.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
+                ws.SetRangeStyles(rangeGroup, new WorksheetRangeStyle
                 {
                     // style item flag
                     Flag = PlainStyleFlag.BackColor,
@@ -102,34 +121,28 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                     Color = Color.Black,
                     Style = BorderLineStyle.Dotted,
                 };
-                worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
+                ws.SetRangeBorders(rangeGroup, BorderPositions.InsideHorizontal, blackDottedBoder);
 
                 var blackSolidBoder = new RangeBorderStyle
                 {
                     Color = Color.Black,
                     Style = BorderLineStyle.Solid,
                 };
-                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
-                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
-                worksheet.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
-                worksheet.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
+                ws.SetRangeBorders(rangeGroup, BorderPositions.Left, blackSolidBoder);
+                ws.SetRangeBorders(rangeGroup, BorderPositions.Right, blackSolidBoder);
+                ws.SetRangeBorders(rangeGroup, BorderPositions.InsideVertical, blackSolidBoder);
+                ws.SetRangeBorders(rangeGroup, BorderPositions.Outside, blackSolidBoder);
 
                 #endregion
             }
-
-            //List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
-            //foreach (string col in colsHaveFormula)
-            //{
-            //    worksheet[Address(col)] = GetFormula(col);
-            //}
         }
 
-        public void render(unvell.ReoGrid.Worksheet worksheet)
+        public void render()
         {
             List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
             foreach (string col in colsHaveFormula)
             {
-                worksheet[Address(col)] = GetFormula(col);
+                ws[col + Id] = GetFormula(col);
             }
         }
     }

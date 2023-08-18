@@ -11,16 +11,18 @@ using Worksheet.modDisplay.templates.tienluong.row;
 using Microsoft.Office.Interop.Excel;
 using System.Windows.Documents;
 using HeaderGroup = Worksheet.modDisplay.templates.tienluong.Header;
+using FooterGroup = Worksheet.modDisplay.templates.tienluong.Footer;
+
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Generator : AGenerator
     {
+        public override string Name { get { return "templates/tienluong"; } }
         public unvell.ReoGrid.Worksheet ws;
         bool DangThemCongViec = false;
-        public override string Name { get { return "templates/tienluong"; } }
         HeaderGroup header;
-        Footer footer;
+        FooterGroup footer;
         Body body;
 
         public override void init(string tabName)
@@ -50,9 +52,9 @@ namespace Worksheet.modDisplay.templates.tienluong
             header.render();
 
             // footer
-            footer = new Footer();
-            footer.bind(ws);
-            footer.render(ws);
+            footer = new FooterGroup(ws);
+            footer.bind();
+            footer.render();
 
             // body 
             body = new Body(ws);
@@ -70,7 +72,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 // bắt đầu thêm công việc
                 DangThemCongViec = true;
-                body.rows[selectedIndexRow] = new Row(selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(ws, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData(ws);
             }

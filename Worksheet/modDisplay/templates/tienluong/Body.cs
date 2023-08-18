@@ -10,14 +10,14 @@ using Worksheet.modDisplay.templates.tienluong.row;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
-    internal class Body
+    internal class Body : APosition
     {
-        public readonly int start = 6;
-        public int end;
-        public unvell.ReoGrid.Worksheet ws;
+        public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
         public Dictionary<int, Group> groups = new Dictionary<int, Group>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-        public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
+        public readonly int start = 6;
+        public int end;
+        public override string Name { get { return "Body"; } }
 
         public Body(unvell.ReoGrid.Worksheet worksheet)
         {
@@ -40,7 +40,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             return string.IsNullOrEmpty(cell);
         }
-        public void bind()
+        public override void bind()
         {
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
@@ -80,7 +80,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(indexGroups[i]);
+                groups[indexGroups[i]] = new Group(ws,indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -103,20 +103,20 @@ namespace Worksheet.modDisplay.templates.tienluong
                 }
                 groupCV.start = startGroup;
                 groupCV.end = endGroup;
-                groupCV.bind(ws);
+                groupCV.bind();
             }
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(indexAdditionalRows[i]);
-                additionalRows[indexAdditionalRows[i]].bind(ws);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(ws, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]].bind();
             }
 
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(indexRow);
+                rows[indexRow] = new Row(ws,indexRow);
                 int endRowGroup = InGroup(indexRow) != -1 ? InGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
@@ -153,7 +153,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                     }
                 }
                 cv.HaveInterpretiveFormula = haveInterpretiveFormula;
-                cv.bind(ws);
+                cv.bind();
             }
         }
 
@@ -163,25 +163,25 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 if (index >= group.start && index <= group.end)
                 {
-                    return group.Id;
+                    return group.end;
                 }
             }
             return -1;
         }
 
-        public void render()
+        public override void render()
         {
             foreach (Group group in groups.Values)
             {
-                group.render(ws);
+                group.render();
             }
             foreach (Row row in rows.Values)
             {
-                row.render(ws);
+                row.render();
             }
             foreach (AdditionalRow additionalRow in additionalRows.Values)
             {
-                additionalRow.render(ws);
+                additionalRow.render();
             }
 
             // Đánh lại số  thứ tự cho các công việc
@@ -190,11 +190,12 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 if (rows.ContainsKey(rowIndex))
                 {
-                    rows.TryGetValue(rowIndex, out Row row);
-                    Row rowObject = row;
-                    ws[rowObject.Address("B")] = beginRow.ToString();
-                    ws.AutoFitRowHeight(rowIndex - 1, false);
-                    beginRow++;
+                    if(rows.TryGetValue(rowIndex, out Row row))
+                    {
+                        row.B.Data = beginRow;
+                        ws.AutoFitRowHeight(rowIndex - 1, false);
+                        beginRow++;
+                    }
                 }
             }
         }

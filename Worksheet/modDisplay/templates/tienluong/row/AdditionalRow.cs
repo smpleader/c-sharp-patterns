@@ -9,17 +9,91 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Cell = unvell.ReoGrid.Cell;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
 {
-    internal class AdditionalRow : ARow
+    internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(int id) : base(id)
+        public AdditionalRow(unvell.ReoGrid.Worksheet worksheet, int id) 
         {
+            ws = worksheet;
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
 
+        /// <summary>
+        /// Ký hiệu bản vẽ
+        /// </summary>
+        public Cell A { get { return GetCell("A"); } }
+        /// <summary>
+        /// STT
+        /// </summary>
+        public Cell B { get { return GetCell("B"); } }
+        /// <summary>
+        /// MSCV
+        /// </summary>
+        public Cell C { get { return GetCell("C"); } }
+        /// <summary>
+        /// Tên công việc
+        /// </summary>
+        public Cell D { get { return GetCell("D"); } }
+        /// <summary>
+        /// Đơn vị
+        /// </summary>
+        public Cell E { get { return GetCell("E"); } }
+        /// <summary>
+        /// Tên CK
+        /// </summary>
+        public Cell F { get { return GetCell("F"); } }
+        /// <summary>
+        /// Số CK
+        /// </summary>
+        public Cell G { get { return GetCell("G"); } }
+        /// <summary>
+        /// Dài
+        /// </summary>
+        public Cell H { get { return GetCell("H"); } }
+        /// <summary>
+        /// Rộng
+        /// </summary>
+        public Cell I { get { return GetCell("I"); } }
+        /// <summary>
+        /// Cao
+        /// </summary>
+        public Cell J { get { return GetCell("J"); } }
+        /// <summary>
+        /// HS phụ
+        /// </summary>
+        public Cell K { get { return GetCell("K"); } }
+        /// <summary>
+        /// KL Phụ
+        /// </summary>
+        public Cell L { get { return GetCell("L"); } }
+        /// <summary>
+        /// Khối lượng
+        /// </summary>
+        public Cell M { get { return GetCell("M"); } }
+        /// <summary>
+        /// Đơn giá vật liệu
+        /// </summary>
+        public Cell N { get { return GetCell("N"); } }
+        /// <summary>
+        /// Đơn giá vật liệu phụ
+        /// </summary>
+        public Cell O { get { return GetCell("O"); } }
+        /// <summary>
+        /// Đơn giá nhân công
+        /// </summary>
+        public Cell P { get { return GetCell("P"); } }
+        /// <summary>
+        /// Đơn giá máy
+        /// </summary>
+        public Cell Q { get { return GetCell("Q"); } }
+        /// Thành tiền vật liệu
+        public Cell R { get { return GetCell("R"); } }
+        /// Thành tiền vật liệu phụ
+        public Cell S { get { return GetCell("S"); } }
         /// <summary>
         /// Địa chỉ ô cho phép lấy C, D, F, G, H, I, J, K, L
         /// </summary>
@@ -40,19 +114,19 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             string[] parameters = new string[1] { Id.ToString() };
             return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").fml(parameters));
         }
-        public void bind(unvell.ReoGrid.Worksheet worksheet)
+        public void bind()
         {
             // check group object khi mở từ file excel ( bind)
-            if (!worksheet.IsMergedCell("B" + Id))
+            if (!ws.IsMergedCell("B" + Id))
             {
                 // check group object khi nhập vào
-                string C = CellUtility.ConvertData<string>(worksheet["C" + Id]);
+                string C = this.C.GetData<string>();
                 if (C == null)
                 {
                     // check công thức diễn giải khi nhập vào
-                    if (worksheet["D" + Id] != null && worksheet["D" + Id] != "")
+                    if (D.GetData<string>() != null)
                     {
-                        string interpretiveFormula = CellUtility.ConvertData<string>(worksheet["D" + Id]);
+                        string interpretiveFormula = D.GetData<string>();
                         var segment = interpretiveFormula.Split(":").ToList();
                         if (segment.Count > 1)
                         {
@@ -60,19 +134,19 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                             if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim().Split("=")[0]))
                             {
                                 double result = EvaluateExpression(segment[1].Trim().Split("=")[0]);
-                                worksheet["D" + Id] = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
-                                worksheet["L" + Id] = "=" + segment[1].Trim().Split("=")[0];
+                                D.Data = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
+                                L.Data = "=" + segment[1].Trim().Split("=")[0];
                                 IsInterpretiveFormula = true;
                             }
                             else
                             {
-                                worksheet["D" + Id] = interpretiveFormula + " :";
+                                D.Data = interpretiveFormula + " :";
                                 IsInterpretiveFormula = true;
                             }
                         }
                         else
                         {
-                            worksheet["D" + Id] = interpretiveFormula + " :";
+                            D.Data = interpretiveFormula + " :";
                             IsInterpretiveFormula = true;
                         }
                     }
@@ -114,7 +188,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             return double.Parse((string)row["expression"]);
         }
 
-        internal void render(unvell.ReoGrid.Worksheet ws)
+        internal void render()
         {
             
         }
