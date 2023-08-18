@@ -9,7 +9,7 @@ namespace Worksheet.modDisplay
     internal class APosition : IPosition
     {
         public virtual string Name { get { return "--"; } }
-        public unvell.ReoGrid.Worksheet ws;
+        public unvell.ReoGrid.Worksheet ws { get; set; }
         public int Id { get; set; }
 
         public virtual void bind(){}

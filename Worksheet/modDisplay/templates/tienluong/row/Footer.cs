@@ -20,6 +20,58 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// Tổng hạng mục
         /// </summary>
         public Cell A { get { return GetCell("A"); } }
+       
+        public Cell R { get { return GetCell("R"); } }
+       
+        public Cell S { get { return GetCell("S"); } }
+        
+        public Cell T { get { return GetCell("T"); } }
+        
+        public Cell U { get { return GetCell("U"); } }
+
+        /// <summary>
+        /// Tổng thành tiền vật liệu
+        /// </summary>
+        public decimal TongThanhTienVatLieu
+        {
+            get
+            {
+                return R.GetData<decimal>();
+            }
+        }
+
+        /// <summary>
+        /// Tổng thành tiền vật liệu phụ
+        /// </summary>
+        public decimal TongThanhTienVatLieuPhu
+        {
+            get
+            {
+                return S.GetData<decimal>();
+            }
+        }
+
+        /// <summary>
+        /// Tổng thành tiền nhân công
+        /// </summary>
+        public decimal TongThanhTienNhanCong
+        {
+            get
+            {
+                return T.GetData<decimal>();
+            }
+        }
+
+        /// <summary>
+        /// Tổng thành tiền máy
+        /// </summary>
+        public decimal TongThanhTienMay
+        {
+            get
+            {
+                return U.GetData<decimal>();
+            }
+        }
 
         /// <summary>
         /// Lấy công thức cho các cột  R, S, T, U

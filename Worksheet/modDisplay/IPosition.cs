@@ -8,6 +8,7 @@ namespace Worksheet.modDisplay
 {
     internal interface IPosition
     {
+        unvell.ReoGrid.Worksheet ws { get; set; }
         string Name { get; }
         int Id { get; set; }
         void bind();

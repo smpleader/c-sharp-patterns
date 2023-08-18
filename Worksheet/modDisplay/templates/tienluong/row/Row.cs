@@ -90,9 +90,13 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// Đơn giá máy
         /// </summary>
         public Cell Q { get { return GetCell("Q"); } }
+        /// <summary>
         /// Thành tiền vật liệu
+        /// </summary>
         public Cell R { get { return GetCell("R"); } }
+        /// <summary>
         /// Thành tiền vật liệu phụ
+        /// </summary>
         public Cell S { get { return GetCell("S"); } }
         /// <summary>
         /// Thành tiền nhân công

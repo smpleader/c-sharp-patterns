@@ -21,15 +21,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
-
-        /// <summary>
-        /// Ký hiệu bản vẽ
-        /// </summary>
-        public Cell A { get { return GetCell("A"); } }
-        /// <summary>
-        /// STT
-        /// </summary>
-        public Cell B { get { return GetCell("B"); } }
+        
         /// <summary>
         /// MSCV
         /// </summary>
@@ -38,10 +30,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// Tên công việc
         /// </summary>
         public Cell D { get { return GetCell("D"); } }
-        /// <summary>
-        /// Đơn vị
-        /// </summary>
-        public Cell E { get { return GetCell("E"); } }
+      
         /// <summary>
         /// Tên CK
         /// </summary>
@@ -70,39 +59,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// KL Phụ
         /// </summary>
         public Cell L { get { return GetCell("L"); } }
-        /// <summary>
-        /// Khối lượng
-        /// </summary>
-        public Cell M { get { return GetCell("M"); } }
-        /// <summary>
-        /// Đơn giá vật liệu
-        /// </summary>
-        public Cell N { get { return GetCell("N"); } }
-        /// <summary>
-        /// Đơn giá vật liệu phụ
-        /// </summary>
-        public Cell O { get { return GetCell("O"); } }
-        /// <summary>
-        /// Đơn giá nhân công
-        /// </summary>
-        public Cell P { get { return GetCell("P"); } }
-        /// <summary>
-        /// Đơn giá máy
-        /// </summary>
-        public Cell Q { get { return GetCell("Q"); } }
-        /// Thành tiền vật liệu
-        public Cell R { get { return GetCell("R"); } }
-        /// Thành tiền vật liệu phụ
-        public Cell S { get { return GetCell("S"); } }
-        /// <summary>
-        /// Địa chỉ ô cho phép lấy C, D, F, G, H, I, J, K, L
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns> col + indexRow</returns>
-        //public string Address(string col)
-        //{
-        //    return col + Id;
-        //}
+        
 
         /// <summary>
         /// Lấy công thức cho các cột R, S, T, U
