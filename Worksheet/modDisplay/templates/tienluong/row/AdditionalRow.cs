@@ -21,13 +21,9 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
-        
-        /// <summary>
-        /// MSCV
-        /// </summary>
         public Cell C { get { return GetCell("C"); } }
         /// <summary>
-        /// Tên công việc
+        /// Công thức diễn giả
         /// </summary>
         public Cell D { get { return GetCell("D"); } }
       
