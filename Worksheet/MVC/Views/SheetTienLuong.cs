@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using unvell.ReoGrid;
 using Worksheet.modData.Memories.Models;
 using Worksheet.modData.Memories.Pointer;
 using Worksheet.modDisplay;
@@ -28,6 +29,10 @@ namespace Worksheet.MVC.Views
 
         private void SheetTienLuong_Load(object sender, EventArgs e)
         {
+            sheet_ChiTietNhanCong.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
+            sheet_ChiTietVatLieu.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
+            sheet_ChiTietMay.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
+
             tienLuongP = (TienLuongP)Publisher.get("SheetTienLuong");
             tienLuongP.Setup();
             vatLieuP = (VatLieuP)Publisher.get("SheetVatLieu");
@@ -135,7 +140,7 @@ namespace Worksheet.MVC.Views
 
         private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkbx_KichThuoc.Checked)
+            if (chkbx_KichThuoc.Checked)
             {
                 sheet_TienLuong.CurrentWorksheet.ShowColumns(5, 7);
             }

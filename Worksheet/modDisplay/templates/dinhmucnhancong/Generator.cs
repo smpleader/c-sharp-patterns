@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Worksheet.modDisplay.templates.dinhmucvatlieu.row;
-using Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu;
+using Worksheet.modDisplay.templates.dinhmucnhancong.row;
+using Worksheet.modDisplay.templates.tienluong.dinhmucnhancong;
 
-namespace Worksheet.modDisplay.templates.dinhmucvatlieu
+namespace Worksheet.modDisplay.templates.dinhmucnhancong
 {
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
-        public override string Name { get { return "templates/dinhmucvatlieu"; } }
+        public override string Name { get { return "templates/dinhmucnhancong"; } }
         Body body { get; set; }
 
         public override void init(string tabName)
@@ -20,19 +20,16 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
             {
                 ws = Display.WB[tabName];
 
-                ws.SetCols(12);
+                ws.SetCols(9);
                 ws.ColumnHeaders[0].Text = "STT";
-                ws.ColumnHeaders[1].Text = "Mã VL";
-                ws.ColumnHeaders[2].Text = "Tên vật liệu";
+                ws.ColumnHeaders[1].Text = "Mã NC";
+                ws.ColumnHeaders[2].Text = "Tên nhân công";
                 ws.ColumnHeaders[3].Text = "Đơn vị";
                 ws.ColumnHeaders[4].Text = "Hao phí";
                 ws.ColumnHeaders[5].Text = "Giá gốc";
                 ws.ColumnHeaders[6].Text = "Giá TB";
-                ws.ColumnHeaders[7].Text = "Giá HT";
-                ws.ColumnHeaders[8].Text = "Loại VL";
-                ws.ColumnHeaders[9].Text = "HP khác";
-                ws.ColumnHeaders[10].Text = "";
-                ws.ColumnHeaders[11].Text = "Hao phí gốc"; // ẩn không hiển thị
+                ws.ColumnHeaders[7].Text = "";
+                ws.ColumnHeaders[8].Text = "Hao phí gốc"; // ẩn không hiển thị
             }
         }
 
@@ -52,18 +49,6 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
                     break;
             }
         }
-
-        public override void beforeSave()
-        {
-            //ws["A1"] = "xxx11x"; test
-
-            // attach to control to save into file
-            Display.WControl.AddWorksheet(ws);
-        }
-        public override void afterSave()
-        {
-            // detach from control
-            Display.WControl.RemoveWorksheet(ws);
-        }
+        
     }
 }

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid;
 
-namespace Worksheet.modDisplay.templates.dinhmucvatlieu
+namespace Worksheet.modDisplay.templates.dinhmucnhancong.row
 {
     internal class Row : ARowObject
     {
         public Row(unvell.ReoGrid.Worksheet worksheet, int id)
-        {   
+        {
             ws = worksheet;
             Id = id;
         }
@@ -19,11 +19,11 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
         /// </summary>
         public Cell A { get { return GetCell("A"); } }
         /// <summary>
-        /// Mã VL
+        /// Mã NC
         /// </summary>
         public Cell B { get { return GetCell("B"); } }
         /// <summary>
-        /// Tên vật liệu
+        /// Tên nhân công
         /// </summary>
         public Cell C { get { return GetCell("C"); } }
         /// <summary>
@@ -46,50 +46,42 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
         /// Giá HT
         /// </summary>
         public Cell H { get { return GetCell("H"); } }
-        /// <summary>
-        /// Loại VL
-        /// </summary>
+      
         public Cell I { get { return GetCell("I"); } }
         /// <summary>
-        /// HP khác
+        /// HP gốc
         /// </summary>
         public Cell J { get { return GetCell("J"); } }
 
-        public Cell K { get { return GetCell("K"); } }
-        /// <summary>
-        /// Hao phí gốc
-        /// </summary>
-        public Cell L { get { return GetCell("L"); } }
-
         public void bind()
         {
+
         }
 
         public void render()
         {
+
         }
 
         public void AddSimpleData()
         {
             A.Data = "1";
             // Mã VL
-            B.Data = "C2221";
+            B.Data = "N2307";
             // Tên vật liệu
-            C.Data = "Vữa bê tông M100, XM PCB30, đá 1x2, độ sụt 2÷4cm";
+            C.Data = "Nhân công bậc 3,0/7 - Nhóm 2";
             // đơn vị
-            D.Data = "m3";
+            D.Data = "công";
             // hao phí
-            E.Data = 1.015;
-            F.Data = 671718.771;
-            G.Data = 671718.771;
-            H.Data = 671718.771;
-            I.Data = "C";
-            J.Data = 0.5;
-            K.Data = "";
-            L.Data = 1.015;
+            E.Data = 1.37;
+            F.Data = 210300;
+            G.Data = 210300;
+            H.Data = 210300;
+            I.Data = "";
+            J.Data = 1.37;
 
             // set màu chữ thành không màu
-            ws.SetRangeStyles(K.Position.ToAddress() + ":" + L.Position.ToAddress(), new WorksheetRangeStyle()
+            ws.SetRangeStyles(I.Position.ToAddress() + ":" + J.Position.ToAddress(), new WorksheetRangeStyle()
             {
                 Flag = PlainStyleFlag.TextColor,
                 TextColor = Color.Transparent,

@@ -5,18 +5,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid.Utility;
-using Worksheet.modDisplay.templates.tienluong.row;
+using Worksheet.modDisplay.templates.dinhmucvatlieu.row;
 
-
-namespace Worksheet.modDisplay.templates.tienluong
+namespace Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu
 {
     internal class Body : APosition
     {
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
-        public Dictionary<int, Group> groups = new Dictionary<int, Group>();
+
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-        public readonly int start = 6;
-        public int end;
+        public readonly int start = 1;
+        public int end = 30;
         public override string Name { get { return "Body"; } }
 
         public Body(unvell.ReoGrid.Worksheet worksheet)
@@ -28,66 +27,21 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
-            List<int> indexGroups = new List<int>();
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (ws.IsMergedCell("B" + indexRow))
+                if (Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow) && Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
                 {
-                    indexGroups.Add(indexRow);
-                }
-                else
-                {
-                    if (Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow) && Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
+                    // check công thức diễn giải khi nhập vào
+                    if (!Util.CellUtility.IsCellEmptyOrNull(ws, "D" + indexRow) || !Util.CellUtility.IsCellEmptyOrNull(ws, "L" + indexRow))
                     {
-                        // check công thức diễn giải khi nhập vào
-                        if (!Util.CellUtility.IsCellEmptyOrNull(ws, "D" + indexRow) || !Util.CellUtility.IsCellEmptyOrNull(ws, "L" + indexRow))
-                        {
-                            indexAdditionalRows.Add(indexRow);
-                        }
-                    }
-                    if (!Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
-                    {
-                        string C = CellUtility.ConvertData<string>(ws["C" + indexRow]);
-                        if (C != null && C.StartsWith("*"))
-                        {
-                            indexGroups.Add(indexRow);
-                        }
-                        else
-                        {
-                            indexRows.Add(indexRow);
-                        }
+                        indexAdditionalRows.Add(indexRow);
                     }
                 }
-            }
-
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
-            for (int i = 0; i < indexGroups.Count; i++)
-            {
-                groups[indexGroups[i]] = new Group(ws,indexGroups[i]);
-                Group groupCV = groups[indexGroups[i]];
-                int startGroup, endGroup;
-                if (i == indexGroups.Count - 1)
+                if (!Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
                 {
-                    startGroup = indexGroups[i] + 1;
-                    endGroup = end;
+                    indexRows.Add(indexRow);
                 }
-                else
-                {
-                    if (indexGroups[i] == end)
-                    {
-                        startGroup = indexGroups[i];
-                        endGroup = indexGroups[i];
-                    }
-                    else
-                    {
-                        startGroup = indexGroups[i] + 1;
-                        endGroup = indexGroups[i + 1] - 1;
-                    }
-                }
-                groupCV.start = startGroup;
-                groupCV.end = endGroup;
-                groupCV.bind();
             }
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
@@ -100,19 +54,18 @@ namespace Worksheet.modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(ws,indexRow);
-                int endRowGroup = InGroup(indexRow) != -1 ? InGroup(indexRow) : end;
+                rows[indexRow] = new Row(ws, indexRow);
                 Row cv = rows[indexRow];
                 int startRow, endRow;
                 // tính toán dòng bắt đầu kết thúc
                 if (i == indexRows.Count - 1)
                 {
                     startRow = indexRow + 1;
-                    endRow = endRowGroup;
+                    endRow = end;
                 }
                 else
                 {
-                    if (indexRow == endRowGroup)
+                    if (indexRow == end)
                     {
                         startRow = indexRow;
                         endRow = indexRow;
@@ -136,29 +89,13 @@ namespace Worksheet.modDisplay.templates.tienluong
                         break;
                     }
                 }
-                cv.HaveInterpretiveFormula = haveInterpretiveFormula;
+                cv.HaveSubRow = haveInterpretiveFormula;
                 cv.bind();
             }
         }
 
-        private int InGroup(int index)
-        {
-            foreach (Group group in groups.Values)
-            {
-                if (index >= group.start && index <= group.end)
-                {
-                    return group.end;
-                }
-            }
-            return -1;
-        }
-
         public override void render()
         {
-            foreach (Group group in groups.Values)
-            {
-                group.render();
-            }
             foreach (Row row in rows.Values)
             {
                 row.render();

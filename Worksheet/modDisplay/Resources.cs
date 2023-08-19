@@ -71,6 +71,9 @@ namespace Worksheet.modDisplay
                     Tabs = new Dictionary<string, ISheet>()
                     {
                         {"Tiên lượng", new templates.tienluong.Generator()},
+                        {"Định mức vật liệu", new templates.dinhmucvatlieu.Generator()},
+                        {"Định mức nhân công", new templates.dinhmucnhancong.Generator()},
+                        {"Định mức máy", new templates.dinhmucmay.Generator()},
                     }
                 }
             },
