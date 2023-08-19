@@ -75,12 +75,11 @@ namespace Worksheet.modDisplay.templates.tienluong
                 body.rows[selectedIndexRow] = new Row(ws, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData(ws);
+                body.bind();
+                body.render();
+
+                DangThemCongViec = false;
             }
-
-            body.bind();
-            body.render();
-
-            DangThemCongViec = false;
         }
        
         public override void selectCell()
