@@ -27,7 +27,7 @@ namespace Worksheet.modDisplay.templates.tienluong.dinhmucnhancong
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (! Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow))
+                if (!Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow))
                 {
                     indexRows.Add(indexRow);
                 }

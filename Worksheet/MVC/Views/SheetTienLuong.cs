@@ -21,6 +21,10 @@ namespace Worksheet.MVC.Views
     {
         private TienLuongP tienLuongP;
         private VatLieuP vatLieuP;
+        private DinhMucVatLieuP dinhMucVatLieuP;
+        private DinhMucNhanCongP dinhMucNhanCongP;
+        private DinhMucMayP dinhMucMayP;
+
         public SheetTienLuong()
         {
             registerPresenters(true);
@@ -29,19 +33,22 @@ namespace Worksheet.MVC.Views
 
         private void SheetTienLuong_Load(object sender, EventArgs e)
         {
-            sheet_ChiTietNhanCong.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
-            sheet_ChiTietVatLieu.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
-            sheet_ChiTietMay.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, false);
-
             tienLuongP = (TienLuongP)Publisher.get("SheetTienLuong");
             tienLuongP.Setup();
             vatLieuP = (VatLieuP)Publisher.get("SheetVatLieu");
             vatLieuP.Setup();
+            dinhMucVatLieuP = (DinhMucVatLieuP)Publisher.get("SheetChiTietVatLieu");
+            dinhMucVatLieuP.Setup();
+            dinhMucNhanCongP = (DinhMucNhanCongP)Publisher.get("SheetChiTietNhanCong");
+            dinhMucNhanCongP.Setup();
+            dinhMucMayP = (DinhMucMayP)Publisher.get("SheetChiTietMay");
+            dinhMucMayP.Setup();
             sheet_TienLuong.CurrentWorksheet.SetRows(10000);
             sheet_TienLuong.WorkbookSaved += AfterSave;
             sheet_TienLuong.WorkbookLoaded += AfterLoad;
             sheet_TienLuong.ContextMenuStrip = Display.contextMenu;
 
+            Display.setup(sheet_ChiTietVatLieu, AppConst.templateFolder + "TienLuong");
             Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
             Display.hook("LoadData");
         }
@@ -79,6 +86,12 @@ namespace Worksheet.MVC.Views
                 Publisher.register("SheetTienLuong", tienLuongP);
                 if (null == vatLieuP) vatLieuP = new VatLieuP(this);
                 Publisher.register("SheetVatLieu", vatLieuP);
+                if (null == dinhMucVatLieuP) dinhMucVatLieuP = new DinhMucVatLieuP(this);
+                Publisher.register("SheetChiTietVatLieu", dinhMucVatLieuP);
+                if (null == dinhMucNhanCongP) dinhMucNhanCongP = new DinhMucNhanCongP(this);
+                Publisher.register("SheetChiTietNhanCong", dinhMucNhanCongP);
+                if (null == dinhMucMayP) dinhMucMayP = new DinhMucMayP(this);
+                Publisher.register("SheetChiTietMay", dinhMucMayP);
             }
         }
 
@@ -147,6 +160,22 @@ namespace Worksheet.MVC.Views
             else
             {
                 sheet_TienLuong.CurrentWorksheet.HideColumns(5, 7);
+            }
+        }
+
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl2.SelectedTab.Text)
+            {
+                case "Vật liệu":
+                    Display.setup(sheet_ChiTietVatLieu);
+                    break;
+                case "Nhân công":
+                    Display.setup(sheet_ChiTietNhanCong);
+                    break;
+                case "Máy":
+                    Display.setup(sheet_ChiTietMay);
+                    break;
             }
         }
     }

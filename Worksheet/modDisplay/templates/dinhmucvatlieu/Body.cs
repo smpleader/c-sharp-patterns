@@ -30,17 +30,16 @@ namespace Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow) && Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
+                if (!Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow))
                 {
-                    // check công thức diễn giải khi nhập vào
-                    if (!Util.CellUtility.IsCellEmptyOrNull(ws, "D" + indexRow) || !Util.CellUtility.IsCellEmptyOrNull(ws, "L" + indexRow))
+                    if (!Util.CellUtility.IsCellEmptyOrNull(ws, "A" + indexRow))
+                    {
+                        indexRows.Add(indexRow);
+                    }
+                    else
                     {
                         indexAdditionalRows.Add(indexRow);
                     }
-                }
-                if (!Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
-                {
-                    indexRows.Add(indexRow);
                 }
             }
 
@@ -55,7 +54,7 @@ namespace Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu
             {
                 int indexRow = indexRows[i];
                 rows[indexRow] = new Row(ws, indexRow);
-                Row cv = rows[indexRow];
+                Row vl = rows[indexRow];
                 int startRow, endRow;
                 // tính toán dòng bắt đầu kết thúc
                 if (i == indexRows.Count - 1)
@@ -76,21 +75,21 @@ namespace Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu
                         endRow = indexRows[i + 1] - 1;
                     }
                 }
-                cv.start = startRow;
-                cv.end = endRow;
+                vl.start = startRow;
+                vl.end = endRow;
 
                 // kiểm tra xem có dòng dữ liệu thêm ( Công thức diễn giải, Diễn giải khối lượng) hay không
-                bool haveInterpretiveFormula = false;
+                bool haveSubRow = false;
                 for (int index = startRow; index <= endRow; index++)
                 {
                     if (additionalRows.ContainsKey(index))
                     {
-                        haveInterpretiveFormula = true;
+                        haveSubRow = true;
                         break;
                     }
                 }
-                cv.HaveSubRow = haveInterpretiveFormula;
-                cv.bind();
+                vl.HaveSubRow = haveSubRow;
+                vl.bind();
             }
         }
 

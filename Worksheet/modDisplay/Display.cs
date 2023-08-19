@@ -202,7 +202,6 @@ namespace Worksheet.modDisplay
         private static void CellDataChanged(object? sender, CellEventArgs e)
         {
             Display.hook("CellDataChanged");
-
         }
        
         private static void AfterCellEdit(object? sender, CellAfterEditEventArgs e)

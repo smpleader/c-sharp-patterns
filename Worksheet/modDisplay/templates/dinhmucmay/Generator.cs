@@ -19,7 +19,7 @@ namespace Worksheet.modDisplay.templates.dinhmucmay
             {
                 ws = Display.WB[tabName];
 
-                ws.SetCols(11);
+                //ws.SetCols(11);
                 ws.ColumnHeaders[0].Text = "STT";
                 ws.ColumnHeaders[1].Text = "Mã máy";
                 ws.ColumnHeaders[2].Text = "Tên máy";

@@ -20,7 +20,7 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
             {
                 ws = Display.WB[tabName];
 
-                ws.SetCols(12);
+                //ws.SetCols(12);
                 ws.ColumnHeaders[0].Text = "STT";
                 ws.ColumnHeaders[1].Text = "Mã VL";
                 ws.ColumnHeaders[2].Text = "Tên vật liệu";

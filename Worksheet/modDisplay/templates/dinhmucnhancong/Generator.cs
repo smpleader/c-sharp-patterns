@@ -20,7 +20,7 @@ namespace Worksheet.modDisplay.templates.dinhmucnhancong
             {
                 ws = Display.WB[tabName];
 
-                ws.SetCols(9);
+                //ws.SetCols(9);
                 ws.ColumnHeaders[0].Text = "STT";
                 ws.ColumnHeaders[1].Text = "Mã NC";
                 ws.ColumnHeaders[2].Text = "Tên nhân công";
