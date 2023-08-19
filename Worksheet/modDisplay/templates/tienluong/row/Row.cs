@@ -211,7 +211,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             }
         }
 
-        public void AddSimpleData(unvell.ReoGrid.Worksheet ws)
+        public void AddSimpleData()
         {
             // mã công việc
             C.Data = "AG.11111";

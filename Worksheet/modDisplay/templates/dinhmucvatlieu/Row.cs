@@ -61,11 +61,15 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
         /// </summary>
         public Cell L { get { return GetCell("L"); } }
 
-        public void bind(unvell.ReoGrid.Worksheet data)
+        public void bind()
         {
         }
 
-        public void AddSimpleData(unvell.ReoGrid.Worksheet ws)
+        public void render()
+        {
+        }
+
+        public void AddSimpleData()
         {
             A.Data = "1";
             // Mã VL

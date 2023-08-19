@@ -74,7 +74,7 @@ namespace Worksheet.modDisplay.templates.tienluong
                 DangThemCongViec = true;
                 body.rows[selectedIndexRow] = new Row(ws, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
-                selectedRow.AddSimpleData(ws);
+                selectedRow.AddSimpleData();
                 body.bind();
                 body.render();
 
