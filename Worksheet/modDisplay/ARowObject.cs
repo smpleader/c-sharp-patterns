@@ -18,10 +18,7 @@ namespace Worksheet.modDisplay
         {
             // todo : asign column from worksheet
         }
-        public virtual string Address(string col)
-        {
-            return col + Id;
-        }
+      
         public virtual string GetFormula(string col)
         {
             return "";

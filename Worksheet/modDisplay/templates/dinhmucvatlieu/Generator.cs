@@ -9,7 +9,7 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
     internal class Generator : AGenerator
     {
         public unvell.ReoGrid.Worksheet ws;
-        public override string Name { get { return "templates/giavatlieu"; } }
+        public override string Name { get { return "templates/dinhmucvatlieu"; } }
 
         private Dictionary<int, Row> objects = new Dictionary<int, Row>();
 
@@ -24,7 +24,7 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
 
             if (!objects.TryGetValue(id, out obj))
             {
-                objects[id] = new Row(id);
+                objects[id] = new Row(ws,id);
             }
 
             return objects[id];
@@ -36,12 +36,19 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
             {
                 ws = Display.WB[tabName];
 
-                //ws.SetCols(5);
-                //ws.ColumnHeaders[0].Text = "Mã";
-                //ws.ColumnHeaders[1].Text = "Tên";
-                //ws.ColumnHeaders[2].Text = "VL";
-                //ws.ColumnHeaders[3].Text = "NC";
-                //ws.ColumnHeaders[4].Text = "CM";
+                ws.SetCols(11);
+                ws.ColumnHeaders[0].Text = "STT";
+                ws.ColumnHeaders[1].Text = "Mã VL";
+                ws.ColumnHeaders[2].Text = "Tên vật liệu";
+                ws.ColumnHeaders[3].Text = "Đơn vị";
+                ws.ColumnHeaders[4].Text = "Hao phí";
+                ws.ColumnHeaders[5].Text = "Giá gốc";
+                ws.ColumnHeaders[6].Text = "Giá TB";
+                ws.ColumnHeaders[7].Text = "Giá HT";
+                ws.ColumnHeaders[8].Text = "Loại VL";
+                ws.ColumnHeaders[9].Text = "HP khác";
+                ws.ColumnHeaders[10].Text = "";
+                ws.ColumnHeaders[11].Text = "Hao phí gốc"; // ẩn không hiển thị
             }
         }
 
@@ -68,7 +75,7 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
             {
                 for (int i = 1; i < ws.UsedRange.Rows; i++)
                 {
-                    objects[i] = new Row(i);
+                    objects[i] = new Row(ws,i);
                     objects[i].bind(ws);
                 }
             }

@@ -9,55 +9,87 @@ namespace Worksheet.modDisplay.templates.dinhmucvatlieu
 {
     internal class Row : ARowObject
     {
-        public Row(int id)
-        {
+        public Row(unvell.ReoGrid.Worksheet worksheet, int id)
+        {   
+            ws = worksheet;
             Id = id;
         }
+        /// <summary>
+        /// STT
+        /// </summary>
+        public Cell A { get { return GetCell("A"); } }
+        /// <summary>
+        /// Mã VL
+        /// </summary>
+        public Cell B { get { return GetCell("B"); } }
+        /// <summary>
+        /// Tên vật liệu
+        /// </summary>
+        public Cell C { get { return GetCell("C"); } }
+        /// <summary>
+        /// Đơn vị
+        /// </summary>
+        public Cell D { get { return GetCell("D"); } }
+        /// <summary>
+        /// Hao phí
+        /// </summary>
+        public Cell E { get { return GetCell("E"); } }
+        /// <summary>
+        /// Giá gốc
+        /// </summary>
+        public Cell F { get { return GetCell("F"); } }
+        /// <summary>
+        /// Giá TB
+        /// </summary>
+        public Cell G { get { return GetCell("G"); } }
+        /// <summary>
+        /// Giá HT
+        /// </summary>
+        public Cell H { get { return GetCell("H"); } }
+        /// <summary>
+        /// Loại VL
+        /// </summary>
+        public Cell I { get { return GetCell("I"); } }
+        /// <summary>
+        /// HP khác
+        /// </summary>
+        public Cell J { get { return GetCell("J"); } }
+
+        public Cell K { get { return GetCell("K"); } }
+        /// <summary>
+        /// Hao phí gốc
+        /// </summary>
+        public Cell L { get { return GetCell("L"); } }
 
         public void bind(unvell.ReoGrid.Worksheet data)
         {
-            // TODO: consider a link to cell address, not a data hold
-            // Current status: map column to BL/cell
-            //  A = data.Cells["A"+Id].Data.ToString();
-            // B = data.Cells["B"+Id].Data.ToString();
-
-            // modData.Memories.Models.CongViec.capnhat(this);
         }
 
         public void AddSimpleData(unvell.ReoGrid.Worksheet ws)
         {
-            // mã công việc
-            //ws[Address("C")] = "AG.11111";
-            //// tên công việc
-            //ws[Address("D")] = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
-            //// đơn vị
-            //ws[Address("E")] = "m3";
+            A.Data = "1";
+            // Mã VL
+            B.Data = "C2221";
+            // Tên vật liệu
+            C.Data = "Vữa bê tông M100, XM PCB30, đá 1x2, độ sụt 2÷4cm";
+            // đơn vị
+            D.Data = "m3";
+            // hao phí
+            E.Data = 1.015;
+            F.Data = 671718.771;
+            G.Data = 671718.771;
+            H.Data = 671718.771;
+            I.Data = "C";
+            J.Data = 0.5;
+            K.Data = "";
+            L.Data = 1.015;
 
-            //// HSDC vật liệu
-            //ws[Address("V")] = 1;
-            //// HSDC nhân công
-            //ws[Address("W")] = 1;
-            //// HSDC máy
-            //ws[Address("X")] = 1;
-
-            //// thông tin đơn giá
-            //ws[Address("Y")] = "DinhMuc_2021XD_D12";
-
-            //// tổng giá tất cả vật liệu của công việc 
-            //ws[Address("Z")] = 685204;
-            //// tổng giá tất cả vật liệu phụ của công việc 
-            //ws[Address("AA")] = 0;
-            //// tổng giá tất cả nhân công của công việc 
-            //ws[Address("AB")] = 288111;
-            //// tổng giá tất cả máy của công việc 
-            //ws[Address("AC")] = 70230;
-
-            //// set màu chữ thành không màu
-            //ws.SetRangeStyles(Address("Z") + ":" + Address("AC"), new WorksheetRangeStyle()
-            //{
-            //    Flag = PlainStyleFlag.TextColor,
-            //    TextColor = Color.Transparent,
-            //});
+            // set màu chữ thành không màu
+            ws.SetRangeStyles(K.Position.ToAddress() + ":" + L.Position.ToAddress(), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextColor,
+                TextColor = Color.Transparent,
+            });
         }
     }
 }

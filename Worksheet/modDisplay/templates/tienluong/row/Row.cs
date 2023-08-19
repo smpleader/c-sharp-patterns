@@ -207,7 +207,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             List<string> colsHaveFormula = new List<string>() { "M", "N", "O", "P", "Q", "R", "S", "T", "U" };
             foreach (string col in colsHaveFormula)
             {
-                ws[Address(col)] = GetFormula(col);
+                ws[col +Id] = GetFormula(col);
             }
         }
 
@@ -240,7 +240,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             AC.Data = 70230;
 
             // set màu chữ thành không màu
-            ws.SetRangeStyles(Address("Z") + ":" + Address("AC"), new WorksheetRangeStyle()
+            ws.SetRangeStyles(Z.Position.ToAddress() + ":" + AC.Position.ToAddress(), new WorksheetRangeStyle()
             {
                 Flag = PlainStyleFlag.TextColor,
                 TextColor = Color.Transparent,
