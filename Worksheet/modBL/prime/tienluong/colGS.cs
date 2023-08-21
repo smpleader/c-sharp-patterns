@@ -8,20 +8,14 @@ namespace Worksheet.modBL.prime.tienluong
 {
     internal class colGS : ICell
     {
+        // Cột S cho group object
+        public string Col { get { return "S"; } }
         public string option { get { return ""; } }
-        // return forumalation of cell
-        public string fml()
-        {
-            return "= SUMIF(B{0}:B{1},\">0\",S{0}:S{1})";
-        }
-        public string fml(string[] args)
+        public string Name => "NhomCongViec_ThanhTienVatLieuPhu";
+
+        public string formula(string[] args)
         {
             return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", S{args[0]}:S{args[1]})";
-        }
-        // return value of cell
-        public decimal val()
-        {
-            return 0;
         }
     }
 }

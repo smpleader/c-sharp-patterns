@@ -12,12 +12,11 @@ namespace Worksheet.modBL
      */
     interface ICell
     {
+        string Name { get; }
+        string Col { get;}
         string option { get; }
-        // return forumalation of cell
-        string fml();
-        // return value of cell
-        decimal val();
-        string fml(string[] args);
 
+        // return forumalation of cell
+        string formula(string[] args);
     }
 }

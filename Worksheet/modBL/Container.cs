@@ -14,7 +14,7 @@ namespace Worksheet.modBL
             {"test2", new prime.vatlieu.colA() },
 
             // row tiên lượng
-            {"CongViec_KhoiLuongPhu", new prime.tienluong.ColM()},
+            {"CongViec_KhoiLuongPhu", new prime.tienluong.ColL()},
             {"CongViec_KhoiLuong", new prime.tienluong.ColM()},
             {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
             {"CongViec_DonGiaVatLieuPhu", new prime.tienluong.colO()},

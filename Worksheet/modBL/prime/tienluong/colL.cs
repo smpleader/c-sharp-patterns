@@ -8,22 +8,13 @@ namespace Worksheet.modBL.prime.tienluong
 {
     internal class ColL : ICell
     {
+        // Cột L cho row object
+        public string Col { get { return "L"; } }
         public string option { get { return ""; } }
-        // return forumalation of cell
-        public string fml()
-        {
-            return "";
-        }
-
-        public string fml(string[] args)
+        public string Name => "CongViec_KhoiLuongPhu";
+        public string formula(string[] args)
         {
             return $"=G{args[0]}*H{args[0]}*I{args[0]}*J{args[0]}*K{args[0]}";
-        }
-
-        // return value of cell
-        public decimal val()
-        {
-            return 0;
         }
     }
 }

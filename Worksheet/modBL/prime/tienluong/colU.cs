@@ -8,27 +8,19 @@ namespace Worksheet.modBL.prime.tienluong
 {
     internal class colU : ICell
     {
+        // Cột U cho row object
+        public string Col { get {return "U"; } }
         public string option { get { return ""; } }
-        // return forumalation of cell
-        public string fml()
-        {
-            return "=M{0}*Q{1}";
-        }
-
+        public string Name => "CongViec_ThanhTienMay";
+      
         /// <summary>
         /// chỉ có 1 phần từ
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public string fml(string[] args)
+        public string formula(string[] args)
         {
             return $"=M{args[0]}*Q{args[0]}";
-        }
-
-        // return value of cell
-        public decimal val()
-        {
-            return 0;
         }
     }
 }

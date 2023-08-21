@@ -9,6 +9,11 @@ namespace Worksheet.modBL
     internal class DefaultCell : ICell
     {
         public string option { get { return ""; } }
+
+        public string Col => "A";
+
+        public string Name => throw new NotImplementedException();
+
         // return forumalation of cell
         public string fml()
         {
@@ -20,7 +25,7 @@ namespace Worksheet.modBL
             return 0;
         }
 
-        string ICell.fml(string[] args)
+        string ICell.formula(string[] args)
         {
             throw new NotImplementedException();
         }

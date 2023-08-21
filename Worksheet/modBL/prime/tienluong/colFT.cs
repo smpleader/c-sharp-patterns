@@ -8,21 +8,13 @@ namespace Worksheet.modBL.prime.tienluong
 {
     internal class colFT : ICell
     {
+        // Cột T cho foot object
+        public string Col { get { return "T"; } }
         public string option { get { return ""; } }
-        // return forumalation of cell
-        public string fml()
-        {
-            return "=SUMIF(B{0}:B{1},\">0\",T{0}:T{1})";
-        }
-        public string fml(string[] args)
+        public string Name => "CongViec_TongThanhTienNhanCong";
+        public string formula(string[] args)
         {
             return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", T{args[0]}:T{args[1]})";
-        }
-
-        // return value of cell
-        public decimal val()
-        {
-            return 0;
         }
     }
 }
