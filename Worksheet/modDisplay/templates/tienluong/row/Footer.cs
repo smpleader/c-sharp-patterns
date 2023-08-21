@@ -10,6 +10,12 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Footer : ARowObject
     {
+        Dictionary<string, string> aliasUniqueName = new Dictionary<string, string>() {
+            { "R", "CongViec_ThanhTienVatLieu" },
+            { "S", "CongViec_ThanhTienVatLieuPhu" },
+            { "T", "CongViec_ThanhTienNhanCong" },
+            { "U", "CongViec_ThanhTienMay" },
+        };
         public Footer(unvell.ReoGrid.Worksheet worksheet)
         {
             ws = worksheet;
@@ -72,76 +78,22 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 return U.GetData<decimal>();
             }
         }
-
-        /// <summary>
-        /// Lấy công thức cho các cột  R, S, T, U
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public override string GetFormula(string col)
-        {
-            string uniqueName = "";
-            string formula;
-            string[] parameters = new string[2] { start.ToString(), end.ToString() };
-            switch (col)
-            {
-                case "R":
-                    uniqueName = "CongViec_ThanhTienVatLieu";
-                    break;
-                case "S":
-                    uniqueName = "CongViec_ThanhTienVatLieuPhu";
-                    break;
-                case "T":
-                    uniqueName = "CongViec_ThanhTienNhanCong";
-                    break;
-                case "U":
-                    uniqueName = "CongViec_ThanhTienMay";
-                    break;
-                default: break;
-            }
-            formula = string.Format(modBL.Container.Get(uniqueName).fml(parameters));
-            return formula;
-        }
+        
         public void bind()
         {
-            for (int indexRow = start; indexRow <= ws.MaxContentRow; indexRow++)
-            {
-                // Tìm dòng cuối của template
-                if (!IsCellEmptyOrNull(ws, "A" + indexRow))
-                {
-                    if (CellUtility.ConvertData<string>(ws["A" + indexRow]) == "CỘNG HẠNG MỤC")
-                    {
-                        Id = indexRow;
-                        end = indexRow - 1;
-                    }
-                }
-            }
+            Id = this.FindIndexRowFooter(ws, start);
+            end = Id - 1;
         }
 
         public void render()
         {
             // todo: render lại khi thêm hoặc xóa dòng
-            List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
-            foreach (string col in colsHaveFormula)
+            string[] parameters = new string[2] { start.ToString(), end.ToString() };
+            foreach (string colName in aliasUniqueName.Keys)
             {
-                ws[col + Id] = GetFormula(col);
+                string formula = string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters));
+                ws[colName + Id] = formula;
             }
-        }
-
-        /// <summary>
-        /// Kiểm tra cell có null hoặc empty không
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="cellAddress"></param>
-        /// <returns></returns>
-        static bool IsCellEmptyOrNull(unvell.ReoGrid.Worksheet worksheet, string cellAddress)
-        {
-            var cell = CellUtility.ConvertData<string>(worksheet[cellAddress]);
-            if (cell == null || cell == "")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

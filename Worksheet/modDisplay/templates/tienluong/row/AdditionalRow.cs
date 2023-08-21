@@ -21,40 +21,40 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
-        public Cell C { get { return GetCell("C"); } }
+        public Cell C { get { return this.Cell("C"); } }
         /// <summary>
         /// Công thức diễn giả
         /// </summary>
-        public Cell D { get { return GetCell("D"); } }
+        public Cell D { get { return this.Cell("D"); } }
       
         /// <summary>
         /// Tên CK
         /// </summary>
-        public Cell F { get { return GetCell("F"); } }
+        public Cell F { get { return this.Cell("F"); } }
         /// <summary>
         /// Số CK
         /// </summary>
-        public Cell G { get { return GetCell("G"); } }
+        public Cell G { get { return this.Cell("G"); } }
         /// <summary>
         /// Dài
         /// </summary>
-        public Cell H { get { return GetCell("H"); } }
+        public Cell H { get { return this.Cell("H"); } }
         /// <summary>
         /// Rộng
         /// </summary>
-        public Cell I { get { return GetCell("I"); } }
+        public Cell I { get { return this.Cell("I"); } }
         /// <summary>
         /// Cao
         /// </summary>
-        public Cell J { get { return GetCell("J"); } }
+        public Cell J { get { return this.Cell("J"); } }
         /// <summary>
         /// HS phụ
         /// </summary>
-        public Cell K { get { return GetCell("K"); } }
+        public Cell K { get { return this.Cell("K"); } }
         /// <summary>
         /// KL Phụ
         /// </summary>
-        public Cell L { get { return GetCell("L"); } }
+        public Cell L { get { return this.Cell("L"); } }
         
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         public override string GetFormula(string col)
         {
             string[] parameters = new string[1] { Id.ToString() };
-            return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").fml(parameters));
+            return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").formula(parameters));
         }
         public void bind()
         {
@@ -120,6 +120,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 return number.ToString($"0.{new string('0', decimalPlaces)}");
             }
         }
+        
         static bool IsValidExpression(string expression)
         {
             try
@@ -131,6 +132,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 return false;
             }
         }
+        
         static double EvaluateExpression(string expression)
         {
             // Sử dụng DataTable.Compute để tính toán giá trị biểu thức
@@ -141,6 +143,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             return double.Parse((string)row["expression"]);
         }
 
+        
         internal void render()
         {
             

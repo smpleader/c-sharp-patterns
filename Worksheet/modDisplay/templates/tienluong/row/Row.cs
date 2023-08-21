@@ -25,117 +25,117 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// <summary>
         /// Ký hiệu bản vẽ
         /// </summary>
-        public Cell A { get {return GetCell("A");} }
+        public Cell A { get {return this.Cell("A");} }
         /// <summary>
         /// STT
         /// </summary>
-        public Cell B { get { return GetCell("B"); } }
+        public Cell B { get { return this.Cell("B"); } }
         /// <summary>
         /// MSCV
         /// </summary>
-        public Cell C { get { return GetCell("C"); } }
+        public Cell C { get { return this.Cell("C"); } }
         /// <summary>
         /// Tên công việc
         /// </summary>
-        public Cell D { get { return GetCell("D"); } }
+        public Cell D { get { return this.Cell("D"); } }
         /// <summary>
         /// Đơn vị
         /// </summary>
-        public Cell E { get { return GetCell("E"); } }
+        public Cell E { get { return this.Cell("E"); } }
         /// <summary>
         /// Tên CK
         /// </summary>
-        public Cell F { get { return GetCell("F"); } }
+        public Cell F { get { return this.Cell("F"); } }
         /// <summary>
         /// Số CK
         /// </summary>
-        public Cell G { get { return GetCell("G"); } }
+        public Cell G { get { return this.Cell("G"); } }
         /// <summary>
         /// Dài
         /// </summary>
-        public Cell H { get { return GetCell("H"); } }
+        public Cell H { get { return this.Cell("H"); } }
         /// <summary>
         /// Rộng
         /// </summary>
-        public Cell I { get { return GetCell("I"); } }
+        public Cell I { get { return this.Cell("I"); } }
         /// <summary>
         /// Cao
         /// </summary>
-        public Cell J { get { return GetCell("J"); } }
+        public Cell J { get { return this.Cell("J"); } }
         /// <summary>
         /// HS phụ
         /// </summary>
-        public Cell K { get { return GetCell("K"); } }
+        public Cell K { get { return this.Cell("K"); } }
         /// <summary>
         /// KL Phụ
         /// </summary>
-        public Cell L { get { return GetCell("L"); } }
+        public Cell L { get { return this.Cell("L"); } }
         /// <summary>
         /// Khối lượng
         /// </summary>
-        public Cell M { get { return GetCell("M"); } }
+        public Cell M { get { return this.Cell("M"); } }
         /// <summary>
         /// Đơn giá vật liệu
         /// </summary>
-        public Cell N { get { return GetCell("N"); } }
+        public Cell N { get { return this.Cell("N"); } }
         /// <summary>
         /// Đơn giá vật liệu phụ
         /// </summary>
-        public Cell O { get { return GetCell("O"); } }
+        public Cell O { get { return this.Cell("O"); } }
         /// <summary>
         /// Đơn giá nhân công
         /// </summary>
-        public Cell P { get { return GetCell("P"); } }
+        public Cell P { get { return this.Cell("P"); } }
         /// <summary>
         /// Đơn giá máy
         /// </summary>
-        public Cell Q { get { return GetCell("Q"); } }
+        public Cell Q { get { return this.Cell("Q"); } }
         /// <summary>
         /// Thành tiền vật liệu
         /// </summary>
-        public Cell R { get { return GetCell("R"); } }
+        public Cell R { get { return this.Cell("R"); } }
         /// <summary>
         /// Thành tiền vật liệu phụ
         /// </summary>
-        public Cell S { get { return GetCell("S"); } }
+        public Cell S { get { return this.Cell("S"); } }
         /// <summary>
         /// Thành tiền nhân công
         /// </summary>
-        public Cell T { get { return GetCell("T"); } }
+        public Cell T { get { return this.Cell("T"); } }
         /// <summary>
         /// Thành tiền máy
         /// </summary>
-        public Cell U { get { return GetCell("U"); } }
+        public Cell U { get { return this.Cell("U"); } }
         /// <summary>
         /// Hệ số điều chỉnh vật liệu
         /// </summary>
-        public Cell V { get { return GetCell("V"); } }
+        public Cell V { get { return this.Cell("V"); } }
         /// <summary>
         /// Hệ số điều chỉnh nhân công
         /// </summary>
-        public Cell W { get { return GetCell("W"); } }
+        public Cell W { get { return this.Cell("W"); } }
         /// <summary>
         /// Hệ số điều chỉnh máy
         /// </summary>
-        public Cell X { get { return GetCell("X"); } }
+        public Cell X { get { return this.Cell("X"); } }
         /// <summary>
         /// Thông tin đơn giá
         /// </summary>
-        public Cell Y { get { return GetCell("Y"); } }
+        public Cell Y { get { return this.Cell("Y"); } }
         /// <summary>
         /// Tổng giá của tất cả các vật liệu
         /// </summary>
-        public Cell Z { get { return GetCell("Z"); } }
+        public Cell Z { get { return this.Cell("Z"); } }
         /// <summary>
         /// Tổng giá của tất cả các vật liệu phụ
         /// </summary>
-        public Cell AA { get { return GetCell("AA"); } }
+        public Cell AA { get { return this.Cell("AA"); } }
         /// <summary>
         /// Tổng giá của tất cả các nhân công
         /// </summary>
-        public Cell AB { get { return GetCell("AB"); } }
+        public Cell AB { get { return this.Cell("AB"); } }
         /// Tổng giá của tất cả các máy
-        public Cell AC { get { return GetCell("AC"); } }
+        public Cell AC { get { return this.Cell("AC"); } }
 
         /// <summary>
         /// Lấy công thức cho các cột M, N, O, P, Q, R, S, T, U
@@ -158,7 +158,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                     }
                     else
                     {
-                        return M.GetData<string>();
+                        return this.Cell("M").GetData<string>();
                     }
                 case "N":
                     uniqueName = "CongViec_DonGiaVatLieu";
@@ -194,7 +194,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                     break;
                 default: break;
             }
-            formula = string.Format(modBL.Container.Get(uniqueName).fml(parameters));
+            formula = string.Format(modBL.Container.Get(uniqueName).formula(parameters));
             return formula;
         }
 
@@ -213,30 +213,19 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
         public void AddSimpleData()
         {
-            // mã công việc
             C.Data = "AG.11111";
-            // tên công việc
             D.Data = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
-            // đơn vị
             E.Data = "m3";
 
-            // HSDC vật liệu
             V.Data = 1;
-            // HSDC nhân công
             W.Data = 1;
-            // HSDC máy
             X.Data = 1;
 
-            // thông tin đơn giá
             Y.Data = "DinhMuc_2021XD_D12";
 
-            // tổng giá tất cả vật liệu của công việc 
             Z.Data = 685204;
-            // tổng giá tất cả vật liệu phụ của công việc 
             AA.Data = 0;
-            // tổng giá tất cả nhân công của công việc 
             AB.Data = 288111;
-            // tổng giá tất cả máy của công việc 
             AC.Data = 70230;
 
             // set màu chữ thành không màu

@@ -28,6 +28,5 @@ namespace Worksheet.modDisplay
             Cell cell = ws.Cells[col + Id];
             return cell;
         }
-
     }
 }

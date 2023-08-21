@@ -32,32 +32,19 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (ws.IsMergedCell("B" + indexRow))
+                if (Helper.IsGroupObject(ws,indexRow))
                 {
                     indexGroups.Add(indexRow);
+                    continue;
                 }
-                else
+                if (Helper.IsRowObject(ws, indexRow))
                 {
-                    if (Util.CellUtility.IsCellEmptyOrNull(ws, "B" + indexRow) && Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
-                    {
-                        // check công thức diễn giải khi nhập vào
-                        if (!Util.CellUtility.IsCellEmptyOrNull(ws, "D" + indexRow) || !Util.CellUtility.IsCellEmptyOrNull(ws, "L" + indexRow))
-                        {
-                            indexAdditionalRows.Add(indexRow);
-                        }
-                    }
-                    if (!Util.CellUtility.IsCellEmptyOrNull(ws, "C" + indexRow))
-                    {
-                        string C = CellUtility.ConvertData<string>(ws["C" + indexRow]);
-                        if (C != null && C.StartsWith("*"))
-                        {
-                            indexGroups.Add(indexRow);
-                        }
-                        else
-                        {
-                            indexRows.Add(indexRow);
-                        }
-                    }
+                    indexRows.Add(indexRow);
+                    continue;
+                }
+                if (Helper.IsAdditionalRowObject(ws,indexRow))
+                {
+                    indexAdditionalRows.Add(indexRow);
                 }
             }
 
@@ -101,7 +88,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 int indexRow = indexRows[i];
                 rows[indexRow] = new Row(ws,indexRow);
-                int endRowGroup = InGroup(indexRow) != -1 ? InGroup(indexRow) : end;
+                int endRowGroup = IndexInGroup(indexRow) != -1 ? IndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
                 // tính toán dòng bắt đầu kết thúc
@@ -141,7 +128,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
         }
 
-        private int InGroup(int index)
+        private int IndexInGroup(int index)
         {
             foreach (Group group in groups.Values)
             {

@@ -15,6 +15,12 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Group : ARowObject
     {
+        Dictionary<string, string> aliasUniqueName = new Dictionary<string, string>() {
+            { "R", "NhomCongViec_ThanhTienVatLieu" },
+            { "S", "NhomCongViec_ThanhTienVatLieuPhu" },
+            { "T", "NhomCongViec_ThanhTienNhanCong" },
+            { "U", "NhomCongViec_ThanhTienMay" },
+        };
         public Group(unvell.ReoGrid.Worksheet worksheet, int id)
         {
             ws = worksheet;
@@ -24,65 +30,37 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// <summary>
         /// Ký hiệu bản vẽ
         /// </summary>
-        public Cell A { get { return GetCell("A"); } }
+        public Cell A { get { return this.Cell("A"); } }
         /// <summary>
         /// STT
         /// </summary>
-        public Cell B { get { return GetCell("B"); } }
+        public Cell B { get { return this.Cell("B"); } }
         /// <summary>
         /// MSCV
         /// </summary>
-        public Cell C { get { return GetCell("C"); } }
+        public Cell C { get { return this.Cell("C"); } }
         /// <summary>
         /// Đơn giá máy
         /// </summary>
-        public Cell Q { get { return GetCell("Q"); } }
+        public Cell Q { get { return this.Cell("Q"); } }
         /// <summary>
         /// Tổng thành tiền vật liệu của nhóm
         /// </summary>
-        public Cell R { get { return GetCell("R"); } }
+        public Cell R { get { return this.Cell("R"); } }
         /// Tổng thành tiền vật liệu phụ của nhóm
-        public Cell S { get { return GetCell("S"); } }
+        public Cell S { get { return this.Cell("S"); } }
         /// <summary>
         /// Tổng thành tiền nhân công của nhóm
         /// </summary>
-        public Cell T { get { return GetCell("T"); } }
+        public Cell T { get { return this.Cell("T"); } }
         /// <summary>
         /// Tổng thành tiền máy của nhóm
         /// </summary>
-        public Cell U { get { return GetCell("U"); } }
+        public Cell U { get { return this.Cell("U"); } }
         /// <summary>
         /// Hệ số điều chỉnh máy
         /// </summary>
-        public Cell X { get { return GetCell("X"); } }
-        /// <summary>
-        /// Lấy công thức cho các cột R, S, T, U
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public override string GetFormula(string col)
-        {
-            string uniqueName = "";
-            switch (col)
-            {
-                case "R":
-                    uniqueName = "NhomCongViec_ThanhTienVatLieu";
-                    break;
-                case "S":
-                    uniqueName = "NhomCongViec_ThanhTienVatLieuPhu";
-                    break;
-                case "T":
-                    uniqueName = "NhomCongViec_ThanhTienNhanCong";
-                    break;
-                case "U":
-                    uniqueName = "NhomCongViec_ThanhTienMay";
-                    break;
-                default: return uniqueName;
-            }
-            string[] parameters = new string[2] { start.ToString(), end.ToString() };
-            return string.Format(modBL.Container.Get(uniqueName).fml(parameters));
-        }
-
+        public Cell X { get { return this.Cell("X"); } }
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
@@ -95,6 +73,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 {
                     nameGroup = "(Nhóm không tên)";
                 }
+                // merge khi có dấu hiệu của group
                 ws.MergeRange(B.Position.ToAddress() + ":" + Q.Position.ToAddress());
                 B.Data = nameGroup;
 
@@ -139,10 +118,11 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
         public void render()
         {
-            List<string> colsHaveFormula = new List<string>() { "R", "S", "T", "U" };
-            foreach (string col in colsHaveFormula)
+            string[] parameters = new string[2] { start.ToString(), end.ToString() };
+            foreach (string colName in aliasUniqueName.Keys)
             {
-                ws[col + Id] = GetFormula(col);
+                string formula = string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters));
+                ws[colName + Id] = formula;
             }
         }
     }

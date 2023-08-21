@@ -17,7 +17,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// <summary>
         /// Tên công trình hoặc tên hạng mục
         /// </summary>
-        public Cell B { get { return GetCell("B"); } }
+        public Cell B { get { return this.Cell("B"); } }
         public void bind()
         {
             // todo: Lưu giá trị của header tới global state
