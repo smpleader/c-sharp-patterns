@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.vatlieu
 {
-    internal class colA : ICell
+    internal class colW : ICell
     {
         public string option { get { return ""; } }
-        public string Col => "A";
-        public string Name => "VatLieu_KhongCoTen";
+        public string Col => "W";
+        public string Name => "VatLieu_GhiChu";
         public string formula(string[] args)
         {
             return "";
