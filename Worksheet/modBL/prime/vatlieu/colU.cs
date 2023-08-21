@@ -6,14 +6,24 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.vatlieu
 {
-    internal class colU : ICell
+    internal class colU : ACell
     {
-        public string option { get { return ""; } }
-        public string Col => "U";
-        public string Name => "VatLieu_TongCuoc";
-        public string formula(string[] args)
+        public colU(Option opt) : base(opt)
         {
-            return "";
+        }
+
+        public override string Col => "U";
+        public override string Name => "VatLieu_TongCuoc";
+        public override string formula(string[] args)
+        {
+            switch(Option.PPTGiaVatLieu)
+            {
+                case PPTGiaVatLieu.NhapTay:
+                    return "";
+                case PPTGiaVatLieu.CongCuocVanChuyen:
+                    return $"=SUM(M{args[0]}:S{args[0]})";
+            }
+            return base.formula(args);
         }
     }
 }

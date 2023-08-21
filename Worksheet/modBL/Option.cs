@@ -8,9 +8,9 @@ namespace Worksheet.modBL
 {
     public class Option
     {
-        PPTGiaVatLieu PPTGiaVatLieu { get; set; } = PPTGiaVatLieu.NhapTay;
-        PPTGiaNhanCong PPTGiaNhanCong { get; set; } = PPTGiaNhanCong.NhapTay;
-        PPTGiaMay PPTGiaMay { get; set; } = PPTGiaMay.NhapTay;
+        public static PPTGiaVatLieu PPTGiaVatLieu { get; set; } = PPTGiaVatLieu.NhapTay;
+        public static PPTGiaNhanCong PPTGiaNhanCong { get; set; } = PPTGiaNhanCong.NhapTay;
+        public static PPTGiaMay PPTGiaMay { get; set; } = PPTGiaMay.NhapTay;
     }
     public enum PPTGiaVatLieu
     {

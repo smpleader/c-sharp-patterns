@@ -14,7 +14,7 @@ namespace Worksheet.modBL
     {
         string Name { get; }
         string Col { get;}
-        string option { get; }
+        Option Option { get; set; }
 
         // return forumalation of cell
         string formula(string[] args);

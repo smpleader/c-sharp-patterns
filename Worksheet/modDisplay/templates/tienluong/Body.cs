@@ -88,7 +88,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 int indexRow = indexRows[i];
                 rows[indexRow] = new Row(ws,indexRow);
-                int endRowGroup = IndexInGroup(indexRow) != -1 ? IndexInGroup(indexRow) : end;
+                int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
                 // tính toán dòng bắt đầu kết thúc
@@ -128,7 +128,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
         }
 
-        private int IndexInGroup(int index)
+        private int LastIndexInGroup(int index)
         {
             foreach (Group group in groups.Values)
             {
