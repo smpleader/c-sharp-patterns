@@ -102,12 +102,12 @@ namespace Worksheet.MVC.Views
             switch (tabControl1.SelectedTab.Text)
             {
                 case "Tiên lượng":
-                    Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
+                    Display.setup(sheet_TienLuong);
                     btn_ThemCongViec.Enabled = true;
                     bbtn_ThemVatLieu.Enabled = false;
                     break;
                 case "Vật liệu":
-                    Display.setup(sheet_VatLieu, AppConst.templateFolder + "GiaVatLieu");
+                    Display.setup(sheet_VatLieu);
                     switch (Option.PPTGiaVatLieu)
                     {
                         case PPTGiaVatLieu.NhapTay:

@@ -12,7 +12,6 @@ namespace Worksheet.modBL
         public static PPTCuocOto PPTCuocOto { get; set; } = PPTCuocOto.TheoTongCuLy;
         public static PPTCuocSong PPTCuocSong { get; set; } = PPTCuocSong.MauChung;
         public static PPTCuocTC PPTCuocTC { get; set; } = PPTCuocTC.TheoTT12_2021;
-
         public static PPTGiaNhanCong PPTGiaNhanCong { get; set; } = PPTGiaNhanCong.NhapTay;
         public static PPTGiaMay PPTGiaMay { get; set; } = PPTGiaMay.NhapTay;
     }

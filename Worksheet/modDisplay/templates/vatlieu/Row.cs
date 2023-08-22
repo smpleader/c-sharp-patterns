@@ -130,22 +130,6 @@ namespace Worksheet.modDisplay.templates.vatlieu
         public Cell AB { get { return this.Cell("AB"); } }
         /// Tổng giá của tất cả các máy
         public Cell AC { get { return this.Cell("AC"); } }
-        //class ACol
-        //{
-        //    public ACol(Row r)
-        //    {
-        //        Row = r;
-        //    }
-        //    public Row Row { get; set; }
-        //    public virtual string UniqueName { get { return ""; } }
-        //    public virtual string Col { get { return "A"; } }
-        //    public virtual string TongTienVatTu { get { return ""; } }
-        //    public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-        //    public virtual void render()
-        //    {
-        //        Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
-        //    }
-        //}
         class ColV : ACol
         {
             public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }

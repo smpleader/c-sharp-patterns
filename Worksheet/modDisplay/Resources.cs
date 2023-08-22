@@ -74,21 +74,11 @@ namespace Worksheet.modDisplay
                         {"Định mức vật liệu", new templates.dinhmucvatlieu.Generator()},
                         {"Định mức nhân công", new templates.dinhmucnhancong.Generator()},
                         {"Định mức máy", new templates.dinhmucmay.Generator()},
-                    }
-                }
-            },
-            { "Template/GiaVatLieu",
-                new FileTemplate(){
-                    Id = 2,
-                    Name = "Template Giá vật liệu",
-                    Path = "Content/Template/GiaVatLieu.xlsx",
-                    Version = "0.1",
-                    Release = "20230702",
-                    Group = {},
-                    Note = "Dùng cho việc cập nhật thông tin vật liệu",
-                    Tabs = new Dictionary<string, ISheet>()
-                    {
                         {"Giá vật liệu", new templates.vatlieu.Generator()},
+                        {"Cước ô tô", new templates.vatlieu.Generator()},
+                        {"Cước TC", new templates.vatlieu.Generator()},
+                        {"Cước biển", new templates.vatlieu.Generator()},
+                        {"Cước sông", new templates.vatlieu.Generator()},
                     }
                 }
             }
