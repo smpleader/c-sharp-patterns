@@ -213,7 +213,6 @@ namespace Worksheet.modDisplay.templates.vatlieu
         {
             public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
             public override string Col { get { return "L"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
             public ColL(Row r) : base(r)
