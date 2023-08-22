@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.tienluong
 {
-    internal class colFR : ICell
+    internal class colFR : ACell
     {
+        public colFR(Option opt) : base(opt)
+        {
+        }
+
         // Cột R cho foot object
-        public string Col { get { return "R"; } }
-        public string option { get { return ""; } }
-        public string Name => "CongViec_TongThanhTienVatLieu";
+        public override string Col { get { return "R"; } }
+        public override string Name => "CongViec_TongThanhTienVatLieu";
 
         // return forumalation of cell
-        public string formula(string[] args)
+        public override string formula(string[] args)
         {
             return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", R{args[0]}:R{args[1]})";
         }

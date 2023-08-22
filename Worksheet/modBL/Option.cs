@@ -9,6 +9,7 @@ namespace Worksheet.modBL
     public class Option
     {
         public static PPTGiaVatLieu PPTGiaVatLieu { get; set; } = PPTGiaVatLieu.NhapTay;
+        public static PPTCuocOto PPTCuocOto { get; set; } = PPTCuocOto.TheoTongCuLy;
         public static PPTGiaNhanCong PPTGiaNhanCong { get; set; } = PPTGiaNhanCong.NhapTay;
         public static PPTGiaMay PPTGiaMay { get; set; } = PPTGiaMay.NhapTay;
     }

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.tienluong
 {
-    internal class colGS : ICell
+    internal class colGS : ACell
     {
-        // Cột S cho group object
-        public string Col { get { return "S"; } }
-        public string option { get { return ""; } }
-        public string Name => "NhomCongViec_ThanhTienVatLieuPhu";
+        public colGS(Option opt) : base(opt)
+        {
+        }
 
-        public string formula(string[] args)
+        // Cột S cho group object
+        public override string Col { get { return "S"; } }
+        public override string Name => "NhomCongViec_ThanhTienVatLieuPhu";
+        public override string formula(string[] args)
         {
             return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", S{args[0]}:S{args[1]})";
         }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL.prime.tienluong
 {
-    internal class colN : ICell
+    internal class colN : ACell
     {
+        public colN(Option opt) : base(opt)
+        {
+        }
+
         // Cột N cho row object
-        public string Col { get { return "N"; } }
-        public string option { get { return ""; } }
-        public string Name => "CongViec_DonGiaVatLieu";
-        public string formula(string[] args)
+        public override string Col { get { return "N"; } }
+        public override string Name => "CongViec_DonGiaVatLieu";
+        public override string formula(string[] args)
         {
             return $"=V{args[0]}*{args[1]}";
         }

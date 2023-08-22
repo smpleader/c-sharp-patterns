@@ -19,8 +19,10 @@ namespace Worksheet.modBL.prime.vatlieu
             switch(Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
+                case PPTGiaVatLieu.NhanHeSo:
                     return "";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
+                case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
                     return $"=SUM(M{args[0]}:S{args[0]})";
             }
             return base.formula(args);

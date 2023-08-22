@@ -13,6 +13,5 @@ namespace Worksheet.modBL.prime.vatlieu
         }
         public override string Col => "E";
         public override string Name => "VatLieu_TenVatLieu";
-     
     }
 }

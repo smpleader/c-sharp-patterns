@@ -16,7 +16,13 @@ namespace Worksheet.modBL.prime.vatlieu
         public override string Name => "VatLieu_CuocOto";
         public override string formula(string[] args)
         {
-            return "Cước ô tô.CuocOto_TongCuoc";
+            switch(Option.PPTCuocOto)
+            {
+                case PPTCuocOto.TheoTongCuLy:
+                    return $"'Cước ô tô'!.Y{args[0]}";
+                // todo: thêm các trường hợp cho các ppt khác
+            }
+            return base.formula(args);
         }
     }
 }
