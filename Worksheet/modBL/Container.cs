@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Worksheet.modData.Memories.Pointer;
@@ -9,37 +10,47 @@ namespace Worksheet.modBL
 {
     internal class Container
     {
-        private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>() {
-            {"", new DefaultCell() },
-            {"test2", new prime.vatlieu.colA() },
-
-            // row tiên lượng
-            {"CongViec_KhoiLuongPhu", new prime.tienluong.ColL()},
-            {"CongViec_KhoiLuong", new prime.tienluong.ColM()},
-            {"CongViec_DonGiaVatLieu", new prime.tienluong.colN()},
-            {"CongViec_DonGiaVatLieuPhu", new prime.tienluong.colO()},
-            {"CongViec_DonGiaNhanCong", new prime.tienluong.colP()},
-            {"CongViec_DonGiaMay", new prime.tienluong.colQ()},
-            {"CongViec_ThanhTienVatLieu", new prime.tienluong.colR()},
-            {"CongViec_ThanhTienVatLieuPhu", new prime.tienluong.colS()},
-            {"CongViec_ThanhTienNhanCong", new prime.tienluong.colT()},
-            {"CongViec_ThanhTienMay", new prime.tienluong.colU()},
-
-            //group tiên lượng
-            {"NhomCongViec_ThanhTienVatLieu", new prime.tienluong.colGR()},
-            {"NhomCongViec_ThanhTienVatLieuPhu", new prime.tienluong.colGS()},
-            {"NhomCongViec_ThanhTienNhanCong", new prime.tienluong.colGT()},
-            {"NhomCongViec_ThanhTienMay", new prime.tienluong.colGU()},
-
-            // foot tiên lượng
-            {"CongViec_TongThanhTienVatLieu", new prime.tienluong.colFR()},
-            {"CongViec_TongThanhTienVatLieuPhu", new prime.tienluong.colFS()},
-            {"CongViec_TongThanhTienNhanCong", new prime.tienluong.colFT()},
-            {"CongViec_TongThanhTienMay", new prime.tienluong.colFU()},
-        };
-
+        private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>(); 
         public static bool exists(string name) { return _instance.ContainsKey(name); }
         public static ICell Get(string name) {  return _instance[name]; }
 
+        public static void init()
+        {
+            string targetNamespace = "Worksheet.modBL.prime"; 
+            
+            // Lấy tất cả các namespace con
+            var subNamespaces = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => type.Namespace != null && type.Namespace.StartsWith(targetNamespace))
+                .Select(type => type.Namespace)
+                .Distinct()
+                .OrderBy(ns => ns)
+                .ToList();
+
+            foreach (var subNamespace in subNamespaces)
+            {
+                // Lấy tất cả các class trong namespace
+                var classesInNamespace = Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(type => type.Namespace == subNamespace && type.IsClass)
+                    .ToList();
+                foreach (var classType in classesInNamespace)
+                {
+                    // Tìm constructor với 1 parameter có kiểu Option
+                    var constructor = classType.GetConstructor(new Type[] { typeof(Worksheet.modBL.Option)});
+
+                    if (constructor != null)
+                    {
+                        // Tạo mảng parameter truyền vào constructor
+                        object[] parameters = new object[] { new Worksheet.modBL.Option() };
+
+                        // Tạo instance của class sử dụng constructor và parameter
+                        var instance = (ACell) constructor.Invoke(parameters);
+
+                        // Thêm vào dic 
+                        _instance[instance.Name] = instance;
+                    }
+                    
+                }
+            }
+        }
     }
 }

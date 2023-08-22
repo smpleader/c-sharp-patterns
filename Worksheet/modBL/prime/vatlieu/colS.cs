@@ -16,7 +16,7 @@ namespace Worksheet.modBL.prime.vatlieu
         public override string Name => "VatLieu_CuocBien";
         public override string formula(string[] args)
         {
-            return "Cước biển.CuocBien_ChiPhiVanChuyen";
+            return $"'Cước biển'!Q{args[0]}";
         }
     }
 }

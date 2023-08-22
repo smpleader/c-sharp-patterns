@@ -16,7 +16,12 @@ namespace Worksheet.modBL.prime.vatlieu
         public override string Name => "VatLieu_CuocSong";
         public override string formula(string[] args)
         {
-            return "Cước sông.CuocSong_TongCuoc";
+            switch(Option.PPTCuocSong)
+            {
+                case PPTCuocSong.MauChung:
+                    return $"'Cước sông'!P{args[0]}";
+            }
+            return base.formula(args);
         }
     }
 }

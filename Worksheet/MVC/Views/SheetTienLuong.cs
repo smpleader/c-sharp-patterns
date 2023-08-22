@@ -27,6 +27,7 @@ namespace Worksheet.MVC.Views
 
         public SheetTienLuong()
         {
+            Worksheet.modBL.Container.init();
             registerPresenters(true);
             InitializeComponent();
         }

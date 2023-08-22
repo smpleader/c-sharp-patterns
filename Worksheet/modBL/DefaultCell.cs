@@ -6,28 +6,16 @@ using System.Threading.Tasks;
 
 namespace Worksheet.modBL
 {
-    internal class DefaultCell : ICell
+    internal class DefaultCell : ACell
     {
-        public string option { get { return ""; } }
-
-        public string Col => "A";
-
-        public string Name => throw new NotImplementedException();
-
-        // return forumalation of cell
-        public string fml()
+        public DefaultCell(Option opt) : base(opt)
+        {
+        }
+        public override string Col => "A";
+        public override string Name => "Default";
+        public override string formula(string[] args)
         {
             return "";
-        }
-        // return value of cell
-        public decimal val()
-        {
-            return 0;
-        }
-
-        string ICell.formula(string[] args)
-        {
-            throw new NotImplementedException();
         }
     }
 }
