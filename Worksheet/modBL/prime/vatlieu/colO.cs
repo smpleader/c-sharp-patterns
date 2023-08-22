@@ -19,7 +19,9 @@ namespace Worksheet.modBL.prime.vatlieu
             switch(Option.PPTCuocSong)
             {
                 case PPTCuocSong.MauChung:
-                    return $"'Cước sông'!P{args[0]}";
+                    return $"='Cước sông'!P{args[0]}";
+                    // todo: thêm các trường hợp cho các ppt khác
+
             }
             return base.formula(args);
         }

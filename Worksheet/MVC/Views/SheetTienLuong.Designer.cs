@@ -49,7 +49,18 @@
             sheet_ChiTietMay = new unvell.ReoGrid.ReoGridControl();
             formulaBarControl1 = new EtaDt.MVCP.Views.Common.FormulaBarControl();
             tabPage2 = new TabPage();
+            panel8 = new Panel();
+            panel5 = new Panel();
+            panel6 = new Panel();
             sheet_VatLieu = new unvell.ReoGrid.ReoGridControl();
+            formulaBarControl2 = new EtaDt.MVCP.Views.Common.FormulaBarControl();
+            panel7 = new Panel();
+            bbtn_ThemVatLieu = new Button();
+            rdbtn_PPT_NhanHeSoCongCuocVC = new RadioButton();
+            rdbtn_PPT_NhanHeSo = new RadioButton();
+            rdbtn_PPT_CongCuocVC = new RadioButton();
+            rdbtn_PPT_NhapTay = new RadioButton();
+            label1 = new Label();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -61,6 +72,10 @@
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             tabPage2.SuspendLayout();
+            panel8.SuspendLayout();
+            panel5.SuspendLayout();
+            panel6.SuspendLayout();
+            panel7.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -248,7 +263,7 @@
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1495, 368);
+            tabPage4.Size = new Size(1495, 311);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Nhân công";
             tabPage4.UseVisualStyleBackColor = true;
@@ -268,7 +283,7 @@
             sheet_ChiTietNhanCong.SheetTabVisible = true;
             sheet_ChiTietNhanCong.SheetTabWidth = 60;
             sheet_ChiTietNhanCong.ShowScrollEndSpacing = true;
-            sheet_ChiTietNhanCong.Size = new Size(1489, 362);
+            sheet_ChiTietNhanCong.Size = new Size(1489, 305);
             sheet_ChiTietNhanCong.TabIndex = 0;
             sheet_ChiTietNhanCong.Text = "reoGridControl1";
             // 
@@ -277,7 +292,7 @@
             tabPage5.Controls.Add(sheet_ChiTietMay);
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1495, 368);
+            tabPage5.Size = new Size(1495, 311);
             tabPage5.TabIndex = 2;
             tabPage5.Text = "Máy";
             tabPage5.UseVisualStyleBackColor = true;
@@ -297,7 +312,7 @@
             sheet_ChiTietMay.SheetTabVisible = true;
             sheet_ChiTietMay.SheetTabWidth = 60;
             sheet_ChiTietMay.ShowScrollEndSpacing = true;
-            sheet_ChiTietMay.Size = new Size(1495, 368);
+            sheet_ChiTietMay.Size = new Size(1495, 311);
             sheet_ChiTietMay.TabIndex = 0;
             sheet_ChiTietMay.Text = "reoGridControl1";
             // 
@@ -315,7 +330,8 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(sheet_VatLieu);
+            tabPage2.Controls.Add(panel8);
+            tabPage2.Controls.Add(panel7);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -324,13 +340,41 @@
             tabPage2.Text = "Vật liệu";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel8
+            // 
+            panel8.Controls.Add(panel5);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(3, 37);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(1503, 583);
+            panel8.TabIndex = 6;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(panel6);
+            panel5.Controls.Add(formulaBarControl2);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1503, 583);
+            panel5.TabIndex = 4;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(sheet_VatLieu);
+            panel6.Dock = DockStyle.Fill;
+            panel6.Location = new Point(0, 36);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(1503, 547);
+            panel6.TabIndex = 5;
+            // 
             // sheet_VatLieu
             // 
             sheet_VatLieu.BackColor = Color.FromArgb(255, 255, 255);
             sheet_VatLieu.ColumnHeaderContextMenuStrip = null;
             sheet_VatLieu.Dock = DockStyle.Fill;
             sheet_VatLieu.LeadHeaderContextMenuStrip = null;
-            sheet_VatLieu.Location = new Point(3, 3);
+            sheet_VatLieu.Location = new Point(0, 0);
             sheet_VatLieu.Name = "sheet_VatLieu";
             sheet_VatLieu.RowHeaderContextMenuStrip = null;
             sheet_VatLieu.Script = null;
@@ -339,9 +383,99 @@
             sheet_VatLieu.SheetTabVisible = true;
             sheet_VatLieu.SheetTabWidth = 60;
             sheet_VatLieu.ShowScrollEndSpacing = true;
-            sheet_VatLieu.Size = new Size(1503, 617);
+            sheet_VatLieu.Size = new Size(1503, 547);
             sheet_VatLieu.TabIndex = 2;
             sheet_VatLieu.Text = "reoGridControl1";
+            // 
+            // formulaBarControl2
+            // 
+            formulaBarControl2.BackColor = SystemColors.Window;
+            formulaBarControl2.Dock = DockStyle.Top;
+            formulaBarControl2.FocusToGridAfterInputValue = false;
+            formulaBarControl2.GridControl = sheet_VatLieu;
+            formulaBarControl2.Location = new Point(0, 0);
+            formulaBarControl2.Margin = new Padding(4, 5, 4, 5);
+            formulaBarControl2.Name = "formulaBarControl2";
+            formulaBarControl2.Size = new Size(1503, 36);
+            formulaBarControl2.TabIndex = 3;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(bbtn_ThemVatLieu);
+            panel7.Controls.Add(rdbtn_PPT_NhanHeSoCongCuocVC);
+            panel7.Controls.Add(rdbtn_PPT_NhanHeSo);
+            panel7.Controls.Add(rdbtn_PPT_CongCuocVC);
+            panel7.Controls.Add(rdbtn_PPT_NhapTay);
+            panel7.Controls.Add(label1);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(3, 3);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1503, 34);
+            panel7.TabIndex = 5;
+            // 
+            // bbtn_ThemVatLieu
+            // 
+            bbtn_ThemVatLieu.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bbtn_ThemVatLieu.Location = new Point(1386, 2);
+            bbtn_ThemVatLieu.Name = "bbtn_ThemVatLieu";
+            bbtn_ThemVatLieu.Size = new Size(112, 29);
+            bbtn_ThemVatLieu.TabIndex = 10;
+            bbtn_ThemVatLieu.Text = "Thêm vật liệu";
+            bbtn_ThemVatLieu.UseVisualStyleBackColor = true;
+            bbtn_ThemVatLieu.Click += bbtn_ThemVatLieu_Click;
+            // 
+            // rdbtn_PPT_NhanHeSoCongCuocVC
+            // 
+            rdbtn_PPT_NhanHeSoCongCuocVC.AutoSize = true;
+            rdbtn_PPT_NhanHeSoCongCuocVC.Location = new Point(496, 4);
+            rdbtn_PPT_NhanHeSoCongCuocVC.Name = "rdbtn_PPT_NhanHeSoCongCuocVC";
+            rdbtn_PPT_NhanHeSoCongCuocVC.Size = new Size(178, 24);
+            rdbtn_PPT_NhanHeSoCongCuocVC.TabIndex = 9;
+            rdbtn_PPT_NhanHeSoCongCuocVC.Text = "Nhân hệ số + Cước VC";
+            rdbtn_PPT_NhanHeSoCongCuocVC.UseVisualStyleBackColor = true;
+            rdbtn_PPT_NhanHeSoCongCuocVC.CheckedChanged += rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged;
+            // 
+            // rdbtn_PPT_NhanHeSo
+            // 
+            rdbtn_PPT_NhanHeSo.AutoSize = true;
+            rdbtn_PPT_NhanHeSo.Location = new Point(376, 5);
+            rdbtn_PPT_NhanHeSo.Name = "rdbtn_PPT_NhanHeSo";
+            rdbtn_PPT_NhanHeSo.Size = new Size(104, 24);
+            rdbtn_PPT_NhanHeSo.TabIndex = 8;
+            rdbtn_PPT_NhanHeSo.Text = "Nhân hệ số";
+            rdbtn_PPT_NhanHeSo.UseVisualStyleBackColor = true;
+            rdbtn_PPT_NhanHeSo.CheckedChanged += rdbtn_PPT_NhanHeSo_CheckedChanged;
+            // 
+            // rdbtn_PPT_CongCuocVC
+            // 
+            rdbtn_PPT_CongCuocVC.AutoSize = true;
+            rdbtn_PPT_CongCuocVC.Location = new Point(247, 5);
+            rdbtn_PPT_CongCuocVC.Name = "rdbtn_PPT_CongCuocVC";
+            rdbtn_PPT_CongCuocVC.Size = new Size(123, 24);
+            rdbtn_PPT_CongCuocVC.TabIndex = 7;
+            rdbtn_PPT_CongCuocVC.Text = "Cộng cước VC";
+            rdbtn_PPT_CongCuocVC.UseVisualStyleBackColor = true;
+            rdbtn_PPT_CongCuocVC.CheckedChanged += rdbtn_PPT_CongCuocVC_CheckedChanged;
+            // 
+            // rdbtn_PPT_NhapTay
+            // 
+            rdbtn_PPT_NhapTay.AutoSize = true;
+            rdbtn_PPT_NhapTay.Location = new Point(151, 4);
+            rdbtn_PPT_NhapTay.Name = "rdbtn_PPT_NhapTay";
+            rdbtn_PPT_NhapTay.Size = new Size(90, 24);
+            rdbtn_PPT_NhapTay.TabIndex = 6;
+            rdbtn_PPT_NhapTay.Text = "Nhập tay";
+            rdbtn_PPT_NhapTay.UseVisualStyleBackColor = true;
+            rdbtn_PPT_NhapTay.CheckedChanged += rdbtn_PPT_NhapTay_CheckedChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(6, 7);
+            label1.Name = "label1";
+            label1.Size = new Size(127, 20);
+            label1.TabIndex = 6;
+            label1.Text = "Phương pháp tính";
             // 
             // SheetTienLuong
             // 
@@ -366,6 +500,11 @@
             tabPage4.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -393,5 +532,16 @@
         public unvell.ReoGrid.ReoGridControl sheet_ChiTietNhanCong;
         private TabPage tabPage5;
         public unvell.ReoGrid.ReoGridControl sheet_ChiTietMay;
+        private Panel panel5;
+        private EtaDt.MVCP.Views.Common.FormulaBarControl formulaBarControl2;
+        private Panel panel8;
+        private Panel panel6;
+        private Panel panel7;
+        private RadioButton rdbtn_PPT_NhanHeSoCongCuocVC;
+        private RadioButton rdbtn_PPT_NhanHeSo;
+        private RadioButton rdbtn_PPT_CongCuocVC;
+        private RadioButton rdbtn_PPT_NhapTay;
+        private Label label1;
+        private Button bbtn_ThemVatLieu;
     }
 }

@@ -11,7 +11,7 @@ namespace Worksheet.modDisplay.templates.tienluong
     internal class Footer : APosition
     {
         FooterRow footer;
-        public Footer(unvell.ReoGrid.Worksheet worksheet)
+        public Footer(unvell.ReoGrid.Worksheet worksheet) : base(worksheet)
         {
             ws = worksheet;
             Id = 16;

@@ -15,5 +15,9 @@ namespace Worksheet.modDisplay
         public virtual void bind(){}
 
         public virtual void render(){}
+        public APosition(unvell.ReoGrid.Worksheet worksheet)
+        {
+            ws = worksheet;
+        }
     }
 }

@@ -19,7 +19,9 @@ namespace Worksheet.modBL.prime.vatlieu
             switch(Option.PPTCuocTC)
             {
                 case PPTCuocTC.TheoTT12_2021:
-                    return $"'Cước TC'!S{args[0]}";
+                    return $"='Cước TC'!S{args[0]}";
+                    // todo: thêm các trường hợp cho các ppt khác
+
             }
             return base.formula(args);
         }

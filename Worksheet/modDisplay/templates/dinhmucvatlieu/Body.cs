@@ -18,10 +18,7 @@ namespace Worksheet.modDisplay.templates.tienluong.dinhmucvatlieu
         public int end = 30;
         public override string Name { get { return "Body"; } }
 
-        public Body(unvell.ReoGrid.Worksheet worksheet)
-        {
-            ws = worksheet;
-        }
+        public Body(unvell.ReoGrid.Worksheet worksheet) : base(worksheet) { }
         
         public override void bind()
         {

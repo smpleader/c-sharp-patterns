@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using unvell.ReoGrid;
+using Worksheet.modBL;
 using Worksheet.modData.Memories.Models;
 using Worksheet.modData.Memories.Pointer;
 using Worksheet.modDisplay;
@@ -27,9 +28,9 @@ namespace Worksheet.MVC.Views
 
         public SheetTienLuong()
         {
-            Worksheet.modBL.Container.init();
             registerPresenters(true);
             InitializeComponent();
+            Worksheet.modBL.Container.init();
         }
 
         private void SheetTienLuong_Load(object sender, EventArgs e)
@@ -102,11 +103,31 @@ namespace Worksheet.MVC.Views
             {
                 case "Tiên lượng":
                     Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
+                    btn_ThemCongViec.Enabled = true;
+                    bbtn_ThemVatLieu.Enabled = false;
                     break;
                 case "Vật liệu":
                     Display.setup(sheet_VatLieu, AppConst.templateFolder + "GiaVatLieu");
+                    switch (Option.PPTGiaVatLieu)
+                    {
+                        case PPTGiaVatLieu.NhapTay:
+                            rdbtn_PPT_NhapTay.Checked = true;
+                            break;
+                        case PPTGiaVatLieu.CongCuocVanChuyen:
+                            rdbtn_PPT_CongCuocVC.Checked = true;
+                            break;
+                        case PPTGiaVatLieu.NhanHeSo:
+                            rdbtn_PPT_NhanHeSo.Checked = true;
+                            break;
+                        case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
+                            rdbtn_PPT_NhanHeSoCongCuocVC.Checked = true;
+                            break;
+                    }
+                    btn_ThemCongViec.Enabled = false;
+                    bbtn_ThemVatLieu.Enabled = true;
                     break;
             }
+            Display.hook("LoadData");
         }
 
         private void btn_LuuFile_Click(object sender, EventArgs e)
@@ -139,9 +160,6 @@ namespace Worksheet.MVC.Views
                     try
                     {
                         sheet_TienLuong.Load(openFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
-                        modData.Memories.Record.HangMuc t = new modData.Memories.Record.HangMuc("ten 1", "kieu 1");
-                        t.txt("test", "oo1");
-                        Worksheet.modData.Memories.Models.HangMuc.them(t);
                     }
                     catch (Exception ex)
                     {
@@ -178,6 +196,74 @@ namespace Worksheet.MVC.Views
                     Display.setup(sheet_ChiTietMay);
                     break;
             }
+        }
+
+        // Xử lý tab vật liệu
+        private void rdbtn_PPT_NhapTay_CheckedChanged(object sender, EventArgs e)
+        {
+            // Hiển thị tất cả các cột
+            sheet_VatLieu.CurrentWorksheet.ShowColumns(0, 22);
+
+            sheet_VatLieu.CurrentWorksheet.HideColumns(0, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(3, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(7, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(10, 9);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(20, 1);
+
+            Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
+            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+        }
+
+        private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
+        {
+            // Hiển thị tất cả các cột
+            sheet_VatLieu.CurrentWorksheet.ShowColumns(0, 22);
+
+            sheet_VatLieu.CurrentWorksheet.HideColumns(0, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(3, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(7, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(10, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(13, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(16, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(19, 1);
+
+            Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
+            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+
+        }
+
+        private void rdbtn_PPT_NhanHeSo_CheckedChanged(object sender, EventArgs e)
+        {
+            // Hiển thị tất cả các cột
+            sheet_VatLieu.CurrentWorksheet.ShowColumns(0, 22);
+
+            sheet_VatLieu.CurrentWorksheet.HideColumns(0, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(3, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(7, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(11, 9);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(20, 1);
+
+            Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSo;
+            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+        }
+
+        private void rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged(object sender, EventArgs e)
+        {
+            // Hiển thị tất cả các cột
+            sheet_VatLieu.CurrentWorksheet.ShowColumns(0, 22);
+
+            sheet_VatLieu.CurrentWorksheet.HideColumns(0, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(3, 1);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(7, 2);
+            sheet_VatLieu.CurrentWorksheet.HideColumns(12, 8);
+
+            Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen;
+            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+        }
+
+        private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
+        {
+            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
         }
     }
 }

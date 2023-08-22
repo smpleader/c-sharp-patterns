@@ -9,10 +9,7 @@ namespace Worksheet.modDisplay.templates.tienluong
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(unvell.ReoGrid.Worksheet worksheet)
-        {
-            ws = worksheet;
-        }
+        public Header(unvell.ReoGrid.Worksheet worksheet) : base(worksheet) { }
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override void bind()
         {
