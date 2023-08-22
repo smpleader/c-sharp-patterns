@@ -36,7 +36,14 @@ namespace Worksheet.MVC
 
         public static void StartCurrentThread()
         {
-            Application.Run(CurrentController().View.Form);
+            try
+            {
+                Application.Run(CurrentController().View.Form);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void Run(string obj = "Starter", string cmd = "Open")
@@ -106,9 +113,7 @@ namespace Worksheet.MVC
                 MessageBox.Show("System Error: Controller not ready");
                 Application.Exit();
             }
-#pragma warning disable CS8603 // Possible null reference return.
             return c;
-#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

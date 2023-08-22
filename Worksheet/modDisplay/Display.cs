@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid;
 using unvell.ReoGrid.Events;
+using unvell.ReoGrid.IO.OpenXML.Schema;
 using Worksheet.modBL;
 using Worksheet.modBL.prime.vatlieu;
 using Worksheet.modData.Memories.Pointer;
@@ -83,6 +84,28 @@ namespace Worksheet.modDisplay
             WB = control.Worksheets; 
         }
 
+        static Dictionary<string, unvell.ReoGrid.Worksheet> worksheets = new Dictionary<string, unvell.ReoGrid.Worksheet> ();
+        public static void changeReogridControl(ReoGridControl control)
+        {
+            if( WControl != null )
+            {
+                worksheets.Clear();
+                control.Worksheets.Clear();
+                for (int x = WB.Count - 1; x > -1; x--)
+                {
+                    var tmp = WB[x];
+                    worksheets.Add(tmp.Name, tmp);
+                    WControl.Worksheets.RemoveAt(x);
+                }
+                var count = worksheets.Count;
+                foreach(var tmp in worksheets.Values)
+                {
+                    control.Worksheets.Add(tmp);
+                }
+            }
+
+            setControl(control);
+        }
         public static void setup(ReoGridControl control, string filePath)
         {
             setControl(control);

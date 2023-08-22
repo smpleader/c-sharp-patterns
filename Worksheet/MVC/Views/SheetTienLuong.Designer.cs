@@ -88,7 +88,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1517, 42);
+            panel1.Size = new Size(1586, 42);
             panel1.TabIndex = 0;
             // 
             // chkbx_KichThuoc
@@ -135,7 +135,7 @@
             // btn_ThemCongViec
             // 
             btn_ThemCongViec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btn_ThemCongViec.Location = new Point(1357, 5);
+            btn_ThemCongViec.Location = new Point(1426, 5);
             btn_ThemCongViec.Name = "btn_ThemCongViec";
             btn_ThemCongViec.Size = new Size(148, 29);
             btn_ThemCongViec.TabIndex = 0;
@@ -158,7 +158,7 @@
             sheet_TienLuong.SheetTabVisible = true;
             sheet_TienLuong.SheetTabWidth = 60;
             sheet_TienLuong.ShowScrollEndSpacing = true;
-            sheet_TienLuong.Size = new Size(1503, 237);
+            sheet_TienLuong.Size = new Size(1572, 280);
             sheet_TienLuong.TabIndex = 1;
             sheet_TienLuong.Text = "reoGridControl1";
             // 
@@ -170,7 +170,7 @@
             tabControl1.Location = new Point(0, 42);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1517, 656);
+            tabControl1.Size = new Size(1586, 656);
             tabControl1.TabIndex = 2;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -182,7 +182,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1509, 623);
+            tabPage1.Size = new Size(1578, 623);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Tiên lượng";
             tabPage1.UseVisualStyleBackColor = true;
@@ -193,7 +193,7 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(3, 39);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1503, 237);
+            panel4.Size = new Size(1572, 280);
             panel4.TabIndex = 5;
             // 
             // panel2
@@ -202,16 +202,16 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1503, 237);
+            panel2.Size = new Size(1572, 280);
             panel2.TabIndex = 3;
             // 
             // panel3
             // 
             panel3.Controls.Add(tabControl2);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(3, 276);
+            panel3.Location = new Point(3, 319);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1503, 344);
+            panel3.Size = new Size(1572, 301);
             panel3.TabIndex = 4;
             // 
             // tabControl2
@@ -223,7 +223,7 @@
             tabControl2.Location = new Point(0, 0);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(1503, 344);
+            tabControl2.Size = new Size(1572, 301);
             tabControl2.TabIndex = 0;
             tabControl2.SelectedIndexChanged += tabControl2_SelectedIndexChanged;
             // 
@@ -233,7 +233,7 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1495, 311);
+            tabPage3.Size = new Size(1564, 268);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Vật liệu";
             tabPage3.UseVisualStyleBackColor = true;
@@ -253,7 +253,7 @@
             sheet_ChiTietVatLieu.SheetTabVisible = true;
             sheet_ChiTietVatLieu.SheetTabWidth = 60;
             sheet_ChiTietVatLieu.ShowScrollEndSpacing = true;
-            sheet_ChiTietVatLieu.Size = new Size(1489, 305);
+            sheet_ChiTietVatLieu.Size = new Size(1558, 262);
             sheet_ChiTietVatLieu.TabIndex = 0;
             sheet_ChiTietVatLieu.Text = "reoGridControl1";
             // 
@@ -325,7 +325,7 @@
             formulaBarControl1.Location = new Point(3, 3);
             formulaBarControl1.Margin = new Padding(4, 5, 4, 5);
             formulaBarControl1.Name = "formulaBarControl1";
-            formulaBarControl1.Size = new Size(1503, 36);
+            formulaBarControl1.Size = new Size(1572, 36);
             formulaBarControl1.TabIndex = 2;
             // 
             // tabPage2
@@ -335,7 +335,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1509, 623);
+            tabPage2.Size = new Size(1578, 623);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Vật liệu";
             tabPage2.UseVisualStyleBackColor = true;
@@ -346,7 +346,7 @@
             panel8.Dock = DockStyle.Fill;
             panel8.Location = new Point(3, 37);
             panel8.Name = "panel8";
-            panel8.Size = new Size(1503, 583);
+            panel8.Size = new Size(1572, 583);
             panel8.TabIndex = 6;
             // 
             // panel5
@@ -356,7 +356,7 @@
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1503, 583);
+            panel5.Size = new Size(1572, 583);
             panel5.TabIndex = 4;
             // 
             // panel6
@@ -365,7 +365,7 @@
             panel6.Dock = DockStyle.Fill;
             panel6.Location = new Point(0, 36);
             panel6.Name = "panel6";
-            panel6.Size = new Size(1503, 547);
+            panel6.Size = new Size(1572, 547);
             panel6.TabIndex = 5;
             // 
             // sheet_VatLieu
@@ -383,7 +383,7 @@
             sheet_VatLieu.SheetTabVisible = true;
             sheet_VatLieu.SheetTabWidth = 60;
             sheet_VatLieu.ShowScrollEndSpacing = true;
-            sheet_VatLieu.Size = new Size(1503, 547);
+            sheet_VatLieu.Size = new Size(1572, 547);
             sheet_VatLieu.TabIndex = 2;
             sheet_VatLieu.Text = "reoGridControl1";
             // 
@@ -396,7 +396,7 @@
             formulaBarControl2.Location = new Point(0, 0);
             formulaBarControl2.Margin = new Padding(4, 5, 4, 5);
             formulaBarControl2.Name = "formulaBarControl2";
-            formulaBarControl2.Size = new Size(1503, 36);
+            formulaBarControl2.Size = new Size(1572, 36);
             formulaBarControl2.TabIndex = 3;
             // 
             // panel7
@@ -410,13 +410,13 @@
             panel7.Dock = DockStyle.Top;
             panel7.Location = new Point(3, 3);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1503, 34);
+            panel7.Size = new Size(1572, 34);
             panel7.TabIndex = 5;
             // 
             // bbtn_ThemVatLieu
             // 
             bbtn_ThemVatLieu.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            bbtn_ThemVatLieu.Location = new Point(1386, 2);
+            bbtn_ThemVatLieu.Location = new Point(1455, 2);
             bbtn_ThemVatLieu.Name = "bbtn_ThemVatLieu";
             bbtn_ThemVatLieu.Size = new Size(112, 29);
             bbtn_ThemVatLieu.TabIndex = 10;
@@ -481,7 +481,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1517, 698);
+            ClientSize = new Size(1586, 698);
             Controls.Add(tabControl1);
             Controls.Add(panel1);
             Name = "SheetTienLuong";

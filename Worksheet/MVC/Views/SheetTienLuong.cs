@@ -37,6 +37,7 @@ namespace Worksheet.MVC.Views
         {
             tienLuongP = (TienLuongP)Publisher.get("SheetTienLuong");
             tienLuongP.Setup();
+            Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
             vatLieuP = (VatLieuP)Publisher.get("SheetVatLieu");
             vatLieuP.Setup();
             dinhMucVatLieuP = (DinhMucVatLieuP)Publisher.get("SheetChiTietVatLieu");
@@ -49,9 +50,7 @@ namespace Worksheet.MVC.Views
             sheet_TienLuong.WorkbookSaved += AfterSave;
             sheet_TienLuong.WorkbookLoaded += AfterLoad;
             sheet_TienLuong.ContextMenuStrip = Display.contextMenu;
-
-            Display.setup(sheet_ChiTietVatLieu, AppConst.templateFolder + "TienLuong");
-            Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
+         
             Display.hook("LoadData");
         }
 
