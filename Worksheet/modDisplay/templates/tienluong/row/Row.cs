@@ -137,78 +137,143 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// Tổng giá của tất cả các máy
         public Cell AC { get { return this.Cell("AC"); } }
 
-        /// <summary>
-        /// Lấy công thức cho các cột M, N, O, P, Q, R, S, T, U
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public override string GetFormula(string col)
+        class ACol
         {
-            string uniqueName = "";
-            string formula;
-            string[] parameters = new string[1] { Id.ToString() };
-            switch (col)
+            public ACol(Row r)
             {
-                case "M":
-                    if (HaveInterpretiveFormula)
-                    {
-                        uniqueName = "CongViec_KhoiLuong";
-                        parameters = new string[2] { start.ToString(), end.ToString() };
-                        break;
-                    }
-                    else
-                    {
-                        return this.Cell("M").GetData<string>();
-                    }
-                case "N":
-                    uniqueName = "CongViec_DonGiaVatLieu";
-                    decimal tongGiaVatLieu = Z.GetData<decimal>();
-                    parameters = new string[2] { Id.ToString(), tongGiaVatLieu.ToString() };
-                    break;
-                case "O":
-                    uniqueName = "CongViec_DonGiaVatLieuPhu";
-                    decimal tongGiaVatLieuPhu = AA.GetData<decimal>();
-                    parameters = new string[2] { Id.ToString(), tongGiaVatLieuPhu.ToString() };
-                    break;
-                case "P":
-                    uniqueName = "CongViec_DonGiaNhanCong";
-                    decimal tongGiaNhanCong = AB.GetData<decimal>();
-                    parameters = new string[2] { Id.ToString(), tongGiaNhanCong.ToString() };
-                    break;
-                case "Q":
-                    uniqueName = "CongViec_DonGiaMay";
-                    decimal tongGiaMay = AC.GetData<decimal>();
-                    parameters = new string[2] { Id.ToString(), tongGiaMay.ToString() };
-                    break;
-                case "R":
-                    uniqueName = "CongViec_ThanhTienVatLieu";
-                    break;
-                case "S":
-                    uniqueName = "CongViec_ThanhTienVatLieuPhu";
-                    break;
-                case "T":
-                    uniqueName = "CongViec_ThanhTienNhanCong";
-                    break;
-                case "U":
-                    uniqueName = "CongViec_ThanhTienMay";
-                    break;
-                default: break;
+                Row = r;
             }
-            formula = string.Format(modBL.Container.Get(uniqueName).formula(parameters));
-            return formula;
+            public Row Row { get; set; }
+            public virtual string UniqueName { get { return ""; } }
+            public virtual string Col { get { return "A"; } }
+            public virtual string TongTienVatTu { get { return ""; } }
+            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+            public virtual void render()
+            {
+                Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
+            }
         }
-
+        class ColM : ACol
+        {
+            public override string UniqueName { get { return "CongViec_KhoiLuong"; } }
+            public override string Col { get { return "M"; } }
+            public override string[] Params { get { return new string[2] { Row.start.ToString(), Row.end.ToString() }; } }
+            public ColM(Row r) : base(r)
+            {
+            }
+            public override void render()
+            {
+                // xử lý công thức cho cột M
+                if (Row.HaveInterpretiveFormula)
+                {
+                    Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
+                }
+                else
+                {
+                    Row.ws[Col + Row.Id] = Row.Cell("M").GetData<string>();
+                }
+            }
+        }
+        class ColN : ACol
+        {
+            public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
+            public override string Col { get { return "N"; } } 
+            public override string  TongTienVatTu { get{ return Row.Z.GetData<decimal>().ToString(); }}
+            public ColN(Row r) : base(r)
+            {
+            }
+        }
+        class ColO : ACol
+        {
+            public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
+            public override string Col { get { return "O"; } }
+            public override string TongTienVatTu { get { return Row.AA.GetData<decimal>().ToString(); } }
+            public ColO(Row r) : base(r)
+            {
+            }
+        }
+        class ColP : ACol
+        {
+            public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
+            public override string Col { get { return "P"; } }
+            public override string TongTienVatTu { get { return Row.AB.GetData<decimal>().ToString(); } }
+            public ColP(Row r) : base(r)
+            {
+            }
+        }
+        class ColQ : ACol
+        {
+            public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
+            public override string Col { get { return "Q"; } }
+            public override string TongTienVatTu { get { return Row.AC.GetData<decimal>().ToString(); } }
+            public ColQ(Row r) : base(r)
+            {
+            }
+        }
+        class ColR : ACol
+        {
+            public override string UniqueName { get { return "CongViec_ThanhTienVatLieu"; } }
+            public override string Col { get { return "R"; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public ColR(Row r) : base(r)
+            {
+            }
+        }
+        class ColS : ACol
+        {
+            public override string UniqueName { get { return "CongViec_ThanhTienVatLieuPhu"; } }
+            public override string Col { get { return "S"; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public ColS(Row r) : base(r)
+            {
+            }
+        }
+        class ColT : ACol
+        {
+            public override string UniqueName { get { return "CongViec_ThanhTienNhanCong"; } }
+            public override string Col { get { return "T"; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public ColT(Row r) : base(r)
+            {
+            }
+        }
+        class ColU : ACol
+        {
+            public override string UniqueName { get { return "CongViec_ThanhTienMay"; } }
+            public override string Col { get { return "U"; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public ColU(Row r) : base(r)
+            {
+            }
+        }
+        
         public void bind()
         {
             
         }
         public void render()
         {
-            List<string> colsHaveFormula = new List<string>() { "M", "N", "O", "P", "Q", "R", "S", "T", "U" };
-            foreach (string col in colsHaveFormula)
-            {
-                ws[col +Id] = GetFormula(col);
-            }
+            // xử lý công thức cho cột M
+            ColM colM = new ColM(this);
+            // xử lý công thức cho cột N, O, P, Q
+            colM.render();
+            ColN colN = new ColN(this);
+            colN.render();
+            ColO  colO = new ColO(this);
+            colO.render();
+            ColP colP = new ColP(this);
+            colP.render();
+            ColQ colQ = new ColQ(this);
+            colQ.render();
+            // xử lý công thức cho cột R, S, T, U
+            ColR colR = new ColR(this);
+            colR.render();
+            ColS colS = new ColS(this);
+            colS.render();
+            ColT colT = new ColT(this);
+            colT.render();
+            ColU colU = new ColU(this);
+            colU.render();
         }
 
         public void AddSimpleData()

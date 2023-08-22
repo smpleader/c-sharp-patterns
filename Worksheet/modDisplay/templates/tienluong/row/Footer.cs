@@ -25,15 +25,15 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// <summary>
         /// Tổng hạng mục
         /// </summary>
-        public Cell A { get { return GetCell("A"); } }
+        public Cell A { get { return this.Cell("A"); } }
        
-        public Cell R { get { return GetCell("R"); } }
+        public Cell R { get { return this.Cell("R"); } }
        
-        public Cell S { get { return GetCell("S"); } }
+        public Cell S { get { return this.Cell("S"); } }
         
-        public Cell T { get { return GetCell("T"); } }
+        public Cell T { get { return this.Cell("T"); } }
         
-        public Cell U { get { return GetCell("U"); } }
+        public Cell U { get { return this.Cell("U"); } }
 
         /// <summary>
         /// Tổng thành tiền vật liệu
