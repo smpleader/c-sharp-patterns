@@ -22,7 +22,7 @@ namespace Worksheet.modDisplay.templates.vatlieu
                 }
             }
 
-            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của công việc trên sheet
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
@@ -39,7 +39,7 @@ namespace Worksheet.modDisplay.templates.vatlieu
                 row.render();
             }
 
-            // Đánh lại số  thứ tự cho các công việc
+            // Đánh lại số  thứ tự cho các vật liệu
             int beginRow = 1;
             for (int rowIndex = start; rowIndex <= end; rowIndex++)
             {
