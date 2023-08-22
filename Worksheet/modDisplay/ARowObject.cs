@@ -8,7 +8,7 @@ using Row = Worksheet.modData.Memories.ARecord;
 
 namespace Worksheet.modDisplay
 {
-    class ARowObject: Row
+    public class ARowObject: Row
     {
         public unvell.ReoGrid.Worksheet ws;
         public int start { get; set; }

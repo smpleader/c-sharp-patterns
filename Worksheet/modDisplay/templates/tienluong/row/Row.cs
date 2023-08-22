@@ -137,22 +137,22 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// Tổng giá của tất cả các máy
         public Cell AC { get { return this.Cell("AC"); } }
 
-        class ACol
-        {
-            public ACol(Row r)
-            {
-                Row = r;
-            }
-            public Row Row { get; set; }
-            public virtual string UniqueName { get { return ""; } }
-            public virtual string Col { get { return "A"; } }
-            public virtual string TongTienVatTu { get { return ""; } }
-            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-            public virtual void render()
-            {
-                Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
-            }
-        }
+        //class ACol
+        //{
+        //    public ACol(Row r)
+        //    {
+        //        Row = r;
+        //    }
+        //    public Row Row { get; set; }
+        //    public virtual string UniqueName { get { return ""; } }
+        //    public virtual string Col { get { return "A"; } }
+        //    public virtual string TongTienVatTu { get { return ""; } }
+        //    public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+        //    public virtual void render()
+        //    {
+        //        Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
+        //    }
+        //}
         class ColM : ACol
         {
             public override string UniqueName { get { return "CongViec_KhoiLuong"; } }
@@ -164,7 +164,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             public override void render()
             {
                 // xử lý công thức cho cột M
-                if (Row.HaveInterpretiveFormula)
+                if (((Row)Row).HaveInterpretiveFormula)
                 {
                     Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
                 }
@@ -178,7 +178,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
             public override string Col { get { return "N"; } } 
-            public override string  TongTienVatTu { get{ return Row.Z.GetData<decimal>().ToString(); }}
+            public override string  TongTienVatTu { get{ return ((Row)Row).Z.GetData<decimal>().ToString(); }}
             public ColN(Row r) : base(r)
             {
             }
@@ -187,7 +187,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
             public override string Col { get { return "O"; } }
-            public override string TongTienVatTu { get { return Row.AA.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AA.GetData<decimal>().ToString(); } }
             public ColO(Row r) : base(r)
             {
             }
@@ -196,7 +196,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
             public override string Col { get { return "P"; } }
-            public override string TongTienVatTu { get { return Row.AB.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AB.GetData<decimal>().ToString(); } }
             public ColP(Row r) : base(r)
             {
             }
@@ -205,7 +205,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
             public override string Col { get { return "Q"; } }
-            public override string TongTienVatTu { get { return Row.AC.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AC.GetData<decimal>().ToString(); } }
             public ColQ(Row r) : base(r)
             {
             }
