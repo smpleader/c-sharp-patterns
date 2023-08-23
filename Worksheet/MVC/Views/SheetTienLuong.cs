@@ -53,7 +53,6 @@ namespace Worksheet.MVC.Views
          
             Display.hook("LoadData");
         }
-
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
         {
             ((Worksheet.modDisplay.templates.tienluong.Generator)Display.tab("Tiên lượng")).updateData();
@@ -101,12 +100,14 @@ namespace Worksheet.MVC.Views
             switch (tabControl1.SelectedTab.Text)
             {
                 case "Tiên lượng":
-                    Display.setup(sheet_TienLuong);
+                    Display.changeTab(sheet_TienLuong);
+                    sheet_TienLuong.CurrentWorksheet = Display.WB["Tiên lượng"];
                     btn_ThemCongViec.Enabled = true;
                     bbtn_ThemVatLieu.Enabled = false;
                     break;
                 case "Vật liệu":
-                    Display.setup(sheet_VatLieu);
+                    Display.changeTab(sheet_VatLieu);
+                    sheet_VatLieu.CurrentWorksheet = Display.WB["Giá vật liệu"];
                     switch (Option.PPTGiaVatLieu)
                     {
                         case PPTGiaVatLieu.NhapTay:

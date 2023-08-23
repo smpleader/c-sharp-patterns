@@ -85,25 +85,22 @@ namespace Worksheet.modDisplay
         }
 
         static Dictionary<string, unvell.ReoGrid.Worksheet> worksheets = new Dictionary<string, unvell.ReoGrid.Worksheet> ();
-        public static void changeReogridControl(ReoGridControl control)
+
+        public static void changeTab(ReoGridControl control)
         {
-            if( WControl != null )
+            if (WControl != null)
             {
-                worksheets.Clear();
                 control.Worksheets.Clear();
                 for (int x = WB.Count - 1; x > -1; x--)
                 {
                     var tmp = WB[x];
-                    worksheets.Add(tmp.Name, tmp);
-                    WControl.Worksheets.RemoveAt(x);
-                }
-                var count = worksheets.Count;
-                foreach(var tmp in worksheets.Values)
-                {
+                    WB.RemoveAt(x);
                     control.Worksheets.Add(tmp);
                 }
+                // trick để xử lý việc chuyển đổi các sheets giữa 2 ReogridControl
+                var worksheet = WControl.CreateWorksheet("OnlyOne");
+                WControl.Worksheets.Add(worksheet);
             }
-
             setControl(control);
         }
         public static void setup(ReoGridControl control, string filePath)
