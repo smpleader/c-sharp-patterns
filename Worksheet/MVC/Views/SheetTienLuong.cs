@@ -50,7 +50,7 @@ namespace Worksheet.MVC.Views
             sheet_TienLuong.WorkbookSaved += AfterSave;
             sheet_TienLuong.WorkbookLoaded += AfterLoad;
             sheet_TienLuong.ContextMenuStrip = Display.contextMenu;
-         
+
             Display.hook("LoadData");
         }
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
@@ -264,6 +264,11 @@ namespace Worksheet.MVC.Views
         private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
         {
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
+        }
+
+        private void SheetTienLuong_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

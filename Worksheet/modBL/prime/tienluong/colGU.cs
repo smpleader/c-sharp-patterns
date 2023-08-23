@@ -13,8 +13,8 @@ namespace Worksheet.modBL.prime.tienluong
         }
 
         // Cột U cho group object
-        public override string Col { get { return "U"; } }
-        public override string Name => "NhomCongViec_ThanhTienMay";
+        public override string CName => "U";
+        public override string UName => "NhomCongViec_ThanhTienMay";
         public override string formula(string[] args)
         {
             return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", U{args[0]}:U{args[1]})";

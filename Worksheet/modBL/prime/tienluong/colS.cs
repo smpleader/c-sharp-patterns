@@ -13,8 +13,8 @@ namespace Worksheet.modBL.prime.tienluong
         }
 
         // Cột S cho row object
-        public override string Col { get { return "S"; } }
-        public override string Name => "CongViec_ThanhTienVatLieuPhu";
+        public override string CName => "S";
+        public override string UName => "CongViec_ThanhTienVatLieuPhu";
 
         /// <summary>
         /// chỉ có 1 phần từ

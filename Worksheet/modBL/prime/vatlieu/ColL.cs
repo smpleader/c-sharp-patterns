@@ -12,8 +12,8 @@ namespace Worksheet.modBL.prime.vatlieu
         {
         }
 
-        public override string Col => "L";
-        public override string Name => "VatLieu_GiaTBxHS";
+        public override string CName => "L";
+        public override string UName => "VatLieu_GiaTBxHS";
         public override string formula(string[] args)
         {
             return $"=J{args[0]}*K{args[0]}";

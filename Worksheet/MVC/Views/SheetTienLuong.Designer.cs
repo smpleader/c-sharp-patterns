@@ -263,7 +263,7 @@
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1495, 311);
+            tabPage4.Size = new Size(1564, 268);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Nhân công";
             tabPage4.UseVisualStyleBackColor = true;
@@ -283,7 +283,7 @@
             sheet_ChiTietNhanCong.SheetTabVisible = true;
             sheet_ChiTietNhanCong.SheetTabWidth = 60;
             sheet_ChiTietNhanCong.ShowScrollEndSpacing = true;
-            sheet_ChiTietNhanCong.Size = new Size(1489, 305);
+            sheet_ChiTietNhanCong.Size = new Size(1558, 262);
             sheet_ChiTietNhanCong.TabIndex = 0;
             sheet_ChiTietNhanCong.Text = "reoGridControl1";
             // 
@@ -292,7 +292,7 @@
             tabPage5.Controls.Add(sheet_ChiTietMay);
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1495, 311);
+            tabPage5.Size = new Size(1564, 268);
             tabPage5.TabIndex = 2;
             tabPage5.Text = "Máy";
             tabPage5.UseVisualStyleBackColor = true;
@@ -312,7 +312,7 @@
             sheet_ChiTietMay.SheetTabVisible = true;
             sheet_ChiTietMay.SheetTabWidth = 60;
             sheet_ChiTietMay.ShowScrollEndSpacing = true;
-            sheet_ChiTietMay.Size = new Size(1495, 311);
+            sheet_ChiTietMay.Size = new Size(1564, 268);
             sheet_ChiTietMay.TabIndex = 0;
             sheet_ChiTietMay.Text = "reoGridControl1";
             // 
@@ -487,6 +487,7 @@
             Name = "SheetTienLuong";
             Text = "Demo sheet Tiên lượng";
             Title = "Demo sheet Tiên lượng";
+            FormClosed += SheetTienLuong_FormClosed;
             Load += SheetTienLuong_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -11,7 +11,7 @@ namespace Worksheet.modBL.prime.vatlieu
         public colE(Option opt) : base(opt)
         {
         }
-        public override string Col => "E";
-        public override string Name => "VatLieu_TenVatLieu";
+        public override string CName => "E";
+        public override string UName => "VatLieu_TenVatLieu";
     }
 }

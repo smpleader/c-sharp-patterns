@@ -13,8 +13,8 @@ namespace Worksheet.modBL.prime.tienluong
         }
 
         // Cột R cho group object
-        public override string Col { get { return "R"; } }
-        public override string Name => "NhomCongViec_ThanhTienVatLieu";
+        public override string CName => "R";
+        public override string UName => "NhomCongViec_ThanhTienVatLieu";
         // return forumalation of cell
         public override string formula(string[] args)
         {

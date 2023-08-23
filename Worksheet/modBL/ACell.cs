@@ -12,9 +12,12 @@ namespace Worksheet.modBL
         {
             Option = opt;
         }
-        public virtual string Name => "Default";
 
-        public virtual string Col => "A";
+        // Col name
+        public virtual string CName => "A";
+
+        // Unique name
+        public virtual string UName => "Default";
 
         public Option Option { get ; set ; }
 

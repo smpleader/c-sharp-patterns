@@ -12,8 +12,8 @@ namespace Worksheet.modBL.prime.vatlieu
         {
         }
 
-        public override string Col => "M";
-        public override string Name => "VatLieu_CuocOto";
+        public override string CName => "M";
+        public override string UName => "VatLieu_CuocOto";
         public override string formula(string[] args)
         {
             switch(Option.PPTCuocOto)

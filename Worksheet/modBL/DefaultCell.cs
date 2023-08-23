@@ -11,8 +11,8 @@ namespace Worksheet.modBL
         public DefaultCell(Option opt) : base(opt)
         {
         }
-        public override string Col => "A";
-        public override string Name => "Default";
+        public override string CName => "A";
+        public override string UName => "Default";
         public override string formula(string[] args)
         {
             return "";

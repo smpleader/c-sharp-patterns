@@ -46,7 +46,7 @@ namespace Worksheet.modBL
                         var instance = (ACell) constructor.Invoke(parameters);
 
                         // Thêm vào dic 
-                        _instance[instance.Name] = instance;
+                        _instance[instance.UName] = instance;
                     }
                     
                 }

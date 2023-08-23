@@ -13,8 +13,8 @@ namespace Worksheet.modBL.prime.tienluong
         }
 
         // Cột L cho row object
-        public override string Col { get { return "L"; } }
-        public override string Name => "CongViec_KhoiLuongPhu";
+        public override string CName => "L";
+        public override string UName => "CongViec_KhoiLuongPhu";
         public override string formula(string[] args)
         {
             return $"=G{args[0]}*H{args[0]}*I{args[0]}*J{args[0]}*K{args[0]}";

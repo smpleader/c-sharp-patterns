@@ -12,8 +12,8 @@ namespace Worksheet.modBL
      */
     interface ICell
     {
-        string Name { get; }
-        string Col { get;}
+        string CName { get; }
+        string UName { get;}
         Option Option { get; set; }
 
         // return forumalation of cell

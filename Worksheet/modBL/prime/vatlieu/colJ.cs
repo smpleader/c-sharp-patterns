@@ -12,7 +12,7 @@ namespace Worksheet.modBL.prime.vatlieu
         {
         }
 
-        public override string Col => "J";
-        public override string Name => "VatLieu_GiaThongBao";
+        public override string CName => "J";
+        public override string UName => "VatLieu_GiaThongBao";
     }
 }
