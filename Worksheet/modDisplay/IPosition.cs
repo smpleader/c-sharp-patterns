@@ -9,7 +9,7 @@ namespace Worksheet.modDisplay
 {
     internal interface IPosition
     {
-        SpreadsheetGrid ws { get; set; }
+        SpreadsheetGrid spreadsheetGrid { get; set; }
         string Name { get; }
         int Id { get; set; }
         void bind();

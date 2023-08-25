@@ -16,8 +16,8 @@ namespace Worksheet.modDisplay.templates.tienluong
         public override void bind()
         {
             // todo: Lưu giá trị của header tới global state
-            headers[2] = new HeaderRow(ws,worksheet,2);
-            headers[3] = new HeaderRow(ws, worksheet, 3);
+            headers[2] = new HeaderRow(spreadsheetGrid, worksheet,2);
+            headers[3] = new HeaderRow(spreadsheetGrid, worksheet, 3);
             foreach (var item in headers)
             {
                 item.Value.bind();

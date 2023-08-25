@@ -131,7 +131,7 @@ namespace Worksheet.modDisplay
         {
             if (name == "")
             {
-                name = WControl.ActiveGrid.Name;
+                name = WControl.ActiveSheet.Name;
             }
             return currentTemplate.Tabs.ContainsKey(name) ? currentTemplate.Tabs[name] : new AGenerator();
         }
@@ -194,25 +194,18 @@ namespace Worksheet.modDisplay
             {
                 sheet.CurrentCellEndEdit += AfterCellEdit;
             }
-
-            foreach (var sheet in WB.Values)
+         
+            foreach (var sheet in WorkSheets)
             {
-                sheet.CurrentCellValueChanged += CellDataChanged;
+                sheet.CellValueChanged += CellDataChanged;
             }
-
             contextMenu.Opening += contextMenuOpen;
         }
 
-        private static void CellDataChanged(object sender, CurrentCellValueChangedEventArgs e)
+        private static void CellDataChanged(object sender, Syncfusion.XlsIO.Implementation.CellValueChangedEventArgs e)
         {
             hook("CellDataChanged");
         }
-
-        private static void CellDataChanged(object sender, ValueChangedEventArgs e)
-        {
-            hook("CellDataChanged");
-        }
-
         private static void AfterCellEdit(object sender, CurrentCellEndEditEventArgs e)
         {
             hook("AfterCellInput");
@@ -221,9 +214,9 @@ namespace Worksheet.modDisplay
         private static void onClick(object sender, GridCellClickEventArgs e)
         {
             Cell = WS.SelectionController.CurrentCell;
-            Col = Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex);
-            Row = e.RowIndex;
-            SelectedCell =  ActiveWorkSheet.Range[Col + Row];
+            Col = e.ColumnIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex) :"A";
+            Row = e.RowIndex > 0 ? e.RowIndex: 1;
+            SelectedCell = ActiveWorkSheet.Range[Col + Row];
             hook("SelectCell");
         }
         

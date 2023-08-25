@@ -14,10 +14,10 @@ namespace Worksheet.modDisplay
     {
         public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet)
         {
-            ws = spreadsheetGrid;
+            this.spreadsheetGrid = spreadsheetGrid;
             this.worksheet = worksheet;
         }    
-        public SpreadsheetGrid ws;
+        public SpreadsheetGrid spreadsheetGrid;
         public IWorksheet worksheet;
 
         public int start { get; set; }
@@ -26,16 +26,6 @@ namespace Worksheet.modDisplay
         public void import(int s, int e)
         {
             // todo : asign column from worksheet
-        }
-      
-        public virtual string GetFormula(string col)
-        {
-            return "";
-        }
-        public IRange GetCell(string col)
-        {
-            IRange cell = worksheet.Range[col+Id];
-            return cell;
         }
     }
 }

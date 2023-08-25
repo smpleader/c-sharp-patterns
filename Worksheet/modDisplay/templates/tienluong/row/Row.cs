@@ -3,6 +3,7 @@ using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -151,11 +152,11 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 // xử lý công thức cho cột M
                 if (((Row)Row).HaveInterpretiveFormula)
                 {
-                    Row.ws.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
+                    Row.spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
                 }
                 else
                 {
-                    Row.ws.SetCellValue(range, Row.Cell("M").Value);
+                    Row.spreadsheetGrid.SetCellValue(range, Row.Cell("M").Value);
                 }
             }
         }
@@ -263,26 +264,25 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
         public void AddSimpleData()
         {
-            ws.SetCellValue(C,"AG.11111");
-            ws.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
-            ws.SetCellValue(E, "m3");
+            spreadsheetGrid.SetCellValue(C,"AG.11111");
+            spreadsheetGrid.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
+            spreadsheetGrid.SetCellValue(E, "m3");
 
-            ws.SetCellValue(V, "1");
-            ws.SetCellValue(W, "1");
-            ws.SetCellValue(X, "1");
+            spreadsheetGrid.SetCellValue(V, "1");
+            spreadsheetGrid.SetCellValue(W, "1");
+            spreadsheetGrid.SetCellValue(X, "1");
 
-            ws.SetCellValue(Y, "DinhMuc_2021XD_D12");
+            spreadsheetGrid.SetCellValue(Y, "DinhMuc_2021XD_D12");
 
-            ws.SetCellValue(Z, "685204");
-            ws.SetCellValue(AA, "0");
-            ws.SetCellValue(AB, "288111");
-            ws.SetCellValue(AC, "70230");
+            spreadsheetGrid.SetCellValue(Z, "685204");
+            spreadsheetGrid.SetCellValue(AA, "0");
+            spreadsheetGrid.SetCellValue(AB, "288111");
+            spreadsheetGrid.SetCellValue(AC, "70230");
 
             // set màu chữ thành không màu
             IRange range = worksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
-            ws.InvalidateCell(range.Row, range.Column);
-            //ws.Refresh();
+            spreadsheetGrid.InvalidateCell(range.Row, range.Column);
         }
     }
 }

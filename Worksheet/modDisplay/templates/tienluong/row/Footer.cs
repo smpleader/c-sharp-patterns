@@ -20,8 +20,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         };
         public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
         {
-            ws = spreadsheetGrid;
-            this.worksheet = worksheet;
             Id = 16;
             start = 6;
         }
@@ -84,7 +82,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         
         public void bind()
         {
-            Id = this.FindIndexRowFooter(ws,worksheet, start);
+            Id = this.FindIndexRowFooter(spreadsheetGrid, worksheet, start);
             end = Id - 1;
         }
 
@@ -95,8 +93,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             foreach (string colName in aliasUniqueName.Keys)
             {
                 var range = worksheet.Range[colName + Id];
-                ws.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
-                ws.InvalidateCell(range.Row, range.Column);
+                spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
+                spreadsheetGrid.InvalidateCell(range.Row, range.Column);
             }
         }
     }

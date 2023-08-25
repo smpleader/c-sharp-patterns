@@ -11,7 +11,7 @@ namespace Worksheet.modDisplay
     internal class APosition : IPosition
     {
         public virtual string Name { get { return "--"; } }
-        public SpreadsheetGrid ws { get; set; }
+        public SpreadsheetGrid spreadsheetGrid { get; set; }
         public IWorksheet worksheet { get; set; }
 
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace Worksheet.modDisplay
         public virtual void render(){}
         public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet)
         {
-            ws = spreadsheetGrid;
+            this.spreadsheetGrid = spreadsheetGrid;
             this.worksheet = worksheet;
         }
     }

@@ -31,17 +31,17 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsGroupObject(ws,worksheet,indexRow))
+                if (Helper.IsGroupObject(spreadsheetGrid, worksheet,indexRow))
                 {
                     indexGroups.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsRowObject(ws, worksheet, indexRow))
+                if (Helper.IsRowObject(spreadsheetGrid, worksheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsAdditionalRowObject(ws, worksheet, indexRow))
+                if (Helper.IsAdditionalRowObject(spreadsheetGrid, worksheet, indexRow))
                 {
                     indexAdditionalRows.Add(indexRow);
                 }
@@ -50,7 +50,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(ws, worksheet, indexGroups[i]);
+                groups[indexGroups[i]] = new Group(spreadsheetGrid, worksheet, indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -78,7 +78,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(ws, worksheet, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, worksheet, indexAdditionalRows[i]);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
 
@@ -86,7 +86,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(ws, worksheet, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, worksheet, indexRow);
                 int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
@@ -162,8 +162,8 @@ namespace Worksheet.modDisplay.templates.tienluong
                 {
                     if(rows.TryGetValue(rowIndex, out Row row))
                     {
-                        ws.SetCellValue(row.B, beginRow.ToString());
-                        ws.InvalidateCell(row.B.Row, row.B.Column);
+                        spreadsheetGrid.SetCellValue(row.B, beginRow.ToString());
+                        spreadsheetGrid.InvalidateCell(row.B.Row, row.B.Column);
                         beginRow++;
                     }
                 }

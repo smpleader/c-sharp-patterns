@@ -18,8 +18,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
     {
         public AdditionalRow(SpreadsheetGrid spreadsheetGrid,IWorksheet worksheet , int id) : base(spreadsheetGrid,worksheet)
         {
-            ws = spreadsheetGrid;
-            this.worksheet = worksheet;
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
@@ -64,7 +62,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// </summary>
         /// <param name="col"></param>
         /// <returns></returns>
-        public override string GetFormula(string col)
+        public string GetFormula(string col)
         {
             string[] parameters = new string[1] { Id.ToString() };
             return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").formula(parameters));
@@ -94,8 +92,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
                                 string formulaL = "=" + segment[1].Trim().Split("=")[0];
                                 var range = worksheet.Range["L" + Id];
-                                ws.SetCellValue(range, formulaL);
-
+                                spreadsheetGrid.SetCellValue(range, formulaL);
                                 IsInterpretiveFormula = true;
                             }
                             else

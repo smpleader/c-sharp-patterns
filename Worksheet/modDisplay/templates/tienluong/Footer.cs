@@ -16,14 +16,12 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
         {
-            ws = spreadsheetGrid;
-            this.worksheet = worksheet;
             Id = 16;
         }
        
         public override void bind()
         {
-            footer = new FooterRow(ws, worksheet);
+            footer = new FooterRow(spreadsheetGrid, worksheet);
             footer.bind();
             Id = footer.Id;
         }

@@ -25,8 +25,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         };
         public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
-            ws = spreadsheetGrid;
-            this.worksheet = worksheet;
             Id = id;
         }
 
@@ -79,13 +77,14 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
                 // merge khi có dấu hiệu của group
                 IRange raneMerge = worksheet.Range[B.AddressLocal + ":" + Q.AddressLocal];
-                GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);  
-                var excelRange = gridRange.ConvertGridRangeToExcelRange(ws);
-                var coverCell = new CoveredCellInfo(gridRange.Top, gridRange.Left, gridRange.Bottom, gridRange.Right);
+                GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
+                var excelRange = gridRange.ConvertGridRangeToExcelRange(spreadsheetGrid);
+                var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
+                //var coverCell = new CoveredCellInfo(gridRange.Top, gridRange.Left, gridRange.Bottom, gridRange.Right);
 
-                ws.CoveredCells.Add(coverCell);
                 worksheet.Range[excelRange].Merge();
-                ws.SetCellValue(B, nameGroup);
+                spreadsheetGrid.SetCellValue(B, nameGroup);
+                spreadsheetGrid.CoveredCells.Add(coverCell);
 
                 #region style lại cho group object
 
@@ -94,7 +93,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
                 string addressRangeGroup = A.AddressLocal + ":" + X.AddressLocal;
                 IRange rangeGroup = worksheet.Range[addressRangeGroup];
-                rangeGroup.CellStyle.ColorIndex = Syncfusion.XlsIO.ExcelKnownColors.Light_green;
+                rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
                 rangeGroup.BorderAround(ExcelLineStyle.Thin);
 
                 #endregion
@@ -107,8 +106,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             foreach (string colName in aliasUniqueName.Keys)
             {
                 var range = worksheet.Range[colName + Id];
-                ws.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
-                ws.InvalidateCell(range.Row, range.Column);
+                spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
+                spreadsheetGrid.InvalidateCell(range.Row, range.Column);
             }
         }
     }

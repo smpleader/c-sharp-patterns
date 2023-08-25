@@ -21,7 +21,7 @@ namespace Worksheet.modDisplay
         public virtual void render()
         {
             var range = Row.worksheet.Range[Col + Row.Id];
-            Row.ws.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
+            Row.spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
             Row.worksheet.AutofitRow(Row.Id);
         }
     }

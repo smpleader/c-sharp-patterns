@@ -1,26 +1,17 @@
 ﻿
-using System.Security.Cryptography;
-using Worksheet.modData.Memories;
-using Worksheet.modData;
-using Worksheet.modData.Memories.Pointer;
-using unvell.ReoGrid.Utility;
-using System.Configuration;
-using System.Collections.Generic;
-using unvell.ReoGrid;
 using Worksheet.modDisplay.templates.tienluong.row;
 using Microsoft.Office.Interop.Excel;
-using System.Windows.Documents;
+using Syncfusion.XlsIO;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using HeaderGroup = Worksheet.modDisplay.templates.tienluong.Header;
 using FooterGroup = Worksheet.modDisplay.templates.tienluong.Footer;
-using Syncfusion.Windows.Forms.Spreadsheet;
-using Syncfusion.XlsIO;
 
 namespace Worksheet.modDisplay.templates.tienluong
 {
     internal class Generator : AGenerator
     {
         public override string Name { get { return "templates/tienluong"; } }
-        public SpreadsheetGrid ws;
+        public SpreadsheetGrid spreadsheetGrid;
         public IWorksheet worksheet;
 
         bool DangThemCongViec = false;
@@ -33,7 +24,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (Display.WorkSheets[tabName] != null)
             {
                 worksheet = Display.WorkSheets[tabName];
-                ws = Display.WS;
+                spreadsheetGrid = Display.WS;
             }
         }
 
@@ -46,27 +37,28 @@ namespace Worksheet.modDisplay.templates.tienluong
         }
         public override void loadData()
         {
-            //DangThemCongViec = true;
-            ws.ColumnWidths.SetHidden(6, 12, true);
+            DangThemCongViec = true;
+
+            spreadsheetGrid.ColumnWidths.SetHidden(6, 12, true);
             // bind
 
             // header
-            header = new HeaderGroup(ws,worksheet);
+            header = new HeaderGroup(spreadsheetGrid, worksheet);
             header.bind();
             header.render();
 
             // footer
-            footer = new FooterGroup(ws, worksheet);
+            footer = new FooterGroup(spreadsheetGrid, worksheet);
             footer.bind();
             footer.render();
 
             // body 
-            body = new Body(ws, worksheet);
+            body = new Body(spreadsheetGrid, worksheet);
             body.end = footer.Id - 1;
             body.bind();
             body.render();
+            DangThemCongViec = false;
 
-            //DangThemCongViec = false;
         }
         public void updateData()
         {
@@ -75,14 +67,13 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm công việc
-                //DangThemCongViec = true;
-                body.rows[selectedIndexRow] = new Row(ws, worksheet, selectedIndexRow);
+                DangThemCongViec = true;
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, worksheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 body.bind();
                 body.render();
-
-                //DangThemCongViec = false;
+                DangThemCongViec = false;
             }
         }
        
@@ -104,14 +95,16 @@ namespace Worksheet.modDisplay.templates.tienluong
                     break;
             }
         }
-        public override void cellDataChanged()
+       
+        public override void afterCellInput()
         {
+            if (body == null) return;
             if (!DangThemCongViec)
             {
-                //DangThemCongViec = true;
+                DangThemCongViec = true;
                 body.bind();
                 body.render();
-                //DangThemCongViec = false;
+                DangThemCongViec = false;
             }
         }
     }

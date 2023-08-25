@@ -13,8 +13,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
     {
         public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
-            ws = spreadsheetGrid;
-            this.worksheet = worksheet;
             Id = id;
         }
         /// <summary>
