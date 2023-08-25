@@ -13,10 +13,10 @@ namespace Worksheet.modDisplay.templates.tienluong.row
     internal class Footer : ARowObject
     {
         Dictionary<string, string> aliasUniqueName = new Dictionary<string, string>() {
-            { "R", "CongViec_ThanhTienVatLieu" },
-            { "S", "CongViec_ThanhTienVatLieuPhu" },
-            { "T", "CongViec_ThanhTienNhanCong" },
-            { "U", "CongViec_ThanhTienMay" },
+            { "R", "CongViec_TongThanhTienVatLieu" },
+            { "S", "CongViec_TongThanhTienVatLieuPhu" },
+            { "T", "CongViec_TongThanhTienNhanCong" },
+            { "U", "CongViec_TongThanhTienMay" },
         };
         public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
         {
