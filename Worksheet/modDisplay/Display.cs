@@ -22,8 +22,8 @@ namespace Worksheet.modDisplay
 
         static FileTemplate currentTemplate;
         public static Spreadsheet WControl;
-        public static Dictionary<string, SpreadsheetGrid> WB;
-        public static SpreadsheetGrid WS;
+        public static Dictionary<string, SpreadsheetGrid> GridCollection;
+        public static SpreadsheetGrid ActiveGrid;
         public static IWorksheet ActiveWorkSheet;
         public static IWorksheets WorkSheets;
 
@@ -78,8 +78,8 @@ namespace Worksheet.modDisplay
         private static void setControl(Spreadsheet control)
         {
             WControl = control;
-            WB = control.GridCollection;
-            WS = control.ActiveGrid;
+            GridCollection = control.GridCollection;
+            ActiveGrid = control.ActiveGrid;
             ActiveWorkSheet = control.ActiveSheet;
             WorkSheets = control.Workbook.Worksheets;
         }
@@ -89,10 +89,10 @@ namespace Worksheet.modDisplay
             if (WControl != null)
             {
                 control.GridCollection.Clear();
-                for (int x = WB.Keys.Count - 1; x > -1; x--)
+                for (int x = GridCollection.Keys.Count - 1; x > -1; x--)
                 {
-                    string key = WB.Keys.ElementAt(x);
-                    WB.Remove(key, out SpreadsheetGrid value);
+                    string key = GridCollection.Keys.ElementAt(x);
+                    GridCollection.Remove(key, out SpreadsheetGrid value);
                     control.GridCollection[key] = value;
                 }
                 // trick để xử lý việc chuyển đổi các sheets giữa 2 ReogridControl
@@ -142,7 +142,7 @@ namespace Worksheet.modDisplay
             {
                 case "loadData":
                 case "LoadData":
-                    if (WB != null)
+                    if (GridCollection != null)
                     {
                         foreach (var tab in currentTemplate.Tabs)
                         {
@@ -186,11 +186,11 @@ namespace Worksheet.modDisplay
                 tab.Value.init(tab.Key);
             };
 
-            foreach (var sheet in WB.Values)
+            foreach (var sheet in GridCollection.Values)
             {
                 sheet.CellClick += onClick;
             }
-            foreach (var sheet in WB.Values)
+            foreach (var sheet in GridCollection.Values)
             {
                 sheet.CurrentCellEndEdit += AfterCellEdit;
             }
@@ -213,7 +213,7 @@ namespace Worksheet.modDisplay
 
         private static void onClick(object sender, GridCellClickEventArgs e)
         {
-            Cell = WS.SelectionController.CurrentCell;
+            Cell = ActiveGrid.SelectionController.CurrentCell;
             Col = e.ColumnIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex) :"A";
             Row = e.RowIndex > 0 ? e.RowIndex: 1;
             SelectedCell = ActiveWorkSheet.Range[Col + Row];
