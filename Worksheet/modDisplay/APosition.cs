@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +11,18 @@ namespace Worksheet.modDisplay
     internal class APosition : IPosition
     {
         public virtual string Name { get { return "--"; } }
-        public unvell.ReoGrid.Worksheet ws { get; set; }
+        public SpreadsheetGrid ws { get; set; }
+        public IWorksheet worksheet { get; set; }
+
         public int Id { get; set; }
 
         public virtual void bind(){}
 
         public virtual void render(){}
-        public APosition(unvell.ReoGrid.Worksheet worksheet)
+        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet)
         {
-            ws = worksheet;
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
         }
     }
 }

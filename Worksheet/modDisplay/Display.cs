@@ -1,15 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using unvell.ReoGrid;
-using unvell.ReoGrid.Events;
-using unvell.ReoGrid.IO.OpenXML.Schema;
-using Worksheet.modBL;
-using Worksheet.modBL.prime.vatlieu;
-using Worksheet.modData.Memories.Pointer;
+﻿using Syncfusion.Windows.Forms.CellGrid;
+using Syncfusion.Windows.Forms.CellGrid.Helpers;
+using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
 using Worksheet.Util;
 
 namespace Worksheet.modDisplay
@@ -29,10 +21,14 @@ namespace Worksheet.modDisplay
         }
 
         static FileTemplate currentTemplate;
-        public static ReoGridControl WControl;
-        public static WorksheetCollection WB;
-        public static unvell.ReoGrid.Worksheet WS;
-        public static unvell.ReoGrid.Cell Cell;
+        public static Spreadsheet WControl;
+        public static Dictionary<string, SpreadsheetGrid> WB;
+        public static SpreadsheetGrid WS;
+        public static IWorksheet ActiveWorkSheet;
+        public static IWorksheets WorkSheets;
+
+        public static IRange SelectedCell;
+        public static GridCurrentCell Cell;
         public static string Col;
         public static int Row;
 
@@ -57,6 +53,7 @@ namespace Worksheet.modDisplay
 
         private static void setTemplate(string filePath)
         {
+            
             string systemName = filePath.Replace(AppConst.contentFolder, "");
             string[] slugs = systemName.Split("/");
             currentTemplate = Resources.Files[""];
@@ -78,38 +75,38 @@ namespace Worksheet.modDisplay
             }
         }
 
-        private static void setControl(ReoGridControl control)
+        private static void setControl(Spreadsheet control)
         {
             WControl = control;
-            WB = control.Worksheets; 
+            WB = control.GridCollection;
+            WS = control.ActiveGrid;
+            ActiveWorkSheet = control.ActiveSheet;
+            WorkSheets = control.Workbook.Worksheets;
         }
 
-        static Dictionary<string, unvell.ReoGrid.Worksheet> worksheets = new Dictionary<string, unvell.ReoGrid.Worksheet> ();
-
-        public static void changeTab(ReoGridControl control)
+        public static void changeTab(Spreadsheet control)
         {
             if (WControl != null)
             {
-                control.Worksheets.Clear();
-                for (int x = WB.Count - 1; x > -1; x--)
+                control.GridCollection.Clear();
+                for (int x = WB.Keys.Count - 1; x > -1; x--)
                 {
-                    var tmp = WB[x];
-                    WB.RemoveAt(x);
-                    control.Worksheets.Add(tmp);
+                    string key = WB.Keys.ElementAt(x);
+                    WB.Remove(key, out SpreadsheetGrid value);
+                    control.GridCollection[key] = value;
                 }
                 // trick để xử lý việc chuyển đổi các sheets giữa 2 ReogridControl
-                var worksheet = WControl.CreateWorksheet("OnlyOne");
-                WControl.Worksheets.Add(worksheet);
+                //WControl.AddSheet();
             }
             setControl(control);
         }
-        public static void setup(ReoGridControl control, string filePath)
+        public static void setup(Spreadsheet control, string filePath)
         {
             setControl(control);
             setTemplate(filePath);
             attachEvent();
         }
-        public static void setup(ReoGridControl control)
+        public static void setup(Spreadsheet control)
         {
             if (currentTemplate == null)
             {
@@ -134,19 +131,9 @@ namespace Worksheet.modDisplay
         {
             if (name == "")
             {
-                name = WControl.CurrentWorksheet.Name;
+                name = WControl.ActiveGrid.Name;
             }
             return currentTemplate.Tabs.ContainsKey(name) ? currentTemplate.Tabs[name] : new AGenerator();
-        }
-
-        public Dictionary<String, String> State = new Dictionary<String, String>();
-        public string state(string key, string? val = null)
-        {
-            if (null == val)
-            {
-                val = null == State[key] ? "- not found -" : State[key];
-            }
-            return val;
         }
 
         public static void hook(string name)
@@ -179,10 +166,7 @@ namespace Worksheet.modDisplay
                     break;
                 case "selectCell":
                 case "SelectCell":
-
-                    //var t = tab(); MessageBox.Show(t.Name);
                     tab().selectCell();
-
                     break;
                 case "afterCellInput":
                 case "AfterCellInput":
@@ -202,48 +186,51 @@ namespace Worksheet.modDisplay
                 tab.Value.init(tab.Key);
             };
 
-            foreach (var sheet in WB)
+            foreach (var sheet in WB.Values)
             {
-                sheet.CellMouseDown += onClick;
+                sheet.CellClick += onClick;
             }
-            foreach (var sheet in WB)
+            foreach (var sheet in WB.Values)
             {
-                sheet.AfterCellEdit += AfterCellEdit;
+                sheet.CurrentCellEndEdit += AfterCellEdit;
             }
 
-            foreach (var sheet in WB)
+            foreach (var sheet in WB.Values)
             {
-                sheet.CellDataChanged += CellDataChanged;
+                sheet.CurrentCellValueChanged += CellDataChanged;
             }
 
             contextMenu.Opening += contextMenuOpen;
         }
 
-        private static void CellDataChanged(object? sender, CellEventArgs e)
+        private static void CellDataChanged(object sender, CurrentCellValueChangedEventArgs e)
         {
-            Display.hook("CellDataChanged");
-        }
-       
-        private static void AfterCellEdit(object? sender, CellAfterEditEventArgs e)
-        {
-            Display.hook("AfterCellInput");
+            hook("CellDataChanged");
         }
 
+        private static void CellDataChanged(object sender, ValueChangedEventArgs e)
+        {
+            hook("CellDataChanged");
+        }
+
+        private static void AfterCellEdit(object sender, CurrentCellEndEditEventArgs e)
+        {
+            hook("AfterCellInput");
+        }
+
+        private static void onClick(object sender, GridCellClickEventArgs e)
+        {
+            Cell = WS.SelectionController.CurrentCell;
+            Col = Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex);
+            Row = e.RowIndex;
+            SelectedCell =  ActiveWorkSheet.Range[Col + Row];
+            hook("SelectCell");
+        }
+        
         public static void contextMenuOpen(object sender, EventArgs e)
         {
             tab().addMenu();
         }
 
-        public static void onClick(object sender, CellMouseEventArgs e)
-        {
-            // unsafe: cell instance may be null
-            // var cell = e.Cell;
-            // safe: cell instance created from position if not existed 
-            Cell = WControl.CurrentWorksheet.CreateAndGetCell(e.CellPosition);
-            WS = WControl.CurrentWorksheet;
-            Col = new string(Cell.Address.ToString().Where(chr => Char.IsLetter(chr)).ToArray());
-            Row = Int32.Parse(new String(Cell.Address.ToString().Where(chr => Char.IsDigit(chr)).ToArray()));
-            Display.hook("SelectCell"); 
-        }
     }
 }

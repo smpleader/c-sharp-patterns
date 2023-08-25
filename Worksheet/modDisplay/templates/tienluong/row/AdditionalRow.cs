@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,46 +16,47 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(unvell.ReoGrid.Worksheet worksheet, int id) 
+        public AdditionalRow(SpreadsheetGrid spreadsheetGrid,IWorksheet worksheet , int id) : base(spreadsheetGrid,worksheet)
         {
-            ws = worksheet;
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
             Id = id;
         }
         public bool IsInterpretiveFormula { get; set; } = true;
-        public Cell C { get { return this.Cell("C"); } }
+       public IRange C { get { return this.Cell("C"); } }
         /// <summary>
         /// Công thức diễn giả
         /// </summary>
-        public Cell D { get { return this.Cell("D"); } }
+       public IRange D { get { return this.Cell("D"); } }
       
         /// <summary>
         /// Tên CK
         /// </summary>
-        public Cell F { get { return this.Cell("F"); } }
+       public IRange F { get { return this.Cell("F"); } }
         /// <summary>
         /// Số CK
         /// </summary>
-        public Cell G { get { return this.Cell("G"); } }
+       public IRange G { get { return this.Cell("G"); } }
         /// <summary>
         /// Dài
         /// </summary>
-        public Cell H { get { return this.Cell("H"); } }
+       public IRange H { get { return this.Cell("H"); } }
         /// <summary>
         /// Rộng
         /// </summary>
-        public Cell I { get { return this.Cell("I"); } }
+       public IRange I { get { return this.Cell("I"); } }
         /// <summary>
         /// Cao
         /// </summary>
-        public Cell J { get { return this.Cell("J"); } }
+       public IRange J { get { return this.Cell("J"); } }
         /// <summary>
         /// HS phụ
         /// </summary>
-        public Cell K { get { return this.Cell("K"); } }
+       public IRange K { get { return this.Cell("K"); } }
         /// <summary>
         /// KL Phụ
         /// </summary>
-        public Cell L { get { return this.Cell("L"); } }
+       public IRange L { get { return this.Cell("L"); } }
         
 
         /// <summary>
@@ -70,16 +72,17 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
-            if (!ws.IsMergedCell("B" + Id))
+            if (!worksheet.Range["B" + Id].IsMerged)
             {
                 // check group object khi nhập vào
-                string C = this.C.GetData<string>();
-                if (C == null)
+                string C = worksheet.Range["C" + Id].Value;
+                if (string.IsNullOrWhiteSpace(C))
                 {
                     // check công thức diễn giải khi nhập vào
-                    if (D.GetData<string>() != null)
+                    string ColValueD = worksheet.Range["D" + Id].Value;
+                    if (!string.IsNullOrWhiteSpace(ColValueD))
                     {
-                        string interpretiveFormula = D.GetData<string>();
+                        string interpretiveFormula = ColValueD;
                         var segment = interpretiveFormula.Split(":").ToList();
                         if (segment.Count > 1)
                         {
@@ -87,19 +90,23 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                             if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim().Split("=")[0]))
                             {
                                 double result = EvaluateExpression(segment[1].Trim().Split("=")[0]);
-                                D.Data = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
-                                L.Data = "=" + segment[1].Trim().Split("=")[0];
+                                D.Value = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
+
+                                string formulaL = "=" + segment[1].Trim().Split("=")[0];
+                                var range = worksheet.Range["L" + Id];
+                                ws.SetCellValue(range, formulaL);
+
                                 IsInterpretiveFormula = true;
                             }
                             else
                             {
-                                D.Data = interpretiveFormula + " :";
+                                D.Value = interpretiveFormula + " :";
                                 IsInterpretiveFormula = true;
                             }
                         }
                         else
                         {
-                            D.Data = interpretiveFormula + " :";
+                            D.Value = interpretiveFormula + " :";
                             IsInterpretiveFormula = true;
                         }
                     }

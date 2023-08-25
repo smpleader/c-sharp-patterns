@@ -22,10 +22,7 @@ namespace Worksheet.MVC.Views
     {
         private TienLuongP tienLuongP;
         private VatLieuP vatLieuP;
-        private DinhMucVatLieuP dinhMucVatLieuP;
-        private DinhMucNhanCongP dinhMucNhanCongP;
-        private DinhMucMayP dinhMucMayP;
-
+        
         public SheetTienLuong()
         {
             registerPresenters(true);
@@ -37,15 +34,10 @@ namespace Worksheet.MVC.Views
         {
             tienLuongP = (TienLuongP)Publisher.get("SheetTienLuong");
             tienLuongP.Setup();
-            Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
+            //Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
             vatLieuP = (VatLieuP)Publisher.get("SheetVatLieu");
             vatLieuP.Setup();
-            dinhMucVatLieuP = (DinhMucVatLieuP)Publisher.get("SheetChiTietVatLieu");
-            dinhMucVatLieuP.Setup();
-            dinhMucNhanCongP = (DinhMucNhanCongP)Publisher.get("SheetChiTietNhanCong");
-            dinhMucNhanCongP.Setup();
-            dinhMucMayP = (DinhMucMayP)Publisher.get("SheetChiTietMay");
-            dinhMucMayP.Setup();
+         
             sheet_TienLuong.CurrentWorksheet.SetRows(10000);
             sheet_TienLuong.WorkbookSaved += AfterSave;
             sheet_TienLuong.WorkbookLoaded += AfterLoad;
@@ -86,12 +78,7 @@ namespace Worksheet.MVC.Views
                 Publisher.register("SheetTienLuong", tienLuongP);
                 if (null == vatLieuP) vatLieuP = new VatLieuP(this);
                 Publisher.register("SheetVatLieu", vatLieuP);
-                if (null == dinhMucVatLieuP) dinhMucVatLieuP = new DinhMucVatLieuP(this);
-                Publisher.register("SheetChiTietVatLieu", dinhMucVatLieuP);
-                if (null == dinhMucNhanCongP) dinhMucNhanCongP = new DinhMucNhanCongP(this);
-                Publisher.register("SheetChiTietNhanCong", dinhMucNhanCongP);
-                if (null == dinhMucMayP) dinhMucMayP = new DinhMucMayP(this);
-                Publisher.register("SheetChiTietMay", dinhMucMayP);
+          
             }
         }
 
@@ -100,14 +87,14 @@ namespace Worksheet.MVC.Views
             switch (tabControl1.SelectedTab.Text)
             {
                 case "Tiên lượng":
-                    Display.changeTab(sheet_TienLuong);
-                    sheet_TienLuong.CurrentWorksheet = Display.WB["Tiên lượng"];
+                    //Display.changeTab(sheet_TienLuong);
+                    //sheet_TienLuong.CurrentWorksheet = Display.WB["Tiên lượng"];
                     btn_ThemCongViec.Enabled = true;
                     bbtn_ThemVatLieu.Enabled = false;
                     break;
                 case "Vật liệu":
-                    Display.changeTab(sheet_VatLieu);
-                    sheet_VatLieu.CurrentWorksheet = Display.WB["Giá vật liệu"];
+                    //Display.changeTab(sheet_VatLieu);
+                    //sheet_VatLieu.CurrentWorksheet = Display.WB["Giá vật liệu"];
                     switch (Option.PPTGiaVatLieu)
                     {
                         case PPTGiaVatLieu.NhapTay:
@@ -138,7 +125,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        Display.WControl.Save(saveFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
+                        //Display.WControl.Save(saveFileDialog.FileName, unvell.ReoGrid.IO.FileFormat.Excel2007);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
@@ -184,18 +171,18 @@ namespace Worksheet.MVC.Views
 
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (tabControl2.SelectedTab.Text)
-            {
-                case "Vật liệu":
-                    Display.setup(sheet_ChiTietVatLieu);
-                    break;
-                case "Nhân công":
-                    Display.setup(sheet_ChiTietNhanCong);
-                    break;
-                case "Máy":
-                    Display.setup(sheet_ChiTietMay);
-                    break;
-            }
+            //switch (tabControl2.SelectedTab.Text)
+            //{
+            //    case "Vật liệu":
+            //        Display.setup(sheet_ChiTietVatLieu);
+            //        break;
+            //    case "Nhân công":
+            //        Display.setup(sheet_ChiTietNhanCong);
+            //        break;
+            //    case "Máy":
+            //        Display.setup(sheet_ChiTietMay);
+            //        break;
+            //}
         }
 
         // Xử lý tab vật liệu
@@ -211,7 +198,7 @@ namespace Worksheet.MVC.Views
             sheet_VatLieu.CurrentWorksheet.HideColumns(20, 1);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            //((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
@@ -228,7 +215,7 @@ namespace Worksheet.MVC.Views
             sheet_VatLieu.CurrentWorksheet.HideColumns(19, 1);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            //((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
 
         }
 
@@ -244,7 +231,7 @@ namespace Worksheet.MVC.Views
             sheet_VatLieu.CurrentWorksheet.HideColumns(20, 1);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSo;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            //((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged(object sender, EventArgs e)
@@ -258,12 +245,12 @@ namespace Worksheet.MVC.Views
             sheet_VatLieu.CurrentWorksheet.HideColumns(12, 8);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            //((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
         {
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
+            //((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
         }
 
         private void SheetTienLuong_FormClosed(object sender, FormClosedEventArgs e)

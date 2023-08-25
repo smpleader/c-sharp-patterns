@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +11,13 @@ namespace Worksheet.modDisplay.templates.tienluong
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(unvell.ReoGrid.Worksheet worksheet) : base(worksheet) { }
+        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet){ }
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override void bind()
         {
             // todo: Lưu giá trị của header tới global state
-            headers[2] = new HeaderRow(ws,2);
-            headers[3] = new HeaderRow(ws, 3);
+            headers[2] = new HeaderRow(ws,worksheet,2);
+            headers[3] = new HeaderRow(ws, worksheet, 3);
             foreach (var item in headers)
             {
                 item.Value.bind();

@@ -26,39 +26,6 @@ namespace Worksheet.modDisplay
                     Tabs = new Dictionary<string, ISheet>()
                 }
             },
-            { "Dongia",  
-                new FileTemplate(){ 
-                    Id = 1,
-                    Name = "Dongia template",
-                    Path = "",
-                    Version = "0.1",
-                    Release = "20230702",
-                    Group = {},
-                    Note = "Dùng cho việc nhập liệu đơn giá",
-                    Tabs = new Dictionary<string, ISheet>()
-                    {
-                        {"Công việc", new dongia.congviec.Generator()  },
-                        {"Vật liệu", new dongia.vatlieu.Generator()  },
-                        {"Tong-hop", new dongia.tonghop.Generator()  },
-                    }
-                } 
-            },
-            { "Baogia",
-                new FileTemplate(){
-                    Id = 2,
-                    Name = "Bao gia template",
-                    Path = "",
-                    Version = "0.1",
-                    Release = "20230702",
-                    Group = {},
-                    Note = "Dùng cho việc nhập liệu báo giá",
-                    Tabs = new Dictionary<string, ISheet>()
-                    {
-                        {"Vật liệu", new dongia.vatlieu.Generator()  },
-                        {"Tong-hop", new dongia.tonghop.Generator()  },
-                    }
-                }
-            },
             { "Template/TienLuong",
                 new FileTemplate(){
                     Id = 2,
@@ -71,31 +38,10 @@ namespace Worksheet.modDisplay
                     Tabs = new Dictionary<string, ISheet>()
                     {
                         {"Tiên lượng", new templates.tienluong.Generator()},
-                        {"Định mức vật liệu", new templates.dinhmucvatlieu.Generator()},
-                        {"Định mức nhân công", new templates.dinhmucnhancong.Generator()},
-                        {"Định mức máy", new templates.dinhmucmay.Generator()},
-                        {"Giá vật liệu", new templates.vatlieu.Generator()},
-                        {"Cước ô tô", new templates.vatlieu.Generator()},
-                        {"Cước TC", new templates.vatlieu.Generator()},
-                        {"Cước biển", new templates.vatlieu.Generator()},
-                        {"Cước sông", new templates.vatlieu.Generator()},
                     }
                 }
             }
         };
-
-
-        // TODO: create Files by auto load on the startup
-        public static Dictionary<string,  ISheet> tabs = new Dictionary<string, ISheet>()
-                {
-                    {"default", new AGenerator()  },
-                    {"dg/congviec", new dongia.congviec.Generator()  },
-                    {"dg/vatlieu", new dongia.vatlieu.Generator()  },
-                    {"dg/tonghop", new dongia.tonghop.Generator()  },
-                    { "DG", new input_data1.vatlieu.Generator() },
-                    { "thvl", new input_data1.vatlieu.Generator()},
-                    { "THNC", new input_data1.vatlieu.Generator()}
-                };
-
+                
     }
 }

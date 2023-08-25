@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,9 @@ namespace Worksheet.modDisplay
         public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
         public virtual void render()
         {
-            Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
+            var range = Row.worksheet.Range[Col + Row.Id];
+            Row.ws.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
+            Row.worksheet.AutofitRow(Row.Id);
         }
     }
 }

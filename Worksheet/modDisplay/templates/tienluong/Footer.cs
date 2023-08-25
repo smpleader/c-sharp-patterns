@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +13,17 @@ namespace Worksheet.modDisplay.templates.tienluong
     internal class Footer : APosition
     {
         FooterRow footer;
-        public Footer(unvell.ReoGrid.Worksheet worksheet) : base(worksheet)
+
+        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
         {
-            ws = worksheet;
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
             Id = 16;
         }
+       
         public override void bind()
         {
-            footer = new FooterRow(ws);
+            footer = new FooterRow(ws, worksheet);
             footer.bind();
             Id = footer.Id;
         }

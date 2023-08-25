@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +11,16 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Header : ARowObject
     {
-        public Header(unvell.ReoGrid.Worksheet worksheet, int id)
+        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
-            ws = worksheet;
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
             Id = id;
         }
         /// <summary>
         /// Tên công trình hoặc tên hạng mục
         /// </summary>
-        public Cell B { get { return this.Cell("B"); } }
+        public IRange B { get { return this.Cell("B"); } }
         public void bind()
         {
             // todo: Lưu giá trị của header tới global state

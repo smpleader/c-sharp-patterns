@@ -57,6 +57,10 @@
         <PackageReference Include="Dapper" Version="2.0.123" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="SimpleInjector" Version="5.4.1" />
+        <PackageReference Include="Syncfusion.DataGridExport.WinForms" Version="22.2.5" />
+        <PackageReference Include="Syncfusion.Shared.Base" Version="22.2.5" />
+        <PackageReference Include="Syncfusion.Spreadsheet.Windows" Version="22.2.5" />
+        <PackageReference Include="Syncfusion.Tools.Windows" Version="22.2.5" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
         <PackageReference Include="unvell.ReoGrid.dll" Version="3.0.0" />
     </ItemGroup>

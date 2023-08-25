@@ -28,7 +28,7 @@ namespace Worksheet.MVC.Views
             //await checkCrash();
             //await checkSetup();
             await Task.Delay(1000);
-            Backbone.Run("SheetDemo");
+            Backbone.Run("DemoSyncfusion");
         }
 
         private async Task checkCrash()

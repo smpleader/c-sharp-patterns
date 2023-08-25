@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,24 +18,25 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             { "T", "CongViec_ThanhTienNhanCong" },
             { "U", "CongViec_ThanhTienMay" },
         };
-        public Footer(unvell.ReoGrid.Worksheet worksheet)
+        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
         {
-            ws = worksheet;
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
             Id = 16;
             start = 6;
         }
         /// <summary>
         /// Tổng hạng mục
         /// </summary>
-        public Cell A { get { return this.Cell("A"); } }
+       public IRange A { get { return this.Cell("A"); } }
        
-        public Cell R { get { return this.Cell("R"); } }
+       public IRange R { get { return this.Cell("R"); } }
        
-        public Cell S { get { return this.Cell("S"); } }
+       public IRange S { get { return this.Cell("S"); } }
         
-        public Cell T { get { return this.Cell("T"); } }
+       public IRange T { get { return this.Cell("T"); } }
         
-        public Cell U { get { return this.Cell("U"); } }
+       public IRange U { get { return this.Cell("U"); } }
 
         /// <summary>
         /// Tổng thành tiền vật liệu
@@ -42,7 +45,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             get
             {
-                return R.GetData<decimal>();
+                return (decimal)R.Value2;
             }
         }
 
@@ -53,7 +56,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             get
             {
-                return S.GetData<decimal>();
+                return (decimal)S.Value2;
             }
         }
 
@@ -64,7 +67,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             get
             {
-                return T.GetData<decimal>();
+                return (decimal)T.Value2;
             }
         }
 
@@ -75,13 +78,13 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             get
             {
-                return U.GetData<decimal>();
+                return (decimal)U.Value2;
             }
         }
         
         public void bind()
         {
-            Id = this.FindIndexRowFooter(ws, start);
+            Id = this.FindIndexRowFooter(ws,worksheet, start);
             end = Id - 1;
         }
 
@@ -91,8 +94,9 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             string[] parameters = new string[2] { start.ToString(), end.ToString() };
             foreach (string colName in aliasUniqueName.Keys)
             {
-                string formula = string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters));
-                ws[colName + Id] = formula;
+                var range = worksheet.Range[colName + Id];
+                ws.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
+                ws.InvalidateCell(range.Row, range.Column);
             }
         }
     }

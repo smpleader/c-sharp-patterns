@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,14 @@ namespace Worksheet.modDisplay
 {
     public class ARowObject: Row
     {
-        public unvell.ReoGrid.Worksheet ws;
+        public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet)
+        {
+            ws = spreadsheetGrid;
+            this.worksheet = worksheet;
+        }    
+        public SpreadsheetGrid ws;
+        public IWorksheet worksheet;
+
         public int start { get; set; }
         public int end { get; set; }
         public int height { get { return end - start; } }
@@ -23,9 +32,9 @@ namespace Worksheet.modDisplay
         {
             return "";
         }
-        public Cell GetCell(string col)
+        public IRange GetCell(string col)
         {
-            Cell cell = ws.Cells[col + Id];
+            IRange cell = worksheet.Range[col+Id];
             return cell;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,9 +16,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 {
     internal class Row : ARowObject
     {
-        public Row(unvell.ReoGrid.Worksheet worksheet, int id)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
-            ws = worksheet;
             Id = id;
         }
         public bool HaveInterpretiveFormula = false;
@@ -25,117 +25,117 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         /// <summary>
         /// Ký hiệu bản vẽ
         /// </summary>
-        public Cell A { get {return this.Cell("A");} }
+        public IRange A { get {return this.Cell("A");} }
         /// <summary>
         /// STT
         /// </summary>
-        public Cell B { get { return this.Cell("B"); } }
+        public IRange B { get { return this.Cell("B"); } }
         /// <summary>
         /// MSCV
         /// </summary>
-        public Cell C { get { return this.Cell("C"); } }
+        public IRange C { get { return this.Cell("C"); } }
         /// <summary>
         /// Tên công việc
         /// </summary>
-        public Cell D { get { return this.Cell("D"); } }
+        public IRange D { get { return this.Cell("D"); } }
         /// <summary>
         /// Đơn vị
         /// </summary>
-        public Cell E { get { return this.Cell("E"); } }
+        public IRange E { get { return this.Cell("E"); } }
         /// <summary>
         /// Tên CK
         /// </summary>
-        public Cell F { get { return this.Cell("F"); } }
+        public IRange F { get { return this.Cell("F"); } }
         /// <summary>
         /// Số CK
         /// </summary>
-        public Cell G { get { return this.Cell("G"); } }
+        public IRange G { get { return this.Cell("G"); } }
         /// <summary>
         /// Dài
         /// </summary>
-        public Cell H { get { return this.Cell("H"); } }
+        public IRange H { get { return this.Cell("H"); } }
         /// <summary>
         /// Rộng
         /// </summary>
-        public Cell I { get { return this.Cell("I"); } }
+        public IRange I { get { return this.Cell("I"); } }
         /// <summary>
         /// Cao
         /// </summary>
-        public Cell J { get { return this.Cell("J"); } }
+        public IRange J { get { return this.Cell("J"); } }
         /// <summary>
         /// HS phụ
         /// </summary>
-        public Cell K { get { return this.Cell("K"); } }
+        public IRange K { get { return this.Cell("K"); } }
         /// <summary>
         /// KL Phụ
         /// </summary>
-        public Cell L { get { return this.Cell("L"); } }
+        public IRange L { get { return this.Cell("L"); } }
         /// <summary>
         /// Khối lượng
         /// </summary>
-        public Cell M { get { return this.Cell("M"); } }
+        public IRange M { get { return this.Cell("M"); } }
         /// <summary>
         /// Đơn giá vật liệu
         /// </summary>
-        public Cell N { get { return this.Cell("N"); } }
+        public IRange N { get { return this.Cell("N"); } }
         /// <summary>
         /// Đơn giá vật liệu phụ
         /// </summary>
-        public Cell O { get { return this.Cell("O"); } }
+        public IRange O { get { return this.Cell("O"); } }
         /// <summary>
         /// Đơn giá nhân công
         /// </summary>
-        public Cell P { get { return this.Cell("P"); } }
+        public IRange P { get { return this.Cell("P"); } }
         /// <summary>
         /// Đơn giá máy
         /// </summary>
-        public Cell Q { get { return this.Cell("Q"); } }
+        public IRange Q { get { return this.Cell("Q"); } }
         /// <summary>
         /// Thành tiền vật liệu
         /// </summary>
-        public Cell R { get { return this.Cell("R"); } }
+        public IRange R { get { return this.Cell("R"); } }
         /// <summary>
         /// Thành tiền vật liệu phụ
         /// </summary>
-        public Cell S { get { return this.Cell("S"); } }
+        public IRange S { get { return this.Cell("S"); } }
         /// <summary>
         /// Thành tiền nhân công
         /// </summary>
-        public Cell T { get { return this.Cell("T"); } }
+        public IRange T { get { return this.Cell("T"); } }
         /// <summary>
         /// Thành tiền máy
         /// </summary>
-        public Cell U { get { return this.Cell("U"); } }
+        public IRange U { get { return this.Cell("U"); } }
         /// <summary>
         /// Hệ số điều chỉnh vật liệu
         /// </summary>
-        public Cell V { get { return this.Cell("V"); } }
+        public IRange V { get { return this.Cell("V"); } }
         /// <summary>
         /// Hệ số điều chỉnh nhân công
         /// </summary>
-        public Cell W { get { return this.Cell("W"); } }
+        public IRange W { get { return this.Cell("W"); } }
         /// <summary>
         /// Hệ số điều chỉnh máy
         /// </summary>
-        public Cell X { get { return this.Cell("X"); } }
+        public IRange X { get { return this.Cell("X"); } }
         /// <summary>
         /// Thông tin đơn giá
         /// </summary>
-        public Cell Y { get { return this.Cell("Y"); } }
+        public IRange Y { get { return this.Cell("Y"); } }
         /// <summary>
         /// Tổng giá của tất cả các vật liệu
         /// </summary>
-        public Cell Z { get { return this.Cell("Z"); } }
+        public IRange Z { get { return this.Cell("Z"); } }
         /// <summary>
         /// Tổng giá của tất cả các vật liệu phụ
         /// </summary>
-        public Cell AA { get { return this.Cell("AA"); } }
+        public IRange AA { get { return this.Cell("AA"); } }
         /// <summary>
         /// Tổng giá của tất cả các nhân công
         /// </summary>
-        public Cell AB { get { return this.Cell("AB"); } }
+        public IRange AB { get { return this.Cell("AB"); } }
         /// Tổng giá của tất cả các máy
-        public Cell AC { get { return this.Cell("AC"); } }
+        public IRange AC { get { return this.Cell("AC"); } }
 
         class ColM : ACol
         {
@@ -147,14 +147,15 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             }
             public override void render()
             {
+                var range = Row.worksheet.Range[Col + Row.Id];
                 // xử lý công thức cho cột M
                 if (((Row)Row).HaveInterpretiveFormula)
                 {
-                    Row.ws[Col + Row.Id] = string.Format(modBL.Container.Get(UniqueName).formula(Params));
+                    Row.ws.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
                 }
                 else
                 {
-                    Row.ws[Col + Row.Id] = Row.Cell("M").GetData<string>();
+                    Row.ws.SetCellValue(range, Row.Cell("M").Value);
                 }
             }
         }
@@ -162,7 +163,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
             public override string Col { get { return "N"; } } 
-            public override string  TongTienVatTu { get{ return ((Row)Row).Z.GetData<decimal>().ToString(); }}
+            public override string  TongTienVatTu { get{ return ((Row)Row).Z.Value.ToString(); }}
             public ColN(Row r) : base(r)
             {
             }
@@ -171,7 +172,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
             public override string Col { get { return "O"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AA.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AA.Value.ToString(); } }
             public ColO(Row r) : base(r)
             {
             }
@@ -180,7 +181,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
             public override string Col { get { return "P"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AB.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AB.Value.ToString(); } }
             public ColP(Row r) : base(r)
             {
             }
@@ -189,7 +190,7 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
             public override string Col { get { return "Q"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AC.GetData<decimal>().ToString(); } }
+            public override string TongTienVatTu { get { return ((Row)Row).AC.Value.ToString(); } }
             public ColQ(Row r) : base(r)
             {
             }
@@ -262,27 +263,26 @@ namespace Worksheet.modDisplay.templates.tienluong.row
 
         public void AddSimpleData()
         {
-            C.Data = "AG.11111";
-            D.Data = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
-            E.Data = "m3";
+            ws.SetCellValue(C,"AG.11111");
+            ws.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
+            ws.SetCellValue(E, "m3");
 
-            V.Data = 1;
-            W.Data = 1;
-            X.Data = 1;
+            ws.SetCellValue(V, "1");
+            ws.SetCellValue(W, "1");
+            ws.SetCellValue(X, "1");
 
-            Y.Data = "DinhMuc_2021XD_D12";
+            ws.SetCellValue(Y, "DinhMuc_2021XD_D12");
 
-            Z.Data = 685204;
-            AA.Data = 0;
-            AB.Data = 288111;
-            AC.Data = 70230;
+            ws.SetCellValue(Z, "685204");
+            ws.SetCellValue(AA, "0");
+            ws.SetCellValue(AB, "288111");
+            ws.SetCellValue(AC, "70230");
 
             // set màu chữ thành không màu
-            ws.SetRangeStyles(Z.Position.ToAddress() + ":" + AC.Position.ToAddress(), new WorksheetRangeStyle()
-            {
-                Flag = PlainStyleFlag.TextColor,
-                TextColor = Color.Transparent,
-            });
+            IRange range = worksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
+            range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
+            ws.InvalidateCell(range.Row, range.Column);
+            //ws.Refresh();
         }
     }
 }
