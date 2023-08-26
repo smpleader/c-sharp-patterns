@@ -19,7 +19,7 @@ namespace Worksheet.modBL.prime.vatlieu
             switch(Option.PPTCuocOto)
             {
                 case PPTCuocOto.TheoTongCuLy:
-                    return $"='Cước ô tô'!.Y{args[0]}";
+                    return $"='Cước ô tô'!Y{args[0]}";
                 // todo: thêm các trường hợp cho các ppt khác
             }
             return base.formula(args);

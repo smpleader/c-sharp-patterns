@@ -24,7 +24,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (Display.WorkSheets[tabName] != null)
             {
                 worksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.ActiveGrid;
+                spreadsheetGrid = Display.GridCollection[tabName];
                 worksheet.UseRangesCache = false;
             }
         }
@@ -40,6 +40,9 @@ namespace Worksheet.modDisplay.templates.tienluong
         {
             DangThemCongViec = true;
             spreadsheetGrid.ColumnWidths.SetHidden(6, 12, true);
+            spreadsheetGrid.ColumnWidths.SetHidden(14, 14, true);
+            spreadsheetGrid.ColumnWidths.SetHidden(18, 18, true);
+
             // bind
 
             // header

@@ -133,6 +133,7 @@ namespace Worksheet.modDisplay.templates.tienluong
 
         public override void render()
         {
+            spreadsheetGrid.BeginUpdate();
             foreach (Group group in groups.Values)
             {
                 group.render();
@@ -161,6 +162,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             }
             spreadsheetGrid.InvalidateCells();
             worksheet.Calculate();
+            spreadsheetGrid.EndUpdate();
         }
     }
 }

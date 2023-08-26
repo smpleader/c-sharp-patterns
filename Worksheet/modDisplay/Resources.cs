@@ -38,6 +38,7 @@ namespace Worksheet.modDisplay
                     Tabs = new Dictionary<string, ISheet>()
                     {
                         {"Tiên lượng", new templates.tienluong.Generator()},
+                        {"Giá vật liệu", new templates.vatlieu.Generator()},
                     }
                 }
             }

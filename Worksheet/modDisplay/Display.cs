@@ -75,7 +75,16 @@ namespace Worksheet.modDisplay
             }
         }
 
-        private static void setControl(Spreadsheet control)
+        public static void setControl(Spreadsheet control)
+        {
+            WControl = control;
+            GridCollection = control.GridCollection;
+            ActiveGrid = control.ActiveGrid;
+            ActiveWorkSheet = control.ActiveSheet;
+            WorkSheets = control.Workbook.Worksheets;
+        }
+
+        public static void setActiveSheet(Spreadsheet control)
         {
             WControl = control;
             GridCollection = control.GridCollection;
