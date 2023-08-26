@@ -155,11 +155,12 @@ namespace Worksheet.modDisplay.templates.tienluong
                     if(rows.TryGetValue(rowIndex, out Row row))
                     {
                         spreadsheetGrid.SetCellValue(row.B, beginRow.ToString());
-                        spreadsheetGrid.InvalidateCell(row.B.Row, row.B.Column);
                         beginRow++;
                     }
                 }
             }
+            spreadsheetGrid.InvalidateCells();
+            worksheet.Calculate();
         }
     }
 }

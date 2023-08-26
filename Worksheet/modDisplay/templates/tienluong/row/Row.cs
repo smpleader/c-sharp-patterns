@@ -164,7 +164,14 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
             public override string Col { get { return "N"; } } 
-            public override string  TongTienVatTu { get{ return ((Row)Row).Z.Value.ToString(); }}
+            public override string  TongTienVatTu { 
+                get
+                {
+                    string valueZ = ((Row)Row).Z.Value;
+                    if (string.IsNullOrWhiteSpace(valueZ)) return "0";
+                    return ((Row)Row).Z.Value.ToString(); 
+                }
+            }
             public ColN(Row r) : base(r)
             {
             }
@@ -173,7 +180,12 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
             public override string Col { get { return "O"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AA.Value.ToString(); } }
+            public override string TongTienVatTu { 
+                get {
+                    string valueAA = ((Row)Row).AA.Value;
+                    if (string.IsNullOrWhiteSpace(valueAA)) return "0";
+                    return ((Row)Row).AA.Value.ToString();
+                } }
             public ColO(Row r) : base(r)
             {
             }
@@ -182,7 +194,12 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
             public override string Col { get { return "P"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AB.Value.ToString(); } }
+            public override string TongTienVatTu { 
+                get {
+                    string valueAB = ((Row)Row).AB.Value;
+                    if (string.IsNullOrWhiteSpace(valueAB)) return "0";
+                    return ((Row)Row).AB.Value.ToString(); 
+                } }
             public ColP(Row r) : base(r)
             {
             }
@@ -191,7 +208,12 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         {
             public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
             public override string Col { get { return "Q"; } }
-            public override string TongTienVatTu { get { return ((Row)Row).AC.Value.ToString(); } }
+            public override string TongTienVatTu { 
+                get {
+                    string valueAC = ((Row)Row).AC.Value;
+                    if (string.IsNullOrWhiteSpace(valueAC)) return "0";
+                    return ((Row)Row).AC.Value.ToString(); 
+                } }
             public ColQ(Row r) : base(r)
             {
             }
@@ -282,7 +304,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             // set màu chữ thành không màu
             IRange range = worksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
-            spreadsheetGrid.InvalidateCell(range.Row, range.Column);
         }
     }
 }

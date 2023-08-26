@@ -1,6 +1,9 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.CellGrid.ScrollAxis;
+using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.Windows.Forms.Spreadsheet.GraphicCells;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
+using Syncfusion.XlsIO.Implementation.Shapes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,6 +107,7 @@ namespace Worksheet.MVC.Views
         {
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
+
             sheet_TienLuong.WorkbookLoaded += AfterLoad;
         }
 

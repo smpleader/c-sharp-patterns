@@ -1,4 +1,7 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.CellGrid;
+using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
+using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

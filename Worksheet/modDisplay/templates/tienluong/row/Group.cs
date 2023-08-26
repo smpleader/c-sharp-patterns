@@ -107,7 +107,6 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             {
                 var range = worksheet.Range[colName + Id];
                 spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
-                spreadsheetGrid.InvalidateCell(range.Row, range.Column);
             }
         }
     }

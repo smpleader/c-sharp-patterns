@@ -25,6 +25,7 @@ namespace Worksheet.modDisplay.templates.tienluong
             {
                 worksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.ActiveGrid;
+                worksheet.UseRangesCache = false;
             }
         }
 
@@ -100,11 +101,11 @@ namespace Worksheet.modDisplay.templates.tienluong
             if (body == null) return;
             if (!DangThemCongViec)
             {
-                DangThemCongViec = true;
+                //DangThemCongViec = true;
                 body.bind();
                 body.render();
-                spreadsheetGrid.InvalidateCells();
-                DangThemCongViec = false;
+                //spreadsheetGrid.InvalidateCells();
+                //DangThemCongViec = false;
             }
         }
     }
