@@ -91,9 +91,6 @@ namespace Worksheet.MVC.Views
                     break;
             }
         }
-
-       
-
         private void btn_OpenFile_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Excel Files|*.xlsx" })

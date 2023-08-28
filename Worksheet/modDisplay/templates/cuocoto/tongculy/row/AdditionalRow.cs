@@ -86,6 +86,29 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy.row
         /// </summary>
         public IRange W { get { return this.Cell("W"); } }
 
+        class ColO : ACol
+        {
+            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
+            public override string Col { get { return "O"; } }
+            // Chưa lấy đúng refer cần xác định refer khi có modData
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+
+            public ColO(ARowObject r) : base(r)
+            {
+            }
+        }
+        class ColP : ACol
+        {
+            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
+            public override string Col { get { return "P"; } }
+            // Chưa lấy đúng refer cần xác định refer khi có modData
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+
+            public ColP(ARowObject r) : base(r)
+            {
+            }
+        }
+
         /// <summary>
         /// Lấy công thức cho các cột R, S, T, U
         /// </summary>
@@ -101,13 +124,16 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy.row
             string A = worksheet.Range["A" + Id].Value;
             if (string.IsNullOrWhiteSpace(A))
             {
-
+                // todo: detect an additional line
             }
         }
         
         internal void render()
         {
-            
+            ColO colO = new ColO(this);
+            colO.render();
+            ColP colP = new ColP(this);
+            colP.render();
         }
     }
 }

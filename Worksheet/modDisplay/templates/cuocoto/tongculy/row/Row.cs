@@ -16,7 +16,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy.row
         {
             Id = id;
         }
-
+        public bool HaveAdditionalLines { get; set; } = false;
         /// <summary>
         /// STT
         /// </summary>
