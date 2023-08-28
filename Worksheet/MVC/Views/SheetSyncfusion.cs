@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Worksheet.modBL;
+using modBL;
 using Worksheet.modDisplay;
 using Worksheet.MVC.Controllers;
 using Worksheet.MVC.Presenters;
@@ -30,7 +30,7 @@ namespace Worksheet.MVC.Views
         {
             registerPresenters(true);
             InitializeComponent();
-            Worksheet.modBL.Container.init();
+            modBL.Container.init();
         }
         public override void registerPresenters(bool init)
         {
@@ -188,6 +188,7 @@ namespace Worksheet.MVC.Views
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            btn_TinhCuocOto.Visible = rdbtn_PPT_CongCuocVC.Checked;
         }
 
         private void rdbtn_PPT_NhanHeSo_CheckedChanged(object sender, EventArgs e)
@@ -218,6 +219,12 @@ namespace Worksheet.MVC.Views
         private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
         {
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
+        }
+
+        private void btn_TinhCuocOto_Click(object sender, EventArgs e)
+        {
+            SheetTinhCuocOto sheetTinhCuocOto = new SheetTinhCuocOto();
+            sheetTinhCuocOto.ShowDialog();
         }
     }
 }

@@ -11,15 +11,12 @@
     <ItemGroup>
       <Compile Remove="Content\Type\**" />
       <Compile Remove="DataSample\**" />
-      <Compile Remove="modBL\dongia\**" />
       <Compile Remove="samples\**" />
       <EmbeddedResource Remove="Content\Type\**" />
       <EmbeddedResource Remove="DataSample\**" />
-      <EmbeddedResource Remove="modBL\dongia\**" />
       <EmbeddedResource Remove="samples\**" />
       <None Remove="Content\Type\**" />
       <None Remove="DataSample\**" />
-      <None Remove="modBL\dongia\**" />
       <None Remove="samples\**" />
     </ItemGroup>
 
@@ -41,6 +38,12 @@
 		</None>
 		<None Update="Content/Template/dongia.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Template\cuocoto\theoloaiphuongtien.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Template\cuocoto\theotongculy.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Template\GiaVatLieu.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -74,6 +77,9 @@
 			<VersionMajor>1</VersionMajor>
 			<VersionMinor>9</VersionMinor>
 		</COMReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\modBL\modBL.csproj" />
 	</ItemGroup> 
 
 </Project>

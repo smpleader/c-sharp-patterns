@@ -50,7 +50,6 @@ namespace Worksheet.modDisplay
             }
         }
 
-
         private static void setTemplate(string filePath)
         {
             

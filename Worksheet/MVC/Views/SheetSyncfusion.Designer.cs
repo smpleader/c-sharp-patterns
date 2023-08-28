@@ -32,6 +32,7 @@
             Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController1 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             panel1 = new Panel();
             pnl_VatLieu = new Panel();
+            btn_TinhCuocOto = new Button();
             bbtn_ThemVatLieu = new Button();
             rdbtn_PPT_NhanHeSoCongCuocVC = new RadioButton();
             rdbtn_PPT_NhanHeSo = new RadioButton();
@@ -50,8 +51,8 @@
             splitter1 = new Splitter();
             panel4 = new Panel();
             tabPage2 = new TabPage();
-            panel5 = new Panel();
             gridControl1 = new Syncfusion.Windows.Forms.Grid.GridControl();
+            panel5 = new Panel();
             label2 = new Label();
             panel1.SuspendLayout();
             pnl_VatLieu.SuspendLayout();
@@ -60,8 +61,8 @@
             tabPage1.SuspendLayout();
             panel3.SuspendLayout();
             tabPage2.SuspendLayout();
-            panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -79,6 +80,7 @@
             // 
             // pnl_VatLieu
             // 
+            pnl_VatLieu.Controls.Add(btn_TinhCuocOto);
             pnl_VatLieu.Controls.Add(bbtn_ThemVatLieu);
             pnl_VatLieu.Controls.Add(rdbtn_PPT_NhanHeSoCongCuocVC);
             pnl_VatLieu.Controls.Add(rdbtn_PPT_NhanHeSo);
@@ -91,6 +93,17 @@
             pnl_VatLieu.Size = new Size(1790, 46);
             pnl_VatLieu.TabIndex = 10;
             pnl_VatLieu.Visible = false;
+            // 
+            // btn_TinhCuocOto
+            // 
+            btn_TinhCuocOto.Location = new Point(714, 7);
+            btn_TinhCuocOto.Name = "btn_TinhCuocOto";
+            btn_TinhCuocOto.Size = new Size(94, 29);
+            btn_TinhCuocOto.TabIndex = 12;
+            btn_TinhCuocOto.Text = "Tính cước ô tô";
+            btn_TinhCuocOto.UseVisualStyleBackColor = true;
+            btn_TinhCuocOto.Visible = false;
+            btn_TinhCuocOto.Click += btn_TinhCuocOto_Click;
             // 
             // bbtn_ThemVatLieu
             // 
@@ -257,7 +270,7 @@
             sheet_TienLuong.DefaultRowCount = 101;
             sheet_TienLuong.DisplayAlerts = true;
             sheet_TienLuong.Dock = DockStyle.Fill;
-            sheet_TienLuong.FileName = "Book2";
+            sheet_TienLuong.FileName = "Book4";
             sheet_TienLuong.FormulaBarVisibility = true;
             formulaRangeSelectionController1.AllowMouseSelection = true;
             formulaRangeSelectionController1.AllowSelectionOnEditing = true;
@@ -302,15 +315,6 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Vật liệu";
             tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(label2);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(3, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(1776, 44);
-            panel5.TabIndex = 1;
             // 
             // gridControl1
             // 
@@ -357,6 +361,15 @@
             gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbPressedBorderColor = Color.FromArgb(150, 150, 150);
             gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbPressedColor = Color.FromArgb(197, 197, 197);
             // 
+            // panel5
+            // 
+            panel5.Controls.Add(label2);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(3, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1776, 44);
+            panel5.TabIndex = 1;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -386,9 +399,9 @@
             tabPage1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ResumeLayout(false);
         }
 
@@ -417,5 +430,6 @@
         private Button bbtn_ThemVatLieu;
         private Syncfusion.Windows.Forms.Grid.GridControl gridControl1;
         private Label label2;
+        private Button btn_TinhCuocOto;
     }
 }

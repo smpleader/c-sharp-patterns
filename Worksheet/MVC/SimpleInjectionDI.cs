@@ -13,8 +13,7 @@ namespace Worksheet.MVC
         public static void ConfigureServices()
         {
             // CONTROLLERS
-            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new SheetDemoC(),  new SyncfusionC(),
-                new TienLuongC());;
+            container.Collection.Register<IController>(new LoaderC(), new StarterC(), new SheetDemoC(),  new SyncfusionC());
 
             // DRIVERs
             Sqlite sqlDriver = new Sqlite( AppConst.sqliteConnect );
