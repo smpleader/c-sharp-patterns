@@ -49,7 +49,7 @@ namespace Worksheet.modDisplay.templates.vatlieu
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        spreadsheetGrid.SetCellValue(row.B, beginRow.ToString());
+                        spreadsheetGrid.SetCellValue(row.A, beginRow.ToString());
                         beginRow++;
                     }
                 }

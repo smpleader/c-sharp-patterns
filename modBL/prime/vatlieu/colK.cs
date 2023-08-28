@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colO : ACell
+    internal class colK : ACell
     {
-        public colO(Option opt) : base(opt)
+        public colK(Option opt) : base(opt)
         {
         }
 
-        public override string CName => "O";
-        public override string UName => "VatLieu_GiaHienTruong";
+        public override string CName => "K";
+        public override string UName => "VatLieu_CuocThuCong";
+
         /// <summary>
         /// 1 tham số
-        /// <para> Chỉ số dòng vật liệu </para>
+        /// <para> Chỉ số dòng tổng cước trong bảng cước thủ công </para>
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
@@ -25,13 +26,11 @@ namespace modBL.prime.vatlieu
             switch (Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
-                    return $"=F{args[0]} + M{args[0]}";
                 case PPTGiaVatLieu.NhanHeSo:
-                    return $"=H{args[0]}*G{args[0]}";
+                    return "";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
-                    return $"=F{args[0]} + N{args[0]}";
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=H{args[0]} + N{args[0]}";
+                    return $"='Cước TC'!Q{args[0]}";
             }
             return base.formula(args);
         }

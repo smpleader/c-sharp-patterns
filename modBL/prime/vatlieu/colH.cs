@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colV : ACell
+    internal class colH : ACell
     {
-        public colV(Option opt) : base(opt)
+        public colH(Option opt) : base(opt)
         {
         }
 
-        public override string CName => "V";
-        public override string UName => "VatLieu_GiaHienTruong";
+        public override string CName => "H";
+        public override string UName => "VatLieu_GiaTBxHS";
+
+        /// <summary>
+        /// 1 tham số
+        /// <para> Chỉ số dòng tính đơn giá vật liệu </para>
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public override string formula(string[] args)
         {
             switch (Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
-                    return $"=J{args[0]}+T{args[0]}";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
-                    return $"=J{args[0]}+U{args[0]}";
+                    return "";
                 case PPTGiaVatLieu.NhanHeSo:
-                    return $"=J{args[0]}*K{args[0]}";
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=L{args[0]}+U{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}";
             }
             return base.formula(args);
         }

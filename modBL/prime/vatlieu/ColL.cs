@@ -13,10 +13,17 @@ namespace modBL.prime.vatlieu
         }
 
         public override string CName => "L";
-        public override string UName => "VatLieu_GiaTBxHS";
+        public override string UName => "VatLieu_CuocBien";
+
+        /// <summary>
+        /// 1 tham số
+        /// <para> Chỉ số dòng tổng cước trong bảng cước biển </para>
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=J{args[0]}*K{args[0]}";
+            return $"='Cước biển'!Q{args[0]}";
         }
     }
 }

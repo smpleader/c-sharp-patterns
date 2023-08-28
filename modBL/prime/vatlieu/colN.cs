@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colU : ACell
+    internal class colN : ACell
     {
-        public colU(Option opt) : base(opt)
+        public colN(Option opt) : base(opt)
         {
         }
 
-        public override string CName => "U";
+        public override string CName => "N";
         public override string UName => "VatLieu_TongCuoc";
+
+        /// <summary>
+        /// 1 tham số
+        /// <para> Chỉ số dòng vật liệu </para>
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public override string formula(string[] args)
         {
             switch (Option.PPTGiaVatLieu)
@@ -23,7 +30,7 @@ namespace modBL.prime.vatlieu
                     return "";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=SUM(M{args[0]}:S{args[0]})";
+                    return $"=SUM(I{args[0]}:L{args[0]})";
             }
             return base.formula(args);
         }

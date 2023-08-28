@@ -164,12 +164,9 @@ namespace Worksheet.MVC.Views
         private void rdbtn_PPT_NhapTay_CheckedChanged(object sender, EventArgs e)
         {
             // Hiển thị tất cả các cột
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 22, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 1, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(4, 4, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(8, 9, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(11, 19, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(21, 21, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(1, 16, false);
+            Display.ActiveGrid.ColumnWidths.SetHidden(7, 12, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(14, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -177,14 +174,9 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 22, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 1, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(4, 4, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(8, 9, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(11, 12, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(14, 14, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(17, 18, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(20, 20, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(1, 16, false);
+            Display.ActiveGrid.ColumnWidths.SetHidden(7, 8, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(13, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -193,12 +185,8 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_NhanHeSo_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 22, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 1, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(4, 4, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(8, 9, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(12, 20, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(21, 21, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(1, 17, false);
+            Display.ActiveGrid.ColumnWidths.SetHidden(8, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSo;
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -206,11 +194,8 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 22, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 1, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(4, 4, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(8, 9, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(13, 20, true);
+            Display.ActiveGrid.ColumnWidths.SetHidden(1, 17, false);
+            Display.ActiveGrid.ColumnWidths.SetHidden(9, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen;
             ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
