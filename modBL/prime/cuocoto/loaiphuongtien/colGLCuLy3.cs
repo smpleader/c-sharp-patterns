@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.loaiphuongtien
 {
-    // Cột L cho group object dòng cước cự ly lớn hơn 7km
+    /// <summary>
+    /// Cột L cho group object dòng cước cự ly lớn hơn 7km
+    /// </summary>
     internal class colGLCuLy3 : ACell
     {
         public colGLCuLy3(Option opt) : base(opt)

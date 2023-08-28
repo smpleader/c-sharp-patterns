@@ -210,6 +210,8 @@ namespace Worksheet.MVC.Views
         {
             SheetTinhCuocOto sheetTinhCuocOto = new SheetTinhCuocOto();
             sheetTinhCuocOto.ShowDialog();
+            //Backbone.Run("CuocOto", "ShowDialog");
         }
+
     }
 }

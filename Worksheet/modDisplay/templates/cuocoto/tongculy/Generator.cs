@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Worksheet.modDisplay.templates.cuocoto.tongculy.row;
+using HeaderGroup = Worksheet.modDisplay.templates.cuocoto.tongculy.Header;
 
 namespace Worksheet.modDisplay.templates.cuocoto.tongculy
 {
@@ -15,6 +17,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
         public SpreadsheetGrid spreadsheetGrid;
         public IWorksheet worksheet;
         bool DangThemVatLieu = false;
+        HeaderGroup header;
         Body body;
 
         public override void init(string tabName)
@@ -29,6 +32,11 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
 
         public override void loadData()
         {
+            // header
+            header = new HeaderGroup(spreadsheetGrid, worksheet);
+            header.bind();
+            header.render();
+
             body = new Body(spreadsheetGrid,worksheet);
             body.bind();
             body.render();
@@ -40,20 +48,15 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
                 if (!DangThemVatLieu)
                 {
                     DangThemVatLieu = true;
+                    header.bind();
+                    header.render();
+
                     body.bind();
                     body.render();
                     DangThemVatLieu = false;
                 }
             }
             
-        }
-        internal void ThayDoiPPT()
-        {
-            if (body == null) return;
-            DangThemVatLieu = true;
-            body.bind();
-            body.render();
-            DangThemVatLieu = false;
         }
 
         internal void updateData()

@@ -88,6 +88,10 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             IRange cell = aRowObject.worksheet.Range[colName + aRowObject.Id];
             return cell;
         }
-
+        public static IRange Cell(this ARowObject aRowObject, string colName, string row)
+        {
+            IRange cell = aRowObject.worksheet.Range[colName + row];
+            return cell;
+        }
     }
 }

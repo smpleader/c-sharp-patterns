@@ -31,6 +31,8 @@
             Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste1 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
             Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController1 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             panel1 = new Panel();
+            btn_SaveFile = new Button();
+            btn_OpenFile = new Button();
             btn_Close = new Button();
             btn = new Button();
             label1 = new Label();
@@ -41,6 +43,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btn_SaveFile);
+            panel1.Controls.Add(btn_OpenFile);
             panel1.Controls.Add(btn_Close);
             panel1.Controls.Add(btn);
             panel1.Controls.Add(label1);
@@ -50,6 +54,25 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1617, 47);
             panel1.TabIndex = 0;
+            // 
+            // btn_SaveFile
+            // 
+            btn_SaveFile.Location = new Point(618, 7);
+            btn_SaveFile.Name = "btn_SaveFile";
+            btn_SaveFile.Size = new Size(94, 29);
+            btn_SaveFile.TabIndex = 5;
+            btn_SaveFile.Text = "Lưu file";
+            btn_SaveFile.UseVisualStyleBackColor = true;
+            // 
+            // btn_OpenFile
+            // 
+            btn_OpenFile.Location = new Point(492, 7);
+            btn_OpenFile.Name = "btn_OpenFile";
+            btn_OpenFile.Size = new Size(94, 29);
+            btn_OpenFile.TabIndex = 4;
+            btn_OpenFile.Text = "Mở file";
+            btn_OpenFile.UseVisualStyleBackColor = true;
+            btn_OpenFile.Click += btn_OpenFile_Click;
             // 
             // btn_Close
             // 
@@ -104,7 +127,7 @@
             sheet_CuocOto.DefaultRowCount = 101;
             sheet_CuocOto.DisplayAlerts = true;
             sheet_CuocOto.Dock = DockStyle.Fill;
-            sheet_CuocOto.FileName = "Book1";
+            sheet_CuocOto.FileName = "Book3";
             sheet_CuocOto.FormulaBarVisibility = true;
             formulaRangeSelectionController1.AllowMouseSelection = true;
             formulaRangeSelectionController1.AllowSelectionOnEditing = true;
@@ -130,6 +153,7 @@
             Controls.Add(panel1);
             Name = "SheetTinhCuocOto";
             Text = "Cước ô tô";
+            Title = "Cước ô tô";
             Load += CuocOto_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -143,6 +167,8 @@
         private Button btn;
         private Label label1;
         private ComboBox cbb_CachTinh;
-        private Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_CuocOto;
+        public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_CuocOto;
+        private Button btn_SaveFile;
+        private Button btn_OpenFile;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
+using Worksheet.modDisplay.templates.cuocoto.tongculy.row;
 using Worksheet.modDisplay.templates.tienluong.row;
+using Row = Worksheet.modDisplay.templates.cuocoto.tongculy.row.Row;
 
 namespace Worksheet.modDisplay.templates.cuocoto.tongculy
 {

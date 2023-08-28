@@ -12,22 +12,18 @@ using Worksheet.Util;
 
 namespace Worksheet.MVC.Presenters.SheetTemplate
 {
-    internal class SyncfusionP : APresenter<SheetSyncfusion>
+    internal class CuocOtoP : APresenter<SheetTinhCuocOto>
     {
-        protected SheetSyncfusion _view;
+        protected SheetTinhCuocOto _view;
         string pathToTemplate = string.Empty;
-        public SyncfusionP(SheetSyncfusion view) : base(view)
+        public CuocOtoP(SheetTinhCuocOto view) : base(view)
         {
-            // This should be put at Screen Startup
-            Display.init();
-
             _view = view;
-
         }
         public void Setup()
         {
-            pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
-            _view.sheet_TienLuong.Open(pathToTemplate);
+            //pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
+            //_view.sheet_CuocOto.Open(pathToTemplate);
         }
     }
 }

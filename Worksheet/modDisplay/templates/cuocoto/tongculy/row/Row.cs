@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using unvell.ReoGrid;
 using Worksheet.modDisplay.templates.tienluong.row;
 
-namespace Worksheet.modDisplay.templates.cuocoto.tongculy
+namespace Worksheet.modDisplay.templates.cuocoto.tongculy.row
 {
     internal class Row : ARowObject
     {
@@ -18,141 +18,115 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
         }
 
         /// <summary>
-        /// Ký hiệu bản vẽ
+        /// STT
         /// </summary>
         public IRange A { get { return this.Cell("A"); } }
         /// <summary>
-        /// STT
+        /// MSCV
         /// </summary>
         public IRange B { get { return this.Cell("B"); } }
         /// <summary>
-        /// MSCV
+        /// Tên vật liệu
         /// </summary>
         public IRange C { get { return this.Cell("C"); } }
         /// <summary>
-        /// Tên công việc
+        /// Đơn vị
         /// </summary>
         public IRange D { get { return this.Cell("D"); } }
         /// <summary>
-        /// Đơn vị
+        /// Khối lượng đơn vị
         /// </summary>
         public IRange E { get { return this.Cell("E"); } }
         /// <summary>
-        /// Tên CK
+        /// Bậc hàng
         /// </summary>
         public IRange F { get { return this.Cell("F"); } }
         /// <summary>
-        /// Số CK
+        /// Hệ số bậc hàng
         /// </summary>
         public IRange G { get { return this.Cell("G"); } }
         /// <summary>
-        /// Dài
+        /// Nguồn mua
         /// </summary>
         public IRange H { get { return this.Cell("H"); } }
         /// <summary>
-        /// Rộng
+        /// Phương tiện
         /// </summary>
         public IRange I { get { return this.Cell("I"); } }
         /// <summary>
-        /// Cao
+        /// Hệ số phương tiện
         /// </summary>
         public IRange J { get { return this.Cell("J"); } }
         /// <summary>
-        /// HS phụ
+        /// Loại đường
         /// </summary>
         public IRange K { get { return this.Cell("K"); } }
         /// <summary>
-        /// KL Phụ
+        /// Cự ly (km)
         /// </summary>
         public IRange L { get { return this.Cell("L"); } }
         /// <summary>
-        /// Khối lượng
+        /// Tổng cự ly
         /// </summary>
         public IRange M { get { return this.Cell("M"); } }
         /// <summary>
-        /// Đơn giá vật liệu
+        /// Cước cơ bản
         /// </summary>
         public IRange N { get { return this.Cell("N"); } }
         /// <summary>
-        /// Đơn giá vật liệu phụ
+        /// Cước sau thuế
         /// </summary>
         public IRange O { get { return this.Cell("O"); } }
         /// <summary>
-        /// Đơn giá nhân công
+        /// Trước thuế
         /// </summary>
         public IRange P { get { return this.Cell("P"); } }
         /// <summary>
-        /// Đơn giá máy
+        /// Định mức bốc dỡ
         /// </summary>
         public IRange Q { get { return this.Cell("Q"); } }
         /// <summary>
-        /// Thành tiền vật liệu
+        /// Cước nâng hạ
         /// </summary>
         public IRange R { get { return this.Cell("R"); } }
         /// <summary>
-        /// Thành tiền vật liệu phụ
+        /// Thành tiền vật
         /// </summary>
         public IRange S { get { return this.Cell("S"); } }
         /// <summary>
-        /// Thành tiền nhân công
+        /// Giá TB
         /// </summary>
         public IRange T { get { return this.Cell("T"); } }
         /// <summary>
-        /// Thành tiền máy
+        /// Định mức hao hụt
         /// </summary>
         public IRange U { get { return this.Cell("U"); } }
         /// <summary>
-        /// Hệ số điều chỉnh vật liệu
+        /// Thành tiền hao hụt
         /// </summary>
         public IRange V { get { return this.Cell("V"); } }
         /// <summary>
-        /// Hệ số điều chỉnh nhân công
+        /// Chi phí khác
         /// </summary>
         public IRange W { get { return this.Cell("W"); } }
         /// <summary>
-        /// Hệ số điều chỉnh máy
+        /// Tổng cước trước thuế
         /// </summary>
         public IRange X { get { return this.Cell("X"); } }
-        /// <summary>
-        /// Thông tin đơn giá
-        /// </summary>
-        public IRange Y { get { return this.Cell("Y"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu
-        /// </summary>
-        public IRange Z { get { return this.Cell("Z"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu phụ
-        /// </summary>
-        public IRange AA { get { return this.Cell("AA"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các nhân công
-        /// </summary>
-        public IRange AB { get { return this.Cell("AB"); } }
-        /// Tổng giá của tất cả các máy
-        public IRange AC { get { return this.Cell("AC"); } }
-        class ColV : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
-            public override string Col { get { return "V"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString()}; } }
-            public ColV(Row r) : base(r)
-            {
-            }
-        }
+
         class ColM : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocOto"; } }
+            public override string UniqueName { get { return "CuocOto_TongCuLy"; } }
             public override string Col { get { return "M"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
             public ColM(Row r) : base(r)
             {
             }
         }
+
         class ColO : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocSong"; } }
+            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
             public override string Col { get { return "O"; } }
             // Chưa lấy đúng refer cần xác định refer khi có modData
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
@@ -163,7 +137,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
         }
         class ColP : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocThuCong"; } }
+            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
             public override string Col { get { return "P"; } }
             // Chưa lấy đúng refer cần xác định refer khi có modData
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
@@ -174,7 +148,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
         }
         class ColS : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocBien"; } }
+            public override string UniqueName { get { return "CuocOto_ThanhTienChiPhiBocDo"; } }
             public override string Col { get { return "S"; } }
             // Chưa lấy đúng refer cần xác định refer khi có modData
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
@@ -183,26 +157,17 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
             {
             }
         }
-        class ColU : ACol
+        class ColX : ACol
         {
-            public override string UniqueName { get { return "VatLieu_TongCuoc"; } }
-            public override string Col { get { return "U"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public override string UniqueName { get { return "CuocOto_TongCuoc"; } }
+            public override string Col { get { return "X"; } }
+            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
 
-            public ColU(Row r) : base(r)
+            public ColX(Row r) : base(r)
             {
             }
         }
-        class ColL : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
-            public override string Col { get { return "L"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
-            public ColL(Row r) : base(r)
-            {
-            }
-        }
         internal void bind()
         {
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
@@ -217,23 +182,22 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
             colP.render();
             ColS colS = new ColS(this);
             colS.render();
-            ColU colU = new ColU(this);
-            colU.render();
-            ColV colV = new ColV(this);
-            colV.render();
-            ColL colL = new ColL(this);
-            colL.render();
+            ColX colX = new ColX(this);
+            colX.render();
         }
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(C, "V01897");
-            spreadsheetGrid.SetCellValue(E, "Cát vàng");
-            spreadsheetGrid.SetCellValue(F, "m3");
+            spreadsheetGrid.SetCellValue(B, "V01897");
+            spreadsheetGrid.SetCellValue(C, "Cát vàng");
+            spreadsheetGrid.SetCellValue(D, "m3");
+            spreadsheetGrid.SetCellValue(E, "1.45");
+            spreadsheetGrid.SetCellValue(F, "Bậc 1");
+            spreadsheetGrid.SetCellValue(G, "1.0");
+            spreadsheetGrid.SetCellValue(I, "Ô tô");
+            spreadsheetGrid.SetCellValue(J, "1.0");
+            spreadsheetGrid.SetCellValue(K, "Loại 1");
 
-            spreadsheetGrid.SetCellValue(K, "1");
-            spreadsheetGrid.SetCellValue(G, "389809");
-            spreadsheetGrid.SetCellValue(J, "389809");
-
+            spreadsheetGrid.SetCellValue(N, "2984");
         }
     }
 }
