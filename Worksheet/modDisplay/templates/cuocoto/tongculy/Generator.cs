@@ -76,6 +76,9 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
                 spreadsheetGrid.EndUpdate();
                 DangThemVatLieu = false;
             }
+            {
+                MessageBox.Show($"Chỉ được thêm dữ liệu trong khoảng từ dòng {body.start} - {body.end}");
+            }
         }
     }
 }

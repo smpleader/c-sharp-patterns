@@ -92,6 +92,7 @@
             btn.TabIndex = 2;
             btn.Text = "Áp dụng";
             btn.UseVisualStyleBackColor = true;
+            btn.Click += btn_Click;
             // 
             // label1
             // 
@@ -127,7 +128,7 @@
             sheet_CuocOto.DefaultRowCount = 101;
             sheet_CuocOto.DisplayAlerts = true;
             sheet_CuocOto.Dock = DockStyle.Fill;
-            sheet_CuocOto.FileName = "Book3";
+            sheet_CuocOto.FileName = "Book1";
             sheet_CuocOto.FormulaBarVisibility = true;
             formulaRangeSelectionController1.AllowMouseSelection = true;
             formulaRangeSelectionController1.AllowSelectionOnEditing = true;

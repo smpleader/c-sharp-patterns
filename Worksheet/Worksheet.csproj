@@ -80,9 +80,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\modBL\modBL.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="modDisplay\templates\cuocoto\loaiphuongtien\row\" />
 	</ItemGroup> 
 
 </Project>

@@ -22,7 +22,7 @@ namespace modBL.prime.cuocoto.tongculy
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=X6 * E{args[0]}*G{args[0]}*J{args[0]}*L{args[0]}*N{args[0]}";
+            return $"=X6*E{args[0]}*G{args[0]}*J{args[1]}*L{args[1]}*N{args[1]}";
         }
     }
 }

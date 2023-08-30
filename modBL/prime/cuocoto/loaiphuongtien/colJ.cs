@@ -23,7 +23,7 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(K{args[0]}:K{args[1]})";
+            return $"=SUM(J{args[0]}:J{args[1]})";
         }
     }
 }

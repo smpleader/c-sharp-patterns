@@ -13,7 +13,7 @@ using Worksheet.modData.Memories.Pointer;
 using Worksheet.modDisplay.templates.tienluong.row;
 using Cell = unvell.ReoGrid.Cell;
 
-namespace Worksheet.modDisplay.templates.cuocoto.tongculy.row
+namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     internal class AdditionalRow : ARowObject
     {

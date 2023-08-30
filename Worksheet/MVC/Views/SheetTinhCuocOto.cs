@@ -118,5 +118,12 @@ namespace Worksheet.MVC.Views
         {
             Backbone.Run("DemoSyncfusion", "ReLoad");
         }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            SyncfusionP syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
+            Display.changeTab(sheet_CuocOto, syncfusionP.Spreadsheet);
+            Close();
+        }
     }
 }

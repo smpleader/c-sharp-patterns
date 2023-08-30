@@ -29,5 +29,6 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
             pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
             _view.sheet_TienLuong.Open(pathToTemplate);
         }
+        public Spreadsheet Spreadsheet { get { return _view.sheet_TienLuong; } }
     }
 }

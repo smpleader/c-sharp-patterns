@@ -1,7 +1,10 @@
 ﻿using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.CellGrid.Helpers;
 using Syncfusion.Windows.Forms.Spreadsheet;
+using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
+using System.Collections.Generic;
+using System.Windows.Input;
 using Worksheet.Util;
 
 namespace Worksheet.modDisplay
@@ -107,6 +110,44 @@ namespace Worksheet.modDisplay
                 //WControl.AddSheet();
             }
             setControl(control);
+        }
+        public static void changeTab(Spreadsheet src, Spreadsheet des)
+        {
+            if (src != null && des != null)
+            {
+                List<string> sheetNames = src.Workbook.Worksheets.Select(item => item.Name).ToList();
+                foreach (string sheetName in sheetNames)
+                {
+                    var cloneSheet = src.Workbook.Worksheets[sheetName];
+                    //des.Workbook.Worksheets.Remove(sheetName);
+                    des.Workbook.Worksheets.AddCopy(cloneSheet,
+                        ExcelWorksheetCopyFlags.CopyMerges
+                        //| ExcelWorksheetCopyFlags.CopyAll
+                        //| ExcelWorksheetCopyFlags.CopyCells
+                        //| ExcelWorksheetCopyFlags.CopyColumnHeight
+                        //| ExcelWorksheetCopyFlags.CopyAutoFilters
+                        //| ExcelWorksheetCopyFlags.CopyOptions
+                        //| ExcelWorksheetCopyFlags.CopyConditionlFormats
+                        //| ExcelWorksheetCopyFlags.CopyShapes
+                        //| ExcelWorksheetCopyFlags.CopyDataValidations
+                        //| ExcelWorksheetCopyFlags.CopyPalette
+                        );
+                    //src.GridCollection.Remove(sheetName, out SpreadsheetGrid value);
+                    des.GridCollection[sheetName] = src.GridCollection[sheetName];
+                    foreach(var gridRange in des.GridCollection[sheetName].CoveredCells.Ranges)
+                    {
+                        var excelRange = gridRange.ConvertGridRangeToExcelRange(des.GridCollection[sheetName]);
+                        des.Workbook.Worksheets[sheetName].Range[excelRange.ToString()].Merge();
+                        des.GridCollection[sheetName].InvalidateCell(gridRange.Right, gridRange.Top);
+                    }
+                    //des.Workbook.Worksheets[sheetName].Calculate();
+                    //des.GridCollection[sheetName].Refresh();
+                }    
+            }
+            else
+            {
+                // todo: handle error
+            }    
         }
         public static void setup(Spreadsheet control, string filePath)
         {

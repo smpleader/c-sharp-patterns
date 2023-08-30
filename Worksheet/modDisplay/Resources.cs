@@ -53,7 +53,7 @@ namespace Worksheet.modDisplay
                     Note = "Dùng cho việc tính cước ô tô",
                     Tabs = new Dictionary<string, ISheet>()
                     {
-                        {"Tổng cự ly", new templates.cuocoto.tongculy.Generator()},
+                        {"Cước ô tô", new templates.cuocoto.tongculy.Generator()},
                     }
                 }
             },
@@ -68,7 +68,7 @@ namespace Worksheet.modDisplay
                     Note = "Dùng cho việc tính cước ô tô",
                     Tabs = new Dictionary<string, ISheet>()
                     {
-                        {"Theo loại phương tiện", new templates.cuocoto.loaiphuongtien.Generator()},
+                        {"Cước ô tô", new templates.cuocoto.loaiphuongtien.Generator()},
                     }
                 }
             }

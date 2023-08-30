@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using unvell.ReoGrid;
 using Worksheet.modDisplay.templates.tienluong.row;
 
-namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien
+namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     internal class Row : ARowObject
     {
@@ -131,11 +131,22 @@ namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien
         public IRange AB { get { return this.Cell("AB"); } }
         /// Tổng giá của tất cả các máy
         public IRange AC { get { return this.Cell("AC"); } }
+
+        class ColL : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
+            public override string Col { get { return "L"; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+
+            public ColL(Row r) : base(r)
+            {
+            }
+        }
         class ColV : ACol
         {
             public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
             public override string Col { get { return "V"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString()}; } }
+            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
             public ColV(Row r) : base(r)
             {
             }

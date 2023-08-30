@@ -1,7 +1,5 @@
 ﻿using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
-using Worksheet.modDisplay.templates.cuocoto.tongculy.row;
-using Worksheet.modDisplay.templates.tienluong.row;
 using AdditionalRow = Worksheet.modDisplay.templates.cuocoto.tongculy.row.AdditionalRow;
 using Helper = Worksheet.modDisplay.templates.cuocoto.tongculy.row.Helper;
 using Row = Worksheet.modDisplay.templates.cuocoto.tongculy.row.Row;
@@ -21,7 +19,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
 
-            for (int indexRow = start; indexRow <= end; indexRow++)
+            for (int indexRow = start; indexRow <= worksheet.Rows.Length; indexRow++)
             {
                 if (Helper.IsRowObject(spreadsheetGrid, worksheet, indexRow))
                 {
@@ -34,7 +32,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
             }
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, worksheet, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, worksheet, indexAdditionalRows[i],9);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
@@ -74,7 +72,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
                     if (additionalRows.ContainsKey(index))
                     {
                         haveAdditionalLines = true;
-                        break;
+                        additionalRows[indexAdditionalRows[i]].ParentId = vl.Id;
                     }
                 }
                 vl.HaveAdditionalLines = haveAdditionalLines;
@@ -100,7 +98,7 @@ namespace Worksheet.modDisplay.templates.cuocoto.tongculy
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        spreadsheetGrid.SetCellValue(row.B, beginRow.ToString());
+                        spreadsheetGrid.SetCellValue(row.A, beginRow.ToString());
                         beginRow++;
                     }
                 }
