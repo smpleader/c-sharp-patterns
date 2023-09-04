@@ -1,14 +1,13 @@
 ﻿using SimpleInjector;
 using Worksheet.MVC.Controllers;
 using Worksheet.MVC.Models;
-using Worksheet.MVC.Views;
-using Worksheet.Util;
-using Worksheet.modData.Drivers;
+using modData.Drivers;
 using System.Reflection;
+using Util;
 
 namespace Worksheet.MVC
 {
-    internal class SimpleInjectionDI
+    public class SimpleInjectionDI
     {
         public static Container container = new Container();
         public static Container dynamicContainer = new Container();

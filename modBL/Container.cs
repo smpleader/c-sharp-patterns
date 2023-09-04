@@ -11,7 +11,6 @@ namespace modBL
         public void Init()
         {
             string targetNamespace = "modBL.prime";
-
             // Lấy tất cả các namespace con
             var subNamespaces = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.Namespace != null && type.Namespace.StartsWith(targetNamespace))

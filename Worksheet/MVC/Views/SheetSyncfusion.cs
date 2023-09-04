@@ -13,12 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Worksheet.modDisplay;
-using Worksheet.MVC.Controllers;
+using modDisplay;
 using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Presenters.SheetTemplate;
-using Worksheet.Util;
 using BaseInterface;
+using Util;
 
 namespace Worksheet.MVC.Views
 {
@@ -101,7 +100,7 @@ namespace Worksheet.MVC.Views
 
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
         {
-            ((Worksheet.modDisplay.templates.tienluong.Generator)Display.tab("Tiên lượng")).updateData();
+            ((modDisplay.templates.tienluong.Generator)Display.tab("Tiên lượng")).updateData();
         }
 
         private async void SheetSyncfusion_Load(object sender, EventArgs e)
@@ -171,7 +170,7 @@ namespace Worksheet.MVC.Views
             Display.ActiveGrid.ColumnWidths.SetHidden(14, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
@@ -181,7 +180,7 @@ namespace Worksheet.MVC.Views
             Display.ActiveGrid.ColumnWidths.SetHidden(13, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
             btn_TinhCuocOto.Visible = rdbtn_PPT_CongCuocVC.Checked;
         }
 
@@ -191,7 +190,7 @@ namespace Worksheet.MVC.Views
             Display.ActiveGrid.ColumnWidths.SetHidden(8, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSo;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged(object sender, EventArgs e)
@@ -200,12 +199,12 @@ namespace Worksheet.MVC.Views
             Display.ActiveGrid.ColumnWidths.SetHidden(9, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen;
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
         }
 
         private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
         {
-            ((Worksheet.modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
         }
 
         private void btn_TinhCuocOto_Click(object sender, EventArgs e)

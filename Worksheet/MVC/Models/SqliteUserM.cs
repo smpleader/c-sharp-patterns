@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserEntity = Worksheet.modData.Sqlite.Entities.User.WinForm;
-using UserCore = Worksheet.modData.Sqlite.Entities.User.Schema;
+using UserEntity = modData.Sqlite.Entities.User.WinForm;
+using UserCore = modData.Sqlite.Entities.User.Schema;
 
-using Worksheet.Util;
-using SqlDrive = Worksheet.modData.Drivers.Sqlite;
+using Util;
+using SqlDrive = modData.Drivers.Sqlite;
 
 namespace Worksheet.MVC.Models
 {
-    internal class SqliteUserM
+    public class SqliteUserM
     {
         public modData.Sqlite.User tblUser;
         public SqliteUserM(SqlDrive sqlDriver) 
