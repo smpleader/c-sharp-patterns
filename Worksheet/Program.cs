@@ -17,9 +17,6 @@ namespace Worksheet
             SyncfusionLicenseProvider.RegisterLicense("MjY1Mjc3M0AzMjMyMmUzMDJlMzBLam56RC9nbDVOR2N2aGVjQ3djTGdEdGRzU3lSN0FmZFlKWE4reHNBQjhnPQ==");
             ApplicationConfiguration.Initialize();
             SimpleInjectionDI.ConfigureServices();
-            string PathToExtensions = Path.GetDirectoryName(Application.ExecutablePath) + "/Extensions/";
-            string fileDll = PathToExtensions + "modBL.dll";
-            SimpleInjectionDI.ConfigureDynamicServices(fileDll);
             Backbone.StartCurrentThread();
         }
     }

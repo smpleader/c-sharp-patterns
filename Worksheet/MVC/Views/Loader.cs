@@ -27,8 +27,15 @@ namespace Worksheet.MVC.Views
 
             //await checkCrash();
             //await checkSetup();
+            // load modBL
+            string PathToExtensions = Path.GetDirectoryName(Application.ExecutablePath) + "/Extensions/";
+            string fileDll = PathToExtensions + "modBL.dll";
+            SimpleInjectionDI.ConfigureDynamicServices(fileDll);
+           
             await Task.Delay(1000);
             Backbone.Run("DemoSyncfusion");
+
+
         }
 
         private async Task checkCrash()
