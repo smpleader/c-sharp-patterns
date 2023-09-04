@@ -48,6 +48,9 @@
 		<None Update="Content\Template\TienLuong.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Extensions\modBL.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content/*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -76,6 +79,7 @@
 		</COMReference>
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\BaseInterface\BaseInterface.csproj" />
 	  <ProjectReference Include="..\modBL\modBL.csproj" />
 	</ItemGroup> 
 

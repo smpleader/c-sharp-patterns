@@ -12,6 +12,7 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Worksheet.MVC;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
 {
@@ -106,7 +107,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
             foreach (string colName in aliasUniqueName.Keys)
             {
                 var range = worksheet.Range[colName + Id];
-                spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(aliasUniqueName[colName]).formula(parameters)));
+                BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+                spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters)));
             }
         }
     }

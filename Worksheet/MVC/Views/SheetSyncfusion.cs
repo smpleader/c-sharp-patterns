@@ -13,12 +13,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using modBL;
 using Worksheet.modDisplay;
 using Worksheet.MVC.Controllers;
 using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Presenters.SheetTemplate;
 using Worksheet.Util;
+using BaseInterface;
 
 namespace Worksheet.MVC.Views
 {
@@ -30,7 +30,7 @@ namespace Worksheet.MVC.Views
         {
             registerPresenters(true);
             InitializeComponent();
-            modBL.Container.init();
+           
         }
         public override void registerPresenters(bool init)
         {
@@ -106,6 +106,8 @@ namespace Worksheet.MVC.Views
 
         private async void SheetSyncfusion_Load(object sender, EventArgs e)
         {
+            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+            modBLContainer.Init();
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
             sheet_TienLuong.WorkbookLoaded += AfterLoad;

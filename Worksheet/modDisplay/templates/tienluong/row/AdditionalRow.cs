@@ -10,6 +10,7 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Worksheet.MVC;
 using Cell = unvell.ReoGrid.Cell;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
@@ -65,7 +66,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
         public string GetFormula(string col)
         {
             string[] parameters = new string[1] { Id.ToString() };
-            return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").formula(parameters));
+            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+            return string.Format(modBLContainer.Get("CongViec_KhoiLuongPhu").formula(parameters));
         }
         public void bind()
         {

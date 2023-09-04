@@ -1,13 +1,14 @@
-﻿using System.Reflection;
+﻿using BaseInterface;
+using System.Reflection;
 
 namespace modBL
 {
-    public class Container
+    public class Container : IModBL
     {
-        private static Dictionary<string, ICell> _instance = new Dictionary<string, ICell>();
-        public static bool exists(string name) { return _instance.ContainsKey(name); }
-        public static ICell Get(string name) { return _instance[name]; }
-        public static void init()
+        private Dictionary<string, ICell> _instance = new Dictionary<string, ICell>();
+        public bool exists(string name) { return _instance.ContainsKey(name); }
+        public ICell Get(string name) { return _instance[name]; }
+        public void Init()
         {
             string targetNamespace = "modBL.prime";
 

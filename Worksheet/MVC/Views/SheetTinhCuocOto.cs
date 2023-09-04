@@ -1,4 +1,4 @@
-﻿using modBL;
+﻿using BaseInterface;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using System;

@@ -11,6 +11,7 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using unvell.ReoGrid.Utility;
 using Worksheet.modData.Memories.Pointer;
+using Worksheet.MVC;
 using Cell = unvell.ReoGrid.Cell;
 
 namespace Worksheet.modDisplay.templates.tienluong.row
@@ -152,7 +153,8 @@ namespace Worksheet.modDisplay.templates.tienluong.row
                 // xử lý công thức cho cột M
                 if (((Row)Row).HaveInterpretiveFormula)
                 {
-                    Row.spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
+                    BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+                    Row.spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(UniqueName).formula(Params)));
                 }
                 else
                 {

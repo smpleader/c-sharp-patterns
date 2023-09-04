@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Worksheet.MVC;
 
 namespace Worksheet.modDisplay
 {
@@ -24,7 +25,8 @@ namespace Worksheet.modDisplay
         public virtual void render()
         {
             var range = Row.worksheet.Range[Col + Row.Id];
-            Row.spreadsheetGrid.SetCellValue(range, string.Format(modBL.Container.Get(UniqueName).formula(Params)));
+            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+            Row.spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(UniqueName).formula(Params)));
             Row.worksheet.AutofitRow(Row.Id);
         }
     }
