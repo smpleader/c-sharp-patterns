@@ -10,7 +10,7 @@ namespace modData
     /**
      * Lớp dữ liệu dạng memories chứa thông tin dựa theo cơ chế Path
      */
-    internal class memories
+    public class memories
     {
         public static List<ARecord> Storage = new List<ARecord>();
 

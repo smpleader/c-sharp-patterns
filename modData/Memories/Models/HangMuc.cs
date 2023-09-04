@@ -9,7 +9,7 @@ using modData.Memories.Pointer;
 
 namespace modData.Memories.Models
 {
-    internal class HangMuc
+    public class HangMuc
     {
         public static void point(int id)
         {

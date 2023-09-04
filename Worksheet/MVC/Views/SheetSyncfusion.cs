@@ -105,7 +105,7 @@ namespace Worksheet.MVC.Views
 
         private async void SheetSyncfusion_Load(object sender, EventArgs e)
         {
-            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
+            BaseInterface.IModBL modBLContainer = modDisplay.SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
             modBLContainer.Init();
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();

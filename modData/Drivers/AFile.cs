@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace modData.Drivers
 {
-    internal class AFile
+    public class AFile
     {
         public static List<string> GetFiles(string path, List<string>? extList = null, bool fullPath = false)
         {

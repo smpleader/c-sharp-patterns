@@ -9,7 +9,7 @@ using modData.Drivers;
 
 namespace modData.Json
 {
-    internal class User
+    public class User
     {
         private string FilePath;
         private List<UserEntity> Users;

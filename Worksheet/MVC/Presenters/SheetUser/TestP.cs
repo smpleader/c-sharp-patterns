@@ -10,7 +10,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using unvell.ReoGrid.IO.OpenXML.Schema;
 using Microsoft.Office.Interop.Excel;
-using Worksheet.modData.Memories.Models;
+using modData.Memories.Models;
 using Util;
 
 namespace Worksheet.MVC.Presenters.SheetUser

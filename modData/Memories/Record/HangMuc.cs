@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modData.Memories.Record
 {
-    internal class HangMuc : ARecord
+    public class HangMuc : ARecord
     {
         public HangMuc(string ten, string kieu)
         {

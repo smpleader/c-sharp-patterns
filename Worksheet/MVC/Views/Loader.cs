@@ -30,7 +30,7 @@ namespace Worksheet.MVC.Views
             // load modBL
             string PathToExtensions = Path.GetDirectoryName(Application.ExecutablePath) + "/Extensions/";
             string fileDll = PathToExtensions + "modBL.dll";
-            SimpleInjectionDI.ConfigureDynamicServices(fileDll);
+            modDisplay.SimpleInjectionDI.ConfigureDynamicServices(fileDll);
            
             await Task.Delay(1000);
             Backbone.Run("DemoSyncfusion");
