@@ -13,12 +13,19 @@ namespace modBL
             Option = opt;
         }
 
-        // Col name
+        /// <summary>
+        /// Col name
+        /// </summary>
         public virtual string CName => "A";
 
-        // Unique name
+        /// <summary>
+        /// Unique name
+        /// </summary>
         public virtual string UName => "Default";
 
+        /// <summary>
+        /// Option thể hiện thông tin các ppt đang sử dụng
+        /// </summary>
         public Option Option { get; set; }
 
         public virtual string formula(string[] args)

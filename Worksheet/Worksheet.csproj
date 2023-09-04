@@ -39,10 +39,7 @@
 		<None Update="Content/Template/dongia.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Content\Template\cuocoto\theoloaiphuongtien.xlsx">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="Content\Template\cuocoto\theotongculy.xlsx">
+		<None Update="Content\Template\cuocoto\cuocoto.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Template\GiaVatLieu.xlsx">

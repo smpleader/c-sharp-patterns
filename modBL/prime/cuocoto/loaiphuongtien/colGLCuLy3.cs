@@ -15,7 +15,7 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         {
         }
         public override string CName => "L";
-        public override string UName => "CuocOto_ThanhTienCuLyLonHon7KM";
+        public override string UName => "CuocOto_LoaiPhuongTien_ThanhTienCuLyLonHon7KM";
 
         /// <summary>
         /// 2 tham số

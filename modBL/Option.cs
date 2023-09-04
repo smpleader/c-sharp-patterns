@@ -16,7 +16,7 @@ namespace modBL
         public static PPTGiaMay PPTGiaMay { get; set; } = PPTGiaMay.NhapTay;
 
         public static Dictionary<PPTCuocOto, string> DanhSachPPTCuocOto = new Dictionary<PPTCuocOto, string>() {
-            { PPTCuocOto.TheoTongCuLy,"Tổng cự ly (QĐ 89)"},
+            { PPTCuocOto.TheoTongCuLy,"tổng cự ly (QĐ 89)"},
             { PPTCuocOto.TheoLoaiPhuongTien, "theo loại phương tiện"},
             { PPTCuocOto.MauTinhCaoBang,"mẫu tỉnh Cao Bằng"},
             { PPTCuocOto.MauTinhCaoBangThem, "mẫu tỉnh Cao Bằng Thêm"},

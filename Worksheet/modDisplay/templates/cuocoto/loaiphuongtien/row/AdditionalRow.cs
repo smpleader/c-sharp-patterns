@@ -88,40 +88,17 @@ namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
         /// </summary>
         public IRange W { get { return this.Cell("W"); } }
 
-        class ColO : ACol
+        class ColL : ACol
         {
-            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
-            public override string Col { get { return "O"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            /// Dòng cước thêm
+            public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienCuLyNhoHonBang1000M"; } }
+            public override string Col { get { return "L"; } }
             public override string[] Params { get { return new string[2] { (Row as AdditionalRow).ParentId.ToString(), Row.Id.ToString() }; } }
 
-            public ColO(ARowObject r) : base(r)
+            public ColL(ARowObject r) : base(r)
             {
             }
         }
-        class ColP : ACol
-        {
-            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
-            public override string Col { get { return "P"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColP(ARowObject r) : base(r)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Lấy công thức cho các cột R, S, T, U
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public string GetFormula(string col)
-        {
-            string[] parameters = new string[1] { Id.ToString() };
-            return string.Format(modBL.Container.Get("CongViec_KhoiLuongPhu").formula(parameters));
-        }
+        
         public void bind()
         {
             string A = worksheet.Range["A" + Id].Value;
@@ -133,10 +110,8 @@ namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
         
         internal void render()
         {
-            ColO colO = new ColO(this);
-            colO.render();
-            ColP colP = new ColP(this);
-            colP.render();
+            ColL colL = new ColL(this);
+            colL.render();
         }
     }
 }

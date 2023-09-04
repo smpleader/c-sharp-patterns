@@ -132,49 +132,29 @@ namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
         /// Tổng giá của tất cả các máy
         public IRange AC { get { return this.Cell("AC"); } }
 
+        class ColJ : ACol
+        {
+            public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_TongCuLy"; } }
+            public override string Col { get { return "J"; } }
+            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
+
+            public ColJ(Row r) : base(r)
+            {
+            }
+        }
         class ColL : ACol
         {
-            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
+            public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienChiPhiVanChuyen"; } }
             public override string Col { get { return "L"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
+            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
 
             public ColL(Row r) : base(r)
             {
             }
         }
-        class ColV : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
-            public override string Col { get { return "V"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColV(Row r) : base(r)
-            {
-            }
-        }
-        class ColM : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocOto"; } }
-            public override string Col { get { return "M"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColM(Row r) : base(r)
-            {
-            }
-        }
-        class ColO : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocSong"; } }
-            public override string Col { get { return "O"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColO(Row r) : base(r)
-            {
-            }
-        }
         class ColP : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocThuCong"; } }
+            public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienChiPhiBocDo"; } }
             public override string Col { get { return "P"; } }
             // Chưa lấy đúng refer cần xác định refer khi có modData
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
@@ -183,57 +163,32 @@ namespace Worksheet.modDisplay.templates.cuocoto.loaiphuongtien.row
             {
             }
         }
-        class ColS : ACol
+      
+        class ColT : ACol
         {
-            public override string UniqueName { get { return "VatLieu_CuocBien"; } }
-            public override string Col { get { return "S"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
+            public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_TongCuoc"; } }
+            public override string Col { get { return "T"; } }
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
-            public ColS(Row r) : base(r)
+            public ColT(Row r) : base(r)
             {
             }
         }
-        class ColU : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_TongCuoc"; } }
-            public override string Col { get { return "U"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColU(Row r) : base(r)
-            {
-            }
-        }
-        class ColL : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
-            public override string Col { get { return "L"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColL(Row r) : base(r)
-            {
-            }
-        }
+        
         internal void bind()
         {
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()
         {
-            ColM colM = new ColM(this);
-            colM.render();
-            ColO colO = new ColO(this);
-            colO.render();
-            ColP colP = new ColP(this);
-            colP.render();
-            ColS colS = new ColS(this);
-            colS.render();
-            ColU colU = new ColU(this);
-            colU.render();
-            ColV colV = new ColV(this);
-            colV.render();
+            ColJ colJ = new ColJ(this);
+            colJ.render();
             ColL colL = new ColL(this);
             colL.render();
+            ColP colP = new ColP(this);
+            colP.render();
+            ColT colT = new ColT(this);
+            colT.render();
         }
         public void AddSimpleData()
         {

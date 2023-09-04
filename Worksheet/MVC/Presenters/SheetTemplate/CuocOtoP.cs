@@ -23,6 +23,7 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         public void Setup()
         {
             //pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
+            //_view.sheet_CuocOto.Open(AppConst.contentFolder + "Template/cuocoto/cuocoto.xlsx");
             //_view.sheet_CuocOto.Open(pathToTemplate);
         }
     }

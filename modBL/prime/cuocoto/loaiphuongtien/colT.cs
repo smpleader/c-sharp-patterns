@@ -12,7 +12,7 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         {
         }
         public override string CName => "T";
-        public override string UName => "CuocOto_TongCuoc";
+        public override string UName => "CuocOto_LoaiPhuongTien_TongCuoc";
 
         /// <summary>
         /// 2 tham số
