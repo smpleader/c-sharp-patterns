@@ -27,15 +27,15 @@ namespace modBL.prime.vatlieu
             switch (Option.PPTCuocOto)
             {
                 case PPTCuocOto.TheoTongCuLy:
-                    return $"='Cước ô tô'!X{args[0]}";
+                    return $"='{SheetName.CUOC_OTO}'!X{args[0]}";
                 case PPTCuocOto.TheoLoaiPhuongTien:
-                    return $"='Cước ô tô'!T{args[0]}";
+                    return $"='{SheetName.CUOC_OTO}'!T{args[0]}";
                 case PPTCuocOto.MauTinhCaoBang:
-                    return $"='Cước ô tô'!V{args[0]}";
+                    return $"='{SheetName.CUOC_OTO}'!V{args[0]}";
                 case PPTCuocOto.MauTinhCaoBangThem:
-                    return $"='Cước ô tô'!W{args[0]}";
+                    return $"='{SheetName.CUOC_OTO}'!W{args[0]}";
                 case PPTCuocOto.MauTinhQuangBinh:
-                    return $"='Cước ô tô'!AK{args[0]}";
+                    return $"='{SheetName.CUOC_OTO}'!AK{args[0]}";
             }
             return base.formula(args);
         }
