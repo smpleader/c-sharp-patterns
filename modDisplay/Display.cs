@@ -33,6 +33,21 @@ namespace modDisplay
         public static string Col;
         public static int Row;
 
+        // excel engine
+        public static IApplication ExcelApp;
+        public static IWorkbooks WorkbooksStore;
+        public static IWorkbook WorkbookStore;
+        public static IWorksheets WorksheetsStore;
+        public static IWorksheet ActiveWorksheetStore;
+
+        public static void SetUpStore()
+        {
+            ExcelEngine excelEngine = new ExcelEngine();
+            ExcelApp = excelEngine.Excel;
+            WorkbookStore = ExcelApp.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            WorksheetsStore = WorkbookStore.Worksheets;
+        }
+
         public static ContextMenuStrip contextMenu = new ContextMenuStrip();
         public static ToolStripItemCollection menuItems
         {
@@ -53,7 +68,6 @@ namespace modDisplay
 
         private static void setTemplate(string filePath)
         {
-
             string systemName = filePath.Replace(AppConst.contentFolder, "");
             string[] slugs = systemName.Split("/");
             currentTemplate = Resources.Files[""];

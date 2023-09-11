@@ -18,5 +18,13 @@ namespace BaseInterface
 
         // return forumalation of cell
         string formula(string[] args);
+
+        /// <summary>
+        ///  Trả về công thức tính toán chính xác ở working sheet
+        /// </summary>
+        /// <param name="hangMucId"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        string formula(int hangMucId,string[] args);
     }
 }

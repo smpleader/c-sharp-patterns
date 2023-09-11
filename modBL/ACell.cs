@@ -33,5 +33,9 @@ namespace modBL
         {
             return "";
         }
+        public virtual string formula(int hangMucId,string[] args)
+        {
+            return "";
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         {
             // This should be put at Screen Startup
             Display.init();
-
+            Display.SetUpStore();
             _view = view;
 
         }

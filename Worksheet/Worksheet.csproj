@@ -42,6 +42,9 @@
 		<None Update="Content\Template\cuocoto\cuocoto.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Template\Default.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Template\GiaVatLieu.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

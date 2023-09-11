@@ -18,8 +18,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaseInterface\BaseInterface.csproj" />
+    <ProjectReference Include="..\modBL\modBL.csproj" />
     <ProjectReference Include="..\modData\modData.csproj" />
     <ProjectReference Include="..\Util\Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel">
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

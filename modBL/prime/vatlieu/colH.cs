@@ -35,5 +35,25 @@ namespace modBL.prime.vatlieu
             }
             return base.formula(args);
         }
+
+        /// <summary>
+        /// 1 tham số
+        /// <para> Chỉ số dòng tính đơn giá vật liệu </para>
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public override string formula(int hmId ,string[] args)
+        {
+            switch (Option.PPTGiaVatLieu)
+            {
+                case PPTGiaVatLieu.NhapTay:
+                case PPTGiaVatLieu.CongCuocVanChuyen:
+                    return "";
+                case PPTGiaVatLieu.NhanHeSo:
+                case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
+                    return $"=F{args[0]}*G{args[0]}";
+            }
+            return base.formula(args);
+        }
     }
 }
