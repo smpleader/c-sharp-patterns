@@ -20,15 +20,17 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         {
             // This should be put at Screen Startup
             Display.init();
-            Display.SetUpStore();
+            Display.SetUpWorkingWorkbook();
+            Display.AddSheets("2");
+            Display.RemoveSheets("2");
             _view = view;
 
         }
         public void Setup()
         {
             pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
-            _view.sheet_TienLuong.Open(pathToTemplate);
+            _view.sheet_mask.Open(pathToTemplate);
         }
-        public Spreadsheet Spreadsheet { get { return _view.sheet_TienLuong; } }
+        public Spreadsheet Spreadsheet { get { return _view.sheet_mask; } }
     }
 }

@@ -100,7 +100,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         internal void render()
         {
             ColL colL = new ColL(this);
-            colL.render();
+            colL.Render();
         }
     }
 }

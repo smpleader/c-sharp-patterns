@@ -3,8 +3,10 @@
     public class AGenerator : ISheet
     {
         public virtual string Name { get { return "--"; } }
-
         public virtual void init(string tabName) { }
+        /// <summary>
+        /// Sử dụng khi mở file
+        /// </summary>
         public virtual void loadData()
         {
             // header define

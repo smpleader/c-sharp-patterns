@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.CellGrid;
+﻿using Syncfusion.Data.Extensions;
+using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.CellGrid.Helpers;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
@@ -34,19 +35,64 @@ namespace modDisplay
         public static int Row;
 
         // excel engine
-        public static IApplication ExcelApp;
-        public static IWorkbooks WorkbooksStore;
-        public static IWorkbook WorkbookStore;
+        // working sheet
         public static IWorksheets WorksheetsStore;
-        public static IWorksheet ActiveWorksheetStore;
+        public static IWorksheet WorkingWorksheet;
 
-        public static void SetUpStore()
+        public static string WorkingSheetName = "Tiên lượng";
+        public static string HangMucId = "1";
+
+        /// <summary>
+        /// Sau có thể load từ BaseInterface.SheetName
+        /// </summary>
+        public static List<string> DefaultSheetNames;
+        static string GetNameWorkingSheet()
+        {
+            return WorkingSheetName + "_" + HangMucId;
+        }
+        public static void SetUpWorkingWorkbook()
+        {
+            DefaultSheetNames = new List<string>();
+
+            ExcelEngine excelEngine = new ExcelEngine();
+            var application = excelEngine.Excel;
+            var wb = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            WorksheetsStore = wb.Worksheets;
+            foreach (var worksheet in WorksheetsStore)
+            {
+                DefaultSheetNames.Add(worksheet.Name);
+                worksheet.Name += "_" + HangMucId;
+            }
+            WorkingWorksheet = WorksheetsStore[GetNameWorkingSheet()];
+        }
+        /// <summary>
+        /// Tạo thêm hạng mục
+        /// <para>Tạo các sheet mặc định của một hạng mục</para>
+        /// </summary>
+        public static void AddSheets(string hangMucId)
         {
             ExcelEngine excelEngine = new ExcelEngine();
-            ExcelApp = excelEngine.Excel;
-            WorkbookStore = ExcelApp.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
-            WorksheetsStore = WorkbookStore.Worksheets;
+            var application = excelEngine.Excel;
+            var wb = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            foreach (var worksheet in wb.Worksheets)
+            {
+                worksheet.Name += "_"+ hangMucId;
+                WorksheetsStore.AddCopy(worksheet);
+            }
         }
+        /// <summary>
+        /// Xóa hạng mục
+        /// <para>Xóa danh sách các sheet của hạng mục</para>
+        /// </summary>
+        /// <param name="hangMucId"></param>
+        public static void RemoveSheets(string hangMucId)
+        {
+            foreach(var sheetName in DefaultSheetNames)
+            {
+                WorksheetsStore.Remove(sheetName + "_" + hangMucId);
+            }
+            // todo: Tính toán lại các màn hình tổng hợp công trình
+        }    
 
         public static ContextMenuStrip contextMenu = new ContextMenuStrip();
         public static ToolStripItemCollection menuItems
@@ -66,6 +112,7 @@ namespace modDisplay
             }
         }
 
+        
         private static void setTemplate(string filePath)
         {
             string systemName = filePath.Replace(AppConst.contentFolder, "");

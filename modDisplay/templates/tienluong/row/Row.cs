@@ -20,7 +20,15 @@ namespace modDisplay.templates.tienluong.row
             colU = new ColU(this);
         }
         public bool HaveInterpretiveFormula = false;
-
+        public ColM colM { get; set; }
+        public ColN colN { get; set; }
+        public ColO colO { get; set; }
+        public ColP colP { get; set; }
+        public ColQ colQ { get; set; }
+        public ColR colR { get; set; }
+        public ColS colS { get; set; }
+        public ColT colT { get; set; }
+        public ColU colU { get; set; }
         /// <summary>
         /// Ký hiệu bản vẽ
         /// </summary>
@@ -136,7 +144,7 @@ namespace modDisplay.templates.tienluong.row
         /// Tổng giá của tất cả các máy
         public IRange AC { get { return this.Cell("AC"); } }
 
-        class ColM : ACol
+        public class ColM : ACol
         {
             public override string UniqueName { get { return "CongViec_KhoiLuong"; } }
             public override string Col { get { return "M"; } }
@@ -144,7 +152,7 @@ namespace modDisplay.templates.tienluong.row
             public ColM(Row r) : base(r)
             {
             }
-            public override void render()
+            public override void Render()
             {
                 var range = Row.worksheet.Range[Col + Row.Id];
                 // xử lý công thức cho cột M
@@ -159,7 +167,7 @@ namespace modDisplay.templates.tienluong.row
                 }
             }
         }
-        class ColN : ACol
+        public class ColN : ACol
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
             public override string Col { get { return "N"; } }
@@ -176,7 +184,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColO : ACol
+        public class ColO : ACol
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
             public override string Col { get { return "O"; } }
@@ -193,7 +201,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColP : ACol
+        public class ColP : ACol
         {
             public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
             public override string Col { get { return "P"; } }
@@ -210,7 +218,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColQ : ACol
+        public class ColQ : ACol
         {
             public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
             public override string Col { get { return "Q"; } }
@@ -227,7 +235,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColR : ACol
+        public class ColR : ACol
         {
             public override string UniqueName { get { return "CongViec_ThanhTienVatLieu"; } }
             public override string Col { get { return "R"; } }
@@ -236,7 +244,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColS : ACol
+        public class ColS : ACol
         {
             public override string UniqueName { get { return "CongViec_ThanhTienVatLieuPhu"; } }
             public override string Col { get { return "S"; } }
@@ -245,7 +253,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColT : ACol
+        public class ColT : ACol
         {
             public override string UniqueName { get { return "CongViec_ThanhTienNhanCong"; } }
             public override string Col { get { return "T"; } }
@@ -254,7 +262,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        class ColU : ACol
+        public class ColU : ACol
         {
             public override string UniqueName { get { return "CongViec_ThanhTienMay"; } }
             public override string Col { get { return "U"; } }
@@ -268,29 +276,21 @@ namespace modDisplay.templates.tienluong.row
         {
 
         }
-        ColM colM { get; set; }
-        ColN colN { get; set; }
-        ColO colO { get; set; }
-        ColP colP { get; set; }
-        ColQ colQ { get; set; }
-        ColR colR { get; set; }
-        ColS colS { get; set; }
-        ColT colT { get; set; }
-        ColU colU { get; set; }
+       
         public void render()
         {
             // xử lý công thức cho cột M
-            colM.render();
+            colM.Render();
             // xử lý công thức cho cột N, O, P, Q
-            colN.render();
-            colO.render();
-            colP.render();
-            colQ.render();
+            colN.Render();
+            colO.Render();
+            colP.Render();
+            colQ.Render();
             // xử lý công thức cho cột R, S, T, U
-            colR.render();
-            colS.render();
-            colT.render();
-            colU.render();
+            colR.Render();
+            colS.Render();
+            colT.Render();
+            colU.Render();
         }
 
         public void AddSimpleData()

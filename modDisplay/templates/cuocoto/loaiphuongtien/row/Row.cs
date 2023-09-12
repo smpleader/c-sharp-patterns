@@ -176,13 +176,13 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         internal void render()
         {
             ColJ colJ = new ColJ(this);
-            colJ.render();
+            colJ.Render();
             ColL colL = new ColL(this);
-            colL.render();
+            colL.Render();
             ColP colP = new ColP(this);
-            colP.render();
+            colP.Render();
             ColT colT = new ColT(this);
-            colT.render();
+            colT.Render();
         }
         public void AddSimpleData()
         {

@@ -6,13 +6,13 @@ namespace modDisplay
 {
     public class ACol
     {
-        BaseInterface.IModBL modBLContainer;
+        protected BaseInterface.IModBL modBLContainer;
         public ACol(ARowObject r)
         {
             Row = r;
+            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
             //BL = new AColBl(this);
             //Data = new AColDt(this, "");
-            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
         }
         public ARowObject Row { get; set; }
         public virtual string UniqueName { get { return ""; } }
@@ -40,7 +40,11 @@ namespace modDisplay
         /// </summary>
         public virtual IData Data { get; set; }
 
-        public virtual void render()
+        /// <summary>
+        /// Cập nhật data vào working sheet
+        /// <para>Hiển thị dữ liệu ra mark sheet</para>
+        /// </summary>
+        public virtual void Render()
         {
             Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(Params));
             Row.worksheet.AutofitRow(Row.Id);

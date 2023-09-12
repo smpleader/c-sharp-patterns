@@ -1,4 +1,5 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modBL.prime.dongiatonghop;
+using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -10,14 +11,87 @@ namespace modDisplay.templates.vatlieu
         {
             Id = id;
             colA = new ColA(this);
+            colB = new ColB(this);
+            colC = new ColC(this);
+            colD = new ColD(this);
+            colE = new ColE(this);
+            colF = new ColF(this);
+            colG = new ColG(this);
+            colH = new ColH(this);
+            colI = new ColI(this);
+            colJ = new ColJ(this);
+            colK = new ColK(this);
+            colL = new ColL(this);
+            colM = new ColM(this);  
+            colN = new ColN(this);
+            colO = new ColO(this);  
+            colP = new ColP(this);
         }
 
         /// <summary>
         /// Số thứ tự
         /// </summary>
         public ColA colA;
+        /// <summary>
+        /// Mã vật liệu
+        /// </summary>
         public ColB colB;
-
+        /// <summary>
+        /// Tên vật liệu
+        /// </summary>
+        public ColC colC;
+        /// <summary>
+        /// Đơn vị
+        /// </summary>
+        public ColD colD;
+        /// <summary>
+        /// Giá gốc
+        /// </summary>
+        public ColE colE;
+        /// <summary>
+        /// Giá TB
+        /// </summary>
+        public ColF colF;
+        /// <summary>
+        /// Hệ số
+        /// </summary>
+        public ColG colG;
+        /// <summary>
+        /// Giá TBxHS
+        /// </summary>
+        public ColH colH;
+        /// <summary>
+        /// Cước ô tô
+        /// </summary>
+        public ColI colI;
+        /// <summary>
+        /// Cước sông
+        /// </summary>
+        public ColJ colJ;
+        /// <summary>
+        /// Cước thủ công
+        /// </summary>
+        public ColK colK;
+        /// <summary>
+        /// Cước biển
+        /// </summary>
+        public ColL colL;
+        /// <summary>
+        /// Cước khác
+        /// </summary>
+        public ColM colM;
+        /// <summary>
+        /// Tổng cước
+        /// </summary>
+        public ColN colN;
+        /// <summary>
+        /// Giá hiện trường	
+        /// </summary>
+        public ColO colO;
+        /// <summary>
+        /// Ghi chú
+        /// </summary>
+        public ColP colP;
         public class ColA : ACol
         {
             public override string UniqueName { get { return "VatLieu_SoThuTu"; } }
@@ -25,7 +99,7 @@ namespace modDisplay.templates.vatlieu
             public ColA(Row r) : base(r)
             {
             }
-            public override void render()
+            public override void Render()
             {
                 // todo: bind data to working sheet
             }
@@ -37,131 +111,82 @@ namespace modDisplay.templates.vatlieu
             public ColB(Row r) : base(r)
             {
             }
-            public override void render()
+            public override void Render()
             {
                 // todo: bind data to working sheet
             }
         }
-        /// <summary>
-        /// STT
-        /// </summary>
-        public IRange B { get { return this.Cell("B"); } }
-        /// <summary>
-        /// MSCV
-        /// </summary>
-        public IRange C { get { return this.Cell("C"); } }
-        /// <summary>
-        /// Tên công việc
-        /// </summary>
-        public IRange D { get { return this.Cell("D"); } }
-        /// <summary>
-        /// Đơn vị
-        /// </summary>
-        public IRange E { get { return this.Cell("E"); } }
-        /// <summary>
-        /// Tên CK
-        /// </summary>
-        public IRange F { get { return this.Cell("F"); } }
-        /// <summary>
-        /// Số CK
-        /// </summary>
-        public IRange G { get { return this.Cell("G"); } }
-        /// <summary>
-        /// Dài
-        /// </summary>
-        public IRange H { get { return this.Cell("H"); } }
-        /// <summary>
-        /// Rộng
-        /// </summary>
-        public IRange I { get { return this.Cell("I"); } }
-        /// <summary>
-        /// Cao
-        /// </summary>
-        public IRange J { get { return this.Cell("J"); } }
-        /// <summary>
-        /// HS phụ
-        /// </summary>
-        public IRange K { get { return this.Cell("K"); } }
-        /// <summary>
-        /// KL Phụ
-        /// </summary>
-        public IRange L { get { return this.Cell("L"); } }
-        /// <summary>
-        /// Khối lượng
-        /// </summary>
-        public IRange M { get { return this.Cell("M"); } }
-        /// <summary>
-        /// Đơn giá vật liệu
-        /// </summary>
-        public IRange N { get { return this.Cell("N"); } }
-        /// <summary>
-        /// Đơn giá vật liệu phụ
-        /// </summary>
-        public IRange O { get { return this.Cell("O"); } }
-        /// <summary>
-        /// Đơn giá nhân công
-        /// </summary>
-        public IRange P { get { return this.Cell("P"); } }
-        /// <summary>
-        /// Đơn giá máy
-        /// </summary>
-        public IRange Q { get { return this.Cell("Q"); } }
-        /// <summary>
-        /// Thành tiền vật liệu
-        /// </summary>
-        public IRange R { get { return this.Cell("R"); } }
-        /// <summary>
-        /// Thành tiền vật liệu phụ
-        /// </summary>
-        public IRange S { get { return this.Cell("S"); } }
-        /// <summary>
-        /// Thành tiền nhân công
-        /// </summary>
-        public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Thành tiền máy
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh vật liệu
-        /// </summary>
-        public IRange V { get { return this.Cell("V"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh nhân công
-        /// </summary>
-        public IRange W { get { return this.Cell("W"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh máy
-        /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
-        /// <summary>
-        /// Thông tin đơn giá
-        /// </summary>
-        public IRange Y { get { return this.Cell("Y"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu
-        /// </summary>
-        public IRange Z { get { return this.Cell("Z"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu phụ
-        /// </summary>
-        public IRange AA { get { return this.Cell("AA"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các nhân công
-        /// </summary>
-        public IRange AB { get { return this.Cell("AB"); } }
-        /// Tổng giá của tất cả các máy
-        public IRange AC { get { return this.Cell("AC"); } }
-        class ColO : ACol
+        public class ColC : ACol
         {
-            public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
-            public override string Col { get { return "O"; } }
+            public override string UniqueName { get { return "VatLieu_TenVatLieu"; } }
+            public override string Col { get { return "C"; } }
+            public ColC(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColD : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_DonVi"; } }
+            public override string Col { get { return "D"; } }
+            public ColD(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColE : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_GiaGoc"; } }
+            public override string Col { get { return "E"; } }
+            public ColE(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColF : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_GiaThongBao"; } }
+            public override string Col { get { return "F"; } }
+            public ColF(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColG : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_HeSo"; } }
+            public override string Col { get { return "G"; } }
+            public ColG(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColH : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
+            public override string Col { get { return "H"; } }
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColO(Row r) : base(r)
+
+            public ColH(Row r) : base(r)
             {
             }
         }
-        class ColI : ACol
+        public class ColI : ACol
         {
             public override string UniqueName { get { return "VatLieu_CuocOto"; } }
             public override string Col { get { return "I"; } }
@@ -171,7 +196,7 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
-        class ColJ : ACol
+        public class ColJ : ACol
         {
             public override string UniqueName { get { return "VatLieu_CuocSong"; } }
             public override string Col { get { return "J"; } }
@@ -182,7 +207,7 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
-        class ColK : ACol
+        public class ColK : ACol
         {
             public override string UniqueName { get { return "VatLieu_CuocThuCong"; } }
             public override string Col { get { return "K"; } }
@@ -193,7 +218,7 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
-        class ColL : ACol
+        public class ColL : ACol
         {
             public override string UniqueName { get { return "VatLieu_CuocBien"; } }
             public override string Col { get { return "L"; } }
@@ -204,7 +229,19 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
-        class ColN : ACol
+        public class ColM : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_CuocKhac"; } }
+            public override string Col { get { return "M"; } }
+            public ColM(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColN : ACol
         {
             public override string UniqueName { get { return "VatLieu_TongCuoc"; } }
             public override string Col { get { return "N"; } }
@@ -214,17 +251,27 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
-        class ColH : ACol
+        public class ColO : ACol
         {
-            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
-            public override string Col { get { return "H"; } }
+            public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
+            public override string Col { get { return "O"; } }
             public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColH(Row r) : base(r)
+            public ColO(Row r) : base(r)
             {
             }
         }
-
+        public class ColP : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_GhiChu"; } }
+            public override string Col { get { return "P"; } }
+            public ColP(Row r) : base(r)
+            {
+            }
+            public override void Render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
 
         internal void bind()
         {
@@ -232,33 +279,31 @@ namespace modDisplay.templates.vatlieu
         }
         internal void render()
         {
-            colA.render();
-
-            ColH colH = new ColH(this);
-            colH.render();
-            ColI colI = new ColI(this);
-            colI.render();
-            ColJ colJ = new ColJ(this);
-            colJ.render();
-            ColK colK = new ColK(this);
-            colK.render();
-            ColL colL = new ColL(this);
-            colL.render();
-            ColN colN = new ColN(this);
-            colN.render();
-            ColO colO = new ColO(this);
-            colO.render();
+            colA.Render();
+            colB.Render();
+            colC.Render();
+            colD.Render();
+            colE.Render();
+            colF.Render();
+            colG.Render();
+            colH.Render();
+            colI.Render();
+            colJ.Render();
+            colK.Render();
+            colL.Render();
+            colM.Render();
+            colN.Render();
+            colO.Render();
+            colP.Render();
         }
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(B, "V01897");
-            spreadsheetGrid.SetCellValue(C, "Cát vàng");
-            spreadsheetGrid.SetCellValue(D, "m3");
-
-            spreadsheetGrid.SetCellValue(G, "1");
-            spreadsheetGrid.SetCellValue(E, "389809");
-            spreadsheetGrid.SetCellValue(F, "389809");
-
+            spreadsheetGrid.SetCellValue(colB.Range, "V01897");
+            spreadsheetGrid.SetCellValue(colC.Range, "Cát vàng");
+            spreadsheetGrid.SetCellValue(colD.Range, "m3");
+            spreadsheetGrid.SetCellValue(colG.Range, "1");
+            spreadsheetGrid.SetCellValue(colE.Range, "389809");
+            spreadsheetGrid.SetCellValue(colF.Range, "389809");
         }
     }
 }

@@ -51,7 +51,7 @@ namespace modDisplay.templates.vatlieu
             DangThemVatLieu = false;
         }
 
-        public void updateData()
+        public void UpdateData()
         {
             // thêm vật liệu vào dòng đang chọn
             int selectedIndexRow = Display.Row;

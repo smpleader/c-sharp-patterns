@@ -124,9 +124,9 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         internal void render()
         {
             ColO colO = new ColO(this);
-            colO.render();
+            colO.Render();
             ColP colP = new ColP(this);
-            colP.render();
+            colP.Render();
         }
     }
 }

@@ -169,15 +169,15 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         internal void render()
         {
             ColM colM = new ColM(this);
-            colM.render();
+            colM.Render();
             ColO colO = new ColO(this);
-            colO.render();
+            colO.Render();
             ColP colP = new ColP(this);
-            colP.render();
+            colP.Render();
             ColS colS = new ColS(this);
-            colS.render();
+            colS.Render();
             ColX colX = new ColX(this);
-            colX.render();
+            colX.Render();
         }
         public void AddSimpleData()
         {

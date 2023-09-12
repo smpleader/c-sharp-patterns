@@ -29,7 +29,7 @@ namespace Worksheet.MVC.Views
         {
             registerPresenters(true);
             InitializeComponent();
-           
+
         }
         public override void registerPresenters(bool init)
         {
@@ -61,7 +61,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        sheet_TienLuong.Open(openFileDialog.FileName);
+                        sheet_mask.Open(openFileDialog.FileName);
                     }
                     catch (Exception ex)
                     {
@@ -80,7 +80,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        sheet_TienLuong.SaveAs(saveFileDialog.FileName);
+                        sheet_mask.SaveAs(saveFileDialog.FileName);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
@@ -95,7 +95,7 @@ namespace Worksheet.MVC.Views
 
         private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
         {
-            sheet_TienLuong.ActiveGrid.ColumnWidths.SetHidden(5, 12, !chkbx_KichThuoc.Checked);
+            sheet_mask.ActiveGrid.ColumnWidths.SetHidden(5, 12, !chkbx_KichThuoc.Checked);
         }
 
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
@@ -109,8 +109,8 @@ namespace Worksheet.MVC.Views
             modBLContainer.Init();
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
-            sheet_TienLuong.WorkbookLoaded += AfterLoad;
-            sheet_TienLuong.PropertyChanged += Spreadsheet_PropertyChanged;
+            sheet_mask.WorkbookLoaded += AfterLoad;
+            sheet_mask.PropertyChanged += Spreadsheet_PropertyChanged;
         }
 
         private void Spreadsheet_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -119,11 +119,11 @@ namespace Worksheet.MVC.Views
             if (e.PropertyName == "ActiveSheet")
             {
                 //Implement code
-                if (sheet_TienLuong.Workbook.Worksheets.Count > 1)
+                if (sheet_mask.Workbook.Worksheets.Count > 1)
                 {
-                    Display.setControl(sheet_TienLuong);
-                    Display.ActiveGrid = Display.GridCollection[sheet_TienLuong.ActiveSheet.Name];
-                    switch (sheet_TienLuong.ActiveSheet.Name)
+                    Display.setControl(sheet_mask);
+                    Display.ActiveGrid = Display.GridCollection[sheet_mask.ActiveSheet.Name];
+                    switch (sheet_mask.ActiveSheet.Name)
                     {
                         case "Tiên lượng":
                             pnl_VatLieu.Visible = false;
@@ -157,7 +157,7 @@ namespace Worksheet.MVC.Views
         private void AfterLoad(object sender, WorkbookLoadedEventArgs args)
         {
             // sau khi load workbook thì mới tiếp cận được activesheet và activegrid
-            Display.setup(sheet_TienLuong, AppConst.templateFolder + "TienLuong");
+            Display.setup(sheet_mask, AppConst.templateFolder + "TienLuong");
             Display.hook("LoadData");
         }
 
@@ -204,7 +204,7 @@ namespace Worksheet.MVC.Views
 
         private void bbtn_ThemVatLieu_Click(object sender, EventArgs e)
         {
-            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).updateData();
+            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).UpdateData();
         }
 
         private void btn_TinhCuocOto_Click(object sender, EventArgs e)
