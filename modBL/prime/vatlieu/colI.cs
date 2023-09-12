@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colI : ACell
+    public class colI : ACell
     {
         public colI(Option opt) : base(opt)
         {
@@ -36,6 +36,16 @@ namespace modBL.prime.vatlieu
                     return $"='{SheetName.CUOC_OTO}'!W{args[0]}";
                 case PPTCuocOto.MauTinhQuangBinh:
                     return $"='{SheetName.CUOC_OTO}'!AK{args[0]}";
+                case PPTCuocOto.TT12:
+                    return $"='{SheetName.CUOC_OTO}'!AO{args[0]}";
+                case PPTCuocOto.TT10:
+                    return $"='{SheetName.CUOC_OTO}'!AL{args[0]}";
+                case PPTCuocOto.Theo588:
+                    return $"='{SheetName.CUOC_OTO}'!S{args[0]}";
+                case PPTCuocOto.QuangNam38_2021:
+                    return $"='{SheetName.CUOC_OTO}'!T{args[0]}";
+                case PPTCuocOto.QuangNam24_22022:
+                    return $"='{SheetName.CUOC_OTO}'!T{args[0]}";
             }
             return base.formula(args);
         }

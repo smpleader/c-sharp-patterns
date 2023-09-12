@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tienluong
 {
-    internal class colS : ACell
+    public class colS : ACell
     {
         public colS(Option opt) : base(opt)
         {

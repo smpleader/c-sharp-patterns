@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colN : ACell
+    public class colN : ACell
     {
         public colN(Option opt) : base(opt)
         {

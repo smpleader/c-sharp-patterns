@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.loaiphuongtien
 {
-    /// <summary>
-    /// Cột L cho group object dòng cước cự ly nhỏ hơn hoặc bằng 1km
-    /// </summary>
-    internal class colGLCuLy1 : ACell
+    // Cột L cho group object dòng cước cự ly nhỏ hơn hoặc bằng 1km
+    public class colGLCuLy1 : ACell
     {
         public colGLCuLy1(Option opt) : base(opt)
         {
@@ -27,7 +25,7 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=G{args[0]} * J{args[1]} * K{args[1]}";
+            return $"=G{args[0]}*J{args[1]}*K{args[1]}";
         }
     }
 }

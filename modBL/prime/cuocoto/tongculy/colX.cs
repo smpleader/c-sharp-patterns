@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.tongculy
 {
-    internal class colX : ACell
+    public class colX : ACell
     {
         public colX(Option opt) : base(opt)
         {
         }
         public override string CName => "X";
-        public override string UName => "CuocOto_TongCuoc";
+        public override string UName => "CuocOto_TongCuLy_TongCuoc";
 
         /// <summary>
         /// 2 tham số
@@ -24,7 +24,7 @@ namespace modBL.prime.cuocoto.tongculy
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(P{args[0]}:P{args[1]}) + SUM(S{args[0]}:S{args[1]}) + SUM(W{args[0]}:W{args[1]})";
+            return $"=SUM(P{args[0]}:P{args[1]})+SUM(S{args[0]}:S{args[1]})+SUM(W{args[0]}:W{args[1]})";
         }
     }
 }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.tongculy
 {
-    internal class colM : ACell
+    public class colM : ACell
     {
         public colM(Option opt) : base(opt)
         {
         }
         public override string CName => "M";
-        public override string UName => "CuocOto_TongCuLy";
+        public override string UName => "CuocOto_TongCuLy_TongCuLy";
 
         /// <summary>
         /// 2 tham số

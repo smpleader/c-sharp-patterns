@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tienluong
 {
-    internal class colGU : ACell
+    public class colGU : ACell
     {
         public colGU(Option opt) : base(opt)
         {
@@ -18,7 +18,7 @@ namespace modBL.prime.tienluong
         public override string UName => "NhomCongViec_ThanhTienMay";
         public override string formula(string[] args)
         {
-            return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", U{args[0]}:U{args[1]})";
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";U{args[0]}:U{args[1]})";
         }
     }
 }

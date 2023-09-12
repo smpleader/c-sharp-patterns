@@ -9,6 +9,15 @@ namespace modDisplay.templates.tienluong.row
         public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
             Id = id;
+            colM = new ColM(this);
+            colN = new ColN(this);
+            colP = new ColP(this);
+            colO = new ColO(this);
+            colQ = new ColQ(this);
+            colR = new ColR(this);
+            colS = new ColS(this);
+            colT = new ColT(this);
+            colU = new ColU(this);
         }
         public bool HaveInterpretiveFormula = false;
 
@@ -254,33 +263,33 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-
+        
         public void bind()
         {
 
         }
+        ColM colM { get; set; }
+        ColN colN { get; set; }
+        ColO colO { get; set; }
+        ColP colP { get; set; }
+        ColQ colQ { get; set; }
+        ColR colR { get; set; }
+        ColS colS { get; set; }
+        ColT colT { get; set; }
+        ColU colU { get; set; }
         public void render()
         {
             // xử lý công thức cho cột M
-            ColM colM = new ColM(this);
-            // xử lý công thức cho cột N, O, P, Q
             colM.render();
-            ColN colN = new ColN(this);
+            // xử lý công thức cho cột N, O, P, Q
             colN.render();
-            ColO colO = new ColO(this);
             colO.render();
-            ColP colP = new ColP(this);
             colP.render();
-            ColQ colQ = new ColQ(this);
             colQ.render();
             // xử lý công thức cho cột R, S, T, U
-            ColR colR = new ColR(this);
             colR.render();
-            ColS colS = new ColS(this);
             colS.render();
-            ColT colT = new ColT(this);
             colT.render();
-            ColU colU = new ColU(this);
             colU.render();
         }
 

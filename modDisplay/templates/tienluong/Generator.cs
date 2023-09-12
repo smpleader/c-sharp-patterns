@@ -100,14 +100,8 @@ namespace modDisplay.templates.tienluong
         public override void afterCellInput()
         {
             if (body == null) return;
-            if (!DangThemCongViec)
-            {
-                //DangThemCongViec = true;
-                body.bind();
-                body.render();
-                //spreadsheetGrid.InvalidateCells();
-                //DangThemCongViec = false;
-            }
+            body.bind();
+            body.render();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colJ : ACell
+    public class colJ : ACell
     {
         public colJ(Option opt) : base(opt)
         {
@@ -28,9 +28,19 @@ namespace modBL.prime.vatlieu
             {
                 case PPTCuocSong.MauChung:
                 case PPTCuocSong.MauCaMau:
-                    return "";
                 case PPTCuocSong.MauDongThap:
-                    return $"='Cước sông'!P{args[0]}";
+                    return $"='{SheetName.CUOC_SONG}'!O{args[0]}";
+            }
+            return base.formula(args);
+        }
+        public override string formula(string hmId,string[] args)
+        {
+            switch (Option.PPTCuocSong)
+            {
+                case PPTCuocSong.MauChung:
+                case PPTCuocSong.MauCaMau:
+                case PPTCuocSong.MauDongThap:
+                    return $"='{SheetName.CUOC_SONG}_{hmId}'!O{args[0]}";
             }
             return base.formula(args);
         }

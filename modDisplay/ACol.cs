@@ -6,11 +6,13 @@ namespace modDisplay
 {
     public class ACol
     {
+        BaseInterface.IModBL modBLContainer;
         public ACol(ARowObject r)
         {
             Row = r;
-            BL = new AColBl(this);
-            Data = new AColDt(this, "");
+            //BL = new AColBl(this);
+            //Data = new AColDt(this, "");
+            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
         }
         public ARowObject Row { get; set; }
         public virtual string UniqueName { get { return ""; } }
@@ -40,33 +42,32 @@ namespace modDisplay
 
         public virtual void render()
         {
-            Row.spreadsheetGrid.SetCellValue(Range, BL.Calculate());
+            Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(Params));
             Row.worksheet.AutofitRow(Row.Id);
         }
     }
     public class AColBl : IColBL
     {
         private ACol Col;
-        private ICell CellBL;
+        private ICell BL;
         public AColBl(ACol col)
         {
             Col = col;
             BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-            CellBL = modBLContainer.Get(Col.UniqueName);
+            BL = modBLContainer.Get(Col.UniqueName);
         }
 
         public string UniqueName { get { return Col.UniqueName; } }
 
-        public string Calculate()
+        public virtual string Calculate()
         {
             // render trên working sheet
-            return CellBL.formula(Col.Params);
+            return BL.formula(Col.Params);
         }
-
-        public string Display()
+        public virtual string Display()
         {
             //todo: hiển thị lên mark sheet
-            return CellBL.formula(Col.Params);
+            return BL.formula(Col.Params);
         }
     }
     public class AColDt : IData

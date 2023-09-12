@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.loaiphuongtien
 {
-    internal class colP : ACell
+    public class colP : ACell
     {
         public colP(Option opt) : base(opt)
         {
@@ -23,7 +23,7 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=T4 * M{args[0]} * (N{args[0]} + O{args[0]})";
+            return $"=T4*M{args[0]}*(N{args[0]}+O{args[0]})";
         }
     }
 }

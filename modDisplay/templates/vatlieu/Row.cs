@@ -9,12 +9,39 @@ namespace modDisplay.templates.vatlieu
         public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
         {
             Id = id;
+            colA = new ColA(this);
         }
 
         /// <summary>
-        /// Ký hiệu bản vẽ
+        /// Số thứ tự
         /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
+        public ColA colA;
+        public ColB colB;
+
+        public class ColA : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_SoThuTu"; } }
+            public override string Col { get { return "A"; } }
+            public ColA(Row r) : base(r)
+            {
+            }
+            public override void render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
+        public class ColB : ACol
+        {
+            public override string UniqueName { get { return "VatLieu_MaVatLieu"; } }
+            public override string Col { get { return "B"; } }
+            public ColB(Row r) : base(r)
+            {
+            }
+            public override void render()
+            {
+                // todo: bind data to working sheet
+            }
+        }
         /// <summary>
         /// STT
         /// </summary>
@@ -197,12 +224,16 @@ namespace modDisplay.templates.vatlieu
             {
             }
         }
+
+
         internal void bind()
         {
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()
         {
+            colA.render();
+
             ColH colH = new ColH(this);
             colH.render();
             ColI colI = new ColI(this);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocoto.loaiphuongtien
 {
-    internal class colGL : ACell
+    public class colGL : ACell
     {
         public colGL(Option opt) : base(opt)
         {

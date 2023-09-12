@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -26,13 +26,13 @@ namespace modBL.prime.vatlieu
             switch (Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
-                    return $"=F{args[0]} + M{args[0]}";
+                    return $"=F{args[0]}+M{args[0]}";
                 case PPTGiaVatLieu.NhanHeSo:
-                    return $"=H{args[0]}*G{args[0]}";
+                    return $"=H{args[0]}";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
-                    return $"=F{args[0]} + N{args[0]}";
+                    return $"=F{args[0]}+N{args[0]}";
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=H{args[0]} + N{args[0]}";
+                    return $"=H{args[0]}+N{args[0]}";
             }
             return base.formula(args);
         }

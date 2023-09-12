@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tienluong
 {
-    internal class colFR : ACell
+    public class colFR : ACell
     {
         public colFR(Option opt) : base(opt)
         {
@@ -20,7 +20,7 @@ namespace modBL.prime.tienluong
         // return forumalation of cell
         public override string formula(string[] args)
         {
-            return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", R{args[0]}:R{args[1]})";
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";R{args[0]}:R{args[1]})";
         }
     }
 }

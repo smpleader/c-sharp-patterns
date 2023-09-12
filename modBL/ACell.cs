@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL
 {
-    internal class ACell : ICell
+    public class ACell : ICell
     {
         public ACell(Option opt)
         {
@@ -33,7 +33,7 @@ namespace modBL
         {
             return "";
         }
-        public virtual string formula(int hangMucId,string[] args)
+        public virtual string formula(string hangMucId,string[] args)
         {
             return "";
         }

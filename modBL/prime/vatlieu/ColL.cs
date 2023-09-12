@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.vatlieu
 {
-    internal class colL : ACell
+    public class colL : ACell
     {
         public colL(Option opt) : base(opt)
         {
@@ -24,7 +24,7 @@ namespace modBL.prime.vatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='Cước biển'!Q{args[0]}";
+            return $"='{SheetName.CUOC_BIEN}'!Q{args[0]}";
         }
     }
 }

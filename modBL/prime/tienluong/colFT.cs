@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tienluong
 {
-    internal class colFT : ACell
+    public class colFT : ACell
     {
         public colFT(Option opt) : base(opt)
         {
@@ -18,7 +18,7 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_TongThanhTienNhanCong";
         public override string formula(string[] args)
         {
-            return $"=SUMIF(B{args[0]}:B{args[1]}, \">0\", T{args[0]}:T{args[1]})";
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";T{args[0]}:T{args[1]})";
         }
     }
 }

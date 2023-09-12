@@ -25,6 +25,6 @@ namespace BaseInterface
         /// <param name="hangMucId"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        string formula(int hangMucId,string[] args);
+        string formula(string hangMucId,string[] args);
     }
 }

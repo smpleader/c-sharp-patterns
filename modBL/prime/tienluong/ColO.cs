@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tienluong
 {
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -18,7 +18,7 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_DonGiaVatLieuPhu";
         public override string formula(string[] args)
         {
-            return $"=V{args[0]}*{args[1]}";
+            return $"={args[1]}*V{args[0]}";
         }
     }
 }
