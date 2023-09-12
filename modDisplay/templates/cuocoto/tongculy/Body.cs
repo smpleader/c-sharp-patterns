@@ -14,7 +14,7 @@ namespace modDisplay.templates.cuocoto.tongculy
         public int end = 15;
         public override string Name { get { return "Body"; } }
         public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
-        public override void bind()
+        public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
@@ -80,7 +80,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             }
         }
 
-        public override void render()
+        public override void render(bool maskToWorking = true)
         {
             foreach (Row row in rows.Values)
             {

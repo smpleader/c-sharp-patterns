@@ -20,7 +20,7 @@ namespace modDisplay.templates.vatlieu
             {
                 masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
-                workingsheet = Display.WorksheetsStore[tabName + "_" + Display.HangMucId];
+                workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
         }
@@ -61,7 +61,6 @@ namespace modDisplay.templates.vatlieu
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm vật liệu
-                DangThemVatLieu = true;
                 body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
@@ -69,7 +68,6 @@ namespace modDisplay.templates.vatlieu
                 body.bind();
                 body.render();
                 spreadsheetGrid.EndUpdate();
-                DangThemVatLieu = false;
             }
         }
     }

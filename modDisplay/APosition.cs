@@ -11,9 +11,9 @@ namespace modDisplay
         public IWorksheet workingsheet { get; set; }
         public int Id { get; set; }
 
-        public virtual void bind() { }
+        public virtual void bind(bool maskToWorking = true) { }
 
-        public virtual void render() { }
+        public virtual void render(bool maskToWorking = true) { }
         public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet)
         {
             this.spreadsheetGrid = spreadsheetGrid;

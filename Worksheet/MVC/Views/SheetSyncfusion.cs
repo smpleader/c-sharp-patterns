@@ -110,12 +110,13 @@ namespace Worksheet.MVC.Views
             syncfusionP.Setup();
             sheet_mask.WorkbookLoaded += AfterLoad;
             sheet_mask.PropertyChanged += Spreadsheet_PropertyChanged;
+            //Display.setControlDebug(sheet_working);
             sheet_working.WorkbookLoaded += AfterLoad2;
         }
 
         private void AfterLoad2(object sender, WorkbookLoadedEventArgs args)
         {
-            Display.setControl2(sheet_working);
+            Display.setControlDebug(sheet_working);
         }
 
         private void Spreadsheet_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -128,6 +129,13 @@ namespace Worksheet.MVC.Views
                 {
                     Display.setControl(sheet_mask);
                     Display.ActiveGrid = Display.GridCollection[sheet_mask.ActiveSheet.Name];
+
+                    Display.SetActiveWorkingSheet(sheet_mask.ActiveSheet.Name);
+                    if(Display.WControlDebug !=null)
+                    {
+                        Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[sheet_mask.ActiveSheet.Name];
+                    }
+
                     switch (sheet_mask.ActiveSheet.Name)
                     {
                         case "Tiên lượng":

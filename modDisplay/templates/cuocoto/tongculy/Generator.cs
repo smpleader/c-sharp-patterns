@@ -23,7 +23,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             {
                 masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
-                workingsheet = Display.WorksheetsStore[tabName + "_" + Display.HangMucId];
+                workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
         }

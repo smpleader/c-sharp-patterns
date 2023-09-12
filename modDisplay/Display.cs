@@ -1,9 +1,8 @@
-﻿using Syncfusion.Data.Extensions;
-using Syncfusion.Windows.Forms.CellGrid;
+﻿using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.CellGrid.Helpers;
 using Syncfusion.Windows.Forms.Spreadsheet;
-using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
+using System.Diagnostics;
 using Util;
 
 namespace modDisplay
@@ -36,18 +35,31 @@ namespace modDisplay
 
         // excel engine
         // working sheet
-        public static IWorksheets WorksheetsStore;
-        public static IWorksheet WorkingWorksheet { get { return WorksheetsStore[GetNameWorkingSheet()]; } }
-
+        /// <summary>
+        /// Danh sách working sheet 
+        /// <para>Sheet phục vụ tính toán<para>
+        /// </summary>
+        public static IWorksheets Workingsheets;
+        /// <summary>
+        /// Working sheet đang được hiển thị
+        /// </summary>
+        public static IWorksheet Workingsheet { get { return Workingsheets[GetNameWorkingSheet()]; } }
+        /// <summary>
+        /// Tên sheet hiển thị
+        /// </summary>
         public static string WorkingSheetName = "Tiên lượng";
+        /// <summary>
+        /// Id của hạng mục đang sử dụng
+        /// </summary>
         public static string HangMucId = "1";
 
-        public static Spreadsheet WControl2;
-        public static Dictionary<string, SpreadsheetGrid> GridCollection2;
-        public static SpreadsheetGrid ActiveGrid2;
-        public static IWorksheet ActiveMaskSheet2;
-        public static IWorksheets WorkSheets2;
-        public static IWorkbook WorkingBook;
+        // Hiển thị giá trị được tính toán từ working sheet
+        public static Spreadsheet WControlDebug;
+        public static Dictionary<string, SpreadsheetGrid> GridCollectionDebug;
+        public static SpreadsheetGrid ActiveGridDebug;
+        public static IWorksheet ActiveMaskSheetDebug;
+        public static IWorksheets WorkSheetsDebug;
+        public static IWorkbook WorkingBookDebug;
 
         /// <summary>
         /// Sau có thể load từ BaseInterface.SheetName
@@ -63,12 +75,13 @@ namespace modDisplay
 
             ExcelEngine excelEngine = new ExcelEngine();
             var application = excelEngine.Excel;
-            WorkingBook = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
-            WorksheetsStore = WorkingBook.Worksheets;
-            foreach (var worksheet in WorksheetsStore)
+            WorkingBookDebug = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            Workingsheets = WorkingBookDebug.Worksheets;
+            foreach (var worksheet in Workingsheets)
             {
                 DefaultSheetNames.Add(worksheet.Name);
                 worksheet.Name += "_" + HangMucId;
+                worksheet.EnableSheetCalculations();
             }
         }
         /// <summary>
@@ -83,7 +96,9 @@ namespace modDisplay
             foreach (var worksheet in wb.Worksheets)
             {
                 worksheet.Name += "_"+ hangMucId;
-                WorksheetsStore.AddCopy(worksheet);
+                worksheet.EnableSheetCalculations();
+                Workingsheets.AddCopy(worksheet);
+
             }
         }
         /// <summary>
@@ -95,7 +110,7 @@ namespace modDisplay
         {
             foreach(var sheetName in DefaultSheetNames)
             {
-                WorksheetsStore.Remove(sheetName + "_" + hangMucId);
+                Workingsheets.Remove(sheetName + "_" + hangMucId);
             }
             // todo: Tính toán lại các màn hình tổng hợp công trình
         }    
@@ -141,20 +156,52 @@ namespace modDisplay
                     break;
             }
         }
-        public static void setControl2(Spreadsheet control)
+        public static void setControlDebug(Spreadsheet control)
         {
-            WControl2 = control;
-            GridCollection2 = control.GridCollection;
-            ActiveGrid2 = control.ActiveGrid;
-            ActiveMaskSheet2 = control.ActiveSheet;
-            WorkSheets2 = control.Workbook.Worksheets;
+            WControlDebug = control;
+            GridCollectionDebug = control.GridCollection;
+            ActiveGridDebug = control.ActiveGrid;
+            ActiveMaskSheetDebug = control.ActiveSheet;
+            WorkSheetsDebug = control.Workbook.Worksheets;
         }
-        public static void showData()
+
+        public static void SetActiveWorkingSheet(string name)
         {
-            string workingSheetName = WorkingWorksheet.Name;
-            WorkSheets2.AddCopy(WorkingWorksheet);
-            WorkSheets2[workingSheetName].Name = WorkSheets2[workingSheetName].Name.Substring(-2);
-            WControl2.ActiveSheet = WorkSheets2[workingSheetName];
+            WorkingSheetName = name;
+        }
+        public static void SetHangMuc(string hmId)
+        {
+            HangMucId = hmId;
+        }
+
+        public static void showDataDebug()
+        {
+            //string workingSheetName = Workingsheet.Name;
+            //WorkSheetsDebug.AddCopy(Workingsheet);
+            //int indexSub = WorkSheetsDebug[workingSheetName].Name.IndexOf("_");
+            //string newSheetName = WorkSheetsDebug[workingSheetName].Name.Substring(0, indexSub);
+            //WorkSheetsDebug[workingSheetName].Name = newSheetName;
+            //WControlDebug.ActiveSheet = WorkSheetsDebug[newSheetName];
+            
+            Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
+            // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
+            for (int row = 1; row <= Workingsheet.Rows.Length; row++)
+            {
+                for (int col = 1; col <= Workingsheet.Columns.Length; col++)
+                {
+                    IRange cell = Workingsheet[row, col];
+                    var cellValue = cell.Value; // giá trị dạng text nếu có formula thì hiển thị formula
+
+                    if(!string.IsNullOrEmpty(cell.Value))
+                    {
+                        Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
+
+                        IRange cellUI = ActiveMaskSheetDebug[row, col];
+                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
+                    }
+                }
+            }
+            WControlDebug.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
         }
 
         public static void setControl(Spreadsheet control)

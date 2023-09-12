@@ -7,7 +7,7 @@ namespace modDisplay
         SpreadsheetGrid spreadsheetGrid { get; set; }
         string Name { get; }
         int Id { get; set; }
-        void bind();
-        void render();
+        void bind(bool maskToWorking = true);
+        void render(bool maskToWorking = true);
     }
 }

@@ -11,8 +11,8 @@ namespace modDisplay
         {
             Row = r;
             modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-            //BL = new AColBl(this);
-            //Data = new AColDt(this, "");
+            BL = new AColBl(this);
+            Data = new AColDt(this, "");
         }
         public ARowObject Row { get; set; }
         public virtual string UniqueName { get { return ""; } }

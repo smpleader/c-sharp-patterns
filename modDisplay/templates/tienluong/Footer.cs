@@ -18,13 +18,13 @@ namespace modDisplay.templates.tienluong
             Id = 16;
         }
 
-        public override void bind()
+        public override void bind(bool maskToWorking = true)
         {
             footer = new FooterRow(spreadsheetGrid, masksheet, workingsheet);
             footer.bind();
             Id = footer.Id;
         }
-        public override void render()
+        public override void render(bool maskToWorking = true)
         {
             footer.render();
         }

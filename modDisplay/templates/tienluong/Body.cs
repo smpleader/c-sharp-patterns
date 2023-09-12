@@ -16,7 +16,7 @@ namespace modDisplay.templates.tienluong
         public override string Name { get { return "Body"; } }
         public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
 
-        public override void bind()
+        public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
@@ -29,7 +29,7 @@ namespace modDisplay.templates.tienluong
                     indexGroups.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsRowObject(spreadsheetGrid, masksheet, indexRow))
+                if (Helper.IsRowObject(masksheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -132,7 +132,7 @@ namespace modDisplay.templates.tienluong
             return -1;
         }
 
-        public override void render()
+        public override void render(bool maskToWorking = true)
         {
             spreadsheetGrid.BeginUpdate();
             foreach (Group group in groups.Values)

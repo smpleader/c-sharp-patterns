@@ -7,7 +7,10 @@ namespace modBL
     {
         private Dictionary<string, ICell> _instance = new Dictionary<string, ICell>();
         public bool exists(string name) { return _instance.ContainsKey(name); }
-        public ICell Get(string name) { return _instance[name]; }
+        public ICell Get(string name) {
+            if(_instance.Keys.Contains(name)) return _instance[name];
+            return new DefaultCell(new Option());
+        }
         public void Init()
         {
             string targetNamespace = "modBL.prime";

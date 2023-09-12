@@ -11,13 +11,13 @@ namespace modDisplay.templates.vatlieu
         public int end = 15;
         public override string Name { get { return "Body"; } }
         public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
-        public override void bind()
+        public override void bind(bool maskToWorking = true)
         {
             List<int> indexRows = new List<int>();
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject(spreadsheetGrid, masksheet, indexRow))
+                if (Helper.IsRowObject(masksheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -34,7 +34,7 @@ namespace modDisplay.templates.vatlieu
             }
         }
 
-        public override void render()
+        public override void render(bool maskToWorking = true)
         {
             foreach (Row row in rows.Values)
             {
