@@ -42,7 +42,7 @@ namespace modBL.prime.vatlieu
                 case PPTCuocSong.MauDongThap:
                     return $"='{SheetName.CUOC_SONG}_{hmId}'!O{args[0]}";
             }
-            return base.formula(args);
+            return base.formula(hmId,args);
         }
     }
 }
