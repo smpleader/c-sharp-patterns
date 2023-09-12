@@ -10,14 +10,14 @@ namespace modDisplay.templates.vatlieu
         public readonly int start = 5;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, masksheet, workingsheet, hangMucId) { }
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexRows = new List<int>();
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject(masksheet, indexRow))
+                if (Helper.IsRowObject(maskToWorking?masksheet:workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -28,7 +28,7 @@ namespace modDisplay.templates.vatlieu
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, indexRow);
                 Row vl = rows[indexRow];
                 vl.bind();
             }
@@ -36,6 +36,7 @@ namespace modDisplay.templates.vatlieu
 
         public override void render(bool maskToWorking = true)
         {
+            // render
             foreach (Row row in rows.Values)
             {
                 row.render();
@@ -49,7 +50,7 @@ namespace modDisplay.templates.vatlieu
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        spreadsheetGrid.SetCellValue(row.colA.Range, beginRow.ToString());
+                        row.colA.Range.Text = beginRow.ToString();
                         beginRow++;
                     }
                 }

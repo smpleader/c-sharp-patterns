@@ -12,7 +12,7 @@ namespace modDisplay.templates.cuocoto.tongculy
         public SpreadsheetGrid spreadsheetGrid;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
-
+        public string HangMucId;
         bool DangThemVatLieu = false;
         HeaderGroup header;
         Body body;
@@ -23,6 +23,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             {
                 masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
+                HangMucId = Display.HangMucId;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
@@ -31,11 +32,11 @@ namespace modDisplay.templates.cuocoto.tongculy
         public override void loadData()
         {
             // header
-            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
+            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet, HangMucId);
             header.bind();
             header.render();
 
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet, HangMucId);
             body.bind();
             body.render();
         }
@@ -65,7 +66,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             {
                 // bắt đầu thêm vật liệu
                 DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, this.HangMucId, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
                 selectedRow.AddSimpleData();

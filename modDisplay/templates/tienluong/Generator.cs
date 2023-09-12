@@ -46,17 +46,17 @@ namespace modDisplay.templates.tienluong
             // bind
 
             // header
-            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
+            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId);
             header.bind();
             header.render();
 
             // footer
-            footer = new FooterGroup(spreadsheetGrid, masksheet, workingsheet);
+            footer = new FooterGroup(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId);
             footer.bind();
             footer.render();
 
             // body 
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId);
             body.end = footer.Id - 1;
             body.bind();
             body.render();
@@ -71,7 +71,7 @@ namespace modDisplay.templates.tienluong
             {
                 // bắt đầu thêm công việc
                 DangThemCongViec = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 body.bind();

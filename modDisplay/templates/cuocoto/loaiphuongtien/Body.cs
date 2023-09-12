@@ -14,7 +14,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
         public readonly int start = 5;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId) { }
         public override void bind(bool maskToWorking = true)
         {
             for (int indexRow = start; indexRow <= masksheet.Rows.Length; indexRow++)
@@ -22,7 +22,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
                 if (Helper.IsRowObject(spreadsheetGrid, masksheet, indexRow))
                 {
                     int parentId = indexRow;
-                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow);
                     Row vl = rows[indexRow];
                     vl.start = indexRow + 1;
                     vl.end = indexRow + 3;
@@ -30,17 +30,17 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
 
                     // dòng cước phạm vi <= 1000m
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow, parentId);
                     additionalRows[indexRow].bind();
 
                     // dòng cước phạm vi <= 7km
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow, parentId);
                     additionalRows[indexRow].bind();
 
                     // dòng cước phạm vi > 7km
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow, parentId);
                     additionalRows[indexRow].bind();
                 }
             }

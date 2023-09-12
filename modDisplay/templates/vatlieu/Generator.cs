@@ -27,7 +27,7 @@ namespace modDisplay.templates.vatlieu
 
         public override void loadData()
         {
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId);
             body.bind();
             body.render();
         }
@@ -61,13 +61,15 @@ namespace modDisplay.templates.vatlieu
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm vật liệu
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
                 selectedRow.AddSimpleData();
-                body.bind();
+                body.bind(false);
                 body.render();
                 spreadsheetGrid.EndUpdate();
+                Display.showDataDebug();
+                Display.showData();
             }
         }
     }

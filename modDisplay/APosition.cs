@@ -10,15 +10,15 @@ namespace modDisplay
         public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
         public int Id { get; set; }
-
+        public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
-
         public virtual void render(bool maskToWorking = true) { }
-        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet)
+        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId)
         {
             this.spreadsheetGrid = spreadsheetGrid;
             this.masksheet = worksheet;
             this.workingsheet = workingsheet;
+            this.HangMucId = hangMucId;  
         }
     }
 }

@@ -6,21 +6,21 @@ namespace modDisplay.templates.cuocoto.tongculy
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
+        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId) { }
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state
             // Tên công trình và hạng mục
-            headers[2] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 2);
-            headers[3] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 3);
+            headers[2] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 2);
+            headers[3] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 3);
 
             // Lương nhân công bốc dỡ
-            headers[4] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 4);
+            headers[4] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 4);
             // Thuế VAT
-            headers[5] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 5);
+            headers[5] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 5);
             // Hệ số điều chỉnh
-            headers[6] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 6);
+            headers[6] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 6);
 
             foreach (var item in headers)
             {

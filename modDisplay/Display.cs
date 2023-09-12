@@ -173,7 +173,35 @@ namespace modDisplay
         {
             HangMucId = hmId;
         }
+        public static void showData()
+        {
+            //string workingSheetName = Workingsheet.Name;
+            //WorkSheetsDebug.AddCopy(Workingsheet);
+            //int indexSub = WorkSheetsDebug[workingSheetName].Name.IndexOf("_");
+            //string newSheetName = WorkSheetsDebug[workingSheetName].Name.Substring(0, indexSub);
+            //WorkSheetsDebug[workingSheetName].Name = newSheetName;
+            //WControlDebug.ActiveSheet = WorkSheetsDebug[newSheetName];
 
+            Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
+            // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
+            for (int row = 1; row <= Workingsheet.Rows.Length; row++)
+            {
+                for (int col = 1; col <= Workingsheet.Columns.Length; col++)
+                {
+                    IRange cell = Workingsheet[row, col];
+                    var cellValue = cell.Value; // giá trị dạng text nếu có formula thì hiển thị formula
+
+                    if (!string.IsNullOrEmpty(cell.Value))
+                    {
+                        Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
+
+                        IRange cellUI = ActiveMaskSheet[row, col];
+                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
+                    }
+                }
+            }
+            WControl.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
+        }
         public static void showDataDebug()
         {
             //string workingSheetName = Workingsheet.Name;
@@ -197,7 +225,9 @@ namespace modDisplay
                         Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
 
                         IRange cellUI = ActiveMaskSheetDebug[row, col];
-                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
+                        //cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
+                        WControlDebug.ActiveGrid.SetCellValue(cellUI, cellValue); // hiển thị giá trị
+
                     }
                 }
             }

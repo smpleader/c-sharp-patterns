@@ -13,7 +13,7 @@ namespace modDisplay.templates.cuocoto.tongculy
         public readonly int start = 9;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId) { }
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();
@@ -32,14 +32,14 @@ namespace modDisplay.templates.cuocoto.tongculy
             }
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexAdditionalRows[i], 9);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexAdditionalRows[i], 9);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow);
                 Row vl = rows[indexRow];
                 int startRow, endRow;
                 int endTemplate = indexRows[indexRows.Count - 1];

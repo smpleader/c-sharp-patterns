@@ -7,7 +7,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
 {
     internal class Header : ARowObject
     {
-        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId, int id) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
         {
             Id = id;
         }

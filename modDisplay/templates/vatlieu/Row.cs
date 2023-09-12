@@ -8,7 +8,7 @@ namespace modDisplay.templates.vatlieu
 {
     internal class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet , int id) : base(spreadsheetGrid, masksheet, workingsheet)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, string hangMucId, int id) : base(spreadsheetGrid, masksheet, workingsheet, hangMucId)
         {
             Id = id;
             colA = new ColA(this);
@@ -291,7 +291,15 @@ namespace modDisplay.templates.vatlieu
             colE.Render();
             colF.Render();
             colG.Render();
-          
+            colH.Render();
+            colI.Render();
+            colJ.Render();
+            colK.Render();
+            colL.Render();
+            colM.Render();
+            colN.Render();
+            colO.Render();
+            colP.Render();
         }
         public void AddSimpleData()
         {
@@ -302,15 +310,15 @@ namespace modDisplay.templates.vatlieu
             colG.Range.Number = 1;
             colE.Range.Number = 389809;
             colF.Range.Number = 389809;
-            colH.Render();
-            colI.Render();
-            colJ.Render();
-            colK.Render();
-            colL.Render();
-            colM.Render();
-            colN.Render();
-            colO.Render();
-            colP.Render();
+            //colH.Render();
+            //colI.Render();
+            //colJ.Render();
+            //colK.Render();
+            //colL.Render();
+            //colM.Render();
+            //colN.Render();
+            //colO.Render();
+            //colP.Render();
 
             Display.ActiveMaskSheetDebug = Display.WorkSheetsDebug["Giá vật liệu"];
             //Display.ActiveGridDebug.SetCellValue(Display.ActiveMaskSheetDebug.Range[colB.RangeDisplay.AddressLocal], colB.Range.Text);
@@ -319,7 +327,6 @@ namespace modDisplay.templates.vatlieu
             //Display.ActiveGridDebug.SetCellValue(Display.ActiveMaskSheetDebug.Range[colG.RangeDisplay.AddressLocal], colG.Range.Number.ToString());
             //Display.ActiveGridDebug.SetCellValue(Display.ActiveMaskSheetDebug.Range[colE.RangeDisplay.AddressLocal], colE.Range.Number.ToString());
             //Display.ActiveGridDebug.SetCellValue(Display.ActiveMaskSheetDebug.Range[colF.RangeDisplay.AddressLocal], colF.Range.Number.ToString());
-            Display.showDataDebug();
 
             // Hiển thị ra mask sheet
             //spreadsheetGrid.SetCellValue(colB.RangeDisplay, "V01897");

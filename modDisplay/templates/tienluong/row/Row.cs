@@ -6,7 +6,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId, int id) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
         {
             Id = id;
             colM = new ColM(this);
