@@ -16,7 +16,11 @@ namespace BaseInterface
         string UName { get; }
         Option Option { get; set; }
 
-        // return forumalation of cell
+        /// <summary>
+        /// Trả về công thức hiển thị ở mark sheet
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         string formula(string[] args);
 
         /// <summary>
