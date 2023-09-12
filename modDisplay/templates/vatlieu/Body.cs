@@ -10,14 +10,14 @@ namespace modDisplay.templates.vatlieu
         public readonly int start = 5;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
         public override void bind()
         {
             List<int> indexRows = new List<int>();
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject(spreadsheetGrid, worksheet, indexRow))
+                if (Helper.IsRowObject(spreadsheetGrid, masksheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -28,7 +28,7 @@ namespace modDisplay.templates.vatlieu
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, worksheet, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
                 Row vl = rows[indexRow];
                 vl.bind();
             }
@@ -54,7 +54,7 @@ namespace modDisplay.templates.vatlieu
                     }
                 }
             }
-            worksheet.Calculate();
+            masksheet.Calculate();
             spreadsheetGrid.InvalidateCells();
         }
 

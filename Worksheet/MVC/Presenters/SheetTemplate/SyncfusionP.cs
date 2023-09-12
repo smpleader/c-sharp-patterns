@@ -30,6 +30,7 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         {
             pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
             _view.sheet_mask.Open(pathToTemplate);
+            _view.sheet_working.Open(pathToTemplate);
         }
         public Spreadsheet Spreadsheet { get { return _view.sheet_mask; } }
     }

@@ -116,7 +116,6 @@ namespace Worksheet.MVC.Views
         private void btn_Click(object sender, EventArgs e)
         {
             SyncfusionP syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
-            Display.changeTab(sheet_CuocOto, syncfusionP.Spreadsheet);
             Close();
         }
     }

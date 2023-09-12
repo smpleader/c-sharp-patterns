@@ -6,7 +6,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     internal class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
         }

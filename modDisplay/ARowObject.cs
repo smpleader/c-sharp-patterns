@@ -6,20 +6,21 @@ namespace modDisplay
 {
     public class ARowObject : Row
     {
-        public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet)
+        public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet)
         {
             this.spreadsheetGrid = spreadsheetGrid;
-            this.worksheet = worksheet;
+            this.masksheet = masksheet;
+            this.workingsheet = workingsheet;
         }
-        public SpreadsheetGrid spreadsheetGrid;
-        public IWorksheet worksheet;
-
+        public SpreadsheetGrid spreadsheetGrid { get; set; }
+        public IWorksheet masksheet { get; set; }
+        public IWorksheet workingsheet { get; set; }
         public int start { get; set; }
         public int end { get; set; }
         public int height { get { return end - start; } }
         public void import(int s, int e)
         {
-            // todo : asign column from worksheet
+            // todo : asign column from masksheet
         }
     }
 }

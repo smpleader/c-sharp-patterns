@@ -12,7 +12,7 @@ namespace modDisplay.templates.tienluong.row
             { "T", "CongViec_TongThanhTienNhanCong" },
             { "U", "CongViec_TongThanhTienMay" },
         };
-        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet)
+        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = 16;
             start = 6;
@@ -76,7 +76,7 @@ namespace modDisplay.templates.tienluong.row
 
         public void bind()
         {
-            Id = this.FindIndexRowFooter(spreadsheetGrid, worksheet, start);
+            Id = this.FindIndexRowFooter(spreadsheetGrid, masksheet, start);
             end = Id - 1;
         }
 
@@ -86,7 +86,7 @@ namespace modDisplay.templates.tienluong.row
             string[] parameters = new string[2] { start.ToString(), end.ToString() };
             foreach (string colName in aliasUniqueName.Keys)
             {
-                var range = worksheet.Range[colName + Id];
+                var range = masksheet.Range[colName + Id];
                 BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
                 spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters)));
                 spreadsheetGrid.InvalidateCell(range.Row, range.Column);

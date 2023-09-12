@@ -21,12 +21,23 @@ namespace modDisplay
         public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
 
         /// <summary>
-        /// IRange của cột trong row object
+        /// IRange cột trong mask sheet
         /// </summary>
-        public virtual IRange Range { 
+        public virtual IRange RangeDisplay
+        { 
             get 
             {
-                return Row.worksheet.Range[Col + Row.Id];
+                return Row.masksheet.Range[Col + Row.Id];
+            }
+        }
+        /// <summary>
+        /// IRange cột trong workingsheet
+        /// </summary>
+        public virtual IRange Range
+        {
+            get
+            {
+                return Row.workingsheet.Range[Col + Row.Id];
             }
         }
 
@@ -47,7 +58,7 @@ namespace modDisplay
         public virtual void Render()
         {
             Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(Params));
-            Row.worksheet.AutofitRow(Row.Id);
+            Row.masksheet.AutofitRow(Row.Id);
         }
     }
     public class AColBl : IColBL

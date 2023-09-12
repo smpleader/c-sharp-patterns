@@ -74,7 +74,7 @@ namespace EtaDt.MVCP.Views.Common
 
 					RefreshCurrentAddress();
 
-					// xử lý khi k có thay đổi worksheet, vào lần đầu khởi động
+					// xử lý khi k có thay đổi masksheet, vào lần đầu khởi động
                     this.worksheet = this.workbook.CurrentWorksheet;
                     this.worksheet.SelectionRangeChanging += grid_SelectionRangeChanging;
                     this.worksheet.SelectionRangeChanged += grid_SelectionRangeChanged;

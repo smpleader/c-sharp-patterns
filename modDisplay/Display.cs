@@ -26,7 +26,7 @@ namespace modDisplay
         public static Spreadsheet WControl;
         public static Dictionary<string, SpreadsheetGrid> GridCollection;
         public static SpreadsheetGrid ActiveGrid;
-        public static IWorksheet ActiveWorkSheet;
+        public static IWorksheet ActiveMaskSheet;
         public static IWorksheets WorkSheets;
 
         public static IRange SelectedCell;
@@ -37,10 +37,17 @@ namespace modDisplay
         // excel engine
         // working sheet
         public static IWorksheets WorksheetsStore;
-        public static IWorksheet WorkingWorksheet;
+        public static IWorksheet WorkingWorksheet { get { return WorksheetsStore[GetNameWorkingSheet()]; } }
 
         public static string WorkingSheetName = "Tiên lượng";
         public static string HangMucId = "1";
+
+        public static Spreadsheet WControl2;
+        public static Dictionary<string, SpreadsheetGrid> GridCollection2;
+        public static SpreadsheetGrid ActiveGrid2;
+        public static IWorksheet ActiveMaskSheet2;
+        public static IWorksheets WorkSheets2;
+        public static IWorkbook WorkingBook;
 
         /// <summary>
         /// Sau có thể load từ BaseInterface.SheetName
@@ -56,14 +63,13 @@ namespace modDisplay
 
             ExcelEngine excelEngine = new ExcelEngine();
             var application = excelEngine.Excel;
-            var wb = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
-            WorksheetsStore = wb.Worksheets;
+            WorkingBook = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            WorksheetsStore = WorkingBook.Worksheets;
             foreach (var worksheet in WorksheetsStore)
             {
                 DefaultSheetNames.Add(worksheet.Name);
                 worksheet.Name += "_" + HangMucId;
             }
-            WorkingWorksheet = WorksheetsStore[GetNameWorkingSheet()];
         }
         /// <summary>
         /// Tạo thêm hạng mục
@@ -135,13 +141,28 @@ namespace modDisplay
                     break;
             }
         }
+        public static void setControl2(Spreadsheet control)
+        {
+            WControl2 = control;
+            GridCollection2 = control.GridCollection;
+            ActiveGrid2 = control.ActiveGrid;
+            ActiveMaskSheet2 = control.ActiveSheet;
+            WorkSheets2 = control.Workbook.Worksheets;
+        }
+        public static void showData()
+        {
+            string workingSheetName = WorkingWorksheet.Name;
+            WorkSheets2.AddCopy(WorkingWorksheet);
+            WorkSheets2[workingSheetName].Name = WorkSheets2[workingSheetName].Name.Substring(-2);
+            WControl2.ActiveSheet = WorkSheets2[workingSheetName];
+        }
 
         public static void setControl(Spreadsheet control)
         {
             WControl = control;
             GridCollection = control.GridCollection;
             ActiveGrid = control.ActiveGrid;
-            ActiveWorkSheet = control.ActiveSheet;
+            ActiveMaskSheet = control.ActiveSheet;
             WorkSheets = control.Workbook.Worksheets;
         }
 
@@ -150,63 +171,8 @@ namespace modDisplay
             WControl = control;
             GridCollection = control.GridCollection;
             ActiveGrid = control.ActiveGrid;
-            ActiveWorkSheet = control.ActiveSheet;
+            ActiveMaskSheet = control.ActiveSheet;
             WorkSheets = control.Workbook.Worksheets;
-        }
-
-        public static void changeTab(Spreadsheet control)
-        {
-            if (WControl != null)
-            {
-                control.GridCollection.Clear();
-                for (int x = GridCollection.Keys.Count - 1; x > -1; x--)
-                {
-                    string key = GridCollection.Keys.ElementAt(x);
-                    GridCollection.Remove(key, out SpreadsheetGrid value);
-                    control.GridCollection[key] = value;
-                }
-                // trick để xử lý việc chuyển đổi các sheets giữa 2 ReogridControl
-                //WControl.AddSheet();
-            }
-            setControl(control);
-        }
-        public static void changeTab(Spreadsheet src, Spreadsheet des)
-        {
-            if (src != null && des != null)
-            {
-                List<string> sheetNames = src.Workbook.Worksheets.Select(item => item.Name).ToList();
-                foreach (string sheetName in sheetNames)
-                {
-                    var cloneSheet = src.Workbook.Worksheets[sheetName];
-                    //des.Workbook.Worksheets.Remove(sheetName);
-                    des.Workbook.Worksheets.AddCopy(cloneSheet,
-                        ExcelWorksheetCopyFlags.CopyMerges
-                        //| ExcelWorksheetCopyFlags.CopyAll
-                        //| ExcelWorksheetCopyFlags.CopyCells
-                        //| ExcelWorksheetCopyFlags.CopyColumnHeight
-                        //| ExcelWorksheetCopyFlags.CopyAutoFilters
-                        //| ExcelWorksheetCopyFlags.CopyOptions
-                        //| ExcelWorksheetCopyFlags.CopyConditionlFormats
-                        //| ExcelWorksheetCopyFlags.CopyShapes
-                        //| ExcelWorksheetCopyFlags.CopyDataValidations
-                        //| ExcelWorksheetCopyFlags.CopyPalette
-                        );
-                    //src.GridCollection.Remove(sheetName, out SpreadsheetGrid value);
-                    des.GridCollection[sheetName] = src.GridCollection[sheetName];
-                    foreach (var gridRange in des.GridCollection[sheetName].CoveredCells.Ranges)
-                    {
-                        var excelRange = gridRange.ConvertGridRangeToExcelRange(des.GridCollection[sheetName]);
-                        des.Workbook.Worksheets[sheetName].Range[excelRange.ToString()].Merge();
-                        des.GridCollection[sheetName].InvalidateCell(gridRange.Right, gridRange.Top);
-                    }
-                    //des.Workbook.Worksheets[sheetName].Calculate();
-                    //des.GridCollection[sheetName].Refresh();
-                }
-            }
-            else
-            {
-                // todo: handle error
-            }
         }
         public static void setup(Spreadsheet control, string filePath)
         {
@@ -324,7 +290,7 @@ namespace modDisplay
             Cell = ActiveGrid.SelectionController.CurrentCell;
             Col = e.ColumnIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex) : "A";
             Row = e.RowIndex > 0 ? e.RowIndex : 1;
-            SelectedCell = ActiveWorkSheet.Range[Col + Row];
+            SelectedCell = ActiveMaskSheet.Range[Col + Row];
             hook("SelectCell");
         }
 

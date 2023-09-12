@@ -13,7 +13,7 @@ namespace modDisplay.templates.tienluong.row
             { "T", "NhomCongViec_ThanhTienNhanCong" },
             { "U", "NhomCongViec_ThanhTienMay" },
         };
-        public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
+        public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -56,7 +56,7 @@ namespace modDisplay.templates.tienluong.row
         {
             // check group object khi mở từ file excel ( bind)
 
-            string C = worksheet.Range["C" + Id].Value;
+            string C = masksheet.Range["C" + Id].Value;
             if (C != "" && C.StartsWith("*"))
             {
                 string nameGroup = C.Substring(1);
@@ -66,23 +66,23 @@ namespace modDisplay.templates.tienluong.row
                 }
 
                 // merge khi có dấu hiệu của group
-                IRange raneMerge = worksheet.Range[B.AddressLocal + ":" + Q.AddressLocal];
+                IRange raneMerge = masksheet.Range[B.AddressLocal + ":" + Q.AddressLocal];
                 GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
                 var excelRange = gridRange.ConvertGridRangeToExcelRange(spreadsheetGrid);
                 var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
                 //var coverCell = new CoveredCellInfo(gridRange.Top, gridRange.Left, gridRange.Bottom, gridRange.Right);
 
-                worksheet.Range[excelRange].Merge();
+                masksheet.Range[excelRange].Merge();
                 spreadsheetGrid.SetCellValue(B, nameGroup);
                 spreadsheetGrid.CoveredCells.Add(coverCell);
 
                 #region style lại cho group object
 
-                IRange range = worksheet.Range[B.AddressLocal];
+                IRange range = masksheet.Range[B.AddressLocal];
                 range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignLeft;
 
                 string addressRangeGroup = A.AddressLocal + ":" + X.AddressLocal;
-                IRange rangeGroup = worksheet.Range[addressRangeGroup];
+                IRange rangeGroup = masksheet.Range[addressRangeGroup];
                 rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
                 rangeGroup.BorderAround(ExcelLineStyle.Thin);
 
@@ -95,7 +95,7 @@ namespace modDisplay.templates.tienluong.row
             string[] parameters = new string[2] { start.ToString(), end.ToString() };
             foreach (string colName in aliasUniqueName.Keys)
             {
-                var range = worksheet.Range[colName + Id];
+                var range = masksheet.Range[colName + Id];
                 BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
                 spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters)));
             }

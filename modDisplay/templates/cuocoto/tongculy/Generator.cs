@@ -10,7 +10,9 @@ namespace modDisplay.templates.cuocoto.tongculy
         public override string Name { get { return "templates/cuocoto/tongculy"; } }
 
         public SpreadsheetGrid spreadsheetGrid;
-        public IWorksheet worksheet;
+        public IWorksheet masksheet;
+        public IWorksheet workingsheet;
+
         bool DangThemVatLieu = false;
         HeaderGroup header;
         Body body;
@@ -19,20 +21,21 @@ namespace modDisplay.templates.cuocoto.tongculy
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                worksheet = Display.WorkSheets[tabName];
+                masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
-                worksheet.UseRangesCache = false;
+                workingsheet = Display.WorksheetsStore[tabName + "_" + Display.HangMucId];
+                masksheet.UseRangesCache = false;
             }
         }
 
         public override void loadData()
         {
             // header
-            header = new HeaderGroup(spreadsheetGrid, worksheet);
+            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
             header.bind();
             header.render();
 
-            body = new Body(spreadsheetGrid, worksheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet);
             body.bind();
             body.render();
         }
@@ -62,7 +65,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             {
                 // bắt đầu thêm vật liệu
                 DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, worksheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
                 selectedRow.AddSimpleData();
@@ -71,6 +74,7 @@ namespace modDisplay.templates.cuocoto.tongculy
                 spreadsheetGrid.EndUpdate();
                 DangThemVatLieu = false;
             }
+            else
             {
                 MessageBox.Show($"Chỉ được thêm dữ liệu trong khoảng từ dòng {body.start} - {body.end}");
             }

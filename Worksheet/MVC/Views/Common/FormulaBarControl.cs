@@ -209,7 +209,7 @@ namespace EtaDt.MVCP.Views.Common
 					this.worksheet = grid.CurrentWorksheet;
                     this.worksheet.FocusPosChanged += grid_FocusPosChanged;
 
-                    // xử lý khi k có thay đổi worksheet, vào lần đầu khởi động
+                    // xử lý khi k có thay đổi masksheet, vào lần đầu khởi động
                     ReadFormulaFromCell();
                     grid.CurrentWorksheetChanged += new EventHandler (grid_CurrentWorksheetChanged);
 				}

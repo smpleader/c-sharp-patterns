@@ -12,7 +12,7 @@ namespace modDisplay.templates.tienluong.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
+        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -67,14 +67,14 @@ namespace modDisplay.templates.tienluong.row
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
-            if (!worksheet.Range["B" + Id].IsMerged)
+            if (!masksheet.Range["B" + Id].IsMerged)
             {
                 // check group object khi nhập vào
-                string C = worksheet.Range["C" + Id].Value;
+                string C = masksheet.Range["C" + Id].Value;
                 if (string.IsNullOrWhiteSpace(C))
                 {
                     // check công thức diễn giải khi nhập vào
-                    string ColValueD = worksheet.Range["D" + Id].Value;
+                    string ColValueD = masksheet.Range["D" + Id].Value;
                     if (!string.IsNullOrWhiteSpace(ColValueD))
                     {
                         string interpretiveFormula = ColValueD;
@@ -88,7 +88,7 @@ namespace modDisplay.templates.tienluong.row
                                 D.Value = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
 
                                 string formulaL = "=" + segment[1].Trim().Split("=")[0];
-                                var range = worksheet.Range["L" + Id];
+                                var range = masksheet.Range["L" + Id];
                                 spreadsheetGrid.SetCellValue(range, formulaL);
                                 IsInterpretiveFormula = true;
                             }

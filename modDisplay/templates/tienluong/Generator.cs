@@ -10,7 +10,8 @@ namespace modDisplay.templates.tienluong
     {
         public override string Name { get { return "templates/tienluong"; } }
         public SpreadsheetGrid spreadsheetGrid;
-        public IWorksheet worksheet;
+        public IWorksheet masksheet;
+        public IWorksheet workingsheet;
 
         bool DangThemCongViec = false;
         HeaderGroup header;
@@ -21,9 +22,10 @@ namespace modDisplay.templates.tienluong
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                worksheet = Display.WorkSheets[tabName];
+                masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
-                worksheet.UseRangesCache = false;
+                workingsheet = Display.WorksheetsStore[tabName + "_" + Display.HangMucId];
+                masksheet.UseRangesCache = false;
             }
         }
 
@@ -44,17 +46,17 @@ namespace modDisplay.templates.tienluong
             // bind
 
             // header
-            header = new HeaderGroup(spreadsheetGrid, worksheet);
+            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
             header.bind();
             header.render();
 
             // footer
-            footer = new FooterGroup(spreadsheetGrid, worksheet);
+            footer = new FooterGroup(spreadsheetGrid, masksheet, workingsheet);
             footer.bind();
             footer.render();
 
             // body 
-            body = new Body(spreadsheetGrid, worksheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet);
             body.end = footer.Id - 1;
             body.bind();
             body.render();
@@ -69,7 +71,7 @@ namespace modDisplay.templates.tienluong
             {
                 // bắt đầu thêm công việc
                 DangThemCongViec = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, worksheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 body.bind();

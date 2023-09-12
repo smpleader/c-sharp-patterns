@@ -6,7 +6,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id, int parentId) : base(spreadsheetGrid, worksheet)
+        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id, int parentId) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
             ParentId = parentId;
@@ -114,7 +114,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         }
         public void bind()
         {
-            string A = worksheet.Range["A" + Id].Value;
+            string A = masksheet.Range["A" + Id].Value;
             if (string.IsNullOrWhiteSpace(A))
             {
                 // todo: detect an additional line

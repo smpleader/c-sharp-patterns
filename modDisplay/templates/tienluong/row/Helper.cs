@@ -79,12 +79,12 @@ namespace modDisplay.templates.tienluong.row
         }
         public static IRange Cell(this ARowObject aRowObject, string colName)
         {
-            IRange cell = aRowObject.worksheet.Range[colName + aRowObject.Id];
+            IRange cell = aRowObject.masksheet.Range[colName + aRowObject.Id];
             return cell;
         }
         public static IRange Cell(this ARowObject aRowObject, string colName, string row)
         {
-            IRange cell = aRowObject.worksheet.Range[colName + row];
+            IRange cell = aRowObject.masksheet.Range[colName + row];
             return cell;
         }
     }

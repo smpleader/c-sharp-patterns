@@ -472,6 +472,6 @@
         private Syncfusion.Windows.Forms.Grid.GridControl gridControl1;
         private Label label2;
         private Button btn_TinhCuocOto;
-        private Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_working;
+        public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_working;
     }
 }

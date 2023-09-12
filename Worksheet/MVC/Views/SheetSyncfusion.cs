@@ -24,7 +24,6 @@ namespace Worksheet.MVC.Views
     public partial class SheetSyncfusion : AView
     {
         private SyncfusionP syncfusionP;
-
         public SheetSyncfusion()
         {
             registerPresenters(true);
@@ -111,6 +110,12 @@ namespace Worksheet.MVC.Views
             syncfusionP.Setup();
             sheet_mask.WorkbookLoaded += AfterLoad;
             sheet_mask.PropertyChanged += Spreadsheet_PropertyChanged;
+            sheet_working.WorkbookLoaded += AfterLoad2;
+        }
+
+        private void AfterLoad2(object sender, WorkbookLoadedEventArgs args)
+        {
+            Display.setControl2(sheet_working);
         }
 
         private void Spreadsheet_PropertyChanged(object? sender, PropertyChangedEventArgs e)

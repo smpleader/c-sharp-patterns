@@ -6,7 +6,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
             colM = new ColM(this);
@@ -154,7 +154,7 @@ namespace modDisplay.templates.tienluong.row
             }
             public override void Render()
             {
-                var range = Row.worksheet.Range[Col + Row.Id];
+                var range = Row.masksheet.Range[Col + Row.Id];
                 // xử lý công thức cho cột M
                 if (((Row)Row).HaveInterpretiveFormula)
                 {
@@ -311,7 +311,7 @@ namespace modDisplay.templates.tienluong.row
             spreadsheetGrid.SetCellValue(AC, "70230");
 
             // set màu chữ thành không màu
-            IRange range = worksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
+            IRange range = masksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
         }
     }

@@ -13,15 +13,15 @@ namespace modDisplay.templates.cuocoto.tongculy
         public readonly int start = 9;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet) : base(spreadsheetGrid, worksheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
         public override void bind()
         {
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
 
-            for (int indexRow = start; indexRow <= worksheet.Rows.Length; indexRow++)
+            for (int indexRow = start; indexRow <= masksheet.Rows.Length; indexRow++)
             {
-                if (Helper.IsRowObject(spreadsheetGrid, worksheet, indexRow))
+                if (Helper.IsRowObject(spreadsheetGrid, masksheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                 }
@@ -32,14 +32,14 @@ namespace modDisplay.templates.cuocoto.tongculy
             }
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, worksheet, indexAdditionalRows[i], 9);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexAdditionalRows[i], 9);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, worksheet, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
                 Row vl = rows[indexRow];
                 int startRow, endRow;
                 int endTemplate = indexRows[indexRows.Count - 1];
@@ -103,7 +103,7 @@ namespace modDisplay.templates.cuocoto.tongculy
                     }
                 }
             }
-            worksheet.Calculate();
+            masksheet.Calculate();
             spreadsheetGrid.InvalidateCells();
         }
 

@@ -2,12 +2,13 @@
 using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
+using static modDisplay.templates.vatlieu.Row;
 
 namespace modDisplay.templates.vatlieu
 {
     internal class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, int id) : base(spreadsheetGrid, worksheet)
+        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet , int id) : base(spreadsheetGrid, masksheet, workingsheet)
         {
             Id = id;
             colA = new ColA(this);
@@ -99,6 +100,10 @@ namespace modDisplay.templates.vatlieu
             public ColA(Row r) : base(r)
             {
             }
+
+            /// <summary>
+            /// Hiển thị số thứ tự
+            /// </summary>
             public override void Render()
             {
                 // todo: bind data to working sheet
@@ -298,12 +303,24 @@ namespace modDisplay.templates.vatlieu
         }
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(colB.Range, "V01897");
-            spreadsheetGrid.SetCellValue(colC.Range, "Cát vàng");
-            spreadsheetGrid.SetCellValue(colD.Range, "m3");
-            spreadsheetGrid.SetCellValue(colG.Range, "1");
-            spreadsheetGrid.SetCellValue(colE.Range, "389809");
-            spreadsheetGrid.SetCellValue(colF.Range, "389809");
+            // Add data ở working sheet
+            colB.Range.Text = "V01897";
+            colC.Range.Text = "Cát vàng";
+            colD.Range.Text = "m3";
+            colG.Range.Number = 1;
+            colE.Range.Number = 389809;
+            colF.Range.Number = 389809;
+
+            Display.showData();
+
+            // Hiển thị ra mask sheet
+            //spreadsheetGrid.SetCellValue(colB.RangeDisplay, "V01897");
+            //spreadsheetGrid.SetCellValue(colC.RangeDisplay, "Cát vàng");
+            //spreadsheetGrid.SetCellValue(colD.RangeDisplay, "m3");
+            //spreadsheetGrid.SetCellValue(colG.RangeDisplay, "1");
+            //spreadsheetGrid.SetCellValue(colE.RangeDisplay, "389809");
+            //spreadsheetGrid.SetCellValue(colF.RangeDisplay, "389809");
+           
         }
     }
 }

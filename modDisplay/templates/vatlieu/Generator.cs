@@ -8,7 +8,9 @@ namespace modDisplay.templates.vatlieu
         public override string Name { get { return "templates/giavatlieu"; } }
 
         public SpreadsheetGrid spreadsheetGrid;
-        public IWorksheet worksheet;
+        public IWorksheet masksheet;
+        public IWorksheet workingsheet;
+
         bool DangThemVatLieu = false;
         Body body;
 
@@ -16,15 +18,16 @@ namespace modDisplay.templates.vatlieu
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                worksheet = Display.WorkSheets[tabName];
+                masksheet = Display.WorkSheets[tabName];
                 spreadsheetGrid = Display.GridCollection[tabName];
-                worksheet.UseRangesCache = false;
+                workingsheet = Display.WorksheetsStore[tabName + "_" + Display.HangMucId];
+                masksheet.UseRangesCache = false;
             }
         }
 
         public override void loadData()
         {
-            body = new Body(spreadsheetGrid, worksheet);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet);
             body.bind();
             body.render();
         }
@@ -59,7 +62,7 @@ namespace modDisplay.templates.vatlieu
             {
                 // bắt đầu thêm vật liệu
                 DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, worksheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
                 selectedRow.AddSimpleData();
