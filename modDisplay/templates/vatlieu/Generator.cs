@@ -30,6 +30,14 @@ namespace modDisplay.templates.vatlieu
             body = new Body(spreadsheetGrid, masksheet, workingsheet);
             body.bind();
             body.render();
+            if(Display.ActiveMaskSheetDebug!=null)
+            {
+                Display.showDataDebug();
+            }
+            if (Display.ActiveGrid != null)
+            {
+                Display.showData();
+            }
         }
         public override void afterCellInput()
         {

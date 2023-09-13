@@ -22,7 +22,7 @@ namespace modDisplay
             // Lấy hạng mục ID từ tên của workingsheet
             string workingsheetName = workingsheet.Name;
             int indexSub = workingsheetName.IndexOf("_");
-            this.HangMucId = workingsheetName.Substring(indexSub);  
+            this.HangMucId = workingsheetName.Substring(indexSub + 1);  
         }
     }
 }

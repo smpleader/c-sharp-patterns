@@ -173,15 +173,12 @@ namespace modDisplay
         {
             HangMucId = hmId;
         }
+
+        /// <summary>
+        /// Hiển thị dữ liệu từ workingsheet ra masksheet
+        /// </summary>
         public static void showData()
         {
-            //string workingSheetName = Workingsheet.Name;
-            //WorkSheetsDebug.AddCopy(Workingsheet);
-            //int indexSub = WorkSheetsDebug[workingSheetName].Name.IndexOf("_");
-            //string newSheetName = WorkSheetsDebug[workingSheetName].Name.Substring(0, indexSub);
-            //WorkSheetsDebug[workingSheetName].Name = newSheetName;
-            //WControlDebug.ActiveSheet = WorkSheetsDebug[newSheetName];
-
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
             // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
             for (int row = 1; row <= Workingsheet.Rows.Length; row++)
@@ -202,15 +199,9 @@ namespace modDisplay
             }
             WControl.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
         }
+
         public static void showDataDebug()
         {
-            //string workingSheetName = Workingsheet.Name;
-            //WorkSheetsDebug.AddCopy(Workingsheet);
-            //int indexSub = WorkSheetsDebug[workingSheetName].Name.IndexOf("_");
-            //string newSheetName = WorkSheetsDebug[workingSheetName].Name.Substring(0, indexSub);
-            //WorkSheetsDebug[workingSheetName].Name = newSheetName;
-            //WControlDebug.ActiveSheet = WorkSheetsDebug[newSheetName];
-            
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
             // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
             for (int row = 1; row <= Workingsheet.Rows.Length; row++)
@@ -226,7 +217,7 @@ namespace modDisplay
 
                         IRange cellUI = ActiveMaskSheetDebug[row, col];
                         //cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
-                        WControlDebug.ActiveGrid.SetCellValue(cellUI, cellValue); // hiển thị giá trị
+                        WControlDebug.ActiveGrid.SetCellValue(cellUI, cellValue); // hiển thị giá trị công thức ref sẽ bị invalid do đang lấy ref theo working sheet
 
                     }
                 }

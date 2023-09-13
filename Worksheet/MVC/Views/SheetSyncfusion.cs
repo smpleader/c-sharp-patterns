@@ -131,7 +131,7 @@ namespace Worksheet.MVC.Views
                     Display.ActiveGrid = Display.GridCollection[sheet_mask.ActiveSheet.Name];
 
                     Display.SetActiveWorkingSheet(sheet_mask.ActiveSheet.Name);
-                    if(Display.WControlDebug !=null)
+                    if (Display.WControlDebug != null)
                     {
                         Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[sheet_mask.ActiveSheet.Name];
                     }
@@ -225,6 +225,27 @@ namespace Worksheet.MVC.Views
             SheetTinhCuocOto sheetTinhCuocOto = new SheetTinhCuocOto();
             sheetTinhCuocOto.ShowDialog();
             //Backbone.Run("CuocOto", "ShowDialog");
+        }
+
+        private void btn_SaveWS_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Excel Files|*.xlsx" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Display.WorkingBookDebug.SaveAs(saveFileDialog.FileName);
+                        MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Lưu lỗi. {ex}");
+                        MessageBox.Show("Lưu thất bại! " + ex);
+
+                    }
+                }
+            }
         }
     }
 }

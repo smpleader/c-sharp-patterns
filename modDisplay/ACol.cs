@@ -1,6 +1,7 @@
 ﻿
 using BaseInterface;
 using Syncfusion.XlsIO;
+using static modDisplay.templates.vatlieu.Row;
 
 namespace modDisplay
 {
@@ -61,11 +62,13 @@ namespace modDisplay
         public virtual void Render()
         {
             string formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
-            Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(HangMucId, Params));
+            //Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(HangMucId, Params));
+            Range.Formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
             Row.masksheet.AutofitRow(Row.Id);
         }
         public virtual void Bind()
         {
+            // override to validate data before updating workingsheet
             Row.spreadsheetGrid.SetCellValue(Range, RangeDisplay.Value);
         }
     }

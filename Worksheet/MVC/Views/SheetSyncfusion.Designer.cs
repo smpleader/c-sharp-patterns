@@ -52,11 +52,12 @@
             sheet_mask = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
             splitter1 = new Splitter();
             panel4 = new Panel();
+            sheet_working = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
             tabPage2 = new TabPage();
             gridControl1 = new Syncfusion.Windows.Forms.Grid.GridControl();
             panel5 = new Panel();
             label2 = new Label();
-            sheet_working = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
+            btn_SaveWS = new Button();
             panel1.SuspendLayout();
             pnl_VatLieu.SuspendLayout();
             panel2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // pnl_VatLieu
             // 
+            pnl_VatLieu.Controls.Add(btn_SaveWS);
             pnl_VatLieu.Controls.Add(btn_TinhCuocOto);
             pnl_VatLieu.Controls.Add(bbtn_ThemVatLieu);
             pnl_VatLieu.Controls.Add(rdbtn_PPT_NhanHeSoCongCuocVC);
@@ -309,6 +311,39 @@
             panel4.Size = new Size(1669, 339);
             panel4.TabIndex = 2;
             // 
+            // sheet_working
+            // 
+            sheet_working.AllowCellContextMenu = true;
+            sheet_working.AllowExtendRowColumnCount = true;
+            sheet_working.AllowFiltering = false;
+            sheet_working.AllowFormulaRangeSelection = true;
+            sheet_working.AllowTabItemContextMenu = true;
+            sheet_working.AllowZooming = true;
+            sheet_working.BaseThemeName = "";
+            spreadsheetCopyPaste2.AllowPasteOptionPopup = true;
+            spreadsheetCopyPaste2.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
+            sheet_working.CopyPaste = spreadsheetCopyPaste2;
+            sheet_working.DefaultColumnCount = 101;
+            sheet_working.DefaultRowCount = 101;
+            sheet_working.DisplayAlerts = true;
+            sheet_working.Dock = DockStyle.Fill;
+            sheet_working.FileName = "Book2";
+            sheet_working.FormulaBarVisibility = true;
+            formulaRangeSelectionController2.AllowMouseSelection = true;
+            formulaRangeSelectionController2.AllowSelectionOnEditing = true;
+            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController2;
+            sheet_working.IsCustomTabItemContextMenuEnabled = false;
+            sheet_working.Location = new Point(0, 0);
+            sheet_working.Name = "sheet_working";
+            sheet_working.SelectedTabIndex = 0;
+            sheet_working.SelectedTabItem = null;
+            sheet_working.ShowBusyIndicator = true;
+            sheet_working.Size = new Size(1669, 339);
+            sheet_working.TabIndex = 0;
+            sheet_working.TabItemContextMenu = null;
+            sheet_working.Text = "spreadsheet1";
+            sheet_working.ThemeName = "Default";
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(gridControl1);
@@ -316,7 +351,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1420, 515);
+            tabPage2.Size = new Size(1675, 697);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Vật liệu";
             tabPage2.UseVisualStyleBackColor = true;
@@ -327,7 +362,7 @@
             gridControl1.Location = new Point(3, 47);
             gridControl1.Name = "gridControl1";
             gridControl1.SerializeCellsBehavior = Syncfusion.Windows.Forms.Grid.GridSerializeCellsBehavior.SerializeIntoCode;
-            gridControl1.Size = new Size(1414, 465);
+            gridControl1.Size = new Size(1669, 647);
             gridControl1.SmartSizeBox = false;
             gridControl1.TabIndex = 0;
             gridControl1.Text = "gridControl1";
@@ -372,7 +407,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(3, 3);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1414, 44);
+            panel5.Size = new Size(1669, 44);
             panel5.TabIndex = 1;
             // 
             // label2
@@ -384,38 +419,15 @@
             label2.TabIndex = 0;
             label2.Text = "Tab này k sử dụng chuyển sheet khác nhau ở tab tiên lượng";
             // 
-            // sheet_working
+            // btn_SaveWS
             // 
-            sheet_working.AllowCellContextMenu = true;
-            sheet_working.AllowExtendRowColumnCount = true;
-            sheet_working.AllowFiltering = false;
-            sheet_working.AllowFormulaRangeSelection = true;
-            sheet_working.AllowTabItemContextMenu = true;
-            sheet_working.AllowZooming = true;
-            sheet_working.BaseThemeName = "";
-            spreadsheetCopyPaste2.AllowPasteOptionPopup = true;
-            spreadsheetCopyPaste2.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
-            sheet_working.CopyPaste = spreadsheetCopyPaste2;
-            sheet_working.DefaultColumnCount = 101;
-            sheet_working.DefaultRowCount = 101;
-            sheet_working.DisplayAlerts = true;
-            sheet_working.Dock = DockStyle.Fill;
-            sheet_working.FileName = "Book2";
-            sheet_working.FormulaBarVisibility = true;
-            formulaRangeSelectionController2.AllowMouseSelection = true;
-            formulaRangeSelectionController2.AllowSelectionOnEditing = true;
-            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController2;
-            sheet_working.IsCustomTabItemContextMenuEnabled = false;
-            sheet_working.Location = new Point(0, 0);
-            sheet_working.Name = "sheet_working";
-            sheet_working.SelectedTabIndex = 0;
-            sheet_working.SelectedTabItem = null;
-            sheet_working.ShowBusyIndicator = true;
-            sheet_working.Size = new Size(1669, 339);
-            sheet_working.TabIndex = 0;
-            sheet_working.TabItemContextMenu = null;
-            sheet_working.Text = "spreadsheet1";
-            sheet_working.ThemeName = "Default";
+            btn_SaveWS.Location = new Point(836, 4);
+            btn_SaveWS.Name = "btn_SaveWS";
+            btn_SaveWS.Size = new Size(158, 29);
+            btn_SaveWS.TabIndex = 13;
+            btn_SaveWS.Text = "Save workingsheet";
+            btn_SaveWS.UseVisualStyleBackColor = true;
+            btn_SaveWS.Click += btn_SaveWS_Click;
             // 
             // SheetSyncfusion
             // 
@@ -472,5 +484,6 @@
         private Label label2;
         private Button btn_TinhCuocOto;
         public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_working;
+        private Button btn_SaveWS;
     }
 }
