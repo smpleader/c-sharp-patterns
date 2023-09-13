@@ -76,7 +76,7 @@ namespace modDisplay.templates.vatlieu
 
         public void renderInWorkingsheet()
         {
-            // render ở working sheet
+            // render dữ liệu và công thức ở working sheet
             foreach (Row row in rows.Values)
             {
                 row.render();

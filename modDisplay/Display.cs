@@ -200,6 +200,9 @@ namespace modDisplay
             WControl.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
         }
 
+        /// <summary>
+        /// Hiển thị dữ liệu ra sheet debug
+        /// </summary>
         public static void showDataDebug()
         {
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
