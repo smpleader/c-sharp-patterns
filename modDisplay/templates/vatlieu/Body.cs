@@ -17,7 +17,7 @@ namespace modDisplay.templates.vatlieu
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject( maskToWorking ? masksheet:workingsheet, indexRow))
+                if (Helper.IsRowObject( maskToWorking ? masksheet : workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;

@@ -9,7 +9,7 @@ namespace BaseInterface
     public interface IColBL
     {
         string UniqueName { get; }
-        string Calculate();
-        string Display();
+        string GetFormulaCalculate();
+        string GetFormulaDisplay();
     }
 }

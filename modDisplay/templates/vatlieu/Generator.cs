@@ -28,6 +28,7 @@ namespace modDisplay.templates.vatlieu
         public override void loadData()
         {
             body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
             body.bind();
             body.render();
             if(Display.ActiveMaskSheetDebug!=null)

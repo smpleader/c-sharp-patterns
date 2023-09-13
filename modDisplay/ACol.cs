@@ -62,8 +62,8 @@ namespace modDisplay
         public virtual void Render()
         {
             string formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
-            //Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(HangMucId, Params));
-            Range.Formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
+            //Row.spreadsheetGrid.SetCellValue(RangeDisplay, formula); // bỏ set công thức cho masksheet
+            Range.Formula = formula;
             Row.masksheet.AutofitRow(Row.Id);
         }
         public virtual void Bind()
@@ -85,12 +85,12 @@ namespace modDisplay
 
         public string UniqueName { get { return Col.UniqueName; } }
 
-        public virtual string Calculate()
+        public virtual string GetFormulaCalculate()
         {
             // render trên working sheet
-            return BL.formula(Col.Params);
+            return BL.formula(Col.HangMucId,Col.Params);
         }
-        public virtual string Display()
+        public virtual string GetFormulaDisplay()
         {
             //todo: hiển thị lên mark sheet
             return BL.formula(Col.Params);
