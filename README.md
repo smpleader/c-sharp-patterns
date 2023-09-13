@@ -1,24 +1,9 @@
-# C sharp patterns & practises
-Just some practices for patterns in C sharp
+Dev theo flow chart
 
-## Worksheet:
-
-How we deal with 2 dimensions of data model, which you can't apply POV or RDBM.
-
-Pattern for data mapping in strong type language.
-
-Todo:
-
-- Print a grid of data to paper.
-- Consider SyncFusion instead of ReoGrid
-
-## DI_MVP:
-
-MVP with MicrosoftInjection and SimpleInjection
-
-## DI_MVC:
-
-MVC with SimpleInjection
-## DI_Storage:
-
-Storage + repository with SimpleInjection
+Khi chạy ứng dụng, mở sheet "Giá vật liệu" ở cả 2 worksheet 
+ Thêm dữ liệu ( workingsheet -> masksheet)
+    Kích chọn 1 dòng từ 5 đến 15, rồi nhấn thêm vào vật liệu
+ Sửa dữ liệu  ( masksheet -> workingsheet-> masksheet)
+    Kích chọn 1 dòng đã có dữ liệu sửa dữ liệu thì sẽ được cập nhật data vào workingsheet -> tính toán -> hiển thị lại masksheet
+ Thay đổi phương pháp tính ( workingsheet -> masksheet)
+    Thay đổi ppt ở workingsheet, xử lý render công thức, tính toán ở workingsheet -> hiển thị ra masksheet
