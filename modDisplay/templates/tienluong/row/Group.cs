@@ -13,7 +13,7 @@ namespace modDisplay.templates.tienluong.row
             { "T", "NhomCongViec_ThanhTienNhanCong" },
             { "U", "NhomCongViec_ThanhTienMay" },
         };
-        public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId, int id) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
+        public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
         }

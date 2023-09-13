@@ -12,7 +12,7 @@ namespace modDisplay.templates.tienluong.row
             { "T", "CongViec_TongThanhTienNhanCong" },
             { "U", "CongViec_TongThanhTienMay" },
         };
-        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
+        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = 16;
             start = 6;

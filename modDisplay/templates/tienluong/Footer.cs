@@ -13,14 +13,14 @@ namespace modDisplay.templates.tienluong
     {
         FooterRow footer;
 
-        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
+        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = 16;
         }
 
         public override void bind(bool maskToWorking = true)
         {
-            footer = new FooterRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId);
+            footer = new FooterRow(spreadsheetGrid, masksheet, workingsheet);
             footer.bind();
             Id = footer.Id;
         }

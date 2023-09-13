@@ -13,12 +13,16 @@ namespace modDisplay
         public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
         public virtual void render(bool maskToWorking = true) { }
-        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId)
+        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet)
         {
             this.spreadsheetGrid = spreadsheetGrid;
             this.masksheet = worksheet;
             this.workingsheet = workingsheet;
-            this.HangMucId = hangMucId;  
+
+            // Lấy hạng mục ID từ tên của workingsheet
+            string workingsheetName = workingsheet.Name;
+            int indexSub = workingsheetName.IndexOf("_");
+            this.HangMucId = workingsheetName.Substring(indexSub);  
         }
     }
 }

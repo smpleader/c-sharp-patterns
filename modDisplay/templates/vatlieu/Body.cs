@@ -10,7 +10,7 @@ namespace modDisplay.templates.vatlieu
         public readonly int start = 5;
         public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, masksheet, workingsheet, hangMucId) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexRows = new List<int>();
@@ -30,7 +30,7 @@ namespace modDisplay.templates.vatlieu
                 int indexRow = indexRows[i];
                 if(!rows.Keys.Contains(indexRow))
                 {
-                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, indexRow);
+                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
                 }
                 Row vl = rows[indexRow];
                 vl.bind(maskToWorking);

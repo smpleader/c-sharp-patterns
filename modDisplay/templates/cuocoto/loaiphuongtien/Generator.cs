@@ -12,7 +12,6 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
         public SpreadsheetGrid spreadsheetGrid;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
-        public string HangMucId;
         bool DangThemVatLieu = false;
         Body body;
 
@@ -29,7 +28,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
 
         public override void loadData()
         {
-            body = new Body(spreadsheetGrid, masksheet, workingsheet, HangMucId);
+            body = new Body(spreadsheetGrid, masksheet, workingsheet);
             body.bind();
             body.render();
         }
@@ -64,7 +63,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
             {
                 // bắt đầu thêm vật liệu
                 DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, this.HangMucId, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet , selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 spreadsheetGrid.BeginUpdate();
                 selectedRow.AddSimpleData();

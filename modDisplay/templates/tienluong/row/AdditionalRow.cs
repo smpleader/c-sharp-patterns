@@ -12,7 +12,7 @@ namespace modDisplay.templates.tienluong.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId, int id) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId)
+        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
         {
             Id = id;
         }

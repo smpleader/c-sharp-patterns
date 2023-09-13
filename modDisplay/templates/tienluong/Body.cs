@@ -14,7 +14,7 @@ namespace modDisplay.templates.tienluong
         public readonly int start = 6;
         public int end;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
 
         public override void bind(bool maskToWorking = true)
         {
@@ -43,7 +43,7 @@ namespace modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexGroups[i]);
+                groups[indexGroups[i]] = new Group(spreadsheetGrid, masksheet, workingsheet, indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -71,7 +71,7 @@ namespace modDisplay.templates.tienluong
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexAdditionalRows[i]);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
 
@@ -79,7 +79,7 @@ namespace modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, HangMucId, indexRow);
+                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
                 int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;

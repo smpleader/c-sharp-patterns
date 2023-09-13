@@ -11,13 +11,13 @@ namespace modDisplay.templates.tienluong
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, string hangMucId) : base(spreadsheetGrid, worksheet, workingsheet, hangMucId) { }
+        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state
-            headers[2] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 2);
-            headers[3] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, 3);
+            headers[2] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 2);
+            headers[3] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 3);
             foreach (var item in headers)
             {
                 item.Value.bind();

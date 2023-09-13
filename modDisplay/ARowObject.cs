@@ -6,12 +6,16 @@ namespace modDisplay
 {
     public class ARowObject : Row
     {
-        public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, string hangMucId)
+        public ARowObject(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet)
         {
             this.spreadsheetGrid = spreadsheetGrid;
             this.masksheet = masksheet;
             this.workingsheet = workingsheet;
-            this.HangMucId = hangMucId;
+
+            // Lấy hạng mục ID từ tên của workingsheet
+            string workingsheetName = workingsheet.Name;
+            int indexSub = workingsheetName.IndexOf("_");
+            this.HangMucId = workingsheetName.Substring(indexSub);
         }
         public SpreadsheetGrid spreadsheetGrid { get; set; }
         public IWorksheet masksheet { get; set; }
