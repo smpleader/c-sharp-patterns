@@ -11,13 +11,13 @@ namespace modDisplay.templates.vatlieu
         public int end = 15;
         public override string Name { get { return "Body"; } }
         public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
-        public override void bind(bool maskToWorking = true)
+        public void bindInWoringsheet()
         {
             List<int> indexRows = new List<int>();
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject( maskToWorking ? masksheet : workingsheet, indexRow))
+                if (Helper.IsRowObject(workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -32,12 +32,49 @@ namespace modDisplay.templates.vatlieu
                 {
                     rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
                 }
-                Row vl = rows[indexRow];
-                vl.bind(maskToWorking);
             }
         }
 
-        public override void render(bool maskToWorking = true)
+        /// <summary>
+        /// Xác định vị trí của row object -> bind data từ masksheet tới workingsheet
+        /// </summary>
+        /// <param name="row">Dòng mà có dữ liệu thay đổi</param>
+        public void bindInMaskSheet(int row)
+        {
+            // nếu không có thì tạo mới 1 row object
+            if (!rows.Keys.Contains(row))
+            {
+                rows[row] = new Row(spreadsheetGrid, masksheet, workingsheet, row);
+            }
+            rows[row].bind();
+        }
+        public void bindInMaskSheet()
+        {
+            List<int> indexRows = new List<int>();
+
+            for (int indexRow = start; indexRow <= end; indexRow++)
+            {
+                if (Helper.IsRowObject(masksheet , indexRow))
+                {
+                    indexRows.Add(indexRow);
+                    continue;
+                }
+            }
+
+            // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
+            for (int i = 0; i < indexRows.Count; i++)
+            {
+                int indexRow = indexRows[i];
+                if (!rows.Keys.Contains(indexRow))
+                {
+                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                }
+                Row vl = rows[indexRow];
+                vl.bind();
+            }
+        }
+
+        public void renderInWorkingsheet()
         {
             // render ở working sheet
             foreach (Row row in rows.Values)

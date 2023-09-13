@@ -45,12 +45,12 @@ namespace modDisplay.row
         /// <summary>
         /// Xử lý nghiệp vụ
         /// </summary>
-        public virtual IColBL BL { get; set; }
+        public IColBL BL { get; set; }
 
         /// <summary>
         /// Xử lý dữ liệu
         /// </summary>
-        public virtual IData Data { get; set; }
+        public IData Data { get; set; }
 
         /// <summary>
         /// Cập nhật data vào working sheet

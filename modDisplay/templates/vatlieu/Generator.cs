@@ -29,8 +29,8 @@ namespace modDisplay.templates.vatlieu
         {
             body = new Body(spreadsheetGrid, masksheet, workingsheet);
             // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
-            body.bind();
-            body.render();
+            body.bindInWoringsheet();
+            body.renderInWorkingsheet();
             if(Display.ActiveMaskSheetDebug!=null)
             {
                 Display.showDataDebug();
@@ -40,28 +40,53 @@ namespace modDisplay.templates.vatlieu
                 Display.showData();
             }
         }
+
+        public override void selectCell()
+        {
+            switch (Display.Col)
+            {
+                case "B":
+                    if (!body.rows.Keys.Contains(Display.Row))
+                    {
+                        //Display.Cell.IsReadOnly = true;
+                    }
+                    break;
+                case "R":
+                case "S":
+                case "T":
+                case "U":
+                    //Display.Cell.IsReadOnly = true;
+                    break;
+            }
+        }
+
         public override void afterCellInput()
         {
-            if (body != null)
+            if (body == null) return;
+            if (IsEditting) return;
+            IsEditting = true;
+
+            if( body.start <= Display.Row && Display.Row <= body.end)
             {
-                if (!IsEditting)
-                {
-                    IsEditting = true;
-                    body.bind();
-                    body.render();
-                    Display.showDataDebug();
-                    Display.showData();
-                    IsEditting = false;
-                }
-            }
+                body.bindInMaskSheet(Display.Row);
+                body.renderInWorkingsheet();
+
+                Display.showDataDebug();
+                Display.showData();
+            }    
+
+            IsEditting = false;
         }
         public void ThayDoiPPT()
         {
             if (body == null) return;
             IsEditting = true;
-            body.render();
+
+            body.renderInWorkingsheet();
+
             Display.showDataDebug();
             Display.showData();
+
             IsEditting = false;
         }
 
@@ -74,11 +99,16 @@ namespace modDisplay.templates.vatlieu
                 // bắt đầu thêm vật liệu
                 body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
+
                 spreadsheetGrid.BeginUpdate();
+
                 selectedRow.AddSimpleData();
-                body.bind(false);
-                body.render();
+
+                body.bindInWoringsheet();
+                body.renderInWorkingsheet();
+
                 spreadsheetGrid.EndUpdate();
+
                 Display.showDataDebug();
                 Display.showData();
             }

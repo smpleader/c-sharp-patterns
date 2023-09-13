@@ -15,7 +15,6 @@ namespace modDisplay.templates.tienluong
         public int end;
         public override string Name { get { return "Body"; } }
         public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
-
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();

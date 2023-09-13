@@ -93,17 +93,14 @@ namespace modDisplay.templates.vatlieu
         /// </summary>
         public CellP cellP;
 
-        internal void bind(bool maskToWorking = true)
+        internal void bind()
         {
-            if (maskToWorking)
-            {
-                cellB.Bind();
-                cellC.Bind();
-                cellD.Bind();
-                cellE.Bind();
-                cellF.Bind();
-                cellP.Bind();
-            }
+            cellB.Bind();
+            cellC.Bind();
+            cellD.Bind();
+            cellE.Bind();
+            cellF.Bind();
+            cellP.Bind();
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()

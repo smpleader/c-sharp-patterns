@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste3 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
+            Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController3 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste1 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
             Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController1 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
-            Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste2 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
-            Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController2 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             panel1 = new Panel();
             pnl_VatLieu = new Panel();
             btn_SaveWS = new Button();
@@ -95,7 +95,7 @@
             // 
             // btn_SaveWS
             // 
-            btn_SaveWS.Location = new Point(836, 4);
+            btn_SaveWS.Location = new Point(835, 7);
             btn_SaveWS.Name = "btn_SaveWS";
             btn_SaveWS.Size = new Size(158, 29);
             btn_SaveWS.TabIndex = 13;
@@ -271,18 +271,18 @@
             sheet_mask.AllowTabItemContextMenu = true;
             sheet_mask.AllowZooming = true;
             sheet_mask.BaseThemeName = "";
-            spreadsheetCopyPaste1.AllowPasteOptionPopup = true;
-            spreadsheetCopyPaste1.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
-            sheet_mask.CopyPaste = spreadsheetCopyPaste1;
+            spreadsheetCopyPaste3.AllowPasteOptionPopup = true;
+            spreadsheetCopyPaste3.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
+            sheet_mask.CopyPaste = spreadsheetCopyPaste3;
             sheet_mask.DefaultColumnCount = 101;
             sheet_mask.DefaultRowCount = 101;
             sheet_mask.DisplayAlerts = true;
             sheet_mask.Dock = DockStyle.Fill;
             sheet_mask.FileName = "Book1";
             sheet_mask.FormulaBarVisibility = true;
-            formulaRangeSelectionController1.AllowMouseSelection = true;
-            formulaRangeSelectionController1.AllowSelectionOnEditing = true;
-            sheet_mask.FormulaRangeSelectionController = formulaRangeSelectionController1;
+            formulaRangeSelectionController3.AllowMouseSelection = true;
+            formulaRangeSelectionController3.AllowSelectionOnEditing = true;
+            sheet_mask.FormulaRangeSelectionController = formulaRangeSelectionController3;
             sheet_mask.IsCustomTabItemContextMenuEnabled = false;
             sheet_mask.Location = new Point(0, 0);
             sheet_mask.Name = "sheet_mask";
@@ -322,18 +322,18 @@
             sheet_working.AllowTabItemContextMenu = true;
             sheet_working.AllowZooming = true;
             sheet_working.BaseThemeName = "";
-            spreadsheetCopyPaste2.AllowPasteOptionPopup = true;
-            spreadsheetCopyPaste2.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
-            sheet_working.CopyPaste = spreadsheetCopyPaste2;
+            spreadsheetCopyPaste1.AllowPasteOptionPopup = true;
+            spreadsheetCopyPaste1.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
+            sheet_working.CopyPaste = spreadsheetCopyPaste1;
             sheet_working.DefaultColumnCount = 101;
             sheet_working.DefaultRowCount = 101;
             sheet_working.DisplayAlerts = true;
             sheet_working.Dock = DockStyle.Fill;
             sheet_working.FileName = "Book2";
             sheet_working.FormulaBarVisibility = true;
-            formulaRangeSelectionController2.AllowMouseSelection = true;
-            formulaRangeSelectionController2.AllowSelectionOnEditing = true;
-            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController2;
+            formulaRangeSelectionController1.AllowMouseSelection = true;
+            formulaRangeSelectionController1.AllowSelectionOnEditing = true;
+            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController1;
             sheet_working.IsCustomTabItemContextMenuEnabled = false;
             sheet_working.Location = new Point(0, 0);
             sheet_working.Name = "sheet_working";
