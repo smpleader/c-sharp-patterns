@@ -67,6 +67,8 @@ namespace modDisplay.templates.vatlieu
             if (IsEditting) return;
             IsEditting = true;
 
+            //todo: detect header
+
             if( body.HasRow(Display.Row))
             {
                 body.bindInMaskSheet(Display.Row);
