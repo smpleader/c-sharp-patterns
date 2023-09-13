@@ -7,10 +7,14 @@ namespace modDisplay.templates.vatlieu
     internal class Body : APosition
     {
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-        public readonly int start = 5;
-        public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) { }
+        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) 
+        {
+            start = 5;
+            end = 15;
+        }
+
+        
         public void bindInWoringsheet()
         {
             List<int> indexRows = new List<int>();

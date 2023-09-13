@@ -25,6 +25,7 @@ namespace modDisplay.templates.vatlieu
             }
         }
 
+
         public override void loadData()
         {
             body = new Body(spreadsheetGrid, masksheet, workingsheet);
@@ -66,7 +67,7 @@ namespace modDisplay.templates.vatlieu
             if (IsEditting) return;
             IsEditting = true;
 
-            if( body.start <= Display.Row && Display.Row <= body.end)
+            if( body.HasRow(Display.Row))
             {
                 body.bindInMaskSheet(Display.Row);
                 body.renderInWorkingsheet();

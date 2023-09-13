@@ -10,6 +10,18 @@ namespace modDisplay
         public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
         public int Id { get; set; }
+        public int start { get; set; }
+        public int end { get; set; }
+
+        /// <summary>
+        /// Check if row belongs to range of the position
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public virtual bool HasRow(int row)
+        {
+            return start <= row && row <= end;
+        }
         public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
         public virtual void render(bool maskToWorking = true) { }
