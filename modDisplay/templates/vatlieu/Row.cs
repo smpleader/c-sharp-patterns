@@ -127,8 +127,14 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
-                base.Bind();
+                if(RangeDisplay.Value == "Invalid")
+                {
+                    MessageBox.Show("Giá trị cột B không được nhập là 'Invalid'");
+                }    
+                else
+                {
+                    base.Bind();
+                }
             }
         }
         public class ColC : ACol
@@ -144,7 +150,6 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
@@ -161,7 +166,6 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
@@ -178,7 +182,6 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
@@ -195,7 +198,6 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
@@ -212,7 +214,6 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
@@ -317,14 +318,12 @@ namespace modDisplay.templates.vatlieu
             }
             public override void Bind()
             {
-                // todo: bind data to working sheet
                 base.Bind();
             }
         }
 
         internal void bind(bool maskToWorking = true)
         {
-            // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
             if (maskToWorking)
             {
                 colB.Bind();
@@ -334,6 +333,7 @@ namespace modDisplay.templates.vatlieu
                 colF.Bind();
                 colP.Bind();
             }
+            // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()
         {

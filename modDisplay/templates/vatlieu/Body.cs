@@ -39,7 +39,7 @@ namespace modDisplay.templates.vatlieu
 
         public override void render(bool maskToWorking = true)
         {
-            // render
+            // render ở working sheet
             foreach (Row row in rows.Values)
             {
                 row.render();
