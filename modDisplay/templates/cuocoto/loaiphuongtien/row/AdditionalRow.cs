@@ -1,4 +1,5 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modDisplay.row;
+using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -77,7 +78,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         /// </summary>
         public IRange W { get { return this.Cell("W"); } }
 
-        class ColL : ACol
+        class ColL : ACell
         {
             public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienCuLyNhoHonBang1000M"; } }
             public override string Col { get { return "L"; } }

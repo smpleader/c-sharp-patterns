@@ -1,4 +1,5 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modDisplay.row;
+using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -108,7 +109,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         /// </summary>
         public IRange X { get { return this.Cell("X"); } }
 
-        class ColM : ACol
+        class ColM : ACell
         {
             public override string UniqueName { get { return "CuocOto_TongCuLy"; } }
             public override string Col { get { return "M"; } }
@@ -118,7 +119,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
             }
         }
 
-        class ColO : ACol
+        class ColO : ACell
         {
             public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
             public override string Col { get { return "O"; } }
@@ -129,7 +130,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
             {
             }
         }
-        class ColP : ACol
+        class ColP : ACell
         {
             public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
             public override string Col { get { return "P"; } }
@@ -140,7 +141,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
             {
             }
         }
-        class ColS : ACol
+        class ColS : ACell
         {
             public override string UniqueName { get { return "CuocOto_ThanhTienChiPhiBocDo"; } }
             public override string Col { get { return "S"; } }
@@ -151,7 +152,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
             {
             }
         }
-        class ColX : ACol
+        class ColX : ACell
         {
             public override string UniqueName { get { return "CuocOto_TongCuoc"; } }
             public override string Col { get { return "X"; } }

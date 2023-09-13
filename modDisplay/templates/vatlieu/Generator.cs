@@ -11,7 +11,7 @@ namespace modDisplay.templates.vatlieu
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
 
-        bool DangThemVatLieu = false;
+        bool IsEditting = false;
         Body body;
 
         public override void init(string tabName)
@@ -44,26 +44,25 @@ namespace modDisplay.templates.vatlieu
         {
             if (body != null)
             {
-                if (!DangThemVatLieu)
+                if (!IsEditting)
                 {
-                    DangThemVatLieu = true;
+                    IsEditting = true;
                     body.bind();
                     body.render();
                     Display.showDataDebug();
                     Display.showData();
-                    DangThemVatLieu = false;
+                    IsEditting = false;
                 }
             }
-
         }
         public void ThayDoiPPT()
         {
             if (body == null) return;
-            DangThemVatLieu = true;
+            IsEditting = true;
             body.render();
             Display.showDataDebug();
             Display.showData();
-            DangThemVatLieu = false;
+            IsEditting = false;
         }
 
         public void UpdateData()

@@ -1,370 +1,141 @@
-﻿using modBL.prime.dongiatonghop;
-using modDisplay.templates.tienluong.row;
+﻿using modDisplay.row;
+using modDisplay.templates.vatlieu.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
-using static modDisplay.templates.vatlieu.Row;
 
 namespace modDisplay.templates.vatlieu
 {
-    internal class Row : ARowObject
+    public class Row : ARowObject
     {
         public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, masksheet, workingsheet)
         {
             Id = id;
-            colA = new ColA(this);
-            colB = new ColB(this);
-            colC = new ColC(this);
-            colD = new ColD(this);
-            colE = new ColE(this);
-            colF = new ColF(this);
-            colG = new ColG(this);
-            colH = new ColH(this);
-            colI = new ColI(this);
-            colJ = new ColJ(this);
-            colK = new ColK(this);
-            colL = new ColL(this);
-            colM = new ColM(this);  
-            colN = new ColN(this);
-            colO = new ColO(this);  
-            colP = new ColP(this);
+            cellA = new CellA(this);
+            cellB = new CellB(this);
+            cellC = new CellC(this);
+            cellD = new CellD(this);
+            cellE = new CellE(this);
+            cellF = new CellF(this);
+            cellG = new CellG(this);
+            cellH = new CellH(this);
+            cellI = new CellI(this);
+            cellJ = new CellJ(this);
+            cellK = new CellK(this);
+            cellL = new CellL(this);
+            cellM = new CellM(this);  
+            cellN = new CellN(this);
+            cellO = new CellO(this);  
+            cellP = new CellP(this);
         }
 
         /// <summary>
         /// Số thứ tự
         /// </summary>
-        public ColA colA;
+        public CellA cellA;
         /// <summary>
         /// Mã vật liệu
         /// </summary>
-        public ColB colB;
+        public CellB cellB;
         /// <summary>
         /// Tên vật liệu
         /// </summary>
-        public ColC colC;
+        public CellC cellC;
         /// <summary>
         /// Đơn vị
         /// </summary>
-        public ColD colD;
+        public CellD cellD;
         /// <summary>
         /// Giá gốc
         /// </summary>
-        public ColE colE;
+        public CellE cellE;
         /// <summary>
         /// Giá TB
         /// </summary>
-        public ColF colF;
+        public CellF cellF;
         /// <summary>
         /// Hệ số
         /// </summary>
-        public ColG colG;
+        public CellG cellG;
         /// <summary>
         /// Giá TBxHS
         /// </summary>
-        public ColH colH;
+        public CellH cellH;
         /// <summary>
         /// Cước ô tô
         /// </summary>
-        public ColI colI;
+        public CellI cellI;
         /// <summary>
         /// Cước sông
         /// </summary>
-        public ColJ colJ;
+        public CellJ cellJ;
         /// <summary>
         /// Cước thủ công
         /// </summary>
-        public ColK colK;
+        public CellK cellK;
         /// <summary>
         /// Cước biển
         /// </summary>
-        public ColL colL;
+        public CellL cellL;
         /// <summary>
         /// Cước khác
         /// </summary>
-        public ColM colM;
+        public CellM cellM;
         /// <summary>
         /// Tổng cước
         /// </summary>
-        public ColN colN;
+        public CellN cellN;
         /// <summary>
         /// Giá hiện trường	
         /// </summary>
-        public ColO colO;
+        public CellO cellO;
         /// <summary>
         /// Ghi chú
         /// </summary>
-        public ColP colP;
-        public class ColA : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_SoThuTu"; } }
-            public override string Col { get { return "A"; } }
-            public ColA(Row r) : base(r)
-            {
-            }
-
-            /// <summary>
-            /// Hiển thị số thứ tự
-            /// </summary>
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                // todo: bind data to working sheet
-                base.Bind();
-            }
-        }
-        public class ColB : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_MaVatLieu"; } }
-            public override string Col { get { return "B"; } }
-            public ColB(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                if(RangeDisplay.Value == "Invalid")
-                {
-                    MessageBox.Show("Giá trị cột B không được nhập là 'Invalid'");
-                }    
-                else
-                {
-                    base.Bind();
-                }
-            }
-        }
-        public class ColC : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_TenVatLieu"; } }
-            public override string Col { get { return "C"; } }
-            public ColC(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
-        public class ColD : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_DonVi"; } }
-            public override string Col { get { return "D"; } }
-            public ColD(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
-        public class ColE : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaGoc"; } }
-            public override string Col { get { return "E"; } }
-            public ColE(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
-        public class ColF : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaThongBao"; } }
-            public override string Col { get { return "F"; } }
-            public ColF(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
-        public class ColG : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_HeSo"; } }
-            public override string Col { get { return "G"; } }
-            public ColG(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
-        public class ColH : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaTBxHS"; } }
-            public override string Col { get { return "H"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColH(Row r) : base(r)
-            {
-            }
-        }
-        public class ColI : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocOto"; } }
-            public override string Col { get { return "I"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColI(Row r) : base(r)
-            {
-            }
-        }
-        public class ColJ : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocSong"; } }
-            public override string Col { get { return "J"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColJ(Row r) : base(r)
-            {
-            }
-        }
-        public class ColK : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocThuCong"; } }
-            public override string Col { get { return "K"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColK(Row r) : base(r)
-            {
-            }
-        }
-        public class ColL : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocBien"; } }
-            public override string Col { get { return "L"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColL(Row r) : base(r)
-            {
-            }
-        }
-        public class ColM : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_CuocKhac"; } }
-            public override string Col { get { return "M"; } }
-            public ColM(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                // todo: bind data to working sheet
-            }
-        }
-        public class ColN : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_TongCuoc"; } }
-            public override string Col { get { return "N"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColN(Row r) : base(r)
-            {
-            }
-        }
-        public class ColO : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GiaHienTruong"; } }
-            public override string Col { get { return "O"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColO(Row r) : base(r)
-            {
-            }
-        }
-        public class ColP : ACol
-        {
-            public override string UniqueName { get { return "VatLieu_GhiChu"; } }
-            public override string Col { get { return "P"; } }
-            public ColP(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                // todo: bind data to working sheet
-            }
-            public override void Bind()
-            {
-                base.Bind();
-            }
-        }
+        public CellP cellP;
 
         internal void bind(bool maskToWorking = true)
         {
             if (maskToWorking)
             {
-                colB.Bind();
-                colC.Bind();
-                colD.Bind();
-                colE.Bind();
-                colF.Bind();
-                colP.Bind();
+                cellB.Bind();
+                cellC.Bind();
+                cellD.Bind();
+                cellE.Bind();
+                cellF.Bind();
+                cellP.Bind();
             }
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()
         {
-            colA.Render();
-            colB.Render();
-            colC.Render();
-            colD.Render();
-            colE.Render();
-            colF.Render();
-            colG.Render();
-            colH.Render();
-            colI.Render();
-            colJ.Render();
-            colK.Render();
-            colL.Render();
-            colM.Render();
-            colN.Render();
-            colO.Render();
-            colP.Render();
+            cellA.Render();
+            cellB.Render();
+            cellC.Render();
+            cellD.Render();
+            cellE.Render();
+            cellF.Render();
+            cellG.Render();
+            cellH.Render();
+            cellI.Render();
+            cellJ.Render();
+            cellK.Render();
+            cellL.Render();
+            cellM.Render();
+            cellN.Render();
+            cellO.Render();
+            cellP.Render();
         }
         public void AddSimpleData()
         {
             Display.ActiveMaskSheetDebug = Display.WorkSheetsDebug["Giá vật liệu"];
 
             // Add data ở working sheet
-            colB.Range.Text = "V01897";
-            colC.Range.Text = "Cát vàng";
-            colD.Range.Text = "m3";
-            colG.Range.Number = 1;
-            colE.Range.Number = 389809;
-            colF.Range.Number = 389809;
+            cellB.Range.Text = "V01897";
+            cellC.Range.Text = "Cát vàng";
+            cellD.Range.Text = "m3";
+            cellG.Range.Number = 1;
+            cellE.Range.Number = 389809;
+            cellF.Range.Number = 389809;
         }
     }
 }

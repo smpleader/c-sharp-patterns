@@ -1,35 +1,32 @@
 ﻿
 using BaseInterface;
 using Syncfusion.XlsIO;
-using static modDisplay.templates.vatlieu.Row;
 
-namespace modDisplay
+namespace modDisplay.row
 {
-    public class ACol
+    public class ACell
     {
-        protected BaseInterface.IModBL modBLContainer;
-        public ACol(ARowObject r)
+        protected IModBL modBLContainer;
+        public ACell(ARowObject r)
         {
             Row = r;
-            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-            BL = new AColBl(this);
-            Data = new AColDt(this, "");
+            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<IModBL>();
+            BL = new ACellBl(this);
+            Data = new ACellDt(this, "");
             HangMucId = r.HangMucId;
         }
         public ARowObject Row { get; set; }
         public string HangMucId { get; set; }
-
         public virtual string UniqueName { get { return ""; } }
         public virtual string Col { get { return "A"; } }
-        public virtual string TongTienVatTu { get { return ""; } }
-        public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+        public virtual string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
         /// <summary>
         /// IRange cột trong mask sheet
         /// </summary>
         public virtual IRange RangeDisplay
-        { 
-            get 
+        {
+            get
             {
                 return Row.masksheet.Range[Col + Row.Id];
             }
@@ -71,39 +68,5 @@ namespace modDisplay
             // override to validate data before updating workingsheet
             Row.spreadsheetGrid.SetCellValue(Range, RangeDisplay.Value);
         }
-    }
-    public class AColBl : IColBL
-    {
-        private ACol Col;
-        private ICell BL;
-        public AColBl(ACol col)
-        {
-            Col = col;
-            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-            BL = modBLContainer.Get(Col.UniqueName);
-        }
-
-        public string UniqueName { get { return Col.UniqueName; } }
-
-        public virtual string GetFormulaCalculate()
-        {
-            // render trên working sheet
-            return BL.formula(Col.HangMucId,Col.Params);
-        }
-        public virtual string GetFormulaDisplay()
-        {
-            //todo: hiển thị lên mark sheet
-            return BL.formula(Col.Params);
-        }
-    }
-    public class AColDt : IData
-    {
-        private ACol Col;
-        public AColDt(ACol col, string name)
-        {
-            Col = col;
-            Name = name;
-        }
-        public string Name { get; set; } = "--";
     }
 }

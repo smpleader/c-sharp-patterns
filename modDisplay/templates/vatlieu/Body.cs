@@ -53,7 +53,7 @@ namespace modDisplay.templates.vatlieu
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        row.colA.Range.Text = beginRow.ToString();
+                        row.cellA.Range.Text = beginRow.ToString();
                         beginRow++;
                     }
                 }

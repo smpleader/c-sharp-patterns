@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using modDisplay.row;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 
@@ -144,7 +145,7 @@ namespace modDisplay.templates.tienluong.row
         /// Tổng giá của tất cả các máy
         public IRange AC { get { return this.Cell("AC"); } }
 
-        public class ColM : ACol
+        public class ColM : ACell
         {
             public override string UniqueName { get { return "CongViec_KhoiLuong"; } }
             public override string Col { get { return "M"; } }
@@ -167,11 +168,11 @@ namespace modDisplay.templates.tienluong.row
                 }
             }
         }
-        public class ColN : ACol
+        public class ColN : ACell
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
             public override string Col { get { return "N"; } }
-            public override string TongTienVatTu
+            public string TongTienVatTu
             {
                 get
                 {
@@ -180,15 +181,17 @@ namespace modDisplay.templates.tienluong.row
                     return ((Row)Row).Z.Value.ToString();
                 }
             }
+            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+
             public ColN(Row r) : base(r)
             {
             }
         }
-        public class ColO : ACol
+        public class ColO : ACell
         {
             public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
             public override string Col { get { return "O"; } }
-            public override string TongTienVatTu
+            public string TongTienVatTu
             {
                 get
                 {
@@ -197,15 +200,17 @@ namespace modDisplay.templates.tienluong.row
                     return ((Row)Row).AA.Value.ToString();
                 }
             }
+            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+
             public ColO(Row r) : base(r)
             {
             }
         }
-        public class ColP : ACol
+        public class ColP : ACell
         {
             public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
             public override string Col { get { return "P"; } }
-            public override string TongTienVatTu
+            public string TongTienVatTu
             {
                 get
                 {
@@ -214,15 +219,17 @@ namespace modDisplay.templates.tienluong.row
                     return ((Row)Row).AB.Value.ToString();
                 }
             }
+            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+
             public ColP(Row r) : base(r)
             {
             }
         }
-        public class ColQ : ACol
+        public class ColQ : ACell
         {
             public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
             public override string Col { get { return "Q"; } }
-            public override string TongTienVatTu
+            public string TongTienVatTu
             {
                 get
                 {
@@ -231,11 +238,13 @@ namespace modDisplay.templates.tienluong.row
                     return ((Row)Row).AC.Value.ToString();
                 }
             }
+            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+
             public ColQ(Row r) : base(r)
             {
             }
         }
-        public class ColR : ACol
+        public class ColR : ACell
         {
             public override string UniqueName { get { return "CongViec_ThanhTienVatLieu"; } }
             public override string Col { get { return "R"; } }
@@ -244,7 +253,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        public class ColS : ACol
+        public class ColS : ACell
         {
             public override string UniqueName { get { return "CongViec_ThanhTienVatLieuPhu"; } }
             public override string Col { get { return "S"; } }
@@ -253,7 +262,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        public class ColT : ACol
+        public class ColT : ACell
         {
             public override string UniqueName { get { return "CongViec_ThanhTienNhanCong"; } }
             public override string Col { get { return "T"; } }
@@ -262,7 +271,7 @@ namespace modDisplay.templates.tienluong.row
             {
             }
         }
-        public class ColU : ACol
+        public class ColU : ACell
         {
             public override string UniqueName { get { return "CongViec_ThanhTienMay"; } }
             public override string Col { get { return "U"; } }

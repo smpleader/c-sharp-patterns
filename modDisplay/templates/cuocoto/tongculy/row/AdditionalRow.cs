@@ -1,4 +1,5 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modDisplay.row;
+using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -77,7 +78,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         /// </summary>
         public IRange W { get { return this.Cell("W"); } }
 
-        class ColO : ACol
+        class ColO : ACell
         {
             public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
             public override string Col { get { return "O"; } }
@@ -89,7 +90,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
             {
             }
         }
-        class ColP : ACol
+        class ColP : ACell
         {
             public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
             public override string Col { get { return "P"; } }

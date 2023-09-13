@@ -1,4 +1,5 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modDisplay.row;
+using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -126,7 +127,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         /// Tổng giá của tất cả các máy
         public IRange AC { get { return this.Cell("AC"); } }
 
-        class ColJ : ACol
+        class ColJ : ACell
         {
             public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_TongCuLy"; } }
             public override string Col { get { return "J"; } }
@@ -136,7 +137,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
             {
             }
         }
-        class ColL : ACol
+        class ColL : ACell
         {
             public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienChiPhiVanChuyen"; } }
             public override string Col { get { return "L"; } }
@@ -146,7 +147,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
             {
             }
         }
-        class ColP : ACol
+        class ColP : ACell
         {
             public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienChiPhiBocDo"; } }
             public override string Col { get { return "P"; } }
@@ -158,7 +159,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
             }
         }
 
-        class ColT : ACol
+        class ColT : ACell
         {
             public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_TongCuoc"; } }
             public override string Col { get { return "T"; } }

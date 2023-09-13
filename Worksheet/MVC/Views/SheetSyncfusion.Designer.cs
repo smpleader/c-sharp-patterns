@@ -34,6 +34,7 @@
             Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController2 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             panel1 = new Panel();
             pnl_VatLieu = new Panel();
+            btn_SaveWS = new Button();
             btn_TinhCuocOto = new Button();
             bbtn_ThemVatLieu = new Button();
             rdbtn_PPT_NhanHeSoCongCuocVC = new RadioButton();
@@ -53,11 +54,6 @@
             splitter1 = new Splitter();
             panel4 = new Panel();
             sheet_working = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
-            tabPage2 = new TabPage();
-            gridControl1 = new Syncfusion.Windows.Forms.Grid.GridControl();
-            panel5 = new Panel();
-            label2 = new Label();
-            btn_SaveWS = new Button();
             panel1.SuspendLayout();
             pnl_VatLieu.SuspendLayout();
             panel2.SuspendLayout();
@@ -65,9 +61,6 @@
             tabPage1.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
-            tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
-            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -99,6 +92,16 @@
             pnl_VatLieu.Size = new Size(1683, 46);
             pnl_VatLieu.TabIndex = 10;
             pnl_VatLieu.Visible = false;
+            // 
+            // btn_SaveWS
+            // 
+            btn_SaveWS.Location = new Point(836, 4);
+            btn_SaveWS.Name = "btn_SaveWS";
+            btn_SaveWS.Size = new Size(158, 29);
+            btn_SaveWS.TabIndex = 13;
+            btn_SaveWS.Text = "Save workingsheet";
+            btn_SaveWS.UseVisualStyleBackColor = true;
+            btn_SaveWS.Click += btn_SaveWS_Click;
             // 
             // btn_TinhCuocOto
             // 
@@ -229,7 +232,6 @@
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -344,91 +346,6 @@
             sheet_working.Text = "spreadsheet1";
             sheet_working.ThemeName = "Default";
             // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(gridControl1);
-            tabPage2.Controls.Add(panel5);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1675, 697);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Vật liệu";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // gridControl1
-            // 
-            gridControl1.Dock = DockStyle.Fill;
-            gridControl1.Location = new Point(3, 47);
-            gridControl1.Name = "gridControl1";
-            gridControl1.SerializeCellsBehavior = Syncfusion.Windows.Forms.Grid.GridSerializeCellsBehavior.SerializeIntoCode;
-            gridControl1.Size = new Size(1669, 647);
-            gridControl1.SmartSizeBox = false;
-            gridControl1.TabIndex = 0;
-            gridControl1.Text = "gridControl1";
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonBackColor = Color.FromArgb(255, 255, 255);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonBorderColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonDisabledBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonDisabledBorderColor = Color.FromArgb(210, 210, 210);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonHoverBackColor = Color.FromArgb(114, 114, 114);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonHoverBorderColor = Color.FromArgb(94, 94, 94);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonPressedBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ArrowButtonPressedBorderColor = Color.FromArgb(150, 150, 150);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ScrollBarBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbBorderColor = Color.FromArgb(171, 171, 171);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbColor = Color.FromArgb(255, 255, 255);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbDisabledBorderColor = Color.FromArgb(210, 210, 210);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbDisabledColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbHoverBorderColor = Color.FromArgb(171, 171, 171);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbHoverColor = Color.FromArgb(197, 197, 197);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbPressedBorderColor = Color.FromArgb(150, 150, 150);
-            gridControl1.ThemeStyle.HorizontalScrollBarStyle.ThumbPressedColor = Color.FromArgb(197, 197, 197);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonBackColor = Color.FromArgb(255, 255, 255);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonBorderColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonDisabledBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonDisabledBorderColor = Color.FromArgb(210, 210, 210);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonHoverBackColor = Color.FromArgb(114, 114, 114);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonHoverBorderColor = Color.FromArgb(94, 94, 94);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonPressedBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ArrowButtonPressedBorderColor = Color.FromArgb(150, 150, 150);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ScrollBarBackColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbBorderColor = Color.FromArgb(171, 171, 171);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbColor = Color.FromArgb(255, 255, 255);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbDisabledBorderColor = Color.FromArgb(210, 210, 210);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbDisabledColor = Color.FromArgb(225, 225, 225);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbHoverBorderColor = Color.FromArgb(171, 171, 171);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbHoverColor = Color.FromArgb(197, 197, 197);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbPressedBorderColor = Color.FromArgb(150, 150, 150);
-            gridControl1.ThemeStyle.VerticalScrollBarStyle.ThumbPressedColor = Color.FromArgb(197, 197, 197);
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(label2);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(3, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(1669, 44);
-            panel5.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(440, 12);
-            label2.Name = "label2";
-            label2.Size = new Size(397, 20);
-            label2.TabIndex = 0;
-            label2.Text = "Tab này k sử dụng chuyển sheet khác nhau ở tab tiên lượng";
-            // 
-            // btn_SaveWS
-            // 
-            btn_SaveWS.Location = new Point(836, 4);
-            btn_SaveWS.Name = "btn_SaveWS";
-            btn_SaveWS.Size = new Size(158, 29);
-            btn_SaveWS.TabIndex = 13;
-            btn_SaveWS.Text = "Save workingsheet";
-            btn_SaveWS.UseVisualStyleBackColor = true;
-            btn_SaveWS.Click += btn_SaveWS_Click;
-            // 
             // SheetSyncfusion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -450,10 +367,6 @@
             tabPage1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -464,14 +377,12 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private Panel panel4;
-        private TabPage tabPage2;
         private Panel panel3;
         private Splitter splitter1;
         private CheckBox chkbx_KichThuoc;
         private Button btn_LuuFile;
         private Button btn_MoFile;
         private Button btn_ThemCongViec;
-        private Panel panel5;
         public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_mask;
         private Panel pnl_VatLieu;
         private RadioButton rdbtn_PPT_NhanHeSoCongCuocVC;
@@ -480,8 +391,6 @@
         private RadioButton rdbtn_PPT_NhapTay;
         private Label label1;
         private Button bbtn_ThemVatLieu;
-        private Syncfusion.Windows.Forms.Grid.GridControl gridControl1;
-        private Label label2;
         private Button btn_TinhCuocOto;
         public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_working;
         private Button btn_SaveWS;
