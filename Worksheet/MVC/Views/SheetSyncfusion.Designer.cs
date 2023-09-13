@@ -290,7 +290,6 @@
             sheet_mask.TabItemContextMenu = null;
             sheet_mask.Text = "spreadsheet1";
             sheet_mask.ThemeName = "Default";
-            sheet_mask.Click += sheet_TienLuong_Click;
             // 
             // splitter1
             // 

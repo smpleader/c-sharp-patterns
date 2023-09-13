@@ -33,7 +33,7 @@ namespace modBL.prime.vatlieu
             }
             return base.formula(args);
         }
-        public override string formula(string hmId,string[] args)
+        public override string formula(string hmId, string[] args)
         {
             switch (Option.PPTCuocSong)
             {
@@ -42,7 +42,7 @@ namespace modBL.prime.vatlieu
                 case PPTCuocSong.MauDongThap:
                     return $"='{SheetName.CUOC_SONG}_{hmId}'!O{args[0]}";
             }
-            return base.formula(hmId,args);
+            return base.formula(args);
         }
     }
 }

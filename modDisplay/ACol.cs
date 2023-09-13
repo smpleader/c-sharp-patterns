@@ -60,8 +60,13 @@ namespace modDisplay
         /// </summary>
         public virtual void Render()
         {
-            Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(Params));
+            string formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
+            Row.spreadsheetGrid.SetCellValue(Range, modBLContainer.Get(UniqueName).formula(HangMucId, Params));
             Row.masksheet.AutofitRow(Row.Id);
+        }
+        public virtual void Bind()
+        {
+            Row.spreadsheetGrid.SetCellValue(Range, RangeDisplay.Value);
         }
     }
     public class AColBl : IColBL

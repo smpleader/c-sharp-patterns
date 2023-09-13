@@ -108,6 +108,11 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
+            }
         }
         public class ColB : ACol
         {
@@ -119,6 +124,11 @@ namespace modDisplay.templates.vatlieu
             public override void Render()
             {
                 // todo: bind data to working sheet
+            }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
             }
         }
         public class ColC : ACol
@@ -132,6 +142,11 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
+            }
         }
         public class ColD : ACol
         {
@@ -143,6 +158,11 @@ namespace modDisplay.templates.vatlieu
             public override void Render()
             {
                 // todo: bind data to working sheet
+            }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
             }
         }
         public class ColE : ACol
@@ -156,6 +176,11 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
+            }
         }
         public class ColF : ACol
         {
@@ -168,6 +193,11 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
+            }
         }
         public class ColG : ACol
         {
@@ -179,6 +209,11 @@ namespace modDisplay.templates.vatlieu
             public override void Render()
             {
                 // todo: bind data to working sheet
+            }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
             }
         }
         public class ColH : ACol
@@ -245,6 +280,10 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+            }
         }
         public class ColN : ACol
         {
@@ -276,11 +315,25 @@ namespace modDisplay.templates.vatlieu
             {
                 // todo: bind data to working sheet
             }
+            public override void Bind()
+            {
+                // todo: bind data to working sheet
+                base.Bind();
+            }
         }
 
-        internal void bind()
+        internal void bind(bool maskToWorking = true)
         {
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
+            if (maskToWorking)
+            {
+                colB.Bind();
+                colC.Bind();
+                colD.Bind();
+                colE.Bind();
+                colF.Bind();
+                colP.Bind();
+            }
         }
         internal void render()
         {

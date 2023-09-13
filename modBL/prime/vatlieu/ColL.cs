@@ -26,5 +26,9 @@ namespace modBL.prime.vatlieu
         {
             return $"='{SheetName.CUOC_BIEN}'!Q{args[0]}";
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.CUOC_BIEN}_{hmId}'!Q{args[0]}";
+        }
     }
 }

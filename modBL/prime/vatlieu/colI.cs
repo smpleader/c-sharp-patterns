@@ -49,5 +49,32 @@ namespace modBL.prime.vatlieu
             }
             return base.formula(args);
         }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTCuocOto)
+            {
+                case PPTCuocOto.TheoTongCuLy:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!X{args[0]}";
+                case PPTCuocOto.TheoLoaiPhuongTien:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!T{args[0]}";
+                case PPTCuocOto.MauTinhCaoBang:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!V{args[0]}";
+                case PPTCuocOto.MauTinhCaoBangThem:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!W{args[0]}";
+                case PPTCuocOto.MauTinhQuangBinh:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!AK{args[0]}";
+                case PPTCuocOto.TT12:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!AO{args[0]}";
+                case PPTCuocOto.TT10:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!AL{args[0]}";
+                case PPTCuocOto.Theo588:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!S{args[0]}";
+                case PPTCuocOto.QuangNam38_2021:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!T{args[0]}";
+                case PPTCuocOto.QuangNam24_22022:
+                    return $"='{SheetName.CUOC_OTO}_{hmId}'!T{args[0]}";
+            }
+            return base.formula(args);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace modDisplay.templates.vatlieu
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject(maskToWorking?masksheet:workingsheet, indexRow))
+                if (Helper.IsRowObject( maskToWorking ? masksheet:workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -28,9 +28,12 @@ namespace modDisplay.templates.vatlieu
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, indexRow);
+                if(!rows.Keys.Contains(indexRow))
+                {
+                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, Display.HangMucId, indexRow);
+                }
                 Row vl = rows[indexRow];
-                vl.bind();
+                vl.bind(maskToWorking);
             }
         }
 

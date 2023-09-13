@@ -226,10 +226,5 @@ namespace Worksheet.MVC.Views
             sheetTinhCuocOto.ShowDialog();
             //Backbone.Run("CuocOto", "ShowDialog");
         }
-
-        private void sheet_TienLuong_Click(object sender, EventArgs e)
-        {
-            var a = "a";
-        }
     }
 }

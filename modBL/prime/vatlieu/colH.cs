@@ -35,5 +35,18 @@ namespace modBL.prime.vatlieu
             }
             return base.formula(args);
         }
+        public override string formula(string hmId ,string[] args)
+        {
+            switch (Option.PPTGiaVatLieu)
+            {
+                case PPTGiaVatLieu.NhapTay:
+                case PPTGiaVatLieu.CongCuocVanChuyen:
+                    return "";
+                case PPTGiaVatLieu.NhanHeSo:
+                case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
+                    return $"=F{args[0]}*G{args[0]}";
+            }
+            return base.formula(args);
+        }
     }
 }

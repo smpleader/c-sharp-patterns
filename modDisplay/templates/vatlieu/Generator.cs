@@ -40,6 +40,8 @@ namespace modDisplay.templates.vatlieu
                     DangThemVatLieu = true;
                     body.bind();
                     body.render();
+                    Display.showDataDebug();
+                    Display.showData();
                     DangThemVatLieu = false;
                 }
             }
@@ -49,8 +51,10 @@ namespace modDisplay.templates.vatlieu
         {
             if (body == null) return;
             DangThemVatLieu = true;
-            body.bind();
+            //body.bind();
             body.render();
+            Display.showDataDebug();
+            Display.showData();
             DangThemVatLieu = false;
         }
 

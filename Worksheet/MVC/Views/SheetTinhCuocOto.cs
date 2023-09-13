@@ -50,9 +50,6 @@ namespace Worksheet.MVC.Views
             cbb_CachTinh.Text = Option.DanhSachPPTCuocOto[Option.PPTCuocOto];
         }
 
-        private void Spreadsheet_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-        }
         List<string> HiddenSheets = new List<string>();
         private void cbb_CachTinh_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -42,5 +42,25 @@ namespace modBL.prime.vatlieu
             }
             return base.formula(args);
         }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTCuocTC)
+            {
+                case PPTCuocTC.TheoTT12_2021:
+                case PPTCuocTC.TheoTT10_2019:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!Q{args[0]}";
+                case PPTCuocTC.TheoDM588_2014:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!M{args[0]}";
+                case PPTCuocTC.MauLaoCai:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!P{args[0]}";
+                case PPTCuocTC.MauDienBien:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!S{args[0]}";
+                case PPTCuocTC.MauCuocTCChung:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!O{args[0]}";
+                case PPTCuocTC.TheoDM1778:
+                    return $"='{SheetName.CUOC_THU_CONG}_{hmId}'!R{args[0]}";
+            }
+            return base.formula(args);
+        }
     }
 }
