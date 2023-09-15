@@ -90,7 +90,7 @@ namespace modDisplay.templates.tienluong.row
                 var range = workingsheet.Range[colName + Id];
 
                 BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                range.Value2= string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters));
+                //range.Value2= string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters));
                 //gridControl.InvalidateCell(range.Row, range.Column);
             }
         }

@@ -30,7 +30,7 @@ namespace modDisplay.templates.tienluong.row
             return -1;
         }
 
-        public static bool IsRowObject( IWorksheet worksheet, int indexRow)
+        public static bool IsRowObject(IWorksheet worksheet, int indexRow)
         {
             if (!worksheet.Range["B" + indexRow].IsMerged)
             {

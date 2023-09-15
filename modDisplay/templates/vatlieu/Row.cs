@@ -102,6 +102,7 @@ namespace modDisplay.templates.vatlieu
             cellE.Bind();
             cellF.Bind();
             cellP.Bind();
+            cellM.Bind();
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()

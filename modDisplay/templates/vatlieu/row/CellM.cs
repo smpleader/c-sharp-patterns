@@ -21,6 +21,7 @@ namespace modDisplay.templates.vatlieu.row
         public override void Bind()
         {
             // todo: bind data to working sheet
+            base.Bind();
         }
     }
 

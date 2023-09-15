@@ -25,7 +25,6 @@ namespace modDisplay.templates.vatlieu
             }
         }
 
-
         public override void loadData()
         {
             body = new Body(gridControl, masksheet, workingsheet);

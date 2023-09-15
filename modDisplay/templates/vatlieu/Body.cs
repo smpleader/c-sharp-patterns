@@ -100,7 +100,7 @@ namespace modDisplay.templates.vatlieu
                     }
                 }
             }
-            masksheet.Calculate();
+            //masksheet.Calculate();
             //gridControl.InvalidateCells();
         }
 

@@ -366,7 +366,7 @@ namespace modDisplay.CustomGrid
 
             formulaPanel.BorderStyle = BorderStyle.None;
             //formulaPanel.Size = formulaBar.Size;
-            formulaPanel.Size = new Size(formulaBar.Size.Width, formulaBar.Size.Height + 5);
+            formulaPanel.Size = new Size(formulaBar.Size.Width, formulaBar.Size.Height);
             formulaPanel.Controls.Add(formulaBar);
         }
         #region Private Variables

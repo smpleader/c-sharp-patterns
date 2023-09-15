@@ -23,18 +23,16 @@ namespace modDisplay
 
         static FileTemplate currentTemplate;
         public static WorkBook WControl;
-        public static Dictionary<string, SpreadsheetGrid> GridCollection;
         public static GridControl ActiveGrid;
         public static IWorksheet ActiveMaskSheet;
-        public static IWorksheets WorkSheets;
 
         #region [ Mask sheet]
-        List<IWorksheet> worksheets;
-        List<string> worksheetNames = new List<string>();
-        ExcelEngine excelEngine;
-        IApplication application;
-        IWorkbook workbook;
-        IWorksheet activeSheet;
+        public static IWorksheets WorkSheets;
+        public static List<string> worksheetNames = new List<string>();
+        public static ExcelEngine excelEngine;
+        public static IApplication application;
+        public static IWorkbook workbook;
+        public static IWorksheet activeSheet;
 
         public static GridCurrentCell Cell;
         public static string Col;
@@ -201,7 +199,7 @@ namespace modDisplay
                     {
                         Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
 
-                        IRange cellUI = ActiveMaskSheet[row, col];
+                        GridStyleInfo cellUI = ActiveGrid[row, col];
                         cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
                     }
                 }
@@ -285,7 +283,7 @@ namespace modDisplay
             {
                 case "loadData":
                 case "LoadData":
-                    if (GridCollection != null)
+                    if (WorkSheets != null)
                     {
                         foreach (var tab in currentTemplate.Tabs)
                         {
@@ -331,13 +329,19 @@ namespace modDisplay
 
             WControl.OnCurrentCellChanged += WControl_OnCurrentCellChanged;
             WControl.OnCellValueChanged += WControl_OnCellValueChanged;
+            WControl._grid.CurrentCellEditingComplete += new EventHandler(_grid_CurrentCellEditingComplete);
             contextMenu.Opening += contextMenuOpen;
         }
-
-        private static void WControl_OnCellValueChanged(object sender, EventArgs e)
+        private static void _grid_CurrentCellEditingComplete(object? sender, EventArgs e)
         {
+            // hook để lấy sự kiện cell value changed
             hook("CellDataChanged");
             hook("AfterCellInput");
+        }
+        private static void WControl_OnCellValueChanged(object sender, EventArgs e)
+        {
+            //hook("CellDataChanged");
+            //hook("AfterCellInput");
         }
 
         private static void WControl_OnCurrentCellChanged(Syncfusion.Windows.Forms.Grid.GridCurrentCell currentCell)
