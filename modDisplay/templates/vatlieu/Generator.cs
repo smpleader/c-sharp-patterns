@@ -31,7 +31,7 @@ namespace modDisplay.templates.vatlieu
             // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
             body.bindInWoringsheet();
             body.renderInWorkingsheet();
-            if(Display.ActiveMaskSheetDebug!=null)
+            if(Display.ActiveMaskSheetDebug != null)
             {
                 Display.showDataDebug();
             }

@@ -71,9 +71,6 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
                     }
                 }
             }
-            //masksheet.Calculate();
-            //gridControl.InvalidateCells();
         }
-
     }
 }

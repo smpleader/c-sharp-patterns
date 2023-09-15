@@ -63,7 +63,7 @@ namespace modDisplay.row
             string formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
             //Row.gridControl.SetCellValue(RangeDisplay, formula); // bỏ set công thức cho masksheet
             Range.Formula = formula;
-            Row.masksheet.AutofitRow(Row.Id);
+            //Row.masksheet.AutofitRow(Row.Id);
         }
         public virtual void Bind()
         {

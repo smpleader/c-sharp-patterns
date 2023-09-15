@@ -32,7 +32,7 @@ namespace modDisplay
         public static ExcelEngine excelEngine;
         public static IApplication application;
         public static IWorkbook workbook;
-        public static IWorksheet activeSheet;
+        public static IWorksheet ActiveSheet;
 
         public static GridCurrentCell Cell;
         public static string Col;
@@ -204,7 +204,7 @@ namespace modDisplay
                     }
                 }
             }
-            WControl.InvalidateFormulaCell(); // hiển thị lên spreadsheet
+            //WControl.InvalidateFormulaCell(); // hiển thị lên spreadsheet
         }
 
         /// <summary>
@@ -328,7 +328,6 @@ namespace modDisplay
             };
 
             WControl.OnCurrentCellChanged += WControl_OnCurrentCellChanged;
-            WControl.OnCellValueChanged += WControl_OnCellValueChanged;
             WControl._grid.CurrentCellEditingComplete += new EventHandler(_grid_CurrentCellEditingComplete);
             contextMenu.Opening += contextMenuOpen;
         }
@@ -337,11 +336,6 @@ namespace modDisplay
             // hook để lấy sự kiện cell value changed
             hook("CellDataChanged");
             hook("AfterCellInput");
-        }
-        private static void WControl_OnCellValueChanged(object sender, EventArgs e)
-        {
-            //hook("CellDataChanged");
-            //hook("AfterCellInput");
         }
 
         private static void WControl_OnCurrentCellChanged(Syncfusion.Windows.Forms.Grid.GridCurrentCell currentCell)

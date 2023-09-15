@@ -120,10 +120,8 @@ namespace Worksheet.MVC.Views
         private async void SheetSyncfusion_Load(object sender, EventArgs e)
         {
             #region [WorkBook]
-            // Create a new child
             WorkBook workBook = new WorkBook();
             workBook.OnButtonClick += MainForm_OnButtonClick;
-            workBook.OnButtonClick += MainForm_OnButtonClick2;
 
             this.workbook = workBook;
 
@@ -132,14 +130,6 @@ namespace Worksheet.MVC.Views
 
             //workBook._grid.CurrentCellControlKeyMessage += _grid_CurrentCellControlKeyMessage;
 
-            //foreach (Control ctrl in this.Controls)
-            //{
-            //    if (ctrl is MdiClient)
-            //    {
-            //        MdiClient mdiClient = (MdiClient)ctrl;
-            //        mdiClient.BackColor = Color.FromArgb(165, 195, 239);
-            //    }
-            //}
             #endregion
             BaseInterface.IModBL modBLContainer = modDisplay.SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
             modBLContainer.Init();
@@ -149,16 +139,9 @@ namespace Worksheet.MVC.Views
 
             
         }
-
-        private void MainForm_OnButtonClick2(object sender, EventArgs e)
-        {
-            MessageBox.Show("Event click is triggered time 2");
-        }
-
         private void MainForm_OnButtonClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Event click is triggered time 1");
-
+            MessageBox.Show("Event click is triggered ");
         }
 
         private void AfterLoad2(object sender, WorkbookLoadedEventArgs args)
@@ -173,9 +156,11 @@ namespace Worksheet.MVC.Views
             Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
             Display.ActiveGrid.Cols.Hidden.SetRange(7, 12, true);
             Display.ActiveGrid.Cols.Hidden.SetRange(14, 14, true);
-
-            Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
-            ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            if(rdbtn_PPT_NhapTay.Checked)
+            {
+                Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
+                ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
+            }
         }
 
         private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
@@ -242,42 +227,51 @@ namespace Worksheet.MVC.Views
 
         private void cbb_SheetActive_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Display.activeSheet != null)
+            if (Display.ActiveSheet != null)
             {
                 // Get the row and column indexes from the IRange
-                int startRow = Display.activeSheet.UsedRange.Row;
-                int endRow = Display.activeSheet.UsedRange.Row + Display.activeSheet.UsedRange.Rows.Length - 1;
-                int startColumn = Display.activeSheet.UsedRange.Column;
-                int endColumn = Display.activeSheet.UsedRange.Column + Display.activeSheet.UsedRange.Columns.Length - 1;
+                int startRow = Display.ActiveSheet.UsedRange.Row;
+                int endRow = Display.ActiveSheet.UsedRange.Row + Display.ActiveSheet.UsedRange.Rows.Length - 1;
+                endRow = endRow > 0 ? endRow : 0;
+                int startColumn = Display.ActiveSheet.UsedRange.Column;
+                int endColumn = Display.ActiveSheet.UsedRange.Column + Display.ActiveSheet.UsedRange.Columns.Length - 1;
+                endColumn = endColumn > 0 ? endColumn : 0;
                 GridRangeInfo gridRangeInfo = GridRangeInfo.Cells(startRow, startColumn, endRow, endColumn);
                 this.workbook._grid.Model.ClearCells(gridRangeInfo, true);
             }
             Syncfusion.GridExcelConverter.GridExcelConverterControl gecc = new Syncfusion.GridExcelConverter.GridExcelConverterControl();
-            //Display.activeSheet = Display.worksheets.FirstOrDefault(item => item.Name == cbb_SheetActive.Text);
-            Display.activeSheet = Display.WorkSheets[cbb_SheetActive.Text];
+            Display.ActiveSheet = Display.WorkSheets[cbb_SheetActive.Text];
 
-            gecc.ExcelToGrid(Display.activeSheet, this.workbook._grid.Model);
+            gecc.ExcelToGrid(Display.ActiveSheet, this.workbook._grid.Model);
             this.workbook._grid.Refresh();
 
             Display.setControl(this.workbook);
+
             if (cbb_SheetActive.Text == "") return;
             Display.SetActiveWorkingSheet(cbb_SheetActive.Text);
-            //if (Display.WControlDebug != null)
-            //{
-            //    Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[sheet_mask.ActiveSheet.Name];
-            //}
+            if (Display.WControlDebug != null)
+            {
+                Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[cbb_SheetActive.Text];
+            }
             switch (cbb_SheetActive.Text)
             {
                 case "Tiên lượng":
                     pnl_VatLieu.Visible = false;
                     Display.ActiveGrid.Cols.Hidden.SetRange(5, 12, !chkbx_KichThuoc.Checked);
+                    btn_ThemCongViec.Enabled = true;
+                    chkbx_KichThuoc.Enabled = true;
                     break;
                 case "Giá vật liệu":
                     pnl_VatLieu.Visible = true;
+                    btn_ThemCongViec.Enabled = false;
+                    chkbx_KichThuoc.Enabled = false;
                     switch (Option.PPTGiaVatLieu)
                     {
                         case PPTGiaVatLieu.NhapTay:
                             rdbtn_PPT_NhapTay.Checked = true;
+                            Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
+                            Display.ActiveGrid.Cols.Hidden.SetRange(7, 12, true);
+                            Display.ActiveGrid.Cols.Hidden.SetRange(14, 14, true);
                             break;
                         case PPTGiaVatLieu.CongCuocVanChuyen:
                             rdbtn_PPT_CongCuocVC.Checked = true;
@@ -291,6 +285,7 @@ namespace Worksheet.MVC.Views
                     }
                     break;
             }
+            Display.showData();
         }
         bool isShowBottom = true;
         private void btn_ShowDebug_Click(object sender, EventArgs e)
