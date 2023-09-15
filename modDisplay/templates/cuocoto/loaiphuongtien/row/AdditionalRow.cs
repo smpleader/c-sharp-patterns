@@ -1,5 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -7,7 +8,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id, int parentId) : base(spreadsheetGrid, worksheet, workingsheet)
+        public AdditionalRow(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id, int parentId) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
             ParentId = parentId;

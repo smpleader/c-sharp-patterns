@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste3 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
-            Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController3 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
-            Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste1 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
-            Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController1 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
+            Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste spreadsheetCopyPaste2 = new Syncfusion.Windows.Forms.Spreadsheet.SpreadsheetCopyPaste();
+            Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController formulaRangeSelectionController2 = new Syncfusion.Windows.Forms.Spreadsheet.FormulaRangeSelectionController();
             panel1 = new Panel();
             pnl_VatLieu = new Panel();
             btn_SaveWS = new Button();
@@ -49,8 +47,7 @@
             panel2 = new Panel();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            panel3 = new Panel();
-            sheet_mask = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
+            pnl_body = new Panel();
             splitter1 = new Splitter();
             panel4 = new Panel();
             sheet_working = new Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet();
@@ -59,7 +56,7 @@
             panel2.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            panel3.SuspendLayout();
+            pnl_body.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -242,7 +239,7 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(panel3);
+            tabPage1.Controls.Add(pnl_body);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -251,49 +248,15 @@
             tabPage1.Text = "Tiên lượng";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // pnl_body
             // 
-            panel3.Controls.Add(sheet_mask);
-            panel3.Controls.Add(splitter1);
-            panel3.Controls.Add(panel4);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(3, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1669, 691);
-            panel3.TabIndex = 4;
-            // 
-            // sheet_mask
-            // 
-            sheet_mask.AllowCellContextMenu = true;
-            sheet_mask.AllowExtendRowColumnCount = true;
-            sheet_mask.AllowFiltering = false;
-            sheet_mask.AllowFormulaRangeSelection = true;
-            sheet_mask.AllowTabItemContextMenu = true;
-            sheet_mask.AllowZooming = true;
-            sheet_mask.BaseThemeName = "";
-            spreadsheetCopyPaste3.AllowPasteOptionPopup = true;
-            spreadsheetCopyPaste3.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
-            sheet_mask.CopyPaste = spreadsheetCopyPaste3;
-            sheet_mask.DefaultColumnCount = 101;
-            sheet_mask.DefaultRowCount = 101;
-            sheet_mask.DisplayAlerts = true;
-            sheet_mask.Dock = DockStyle.Fill;
-            sheet_mask.FileName = "Book1";
-            sheet_mask.FormulaBarVisibility = true;
-            formulaRangeSelectionController3.AllowMouseSelection = true;
-            formulaRangeSelectionController3.AllowSelectionOnEditing = true;
-            sheet_mask.FormulaRangeSelectionController = formulaRangeSelectionController3;
-            sheet_mask.IsCustomTabItemContextMenuEnabled = false;
-            sheet_mask.Location = new Point(0, 0);
-            sheet_mask.Name = "sheet_mask";
-            sheet_mask.SelectedTabIndex = 0;
-            sheet_mask.SelectedTabItem = null;
-            sheet_mask.ShowBusyIndicator = true;
-            sheet_mask.Size = new Size(1669, 348);
-            sheet_mask.TabIndex = 4;
-            sheet_mask.TabItemContextMenu = null;
-            sheet_mask.Text = "spreadsheet1";
-            sheet_mask.ThemeName = "Default";
+            pnl_body.Controls.Add(splitter1);
+            pnl_body.Controls.Add(panel4);
+            pnl_body.Dock = DockStyle.Fill;
+            pnl_body.Location = new Point(3, 3);
+            pnl_body.Name = "pnl_body";
+            pnl_body.Size = new Size(1669, 691);
+            pnl_body.TabIndex = 4;
             // 
             // splitter1
             // 
@@ -322,18 +285,18 @@
             sheet_working.AllowTabItemContextMenu = true;
             sheet_working.AllowZooming = true;
             sheet_working.BaseThemeName = "";
-            spreadsheetCopyPaste1.AllowPasteOptionPopup = true;
-            spreadsheetCopyPaste1.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
-            sheet_working.CopyPaste = spreadsheetCopyPaste1;
+            spreadsheetCopyPaste2.AllowPasteOptionPopup = true;
+            spreadsheetCopyPaste2.DefaultPasteOption = Syncfusion.Windows.Forms.Spreadsheet.PasteOptions.Paste;
+            sheet_working.CopyPaste = spreadsheetCopyPaste2;
             sheet_working.DefaultColumnCount = 101;
             sheet_working.DefaultRowCount = 101;
             sheet_working.DisplayAlerts = true;
             sheet_working.Dock = DockStyle.Fill;
             sheet_working.FileName = "Book2";
             sheet_working.FormulaBarVisibility = true;
-            formulaRangeSelectionController1.AllowMouseSelection = true;
-            formulaRangeSelectionController1.AllowSelectionOnEditing = true;
-            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController1;
+            formulaRangeSelectionController2.AllowMouseSelection = true;
+            formulaRangeSelectionController2.AllowSelectionOnEditing = true;
+            sheet_working.FormulaRangeSelectionController = formulaRangeSelectionController2;
             sheet_working.IsCustomTabItemContextMenuEnabled = false;
             sheet_working.Location = new Point(0, 0);
             sheet_working.Name = "sheet_working";
@@ -365,7 +328,7 @@
             panel2.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
+            pnl_body.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -377,13 +340,12 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private Panel panel4;
-        private Panel panel3;
+        private Panel pnl_body;
         private Splitter splitter1;
         private CheckBox chkbx_KichThuoc;
         private Button btn_LuuFile;
         private Button btn_MoFile;
         private Button btn_ThemCongViec;
-        public Syncfusion.Windows.Forms.Spreadsheet.Spreadsheet sheet_mask;
         private Panel pnl_VatLieu;
         private RadioButton rdbtn_PPT_NhanHeSoCongCuocVC;
         private RadioButton rdbtn_PPT_NhanHeSo;

@@ -1,4 +1,5 @@
 ﻿using modDisplay.templates.cuocoto.tongculy.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using HeaderGroup = modDisplay.templates.cuocoto.tongculy.Header;
@@ -9,7 +10,7 @@ namespace modDisplay.templates.cuocoto.tongculy
     {
         public override string Name { get { return "templates/cuocoto/tongculy"; } }
 
-        public SpreadsheetGrid spreadsheetGrid;
+        public GridControl spreadsheetGrid;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
         bool DangThemVatLieu = false;
@@ -21,7 +22,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             if (Display.WorkSheets[tabName] != null)
             {
                 masksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.GridCollection[tabName];
+                spreadsheetGrid = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }

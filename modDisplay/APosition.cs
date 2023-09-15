@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay
@@ -6,7 +7,7 @@ namespace modDisplay
     public class APosition : IPosition
     {
         public virtual string Name { get { return "--"; } }
-        public SpreadsheetGrid spreadsheetGrid { get; set; }
+        public GridControl gridControl { get; set; }
         public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
         public int Id { get; set; }
@@ -25,9 +26,9 @@ namespace modDisplay
         public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
         public virtual void render(bool maskToWorking = true) { }
-        public APosition(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet)
+        public APosition(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet)
         {
-            this.spreadsheetGrid = spreadsheetGrid;
+            this.gridControl = gridControl;
             this.masksheet = worksheet;
             this.workingsheet = workingsheet;
 

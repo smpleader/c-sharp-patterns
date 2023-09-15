@@ -1,10 +1,11 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet;
 
 namespace modDisplay
 {
     public interface IPosition
     {
-        SpreadsheetGrid spreadsheetGrid { get; set; }
+        GridControl gridControl { get; set; }
         string Name { get; }
         int Id { get; set; }
         void bind(bool maskToWorking = true);

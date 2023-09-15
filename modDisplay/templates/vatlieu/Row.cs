@@ -1,5 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.vatlieu.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -7,7 +8,7 @@ namespace modDisplay.templates.vatlieu
 {
     public class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, masksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet masksheet, IWorksheet workingsheet, int id) : base(gridControl, masksheet, workingsheet)
         {
             Id = id;
             cellA = new CellA(this);

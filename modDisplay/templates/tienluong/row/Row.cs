@@ -1,4 +1,5 @@
 ﻿using modDisplay.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -7,7 +8,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
             colM = new ColM(this);
@@ -160,11 +161,11 @@ namespace modDisplay.templates.tienluong.row
                 if (((Row)Row).HaveInterpretiveFormula)
                 {
                     BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                    Row.spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(UniqueName).formula(Params)));
+                    Range.Value2 = string.Format(modBLContainer.Get(UniqueName).formula(Params));
                 }
                 else
                 {
-                    Row.spreadsheetGrid.SetCellValue(range, Row.Cell("M").Value);
+                    Range.Value2 = ValueOnMask;
                 }
             }
         }
@@ -304,20 +305,20 @@ namespace modDisplay.templates.tienluong.row
 
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(C, "AG.11111");
-            spreadsheetGrid.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
-            spreadsheetGrid.SetCellValue(E, "m3");
+            //gridControl.SetCellValue(C, "AG.11111");
+            //gridControl.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
+            //gridControl.SetCellValue(E, "m3");
 
-            spreadsheetGrid.SetCellValue(V, "1");
-            spreadsheetGrid.SetCellValue(W, "1");
-            spreadsheetGrid.SetCellValue(X, "1");
+            //gridControl.SetCellValue(V, "1");
+            //gridControl.SetCellValue(W, "1");
+            //gridControl.SetCellValue(X, "1");
 
-            spreadsheetGrid.SetCellValue(Y, "DinhMuc_2021XD_D12");
+            //gridControl.SetCellValue(Y, "DinhMuc_2021XD_D12");
 
-            spreadsheetGrid.SetCellValue(Z, "685204");
-            spreadsheetGrid.SetCellValue(AA, "0");
-            spreadsheetGrid.SetCellValue(AB, "288111");
-            spreadsheetGrid.SetCellValue(AC, "70230");
+            //gridControl.SetCellValue(Z, "685204");
+            //gridControl.SetCellValue(AA, "0");
+            //gridControl.SetCellValue(AB, "288111");
+            //gridControl.SetCellValue(AC, "70230");
 
             // set màu chữ thành không màu
             IRange range = masksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];

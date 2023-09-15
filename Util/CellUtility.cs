@@ -14,5 +14,15 @@ namespace Util
             }
             return columnLetter;
         }
+        public static int GetExcelColumnNumber(string columnLetter)
+        {
+            int columnNumber = 0;
+            for (int i = 0; i < columnLetter.Length; i++)
+            {
+                columnNumber *= 26;
+                columnNumber += columnLetter[i] - 'A' + 1;
+            }
+            return columnNumber;
+        }
     }
 }

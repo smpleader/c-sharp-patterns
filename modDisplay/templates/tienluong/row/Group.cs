@@ -1,4 +1,5 @@
 ﻿using Syncfusion.Windows.Forms.CellGrid;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
@@ -13,7 +14,7 @@ namespace modDisplay.templates.tienluong.row
             { "T", "NhomCongViec_ThanhTienNhanCong" },
             { "U", "NhomCongViec_ThanhTienMay" },
         };
-        public Group(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Group(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -67,14 +68,14 @@ namespace modDisplay.templates.tienluong.row
 
                 // merge khi có dấu hiệu của group
                 IRange raneMerge = masksheet.Range[B.AddressLocal + ":" + Q.AddressLocal];
-                GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
-                var excelRange = gridRange.ConvertGridRangeToExcelRange(spreadsheetGrid);
+                //GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
+                //var excelRange = gridRange.ConvertGridRangeToExcelRange(gridControl);
                 var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
                 //var coverCell = new CoveredCellInfo(gridRange.Top, gridRange.Left, gridRange.Bottom, gridRange.Right);
 
-                masksheet.Range[excelRange].Merge();
-                spreadsheetGrid.SetCellValue(B, nameGroup);
-                spreadsheetGrid.CoveredCells.Add(coverCell);
+                //masksheet.Range[excelRange].Merge();
+                //gridControl.SetCellValue(B, nameGroup);
+                //gridControl.CoveredCells.Add(coverCell);
 
                 #region style lại cho group object
 
@@ -95,9 +96,11 @@ namespace modDisplay.templates.tienluong.row
             string[] parameters = new string[2] { start.ToString(), end.ToString() };
             foreach (string colName in aliasUniqueName.Keys)
             {
-                var range = masksheet.Range[colName + Id];
+                //var range = masksheet.Range[colName + Id];
+                var range = workingsheet.Range[colName + Id];
+
                 BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                spreadsheetGrid.SetCellValue(range, string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters)));
+                range.Value2 = string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters));
             }
         }
     }

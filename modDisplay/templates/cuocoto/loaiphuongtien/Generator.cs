@@ -1,4 +1,5 @@
 ﻿using modDisplay.templates.cuocoto.loaiphuongtien.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -9,7 +10,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
     {
         public override string Name { get { return "templates/cuocoto/loaiphuongtien"; } }
 
-        public SpreadsheetGrid spreadsheetGrid;
+        public GridControl gridControl;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
         bool DangThemVatLieu = false;
@@ -20,7 +21,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
             if (Display.WorkSheets[tabName] != null)
             {
                 masksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.GridCollection[tabName];
+                gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
@@ -28,7 +29,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
 
         public override void loadData()
         {
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(gridControl, masksheet, workingsheet);
             body.bind();
             body.render();
         }
@@ -63,13 +64,13 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
             {
                 // bắt đầu thêm vật liệu
                 DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet , selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet , selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
-                spreadsheetGrid.BeginUpdate();
+                gridControl.BeginUpdate();
                 selectedRow.AddSimpleData();
                 body.bind();
                 body.render();
-                spreadsheetGrid.EndUpdate();
+                gridControl.EndUpdate();
                 DangThemVatLieu = false;
             }
         }

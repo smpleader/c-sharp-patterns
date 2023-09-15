@@ -1,4 +1,4 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.vatlieu
@@ -7,7 +7,7 @@ namespace modDisplay.templates.vatlieu
     {
         public override string Name { get { return "templates/giavatlieu"; } }
 
-        public SpreadsheetGrid spreadsheetGrid;
+        public GridControl gridControl;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
 
@@ -19,7 +19,7 @@ namespace modDisplay.templates.vatlieu
             if (Display.WorkSheets[tabName] != null)
             {
                 masksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.GridCollection[tabName];
+                gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
@@ -28,7 +28,7 @@ namespace modDisplay.templates.vatlieu
 
         public override void loadData()
         {
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(gridControl, masksheet, workingsheet);
             // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
             body.bindInWoringsheet();
             body.renderInWorkingsheet();
@@ -100,17 +100,17 @@ namespace modDisplay.templates.vatlieu
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm vật liệu
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
 
-                spreadsheetGrid.BeginUpdate();
+                gridControl.BeginUpdate();
 
                 selectedRow.AddSimpleData();
 
                 body.bindInWoringsheet();
                 body.renderInWorkingsheet();
 
-                spreadsheetGrid.EndUpdate();
+                gridControl.EndUpdate();
 
                 Display.showDataDebug();
                 Display.showData();

@@ -18,12 +18,14 @@ using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Presenters.SheetTemplate;
 using BaseInterface;
 using Util;
+using modDisplay.CustomGrid;
 
 namespace Worksheet.MVC.Views
 {
     public partial class SheetSyncfusion : AView
     {
         private SyncfusionP syncfusionP;
+        public WorkBook workbook;
         public SheetSyncfusion()
         {
             registerPresenters(true);
@@ -47,10 +49,6 @@ namespace Worksheet.MVC.Views
 
         }
 
-        private void btn_BackDemo_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btn_MoFile_Click(object sender, EventArgs e)
         {
@@ -60,7 +58,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        sheet_mask.Open(openFileDialog.FileName);
+                        //sheet_mask.Open(openFileDialog.FileName);
                     }
                     catch (Exception ex)
                     {
@@ -79,7 +77,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        sheet_mask.SaveAs(saveFileDialog.FileName);
+                        //sheet_mask.SaveAs(saveFileDialog.FileName);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
@@ -94,7 +92,7 @@ namespace Worksheet.MVC.Views
 
         private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
         {
-            sheet_mask.ActiveGrid.ColumnWidths.SetHidden(5, 12, !chkbx_KichThuoc.Checked);
+            Display.ActiveGrid.Cols.Hidden.SetRange(5, 12, !chkbx_KichThuoc.Checked);
         }
 
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
@@ -108,8 +106,8 @@ namespace Worksheet.MVC.Views
             modBLContainer.Init();
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
-            sheet_mask.WorkbookLoaded += AfterLoad;
-            sheet_mask.PropertyChanged += Spreadsheet_PropertyChanged;
+            //sheet_mask.WorkbookLoaded += AfterLoad;
+            //sheet_mask.PropertyChanged += Spreadsheet_PropertyChanged;
             //Display.setControlDebug(sheet_working);
             sheet_working.WorkbookLoaded += AfterLoad2;
         }
@@ -121,56 +119,56 @@ namespace Worksheet.MVC.Views
 
         private void Spreadsheet_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            // when the worksheets in the workbook changed
-            if (e.PropertyName == "ActiveSheet")
-            {
-                //Implement code
-                if (sheet_mask.Workbook.Worksheets.Count > 1)
-                {
-                    Display.setControl(sheet_mask);
-                    Display.ActiveGrid = Display.GridCollection[sheet_mask.ActiveSheet.Name];
+            //// when the worksheets in the workbook changed
+            //if (e.PropertyName == "ActiveSheet")
+            //{
+            //    //Implement code
+            //    if (sheet_mask.Workbook.Worksheets.Count > 1)
+            //    {
+            //        Display.setControl(sheet_mask);
+            //        Display.ActiveGrid = Display.GridCollection[sheet_mask.ActiveSheet.Name];
 
-                    Display.SetActiveWorkingSheet(sheet_mask.ActiveSheet.Name);
-                    if (Display.WControlDebug != null)
-                    {
-                        Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[sheet_mask.ActiveSheet.Name];
-                    }
+            //        Display.SetActiveWorkingSheet(sheet_mask.ActiveSheet.Name);
+            //        if (Display.WControlDebug != null)
+            //        {
+            //            Display.WControlDebug.ActiveSheet = Display.WControlDebug.Workbook.Worksheets[sheet_mask.ActiveSheet.Name];
+            //        }
 
-                    switch (sheet_mask.ActiveSheet.Name)
-                    {
-                        case "Tiên lượng":
-                            pnl_VatLieu.Visible = false;
-                            break;
-                        case "Giá vật liệu":
-                            pnl_VatLieu.Visible = true;
-                            //rdbtn_PPT_NhapTay.Checked = true;
-                            //sheet_VatLieu.CurrentWorksheet = Display.WB["Giá vật liệu"];
-                            switch (Option.PPTGiaVatLieu)
-                            {
-                                case PPTGiaVatLieu.NhapTay:
-                                    rdbtn_PPT_NhapTay.Checked = true;
-                                    break;
-                                case PPTGiaVatLieu.CongCuocVanChuyen:
-                                    rdbtn_PPT_CongCuocVC.Checked = true;
-                                    break;
-                                case PPTGiaVatLieu.NhanHeSo:
-                                    rdbtn_PPT_NhanHeSo.Checked = true;
-                                    break;
-                                case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                                    rdbtn_PPT_NhanHeSoCongCuocVC.Checked = true;
-                                    break;
-                            }
-                            break;
-                    }
-                }
+            //        switch (sheet_mask.ActiveSheet.Name)
+            //        {
+            //            case "Tiên lượng":
+            //                pnl_VatLieu.Visible = false;
+            //                break;
+            //            case "Giá vật liệu":
+            //                pnl_VatLieu.Visible = true;
+            //                //rdbtn_PPT_NhapTay.Checked = true;
+            //                //sheet_VatLieu.CurrentWorksheet = Display.WB["Giá vật liệu"];
+            //                switch (Option.PPTGiaVatLieu)
+            //                {
+            //                    case PPTGiaVatLieu.NhapTay:
+            //                        rdbtn_PPT_NhapTay.Checked = true;
+            //                        break;
+            //                    case PPTGiaVatLieu.CongCuocVanChuyen:
+            //                        rdbtn_PPT_CongCuocVC.Checked = true;
+            //                        break;
+            //                    case PPTGiaVatLieu.NhanHeSo:
+            //                        rdbtn_PPT_NhanHeSo.Checked = true;
+            //                        break;
+            //                    case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
+            //                        rdbtn_PPT_NhanHeSoCongCuocVC.Checked = true;
+            //                        break;
+            //                }
+            //                break;
+            //        }
+            //    }
 
-            }
+            //}
         }
 
         private void AfterLoad(object sender, WorkbookLoadedEventArgs args)
         {
             // sau khi load workbook thì mới tiếp cận được activesheet và activegrid
-            Display.setup(sheet_mask, AppConst.templateFolder + "TienLuong");
+            //Display.setup(sheet_mask, AppConst.templateFolder + "TienLuong");
             Display.hook("LoadData");
         }
 
@@ -178,9 +176,9 @@ namespace Worksheet.MVC.Views
         private void rdbtn_PPT_NhapTay_CheckedChanged(object sender, EventArgs e)
         {
             // Hiển thị tất cả các cột
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 16, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(7, 12, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(14, 14, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
+            Display.ActiveGrid.Cols.Hidden.SetRange(7, 12, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(14, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhapTay;
             ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -188,9 +186,9 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_CongCuocVC_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 16, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(7, 8, true);
-            Display.ActiveGrid.ColumnWidths.SetHidden(13, 13, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
+            Display.ActiveGrid.Cols.Hidden.SetRange(7, 8, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(13, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.CongCuocVanChuyen;
             ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -199,8 +197,8 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_NhanHeSo_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 17, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(8, 14, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(1, 17, false);
+            Display.ActiveGrid.Cols.Hidden.SetRange(8, 14, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSo;
             ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();
@@ -208,8 +206,8 @@ namespace Worksheet.MVC.Views
 
         private void rdbtn_PPT_NhanHeSoCongCuocVC_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.ColumnWidths.SetHidden(1, 17, false);
-            Display.ActiveGrid.ColumnWidths.SetHidden(9, 13, true);
+            Display.ActiveGrid.Cols.Hidden.SetRange(1, 17, false);
+            Display.ActiveGrid.Cols.Hidden.SetRange(9, 13, true);
 
             Option.PPTGiaVatLieu = PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen;
             ((modDisplay.templates.vatlieu.Generator)Display.tab("Giá vật liệu")).ThayDoiPPT();

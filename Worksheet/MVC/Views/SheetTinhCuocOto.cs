@@ -45,7 +45,7 @@ namespace Worksheet.MVC.Views
         private void AfterLoad(object sender, WorkbookLoadedEventArgs args)
         {
             // sau khi load workbook thì mới tiếp cận được activesheet và activegrid
-            Display.setup(sheet_CuocOto, AppConst.contentFolder + "Template/cuocoto/cuocoto.xlsx");
+            //Display.setup(sheet_CuocOto, AppConst.contentFolder + "Template/cuocoto/cuocoto.xlsx");
             Display.hook("LoadData");
             cbb_CachTinh.Text = Option.DanhSachPPTCuocOto[Option.PPTCuocOto];
         }

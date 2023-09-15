@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong.row
@@ -12,7 +13,7 @@ namespace modDisplay.templates.tienluong.row
         /// <param name="ws">Template</param>
         /// <param name="start">Chỉ số dòng bắt đầu tìm</param>
         /// <returns></returns>
-        public static int FindIndexRowFooter(this Footer footer, SpreadsheetGrid ws, IWorksheet worksheet, int start)
+        public static int FindIndexRowFooter(this Footer footer, GridControl ws, IWorksheet worksheet, int start)
         {
             for (int indexRow = start; indexRow <= ws.RowCount; indexRow++)
             {

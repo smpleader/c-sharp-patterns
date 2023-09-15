@@ -1,5 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -7,7 +8,7 @@ namespace modDisplay.templates.cuocoto.tongculy.row
 {
     internal class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -182,17 +183,17 @@ namespace modDisplay.templates.cuocoto.tongculy.row
         }
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(B, "V01897");
-            spreadsheetGrid.SetCellValue(C, "Cát vàng");
-            spreadsheetGrid.SetCellValue(D, "m3");
-            spreadsheetGrid.SetCellValue(E, "1.45");
-            spreadsheetGrid.SetCellValue(F, "Bậc 1");
-            spreadsheetGrid.SetCellValue(G, "1.0");
-            spreadsheetGrid.SetCellValue(I, "Ô tô");
-            spreadsheetGrid.SetCellValue(J, "1.0");
-            spreadsheetGrid.SetCellValue(K, "Loại 1");
+            //gridControl.SetCellValue(B, "V01897");
+            //gridControl.SetCellValue(C, "Cát vàng");
+            //gridControl.SetCellValue(D, "m3");
+            //gridControl.SetCellValue(E, "1.45");
+            //gridControl.SetCellValue(F, "Bậc 1");
+            //gridControl.SetCellValue(G, "1.0");
+            //gridControl.SetCellValue(I, "Ô tô");
+            //gridControl.SetCellValue(J, "1.0");
+            //gridControl.SetCellValue(K, "Loại 1");
 
-            spreadsheetGrid.SetCellValue(N, "2984");
+            //gridControl.SetCellValue(N, "2984");
         }
     }
 }

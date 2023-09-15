@@ -29,10 +29,9 @@ namespace Worksheet.MVC.Presenters.SheetTemplate
         public void Setup()
         {
             pathToTemplate = AppConst.templateFolder + "TienLuong.xlsx";
-            _view.sheet_mask.Open(pathToTemplate);
+            //_view.workbook._grid.Open(pathToTemplate);
             _view.sheet_working.Open(pathToTemplate);
             _view.sheet_working.ActiveSheet = _view.sheet_working.Workbook.Worksheets["Giá vật liệu"];
         }
-        public Spreadsheet Spreadsheet { get { return _view.sheet_mask; } }
     }
 }

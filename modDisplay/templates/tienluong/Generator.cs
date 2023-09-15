@@ -3,13 +3,14 @@ using Syncfusion.Windows.Forms.Spreadsheet;
 using HeaderGroup = modDisplay.templates.tienluong.Header;
 using FooterGroup = modDisplay.templates.tienluong.Footer;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 
 namespace modDisplay.templates.tienluong
 {
     public class Generator : AGenerator
     {
         public override string Name { get { return "templates/tienluong"; } }
-        public SpreadsheetGrid spreadsheetGrid;
+        public GridControl gridControl;
         public IWorksheet masksheet;
         public IWorksheet workingsheet;
 
@@ -23,7 +24,7 @@ namespace modDisplay.templates.tienluong
             if (Display.WorkSheets[tabName] != null)
             {
                 masksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.GridCollection[tabName];
+                gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
@@ -39,24 +40,24 @@ namespace modDisplay.templates.tienluong
         public override void loadData()
         {
             DangThemCongViec = true;
-            spreadsheetGrid.ColumnWidths.SetHidden(6, 12, true);
-            spreadsheetGrid.ColumnWidths.SetHidden(14, 14, true);
-            spreadsheetGrid.ColumnWidths.SetHidden(18, 18, true);
+            gridControl.Cols.Hidden.SetRange(6, 12, true);
+            gridControl.Cols.Hidden.SetRange(14, 14, true);
+            gridControl.Cols.Hidden.SetRange(18, 18, true);
 
             // bind
 
             // header
-            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
+            header = new HeaderGroup(gridControl, masksheet, workingsheet);
             header.bind();
             header.render();
 
             // footer
-            footer = new FooterGroup(spreadsheetGrid, masksheet, workingsheet);
+            footer = new FooterGroup(gridControl, masksheet, workingsheet);
             footer.bind();
             footer.render();
 
             // body 
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(gridControl, masksheet, workingsheet);
             body.end = footer.Id - 1;
             body.bind();
             body.render();
@@ -71,7 +72,7 @@ namespace modDisplay.templates.tienluong
             {
                 // bắt đầu thêm công việc
                 DangThemCongViec = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 body.bind();

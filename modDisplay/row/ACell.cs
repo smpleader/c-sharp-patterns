@@ -19,16 +19,18 @@ namespace modDisplay.row
         public string HangMucId { get; set; }
         public virtual string UniqueName { get { return ""; } }
         public virtual string Col { get { return "A"; } }
+        public virtual int ColIndex { get { return Util.CellUtility.GetExcelColumnNumber(Col); } }
+
         public virtual string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
         /// <summary>
         /// IRange cột trong mask sheet
         /// </summary>
-        public virtual IRange RangeDisplay
+        public virtual object ValueOnMask
         {
             get
             {
-                return Row.masksheet.Range[Col + Row.Id];
+                return Row.gridControl[Row.Id, ColIndex].CellValue;
             }
         }
         /// <summary>
@@ -59,14 +61,14 @@ namespace modDisplay.row
         public virtual void Render()
         {
             string formula = modBLContainer.Get(UniqueName).formula(HangMucId, Params);
-            //Row.spreadsheetGrid.SetCellValue(RangeDisplay, formula); // bỏ set công thức cho masksheet
+            //Row.gridControl.SetCellValue(RangeDisplay, formula); // bỏ set công thức cho masksheet
             Range.Formula = formula;
             Row.masksheet.AutofitRow(Row.Id);
         }
         public virtual void Bind()
         {
             // override to validate data before updating workingsheet
-            Row.spreadsheetGrid.SetCellValue(Range, RangeDisplay.Value);
+            Range.Value2 = ValueOnMask;
         }
     }
 }

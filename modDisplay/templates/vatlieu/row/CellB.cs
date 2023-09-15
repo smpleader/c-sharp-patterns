@@ -20,7 +20,7 @@ namespace modDisplay.templates.vatlieu.row
         }
         public override void Bind()
         {
-            if (RangeDisplay.Value == "Invalid")
+            if (ValueOnMask.ToString() == "Invalid")
             {
                 MessageBox.Show("Giá trị cột B không được nhập là 'Invalid'");
             }

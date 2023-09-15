@@ -1,5 +1,6 @@
 ﻿using modDisplay;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -14,7 +15,7 @@ namespace modDisplay.templates.tienluong
         public readonly int start = 6;
         public int end;
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
+        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();
@@ -42,7 +43,7 @@ namespace modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(spreadsheetGrid, masksheet, workingsheet, indexGroups[i]);
+                groups[indexGroups[i]] = new Group(gridControl, masksheet, workingsheet, indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -70,7 +71,7 @@ namespace modDisplay.templates.tienluong
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(spreadsheetGrid, masksheet, workingsheet, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, masksheet, workingsheet, indexAdditionalRows[i]);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
 
@@ -78,7 +79,7 @@ namespace modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
                 int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
@@ -133,7 +134,7 @@ namespace modDisplay.templates.tienluong
 
         public override void render(bool maskToWorking = true)
         {
-            spreadsheetGrid.BeginUpdate();
+            gridControl.BeginUpdate();
             foreach (Group group in groups.Values)
             {
                 group.render();
@@ -155,14 +156,14 @@ namespace modDisplay.templates.tienluong
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        spreadsheetGrid.SetCellValue(row.B, beginRow.ToString());
+                        row.B.Value2 = beginRow;
                         beginRow++;
                     }
                 }
             }
-            spreadsheetGrid.InvalidateCells();
-            masksheet.Calculate();
-            spreadsheetGrid.EndUpdate();
+            //gridControl.InvalidateCells();
+            //masksheet.Calculate();
+            gridControl.EndUpdate();
         }
     }
 }

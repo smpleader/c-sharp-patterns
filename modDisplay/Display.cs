@@ -1,5 +1,5 @@
-﻿using Syncfusion.Windows.Forms.CellGrid;
-using Syncfusion.Windows.Forms.CellGrid.Helpers;
+﻿using modDisplay.CustomGrid;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using System.Diagnostics;
@@ -22,19 +22,27 @@ namespace modDisplay
         }
 
         static FileTemplate currentTemplate;
-        public static Spreadsheet WControl;
+        public static WorkBook WControl;
         public static Dictionary<string, SpreadsheetGrid> GridCollection;
-        public static SpreadsheetGrid ActiveGrid;
+        public static GridControl ActiveGrid;
         public static IWorksheet ActiveMaskSheet;
         public static IWorksheets WorkSheets;
 
-        public static IRange SelectedCell;
+        #region [ Mask sheet]
+        List<IWorksheet> worksheets;
+        List<string> worksheetNames = new List<string>();
+        ExcelEngine excelEngine;
+        IApplication application;
+        IWorkbook workbook;
+        IWorksheet activeSheet;
+
         public static GridCurrentCell Cell;
         public static string Col;
         public static int Row;
 
-        // excel engine
-        // working sheet
+        #endregion
+
+        #region [ Working sheet]
         /// <summary>
         /// Danh sách working sheet 
         /// <para>Sheet phục vụ tính toán<para>
@@ -60,6 +68,7 @@ namespace modDisplay
         public static IWorksheet ActiveMaskSheetDebug;
         public static IWorksheets WorkSheetsDebug;
         public static IWorkbook WorkingBookDebug;
+        #endregion
 
         /// <summary>
         /// Sau có thể load từ BaseInterface.SheetName
@@ -197,7 +206,7 @@ namespace modDisplay
                     }
                 }
             }
-            WControl.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
+            WControl.InvalidateFormulaCell(); // hiển thị lên spreadsheet
         }
 
         /// <summary>
@@ -228,30 +237,19 @@ namespace modDisplay
             WControlDebug.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
         }
 
-        public static void setControl(Spreadsheet control)
+        public static void setControl(WorkBook control)
         {
             WControl = control;
-            GridCollection = control.GridCollection;
-            ActiveGrid = control.ActiveGrid;
-            ActiveMaskSheet = control.ActiveSheet;
-            WorkSheets = control.Workbook.Worksheets;
+            ActiveGrid = control._grid;
         }
-
-        public static void setActiveSheet(Spreadsheet control)
-        {
-            WControl = control;
-            GridCollection = control.GridCollection;
-            ActiveGrid = control.ActiveGrid;
-            ActiveMaskSheet = control.ActiveSheet;
-            WorkSheets = control.Workbook.Worksheets;
-        }
-        public static void setup(Spreadsheet control, string filePath)
+   
+        public static void setup(WorkBook control, string filePath)
         {
             setControl(control);
             setTemplate(filePath);
             attachEvent();
         }
-        public static void setup(Spreadsheet control)
+        public static void setup(WorkBook control)
         {
             if (currentTemplate == null)
             {
@@ -276,7 +274,7 @@ namespace modDisplay
         {
             if (name == "")
             {
-                name = WControl.ActiveSheet.Name;
+                name = WorkingSheetName;
             }
             return currentTemplate.Tabs.ContainsKey(name) ? currentTemplate.Tabs[name] : new AGenerator();
         }
@@ -331,40 +329,24 @@ namespace modDisplay
                 tab.Value.init(tab.Key);
             };
 
-            foreach (var sheet in GridCollection.Values)
-            {
-                sheet.CellClick += onClick;
-            }
-            foreach (var sheet in GridCollection.Values)
-            {
-                sheet.CurrentCellEndEdit += AfterCellEdit;
-            }
-
-            foreach (var sheet in WorkSheets)
-            {
-                sheet.CellValueChanged += CellDataChanged;
-            }
+            WControl.OnCurrentCellChanged += WControl_OnCurrentCellChanged;
+            WControl.OnCellValueChanged += WControl_OnCellValueChanged;
             contextMenu.Opening += contextMenuOpen;
         }
 
-        private static void CellDataChanged(object sender, Syncfusion.XlsIO.Implementation.CellValueChangedEventArgs e)
+        private static void WControl_OnCellValueChanged(object sender, EventArgs e)
         {
             hook("CellDataChanged");
-        }
-        private static void AfterCellEdit(object sender, CurrentCellEndEditEventArgs e)
-        {
             hook("AfterCellInput");
         }
 
-        private static void onClick(object sender, GridCellClickEventArgs e)
+        private static void WControl_OnCurrentCellChanged(Syncfusion.Windows.Forms.Grid.GridCurrentCell currentCell)
         {
-            Cell = ActiveGrid.SelectionController.CurrentCell;
-            Col = e.ColumnIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(e.ColumnIndex) : "A";
-            Row = e.RowIndex > 0 ? e.RowIndex : 1;
-            SelectedCell = ActiveMaskSheet.Range[Col + Row];
+            Cell = currentCell;
+            Col = Cell.ColIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(Cell.ColIndex) : "A";
+            Row = Cell.RowIndex > 0 ? Cell.RowIndex : 1;
             hook("SelectCell");
         }
-
         public static void contextMenuOpen(object sender, EventArgs e)
         {
             tab().addMenu();

@@ -12,7 +12,7 @@ namespace Worksheet.MVC.Controllers
         protected override IView _view { get; set; } = new SheetSyncfusion();
         public void ReLoad()
         {
-            Display.setup(((SheetSyncfusion)_view).sheet_mask, AppConst.templateFolder + "TienLuong");
+            //Display.setup(((SheetSyncfusion)_view).sheet_mask, AppConst.templateFolder + "TienLuong");
         }
       
     }

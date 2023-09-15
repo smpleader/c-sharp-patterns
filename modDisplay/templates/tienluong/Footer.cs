@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ namespace modDisplay.templates.tienluong
     {
         FooterRow footer;
 
-        public Footer(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Footer(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet)
         {
             Id = 16;
         }
 
         public override void bind(bool maskToWorking = true)
         {
-            footer = new FooterRow(spreadsheetGrid, masksheet, workingsheet);
+            footer = new FooterRow(gridControl, masksheet, workingsheet);
             footer.bind();
             Id = footer.Id;
         }

@@ -1,5 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -7,7 +8,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     internal class Row : ARowObject
     {
-        public Row(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -187,13 +188,13 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         }
         public void AddSimpleData()
         {
-            spreadsheetGrid.SetCellValue(C, "V01897");
-            spreadsheetGrid.SetCellValue(E, "Cát vàng");
-            spreadsheetGrid.SetCellValue(F, "m3");
+            //gridControl.SetCellValue(C, "V01897");
+            //gridControl.SetCellValue(E, "Cát vàng");
+            //gridControl.SetCellValue(F, "m3");
 
-            spreadsheetGrid.SetCellValue(K, "1");
-            spreadsheetGrid.SetCellValue(G, "389809");
-            spreadsheetGrid.SetCellValue(J, "389809");
+            //gridControl.SetCellValue(K, "1");
+            //gridControl.SetCellValue(G, "389809");
+            //gridControl.SetCellValue(J, "389809");
 
         }
     }

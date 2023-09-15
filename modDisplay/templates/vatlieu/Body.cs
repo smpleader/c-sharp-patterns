@@ -1,4 +1,5 @@
 ﻿using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
@@ -8,7 +9,7 @@ namespace modDisplay.templates.vatlieu
     {
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
         public override string Name { get { return "Body"; } }
-        public Body(SpreadsheetGrid spreadsheetGrid, IWorksheet masksheet, IWorksheet workingsheet) : base(spreadsheetGrid, masksheet, workingsheet) 
+        public Body(GridControl gridControl, IWorksheet masksheet, IWorksheet workingsheet) : base(gridControl, masksheet, workingsheet) 
         {
             start = 5;
             end = 15;
@@ -34,7 +35,7 @@ namespace modDisplay.templates.vatlieu
                 int indexRow = indexRows[i];
                 if(!rows.Keys.Contains(indexRow))
                 {
-                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
                 }
             }
         }
@@ -48,7 +49,7 @@ namespace modDisplay.templates.vatlieu
             // nếu không có thì tạo mới 1 row object
             if (!rows.Keys.Contains(row))
             {
-                rows[row] = new Row(spreadsheetGrid, masksheet, workingsheet, row);
+                rows[row] = new Row(gridControl, masksheet, workingsheet, row);
             }
             rows[row].bind();
         }
@@ -71,7 +72,7 @@ namespace modDisplay.templates.vatlieu
                 int indexRow = indexRows[i];
                 if (!rows.Keys.Contains(indexRow))
                 {
-                    rows[indexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
                 }
                 Row vl = rows[indexRow];
                 vl.bind();
@@ -100,7 +101,7 @@ namespace modDisplay.templates.vatlieu
                 }
             }
             masksheet.Calculate();
-            spreadsheetGrid.InvalidateCells();
+            //gridControl.InvalidateCells();
         }
 
     }

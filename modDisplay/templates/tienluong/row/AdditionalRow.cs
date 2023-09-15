@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using modData.Memories.Pointer;
+using Syncfusion.Windows.Forms.Grid;
 
 namespace modDisplay.templates.tienluong.row
 {
     internal class AdditionalRow : ARowObject
     {
-        public AdditionalRow(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(spreadsheetGrid, worksheet, workingsheet)
+        public AdditionalRow(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
         }
@@ -89,7 +90,8 @@ namespace modDisplay.templates.tienluong.row
 
                                 string formulaL = "=" + segment[1].Trim().Split("=")[0];
                                 var range = masksheet.Range["L" + Id];
-                                spreadsheetGrid.SetCellValue(range, formulaL);
+                                //gridControl.SetCellValue(range, formulaL);
+                                workingsheet.Range["L" + Id].Value2 = formulaL;
                                 IsInterpretiveFormula = true;
                             }
                             else

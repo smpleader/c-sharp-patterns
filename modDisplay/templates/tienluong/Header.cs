@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,16 @@ namespace modDisplay.templates.tienluong
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(SpreadsheetGrid spreadsheetGrid, IWorksheet worksheet, IWorksheet workingsheet) : base(spreadsheetGrid, worksheet, workingsheet) { }
+        public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
+
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
+        private SpreadsheetGrid spreadsheetGrid;
+
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state
-            headers[2] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 2);
-            headers[3] = new HeaderRow(spreadsheetGrid, masksheet, workingsheet, 3);
+            headers[2] = new HeaderRow(gridControl, masksheet, workingsheet, 2);
+            headers[3] = new HeaderRow(gridControl, masksheet, workingsheet, 3);
             foreach (var item in headers)
             {
                 item.Value.bind();
