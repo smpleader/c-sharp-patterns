@@ -14,7 +14,6 @@ namespace modDisplay.templates.vatlieu
             start = 5;
             end = 15;
         }
-
         
         public void bindInWoringsheet()
         {
@@ -44,7 +43,7 @@ namespace modDisplay.templates.vatlieu
         /// Xác định vị trí của row object -> bind data từ masksheet tới workingsheet
         /// </summary>
         /// <param name="row">Dòng mà có dữ liệu thay đổi</param>
-        public void bindInMaskSheet(int row)
+        public override void bindInMaskSheet(int row)
         {
             // nếu không có thì tạo mới 1 row object
             if (!rows.Keys.Contains(row))

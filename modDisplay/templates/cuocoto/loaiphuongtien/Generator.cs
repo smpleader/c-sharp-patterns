@@ -9,11 +9,6 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
     public class Generator : AGenerator
     {
         public override string Name { get { return "templates/cuocoto/loaiphuongtien"; } }
-
-        public GridControl gridControl;
-        public IWorksheet masksheet;
-        public IWorksheet workingsheet;
-        bool DangThemVatLieu = false;
         Body body;
 
         public override void init(string tabName)
@@ -37,12 +32,12 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
         {
             if (body != null)
             {
-                if (!DangThemVatLieu)
+                if (!IsEditting)
                 {
-                    DangThemVatLieu = true;
+                    IsEditting = true;
                     body.bind();
                     body.render();
-                    DangThemVatLieu = false;
+                    IsEditting = false;
                 }
             }
 
@@ -50,10 +45,10 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
         internal void ThayDoiPPT()
         {
             if (body == null) return;
-            DangThemVatLieu = true;
+            IsEditting = true;
             body.bind();
             body.render();
-            DangThemVatLieu = false;
+            IsEditting = false;
         }
 
         internal void updateData()
@@ -63,7 +58,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm vật liệu
-                DangThemVatLieu = true;
+                IsEditting = true;
                 body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet , selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 gridControl.BeginUpdate();
@@ -71,7 +66,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
                 body.bind();
                 body.render();
                 gridControl.EndUpdate();
-                DangThemVatLieu = false;
+                IsEditting = false;
             }
         }
     }

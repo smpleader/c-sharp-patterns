@@ -1,4 +1,6 @@
-﻿using Syncfusion.Windows.Forms.Grid;
+﻿using Microsoft.Office.Interop.Excel;
+using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.vatlieu
@@ -6,14 +8,6 @@ namespace modDisplay.templates.vatlieu
     public class Generator : AGenerator
     {
         public override string Name { get { return "templates/giavatlieu"; } }
-
-        public GridControl gridControl;
-        public IWorksheet masksheet;
-        public IWorksheet workingsheet;
-
-        bool IsEditting = false;
-        Body body;
-
         public override void init(string tabName)
         {
             if (Display.WorkSheets[tabName] != null)
@@ -27,10 +21,15 @@ namespace modDisplay.templates.vatlieu
 
         public override void loadData()
         {
-            body = new Body(gridControl, masksheet, workingsheet);
+            Positions = new Dictionary<string, APosition>()
+            {
+                { "Body", new Body(gridControl, masksheet, workingsheet) },
+            };
+            Positions["Body"] = new Body(gridControl, masksheet, workingsheet);
             // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
-            body.bindInWoringsheet();
-            body.renderInWorkingsheet();
+
+            ((Body)Position("Body")).bindInWoringsheet();
+            ((Body)Position("Body")).renderInWorkingsheet();
             if(Display.ActiveMaskSheetDebug != null)
             {
                 Display.showDataDebug();
@@ -46,7 +45,7 @@ namespace modDisplay.templates.vatlieu
             switch (Display.Col)
             {
                 case "B":
-                    if (!body.rows.Keys.Contains(Display.Row))
+                    if (!((Body)Position("Body")).rows.Keys.Contains(Display.Row))
                     {
                         //Display.Cell.IsReadOnly = true;
                     }
@@ -62,29 +61,25 @@ namespace modDisplay.templates.vatlieu
 
         public override void afterCellInput()
         {
-            if (body == null) return;
+            if (((Body)Position("Body")) == null) return;
             if (IsEditting) return;
             IsEditting = true;
 
-            //todo: detect header
+            APosition position = Address(Display.Row);
+            position.bindInMaskSheet(Display.Row);
+            position.renderInWorkingsheet();
 
-            if( body.HasRow(Display.Row))
-            {
-                body.bindInMaskSheet(Display.Row);
-                body.renderInWorkingsheet();
-
-                Display.showDataDebug();
-                Display.showData();
-            }    
-
+            Display.showDataDebug();
+            Display.showData();
             IsEditting = false;
         }
+             
         public void ThayDoiPPT()
         {
-            if (body == null) return;
+            if (((Body)Position("Body")) == null) return;
             IsEditting = true;
 
-            body.renderInWorkingsheet();
+            ((Body)Position("Body")).renderInWorkingsheet();
 
             Display.showDataDebug();
             Display.showData();
@@ -96,18 +91,18 @@ namespace modDisplay.templates.vatlieu
         {
             // thêm vật liệu vào dòng đang chọn
             int selectedIndexRow = Display.Row;
-            if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
+            if (selectedIndexRow >= ((Body)Positions["Body"]).start && selectedIndexRow <= ((Body)Position("Body")).end)
             {
                 // bắt đầu thêm vật liệu
-                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
-                Row selectedRow = body.rows[selectedIndexRow];
+                ((Body)Position("Body")).rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
+                Row selectedRow = ((Body)Position("Body")).rows[selectedIndexRow];
 
                 gridControl.BeginUpdate();
 
                 selectedRow.AddSimpleData();
 
-                body.bindInWoringsheet();
-                body.renderInWorkingsheet();
+                ((Body)Position("Body")).bindInWoringsheet();
+                ((Body)Position("Body")).renderInWorkingsheet();
 
                 gridControl.EndUpdate();
 

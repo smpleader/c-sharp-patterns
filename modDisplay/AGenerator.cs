@@ -1,8 +1,17 @@
-﻿namespace modDisplay
+﻿using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.XlsIO;
+
+namespace modDisplay
 {
     public class AGenerator : ISheet
     {
         public virtual string Name { get { return "--"; } }
+        public bool IsEditting = false;
+        public GridControl gridControl { get; set; }
+        public IWorksheet masksheet { get; set; }
+        public IWorksheet workingsheet { get; set; }
+
+        public Dictionary<string, APosition> Positions;
         public virtual void init(string tabName) { }
         /// <summary>
         /// Sử dụng khi mở file
@@ -19,6 +28,25 @@
         public virtual void afterCellInput() { }
         public virtual void addMenu() { }
         public virtual void cellDataChanged() { }
-
+        
+        public APosition Position(string name)
+        {
+            if (!Positions.Keys.Contains(name))
+            {
+                Positions[name] = new APosition(gridControl, masksheet, workingsheet);
+            }
+            return Positions[name];
+        }
+        public APosition Address(int rowIndex)
+        {
+            foreach (APosition position in Positions.Values)
+            {
+                if (position.HasRow(rowIndex))
+                {
+                    return position;
+                }
+            }
+            return Positions["Body"];
+        }
     }
 }

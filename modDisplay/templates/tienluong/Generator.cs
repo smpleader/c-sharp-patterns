@@ -10,11 +10,7 @@ namespace modDisplay.templates.tienluong
     public class Generator : AGenerator
     {
         public override string Name { get { return "templates/tienluong"; } }
-        public GridControl gridControl;
-        public IWorksheet masksheet;
-        public IWorksheet workingsheet;
 
-        bool DangThemCongViec = false;
         HeaderGroup header;
         FooterGroup footer;
         Body body;
@@ -39,7 +35,7 @@ namespace modDisplay.templates.tienluong
         }
         public override void loadData()
         {
-            DangThemCongViec = true;
+            IsEditting = true;
             gridControl.Cols.Hidden.SetRange(6, 12, true);
             gridControl.Cols.Hidden.SetRange(14, 14, true);
             gridControl.Cols.Hidden.SetRange(18, 18, true);
@@ -61,7 +57,7 @@ namespace modDisplay.templates.tienluong
             body.end = footer.Id - 1;
             body.bind();
             body.render();
-            DangThemCongViec = false;
+            IsEditting = false;
 
         }
         public void updateData()
@@ -71,13 +67,13 @@ namespace modDisplay.templates.tienluong
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm công việc
-                DangThemCongViec = true;
+                IsEditting = true;
                 body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 body.bind();
                 body.render();
-                DangThemCongViec = false;
+                IsEditting = false;
             }
         }
 

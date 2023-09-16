@@ -26,6 +26,15 @@ namespace modDisplay
         public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
         public virtual void render(bool maskToWorking = true) { }
+        public virtual void bindInMaskSheet(int row)
+        {
+            // should override bindInMaskSheet
+        }
+        public virtual void renderInWorkingsheet()
+        {
+            // should override renderInWorkingsheet
+        }
+
         public APosition(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet)
         {
             this.gridControl = gridControl;

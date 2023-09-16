@@ -10,10 +10,6 @@ namespace modDisplay.templates.cuocoto.tongculy
     {
         public override string Name { get { return "templates/cuocoto/tongculy"; } }
 
-        public GridControl spreadsheetGrid;
-        public IWorksheet masksheet;
-        public IWorksheet workingsheet;
-        bool DangThemVatLieu = false;
         HeaderGroup header;
         Body body;
 
@@ -22,7 +18,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             if (Display.WorkSheets[tabName] != null)
             {
                 masksheet = Display.WorkSheets[tabName];
-                spreadsheetGrid = Display.ActiveGrid;
+                gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
                 masksheet.UseRangesCache = false;
             }
@@ -31,11 +27,11 @@ namespace modDisplay.templates.cuocoto.tongculy
         public override void loadData()
         {
             // header
-            header = new HeaderGroup(spreadsheetGrid, masksheet, workingsheet);
+            header = new HeaderGroup(gridControl, masksheet, workingsheet);
             header.bind();
             header.render();
 
-            body = new Body(spreadsheetGrid, masksheet, workingsheet);
+            body = new Body(gridControl, masksheet, workingsheet);
             body.bind();
             body.render();
         }
@@ -43,15 +39,15 @@ namespace modDisplay.templates.cuocoto.tongculy
         {
             if (body != null)
             {
-                if (!DangThemVatLieu)
+                if (!IsEditting)
                 {
-                    DangThemVatLieu = true;
+                    IsEditting = true;
                     header.bind();
                     header.render();
 
                     body.bind();
                     body.render();
-                    DangThemVatLieu = false;
+                    IsEditting = false;
                 }
             }
 
@@ -64,15 +60,15 @@ namespace modDisplay.templates.cuocoto.tongculy
             if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
             {
                 // bắt đầu thêm vật liệu
-                DangThemVatLieu = true;
-                body.rows[selectedIndexRow] = new Row(spreadsheetGrid, masksheet, workingsheet, selectedIndexRow);
+                IsEditting = true;
+                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
-                spreadsheetGrid.BeginUpdate();
+                gridControl.BeginUpdate();
                 selectedRow.AddSimpleData();
                 body.bind();
                 body.render();
-                spreadsheetGrid.EndUpdate();
-                DangThemVatLieu = false;
+                gridControl.EndUpdate();
+                IsEditting = false;
             }
             else
             {
