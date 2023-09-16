@@ -21,6 +21,7 @@ using Util;
 using modDisplay.CustomGrid;
 using Microsoft.Office.Interop.Excel;
 using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.GridExcelConverter;
 
 namespace Worksheet.MVC.Views
 {
@@ -225,10 +226,66 @@ namespace Worksheet.MVC.Views
             }
         }
 
+        // Hàm để chuyển đổi style từ GridControl sang IWorksheet
+        public static void CopyStyles(IWorksheet source, IWorksheet dest, bool clearData = true)
+        {
+            GridControl gridControlTemp = new GridControl();
+            GridExcelConverterControl gecc = new GridExcelConverterControl();
+
+            // step 1: Chuyển iworksheet source to grid
+            gecc.ExcelToGrid(source, gridControlTemp.Model);
+
+            // step 2: Xóa data của gridcontrol nhưng vẫn giữ lại style
+            if (clearData)
+            {
+                for (int rowIndex = 1; rowIndex <= gridControlTemp.RowCount; rowIndex++)
+                {
+                    for (int colIndex = 1; colIndex <= gridControlTemp.ColCount; colIndex++)
+                    {
+                        gridControlTemp[rowIndex, colIndex].CellValue = null;
+                    }
+                }
+            }
+
+            // step 3: copy data from iworksheet dest to grid
+            // Read data from the worksheet and set it to the GridControl
+            for (int rowIndex = 1; rowIndex <= dest.UsedRange.LastRow; rowIndex++)
+            {
+                for (int colIndex = 1; colIndex <= dest.UsedRange.LastColumn; colIndex++)
+                {
+                    object cellValue = dest[rowIndex, colIndex].Value2;
+                    gridControlTemp[rowIndex, colIndex].CellValue = cellValue;
+                }
+            }
+
+            // step 4: Chuyển đổi từ GridControl sang IWorksheet dest
+            gecc.GridToExcel(gridControlTemp.Model, dest);
+        }
+
+        // Hàm để chuyển đổi từ GridControl sang IWorksheet
+        public void ConvertGridToWorksheet(GridControl gridControl, IWorksheet worksheet, bool clearData = true)
+        {
+            // Xóa data của gridcontrol nhưng vẫn giữ lại style
+            if (clearData)
+            {
+                for (int rowIndex = 1; rowIndex <= gridControl.RowCount; rowIndex++)
+                {
+                    for (int colIndex = 1; colIndex <= gridControl.ColCount; colIndex++)
+                    {
+                        gridControl[rowIndex, colIndex].CellValue = null;
+                    }
+                }
+            }    
+           
+            // Chuyển đổi từ GridControl sang IWorksheet
+            GridExcelConverterControl gecc = new GridExcelConverterControl();
+            gecc.GridToExcel(gridControl.Model, worksheet);
+        }
         private void cbb_SheetActive_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Display.ActiveSheet != null)
             {
+                ConvertGridToWorksheet(this.workbook._grid, Display.ActiveSheet);
                 // Get the row and column indexes from the IRange
                 int startRow = Display.ActiveSheet.UsedRange.Row;
                 int endRow = Display.ActiveSheet.UsedRange.Row + Display.ActiveSheet.UsedRange.Rows.Length - 1;

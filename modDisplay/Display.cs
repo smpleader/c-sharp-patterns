@@ -1,4 +1,5 @@
 ﻿using modDisplay.CustomGrid;
+using Syncfusion.GridExcelConverter;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
@@ -186,8 +187,10 @@ namespace modDisplay
         /// </summary>
         public static void showData()
         {
+
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
-            // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
+
+            //// Duyệt qua các ô trên tờ và lấy giá trị của từng ô
             for (int row = 1; row <= Workingsheet.Rows.Length; row++)
             {
                 for (int col = 1; col <= Workingsheet.Columns.Length; col++)
@@ -197,14 +200,13 @@ namespace modDisplay
 
                     if (!string.IsNullOrEmpty(cell.Value))
                     {
-                        Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
+                        //Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
 
                         GridStyleInfo cellUI = ActiveGrid[row, col];
                         cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
                     }
                 }
             }
-            //WControl.InvalidateFormulaCell(); // hiển thị lên spreadsheet
         }
 
         /// <summary>
@@ -329,8 +331,45 @@ namespace modDisplay
 
             WControl.OnCurrentCellChanged += WControl_OnCurrentCellChanged;
             WControl._grid.CurrentCellEditingComplete += new EventHandler(_grid_CurrentCellEditingComplete);
+            WControl._grid.Model.ColWidthsChanged += Model_ColWidthsChanged;
+            WControl._grid.Model.RowHeightsChanged += Model_RowHeightsChanged; ;
+
+
             contextMenu.Opening += contextMenuOpen;
         }
+
+        // Lưu lại sự thay đổi của Row từ masksheet vào workingsheet
+        private static void Model_RowHeightsChanged(object sender, GridRowColSizeChangedEventArgs e)
+        {
+            if(e.Success)
+            {
+                int to = e.To;
+                int start = e.From;
+                while (start <= to)
+                {
+                    double value = Workingsheet.PixelsToColumnWidth(ActiveGrid.RowHeights[start]);
+                    Workingsheet.SetRowHeight(start, value);
+                    start++;
+                }
+            }    
+        }
+
+        // Lưu lại sự thay đổi của Col từ masksheet vào workingsheet
+        private static void Model_ColWidthsChanged(object sender, GridRowColSizeChangedEventArgs e)
+        {
+            if (e.Success)
+            {
+                int to = e.To;
+                int start = e.From;
+                while(start <= to)
+                {
+                    double value = Workingsheet.PixelsToColumnWidth(ActiveGrid.ColWidths[start]);
+                    Workingsheet.SetColumnWidth(start, value);
+                    start++;
+                }    
+            }
+        }
+
         private static void _grid_CurrentCellEditingComplete(object? sender, EventArgs e)
         {
             // hook để lấy sự kiện cell value changed
