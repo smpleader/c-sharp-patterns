@@ -10,11 +10,6 @@ namespace modDisplay.templates.tienluong
     public class Generator : AGenerator
     {
         public override string Name { get { return "templates/tienluong"; } }
-
-        HeaderGroup header;
-        FooterGroup footer;
-        Body body;
-
         public override void init(string tabName)
         {
             if (Display.WorkSheets[tabName] != null)
@@ -39,40 +34,43 @@ namespace modDisplay.templates.tienluong
             gridControl.Cols.Hidden.SetRange(6, 12, true);
             gridControl.Cols.Hidden.SetRange(14, 14, true);
             gridControl.Cols.Hidden.SetRange(18, 18, true);
+            Positions = new Dictionary<string, APosition>()
+            {
+                { "Header", new HeaderGroup(gridControl, masksheet, workingsheet) },
+                { "Body", new Body(gridControl, masksheet, workingsheet) },
+                { "Footer", new Body(gridControl, masksheet, workingsheet) },
 
+            };
             // bind
 
             // header
-            header = new HeaderGroup(gridControl, masksheet, workingsheet);
-            header.bind();
-            header.render();
+            Positions["Header"].bindInWoringsheet();
+            Positions["Header"].renderInWorkingsheet();
 
             // footer
-            footer = new FooterGroup(gridControl, masksheet, workingsheet);
-            footer.bind();
-            footer.render();
+            Positions["Footer"].bindInWoringsheet();
+            Positions["Footer"].renderInWorkingsheet();
 
             // body 
-            body = new Body(gridControl, masksheet, workingsheet);
-            body.end = footer.Id - 1;
-            body.bind();
-            body.render();
-            IsEditting = false;
+            Positions["Body"].end = Positions["Footer"].Id - 1;
+            Positions["Body"].bindInWoringsheet();
+            Positions["Body"].renderInWorkingsheet();
 
+            IsEditting = false;
         }
         public void updateData()
         {
             // thêm công việc vào dòng đang chọn
             int selectedIndexRow = Display.Row;
-            if (selectedIndexRow >= body.start && selectedIndexRow <= body.end)
+            if (selectedIndexRow >= Positions["Body"].start && selectedIndexRow <= Positions["Body"].end)
             {
                 // bắt đầu thêm công việc
                 IsEditting = true;
-                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
-                Row selectedRow = body.rows[selectedIndexRow];
+                ((Body)Positions["Body"]).rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
+                Row selectedRow = ((Body)Positions["Body"]).rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
-                body.bind();
-                body.render();
+                ((Body)Positions["Body"]).bind();
+                ((Body)Positions["Body"]).render();
                 IsEditting = false;
             }
         }
@@ -82,7 +80,7 @@ namespace modDisplay.templates.tienluong
             switch (Display.Col)
             {
                 case "B":
-                    if (!body.groups.Keys.Contains(Display.Row))
+                    if (!((Body)Positions["Body"]).groups.Keys.Contains(Display.Row))
                     {
                         //Display.Cell.IsReadOnly = true;
                     }
@@ -98,9 +96,17 @@ namespace modDisplay.templates.tienluong
 
         public override void afterCellInput()
         {
-            if (body == null) return;
-            body.bind();
-            body.render();
+            if (((Body)Position("Body")) == null) return;
+            if (IsEditting) return;
+            IsEditting = true;
+
+            APosition position = Address(Display.Row);
+            position.bindInMaskSheet(Display.Row);
+            position.renderInWorkingsheet();
+
+            Display.showDataDebug();
+            Display.showData();
+            IsEditting = false;
         }
     }
 }

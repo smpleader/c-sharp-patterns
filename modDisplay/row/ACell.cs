@@ -1,5 +1,6 @@
 ﻿
 using BaseInterface;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.row
@@ -23,6 +24,16 @@ namespace modDisplay.row
 
         public virtual string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
+        /// <summary>
+        /// GridStyleInfo cột trong mask sheet
+        /// </summary>
+        public virtual GridStyleInfo GridStyleInfo
+        {
+            get
+            {
+                return Row.gridControl[Row.Id, ColIndex];
+            }
+        }
         /// <summary>
         /// IRange cột trong mask sheet
         /// </summary>
@@ -69,6 +80,22 @@ namespace modDisplay.row
         {
             // override to validate data before updating workingsheet
             Range.Value2 = ValueOnMask;
+        }
+        public bool IsCellMerged 
+        {
+            get
+            {
+                // Lặp qua danh sách các CoveredRanges để kiểm tra xem cell có nằm trong vùng đã được gộp hay không.
+                foreach (GridRangeInfo coveredRange in Row.gridControl.Model.CoveredRanges)
+                {
+                    if (coveredRange.Contains(GridRangeInfo.Cell(Row.Id, ColIndex)))
+                    {
+                        return true; // Cell là một phần của một vùng đã được gộp.
+                    }
+                }
+
+                return false; // Cell không phải là một phần của bất kỳ vùng nào đã được gộp.
+            }
         }
     }
 }

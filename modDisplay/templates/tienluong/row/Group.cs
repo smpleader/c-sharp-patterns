@@ -1,63 +1,41 @@
-﻿using Syncfusion.Windows.Forms.CellGrid;
+﻿using modDisplay.templates.tienluong.row.group;
+using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
-using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong.row
 {
-    internal class Group : ARowObject
+    public class Group : ARowObject
     {
-        Dictionary<string, string> aliasUniqueName = new Dictionary<string, string>() {
-            { "R", "NhomCongViec_ThanhTienVatLieu" },
-            { "S", "NhomCongViec_ThanhTienVatLieuPhu" },
-            { "T", "NhomCongViec_ThanhTienNhanCong" },
-            { "U", "NhomCongViec_ThanhTienMay" },
-        };
         public Group(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
+            cellA = new CellA(this);
+            cellB = new CellB(this);
+            cellC = new CellC(this);
+            cellQ = new CellQ(this);
+            cellR = new CellR(this);
+            cellS = new CellS(this);
+            cellT = new CellT(this);
+            cellU = new CellU(this);
+            cellX = new CellX(this);
         }
 
-        /// <summary>
-        /// Ký hiệu bản vẽ
-        /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
-        /// <summary>
-        /// STT
-        /// </summary>
-        public IRange B { get { return this.Cell("B"); } }
-        /// <summary>
-        /// MSCV
-        /// </summary>
-        public IRange C { get { return this.Cell("C"); } }
-        /// <summary>
-        /// Đơn giá máy
-        /// </summary>
-        public IRange Q { get { return this.Cell("Q"); } }
-        /// <summary>
-        /// Tổng thành tiền vật liệu của nhóm
-        /// </summary>
-        public IRange R { get { return this.Cell("R"); } }
-        /// Tổng thành tiền vật liệu phụ của nhóm
-        public IRange S { get { return this.Cell("S"); } }
-        /// <summary>
-        /// Tổng thành tiền nhân công của nhóm
-        /// </summary>
-        public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Tổng thành tiền máy của nhóm
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh máy
-        /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
+        public CellA cellA { get; set; }
+        public CellB cellB { set; get; }
+        public CellC cellC { set; get; }
+        public CellQ cellQ { set; get; }
+        public CellR cellR { set; get; }
+        public CellS cellS { set; get; }
+        public CellT cellT { set; get; }
+        public CellU cellU { set; get; }
+        public CellX cellX { set; get; }
+
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
 
-            string C = masksheet.Range["C" + Id].Value;
+            string C = cellC.ValueOnMask.ToString();
             if (C != "" && C.StartsWith("*"))
             {
                 string nameGroup = C.Substring(1);
@@ -67,7 +45,7 @@ namespace modDisplay.templates.tienluong.row
                 }
 
                 // merge khi có dấu hiệu của group
-                IRange raneMerge = masksheet.Range[B.AddressLocal + ":" + Q.AddressLocal];
+                IRange raneMerge = masksheet.Range[cellB.Range.AddressLocal + ":" + cellQ.Range.AddressLocal];
                 //GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
                 //var excelRange = gridRange.ConvertGridRangeToExcelRange(gridControl);
                 var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
@@ -79,10 +57,10 @@ namespace modDisplay.templates.tienluong.row
 
                 #region style lại cho group object
 
-                IRange range = masksheet.Range[B.AddressLocal];
+                IRange range = masksheet.Range[cellB.Range.AddressLocal];
                 range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignLeft;
 
-                string addressRangeGroup = A.AddressLocal + ":" + X.AddressLocal;
+                string addressRangeGroup = cellA.Range.AddressLocal + ":" + cellX.Range.AddressLocal;
                 IRange rangeGroup = masksheet.Range[addressRangeGroup];
                 rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
                 rangeGroup.BorderAround(ExcelLineStyle.Thin);
@@ -93,15 +71,10 @@ namespace modDisplay.templates.tienluong.row
 
         public void render()
         {
-            string[] parameters = new string[2] { start.ToString(), end.ToString() };
-            foreach (string colName in aliasUniqueName.Keys)
-            {
-                //var range = masksheet.Range[colName + Id];
-                var range = workingsheet.Range[colName + Id];
-
-                BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                range.Value2 = string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters));
-            }
+            cellR.Render();
+            cellS.Render();
+            cellT.Render();
+            cellU.Render();
         }
     }
 }

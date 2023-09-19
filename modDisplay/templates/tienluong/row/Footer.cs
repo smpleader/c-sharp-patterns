@@ -1,79 +1,28 @@
-﻿using Syncfusion.Windows.Forms.Grid;
+﻿using modDisplay.templates.tienluong.row.footer;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 
 namespace modDisplay.templates.tienluong.row
 {
-    internal class Footer : ARowObject
+    public class Footer : ARowObject
     {
-        Dictionary<string, string> aliasUniqueName = new Dictionary<string, string>() {
-            { "R", "CongViec_TongThanhTienVatLieu" },
-            { "S", "CongViec_TongThanhTienVatLieuPhu" },
-            { "T", "CongViec_TongThanhTienNhanCong" },
-            { "U", "CongViec_TongThanhTienMay" },
-        };
         public Footer(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet)
         {
             Id = 16;
             start = 6;
+            cellA = new CellA(this);
+            cellR = new CellR(this);
+            cellS = new CellS(this);
+            cellT = new CellT(this);
+            cellU = new CellU(this);
         }
-        /// <summary>
-        /// Tổng hạng mục
-        /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
-
-        public IRange R { get { return this.Cell("R"); } }
-
-        public IRange S { get { return this.Cell("S"); } }
-
-        public IRange T { get { return this.Cell("T"); } }
-
-        public IRange U { get { return this.Cell("U"); } }
-
-        /// <summary>
-        /// Tổng thành tiền vật liệu
-        /// </summary>
-        public decimal TongThanhTienVatLieu
-        {
-            get
-            {
-                return (decimal)R.Value2;
-            }
-        }
-
-        /// <summary>
-        /// Tổng thành tiền vật liệu phụ
-        /// </summary>
-        public decimal TongThanhTienVatLieuPhu
-        {
-            get
-            {
-                return (decimal)S.Value2;
-            }
-        }
-
-        /// <summary>
-        /// Tổng thành tiền nhân công
-        /// </summary>
-        public decimal TongThanhTienNhanCong
-        {
-            get
-            {
-                return (decimal)T.Value2;
-            }
-        }
-
-        /// <summary>
-        /// Tổng thành tiền máy
-        /// </summary>
-        public decimal TongThanhTienMay
-        {
-            get
-            {
-                return (decimal)U.Value2;
-            }
-        }
+        public CellA cellA { get; set; }
+        public CellR cellR { get; set; }
+        public CellS cellS { get; set; }
+        public CellT cellT { get; set; }
+        public CellU cellU { get; set; }
 
         public void bind()
         {
@@ -84,15 +33,10 @@ namespace modDisplay.templates.tienluong.row
         public void render()
         {
             // todo: render lại khi thêm hoặc xóa dòng
-            string[] parameters = new string[2] { start.ToString(), end.ToString() };
-            foreach (string colName in aliasUniqueName.Keys)
-            {
-                var range = workingsheet.Range[colName + Id];
-
-                BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                //range.Value2= string.Format(modBLContainer.Get(aliasUniqueName[colName]).formula(parameters));
-                //gridControl.InvalidateCell(range.Row, range.Column);
-            }
+            cellR.Render();
+            cellS.Render();
+            cellT.Render();
+            cellU.Render();
         }
     }
 }

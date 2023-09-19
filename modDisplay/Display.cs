@@ -203,7 +203,7 @@ namespace modDisplay
                         //Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
 
                         GridStyleInfo cellUI = ActiveGrid[row, col];
-                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cell.Value; // hiển thị dạng text
+                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cellValue; // hiển thị dạng text
                     }
                 }
             }

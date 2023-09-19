@@ -34,7 +34,10 @@ namespace modDisplay
         {
             // should override renderInWorkingsheet
         }
-
+        public virtual void bindInWoringsheet()
+        {
+            // should override bindInWoringsheet
+        }
         public APosition(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet)
         {
             this.gridControl = gridControl;

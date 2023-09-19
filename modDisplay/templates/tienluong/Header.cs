@@ -15,7 +15,6 @@ namespace modDisplay.templates.tienluong
         public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
 
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
-        private SpreadsheetGrid spreadsheetGrid;
 
         public override void bind(bool maskToWorking = true)
         {

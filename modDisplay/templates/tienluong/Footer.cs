@@ -17,6 +17,8 @@ namespace modDisplay.templates.tienluong
         public Footer(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet)
         {
             Id = 16;
+            start = Id;
+            end = Id;
         }
 
         public override void bind(bool maskToWorking = true)
@@ -24,6 +26,9 @@ namespace modDisplay.templates.tienluong
             footer = new FooterRow(gridControl, masksheet, workingsheet);
             footer.bind();
             Id = footer.Id;
+            start = footer.Id;
+            end = footer.Id;
+
         }
         public override void render(bool maskToWorking = true)
         {

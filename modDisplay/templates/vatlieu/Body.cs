@@ -99,9 +99,6 @@ namespace modDisplay.templates.vatlieu
                     }
                 }
             }
-            //masksheet.Calculate();
-            //gridControl.InvalidateCells();
         }
-
     }
 }

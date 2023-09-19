@@ -1,8 +1,6 @@
-﻿using modDisplay.row;
+﻿using modDisplay.templates.tienluong.row.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
-
 
 namespace modDisplay.templates.tienluong.row
 {
@@ -11,277 +9,68 @@ namespace modDisplay.templates.tienluong.row
         public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
-            colM = new ColM(this);
-            colN = new ColN(this);
-            colP = new ColP(this);
-            colO = new ColO(this);
-            colQ = new ColQ(this);
-            colR = new ColR(this);
-            colS = new ColS(this);
-            colT = new ColT(this);
-            colU = new ColU(this);
+            cellA = new CellA(this);
+            cellB = new CellB(this);
+            cellC = new CellC(this);
+            cellD = new CellD(this);
+            cellE = new CellE(this);
+            cellF = new CellF(this);
+            cellG = new CellG(this);
+            cellH = new CellH(this);
+            cellI = new CellI(this);
+            cellJ = new CellJ(this);
+            cellK = new CellK(this);
+            cellL = new CellL(this);
+            cellM = new CellM(this);
+            cellN = new CellN(this);
+            cellO = new CellO(this);
+            cellP = new CellP(this);
+            cellQ = new CellQ(this);
+            cellR = new CellR(this);
+            cellS = new CellS(this);
+            cellT = new CellT(this);
+            cellU = new CellU(this);
+            cellV = new CellV(this);
+            cellW = new CellW(this);
+            cellX = new CellX(this);
+            cellY = new CellY(this);
+            cellZ = new CellZ(this);
+            cellAA = new CellAA(this);
+            cellAB = new CellAB(this);
+            cellAC = new CellAC(this);
         }
+
         public bool HaveInterpretiveFormula = false;
-        public ColM colM { get; set; }
-        public ColN colN { get; set; }
-        public ColO colO { get; set; }
-        public ColP colP { get; set; }
-        public ColQ colQ { get; set; }
-        public ColR colR { get; set; }
-        public ColS colS { get; set; }
-        public ColT colT { get; set; }
-        public ColU colU { get; set; }
-        /// <summary>
-        /// Ký hiệu bản vẽ
-        /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
-        /// <summary>
-        /// STT
-        /// </summary>
-        public IRange B { get { return this.Cell("B"); } }
-        /// <summary>
-        /// MSCV
-        /// </summary>
-        public IRange C { get { return this.Cell("C"); } }
-        /// <summary>
-        /// Tên công việc
-        /// </summary>
-        public IRange D { get { return this.Cell("D"); } }
-        /// <summary>
-        /// Đơn vị
-        /// </summary>
-        public IRange E { get { return this.Cell("E"); } }
-        /// <summary>
-        /// Tên CK
-        /// </summary>
-        public IRange F { get { return this.Cell("F"); } }
-        /// <summary>
-        /// Số CK
-        /// </summary>
-        public IRange G { get { return this.Cell("G"); } }
-        /// <summary>
-        /// Dài
-        /// </summary>
-        public IRange H { get { return this.Cell("H"); } }
-        /// <summary>
-        /// Rộng
-        /// </summary>
-        public IRange I { get { return this.Cell("I"); } }
-        /// <summary>
-        /// Cao
-        /// </summary>
-        public IRange J { get { return this.Cell("J"); } }
-        /// <summary>
-        /// HS phụ
-        /// </summary>
-        public IRange K { get { return this.Cell("K"); } }
-        /// <summary>
-        /// KL Phụ
-        /// </summary>
-        public IRange L { get { return this.Cell("L"); } }
-        /// <summary>
-        /// Khối lượng
-        /// </summary>
-        public IRange M { get { return this.Cell("M"); } }
-        /// <summary>
-        /// Đơn giá vật liệu
-        /// </summary>
-        public IRange N { get { return this.Cell("N"); } }
-        /// <summary>
-        /// Đơn giá vật liệu phụ
-        /// </summary>
-        public IRange O { get { return this.Cell("O"); } }
-        /// <summary>
-        /// Đơn giá nhân công
-        /// </summary>
-        public IRange P { get { return this.Cell("P"); } }
-        /// <summary>
-        /// Đơn giá máy
-        /// </summary>
-        public IRange Q { get { return this.Cell("Q"); } }
-        /// <summary>
-        /// Thành tiền vật liệu
-        /// </summary>
-        public IRange R { get { return this.Cell("R"); } }
-        /// <summary>
-        /// Thành tiền vật liệu phụ
-        /// </summary>
-        public IRange S { get { return this.Cell("S"); } }
-        /// <summary>
-        /// Thành tiền nhân công
-        /// </summary>
-        public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Thành tiền máy
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh vật liệu
-        /// </summary>
-        public IRange V { get { return this.Cell("V"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh nhân công
-        /// </summary>
-        public IRange W { get { return this.Cell("W"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh máy
-        /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
-        /// <summary>
-        /// Thông tin đơn giá
-        /// </summary>
-        public IRange Y { get { return this.Cell("Y"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu
-        /// </summary>
-        public IRange Z { get { return this.Cell("Z"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu phụ
-        /// </summary>
-        public IRange AA { get { return this.Cell("AA"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các nhân công
-        /// </summary>
-        public IRange AB { get { return this.Cell("AB"); } }
-        /// Tổng giá của tất cả các máy
-        public IRange AC { get { return this.Cell("AC"); } }
-
-        public class ColM : ACell
-        {
-            public override string UniqueName { get { return "CongViec_KhoiLuong"; } }
-            public override string Col { get { return "M"; } }
-            public override string[] Params { get { return new string[2] { Row.start.ToString(), Row.end.ToString() }; } }
-            public ColM(Row r) : base(r)
-            {
-            }
-            public override void Render()
-            {
-                var range = Row.masksheet.Range[Col + Row.Id];
-                // xử lý công thức cho cột M
-                if (((Row)Row).HaveInterpretiveFormula)
-                {
-                    BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-                    Range.Value2 = string.Format(modBLContainer.Get(UniqueName).formula(Params));
-                }
-                else
-                {
-                    Range.Value2 = ValueOnMask;
-                }
-            }
-        }
-        public class ColN : ACell
-        {
-            public override string UniqueName { get { return "CongViec_DonGiaVatLieu"; } }
-            public override string Col { get { return "N"; } }
-            public string TongTienVatTu
-            {
-                get
-                {
-                    string valueZ = ((Row)Row).Z.Value;
-                    if (string.IsNullOrWhiteSpace(valueZ)) return "0";
-                    return ((Row)Row).Z.Value.ToString();
-                }
-            }
-            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-
-            public ColN(Row r) : base(r)
-            {
-            }
-        }
-        public class ColO : ACell
-        {
-            public override string UniqueName { get { return "CongViec_DonGiaVatLieuPhu"; } }
-            public override string Col { get { return "O"; } }
-            public string TongTienVatTu
-            {
-                get
-                {
-                    string valueAA = ((Row)Row).AA.Value;
-                    if (string.IsNullOrWhiteSpace(valueAA)) return "0";
-                    return ((Row)Row).AA.Value.ToString();
-                }
-            }
-            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-
-            public ColO(Row r) : base(r)
-            {
-            }
-        }
-        public class ColP : ACell
-        {
-            public override string UniqueName { get { return "CongViec_DonGiaNhanCong"; } }
-            public override string Col { get { return "P"; } }
-            public string TongTienVatTu
-            {
-                get
-                {
-                    string valueAB = ((Row)Row).AB.Value;
-                    if (string.IsNullOrWhiteSpace(valueAB)) return "0";
-                    return ((Row)Row).AB.Value.ToString();
-                }
-            }
-            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-
-            public ColP(Row r) : base(r)
-            {
-            }
-        }
-        public class ColQ : ACell
-        {
-            public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
-            public override string Col { get { return "Q"; } }
-            public string TongTienVatTu
-            {
-                get
-                {
-                    string valueAC = ((Row)Row).AC.Value;
-                    if (string.IsNullOrWhiteSpace(valueAC)) return "0";
-                    return ((Row)Row).AC.Value.ToString();
-                }
-            }
-            public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-
-            public ColQ(Row r) : base(r)
-            {
-            }
-        }
-        public class ColR : ACell
-        {
-            public override string UniqueName { get { return "CongViec_ThanhTienVatLieu"; } }
-            public override string Col { get { return "R"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColR(Row r) : base(r)
-            {
-            }
-        }
-        public class ColS : ACell
-        {
-            public override string UniqueName { get { return "CongViec_ThanhTienVatLieuPhu"; } }
-            public override string Col { get { return "S"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColS(Row r) : base(r)
-            {
-            }
-        }
-        public class ColT : ACell
-        {
-            public override string UniqueName { get { return "CongViec_ThanhTienNhanCong"; } }
-            public override string Col { get { return "T"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColT(Row r) : base(r)
-            {
-            }
-        }
-        public class ColU : ACell
-        {
-            public override string UniqueName { get { return "CongViec_ThanhTienMay"; } }
-            public override string Col { get { return "U"; } }
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-            public ColU(Row r) : base(r)
-            {
-            }
-        }
-        
+        public CellA cellA { get; set; }
+        public CellB cellB { get; set; }
+        public CellC cellC { get; set; }
+        public CellD cellD { get; set; }
+        public CellE cellE { get; set; }
+        public CellF cellF { get; set; }
+        public CellG cellG { get; set; }
+        public CellH cellH { get; set; }
+        public CellI cellI { get; set; }
+        public CellJ cellJ { get; set; }
+        public CellK cellK { get; set; }
+        public CellL cellL { get; set; }
+        public CellM cellM { get; set; }
+        public CellN cellN { get; set; }
+        public CellO cellO { get; set; }
+        public CellP cellP { get; set; }
+        public CellQ cellQ { get; set; }
+        public CellR cellR { get; set; }
+        public CellS cellS { get; set; }
+        public CellT cellT { get; set; }
+        public CellU cellU { get; set; }
+        public CellV cellV { get; set; }
+        public CellW cellW { get; set; }
+        public CellX cellX { get; set; }
+        public CellY cellY { get; set; }
+        public CellZ cellZ { get; set; }
+        public CellAA cellAA { get; set; }
+        public CellAB cellAB { get; set; }
+        public CellAC cellAC { get; set; }
+       
         public void bind()
         {
 
@@ -290,17 +79,17 @@ namespace modDisplay.templates.tienluong.row
         public void render()
         {
             // xử lý công thức cho cột M
-            colM.Render();
+            cellM.Render();
             // xử lý công thức cho cột N, O, P, Q
-            colN.Render();
-            colO.Render();
-            colP.Render();
-            colQ.Render();
+            cellN.Render();
+            cellO.Render();
+            cellP.Render();
+            cellQ.Render();
             // xử lý công thức cho cột R, S, T, U
-            colR.Render();
-            colS.Render();
-            colT.Render();
-            colU.Render();
+            cellR.Render();
+            cellS.Render();
+            cellT.Render();
+            cellU.Render();
         }
 
         public void AddSimpleData()
@@ -321,7 +110,7 @@ namespace modDisplay.templates.tienluong.row
             //gridControl.SetCellValue(AC, "70230");
 
             // set màu chữ thành không màu
-            IRange range = masksheet.Range[Z.AddressLocal + ":" + AC.AddressLocal];
+            IRange range = masksheet.Range[cellZ.Range.AddressLocal + ":" + cellAC.Range.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
         }
     }

@@ -1,81 +1,49 @@
-﻿using Syncfusion.Windows.Forms.Spreadsheet;
-using Syncfusion.XlsIO;
-using System;
-using System.Collections.Generic;
+﻿using Syncfusion.XlsIO;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using modData.Memories.Pointer;
 using Syncfusion.Windows.Forms.Grid;
+using modDisplay.templates.tienluong.row.additional;
 
 namespace modDisplay.templates.tienluong.row
 {
-    internal class AdditionalRow : ARowObject
+    public class AdditionalRow : ARowObject
     {
         public AdditionalRow(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
+            cellB = new CellB(this);
+            cellC = new CellC(this);
+            cellD = new CellD(this);
+            cellF = new CellF(this);
+            cellG = new CellG(this);
+            cellH = new CellH(this);
+            cellI = new CellI(this);
+            cellJ = new CellJ(this);
+            cellK = new CellK(this);
+            cellL = new CellL(this);
         }
         public bool IsInterpretiveFormula { get; set; } = true;
-        public IRange C { get { return this.Cell("C"); } }
-        /// <summary>
-        /// Công thức diễn giả
-        /// </summary>
-        public IRange D { get { return this.Cell("D"); } }
+        public CellB cellB { get; set; }
+        public CellC cellC { get; set; }
+        public CellD cellD { get; set; }
+        public CellF cellF { get; set; }
+        public CellG cellG { get; set; }
+        public CellH cellH { get; set; }
+        public CellI cellI { get; set; }
+        public CellJ cellJ { get; set; }
+        public CellK cellK { get; set; }
+        public CellL cellL { get; set; }
 
-        /// <summary>
-        /// Tên CK
-        /// </summary>
-        public IRange F { get { return this.Cell("F"); } }
-        /// <summary>
-        /// Số CK
-        /// </summary>
-        public IRange G { get { return this.Cell("G"); } }
-        /// <summary>
-        /// Dài
-        /// </summary>
-        public IRange H { get { return this.Cell("H"); } }
-        /// <summary>
-        /// Rộng
-        /// </summary>
-        public IRange I { get { return this.Cell("I"); } }
-        /// <summary>
-        /// Cao
-        /// </summary>
-        public IRange J { get { return this.Cell("J"); } }
-        /// <summary>
-        /// HS phụ
-        /// </summary>
-        public IRange K { get { return this.Cell("K"); } }
-        /// <summary>
-        /// KL Phụ
-        /// </summary>
-        public IRange L { get { return this.Cell("L"); } }
-
-
-        /// <summary>
-        /// Lấy công thức cho các cột R, S, T, U
-        /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public string GetFormula(string col)
-        {
-            string[] parameters = new string[1] { Id.ToString() };
-            BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
-            return string.Format(modBLContainer.Get("CongViec_KhoiLuongPhu").formula(parameters));
-        }
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
-            if (!masksheet.Range["B" + Id].IsMerged)
+            if (!cellB.IsCellMerged)
             {
                 // check group object khi nhập vào
-                string C = masksheet.Range["C" + Id].Value;
+                string C = cellC.ValueOnMask.ToString();
                 if (string.IsNullOrWhiteSpace(C))
                 {
                     // check công thức diễn giải khi nhập vào
-                    string ColValueD = masksheet.Range["D" + Id].Value;
+                    string ColValueD = cellD.ValueOnMask.ToString();
                     if (!string.IsNullOrWhiteSpace(ColValueD))
                     {
                         string interpretiveFormula = ColValueD;
@@ -86,23 +54,21 @@ namespace modDisplay.templates.tienluong.row
                             if (segment[1].Trim() != "" && IsValidExpression(segment[1].Trim().Split("=")[0]))
                             {
                                 double result = EvaluateExpression(segment[1].Trim().Split("=")[0]);
-                                D.Value = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
+                                cellD.Range.Value = segment[1].Trim().Split("=").Length > 1 ? interpretiveFormula : interpretiveFormula + " = " + FormatResult(result);
 
                                 string formulaL = "=" + segment[1].Trim().Split("=")[0];
-                                var range = masksheet.Range["L" + Id];
-                                //gridControl.SetCellValue(range, formulaL);
-                                workingsheet.Range["L" + Id].Value2 = formulaL;
+                                cellL.Range.Formula = formulaL;
                                 IsInterpretiveFormula = true;
                             }
                             else
                             {
-                                D.Value = interpretiveFormula + " :";
+                                cellD.Range.Value = interpretiveFormula + " :";
                                 IsInterpretiveFormula = true;
                             }
                         }
                         else
                         {
-                            D.Value = interpretiveFormula + " :";
+                            cellD.Range.Value = interpretiveFormula + " :";
                             IsInterpretiveFormula = true;
                         }
                     }
@@ -128,10 +94,16 @@ namespace modDisplay.templates.tienluong.row
         {
             try
             {
+                // Sử dụng thư viện DataTable để thử tính toán biểu thức.
+                DataTable table = new DataTable();
+                table.Compute(expression, "");
+
+                // Nếu không có lỗi nào xảy ra, biểu thức là hợp lệ.
                 return true;
             }
             catch (Exception)
             {
+                // Nếu có lỗi xảy ra, biểu thức không hợp lệ.
                 return false;
             }
         }
@@ -145,7 +117,6 @@ namespace modDisplay.templates.tienluong.row
             table.Rows.Add(row);
             return double.Parse((string)row["expression"]);
         }
-
 
         internal void render()
         {

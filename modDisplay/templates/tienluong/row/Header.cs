@@ -1,20 +1,22 @@
-﻿using Syncfusion.Windows.Forms.Grid;
+﻿using modDisplay.templates.tienluong.row.header;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 
 namespace modDisplay.templates.tienluong.row
 {
-    internal class Header : ARowObject
+    public class Header : ARowObject
     {
         public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
+            cellB = new CellB(this);
         }
         /// <summary>
         /// Tên công trình hoặc tên hạng mục
         /// </summary>
-        public IRange B { get { return this.Cell("B"); } }
+        public CellB cellB { get; set; }
         public void bind()
         {
             // todo: Lưu giá trị của header tới global state

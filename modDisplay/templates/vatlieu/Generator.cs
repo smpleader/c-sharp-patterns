@@ -25,9 +25,8 @@ namespace modDisplay.templates.vatlieu
             {
                 { "Body", new Body(gridControl, masksheet, workingsheet) },
             };
-            Positions["Body"] = new Body(gridControl, masksheet, workingsheet);
-            // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
 
+            // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
             ((Body)Position("Body")).bindInWoringsheet();
             ((Body)Position("Body")).renderInWorkingsheet();
             if(Display.ActiveMaskSheetDebug != null)
