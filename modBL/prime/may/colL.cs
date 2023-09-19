@@ -32,9 +32,23 @@ namespace modBL.prime.may
                     return "";
                 case PPTGiaMay.BuGia:
                 case PPTGiaMay.NhanHeSoCongBuGia:
-                    return $"=SUM(I{args[0]}:K{args[0]})";
+                    return $"=SUM(I{args[0]}:K{args[0]})"; // Cột I->K: Bù NG, bù NC, bù NL
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaMay)
+            {
+                case PPTGiaMay.NhapTay:
+                case PPTGiaMay.TinhTrucTiep:
+                case PPTGiaMay.NhanHeSo:
+                    return "";
+                case PPTGiaMay.BuGia:
+                case PPTGiaMay.NhanHeSoCongBuGia:
+                    return $"=SUM(I{args[0]}:K{args[0]})"; // Cột I->K: Bù NG, bù NC, bù NL
+            }
+            return base.formula(hmId, args);
         }
     }
 }

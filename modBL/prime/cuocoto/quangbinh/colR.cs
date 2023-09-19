@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.quangbinh
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=E{args[0]}*G{args[0]}*L{args[1]}*N{args[1]}*P{args[1]}/(1+D5)+Q{args[1]}";
+            return $"=E{args[0]}*G{args[0]}*L{args[1]}*N{args[1]}*P{args[1]}/(1+D5)+Q{args[1]}"; // Cột E: khối lượng đơn vị, cột G: hệ số bậc hàng, cột L: hệ số phương tiện, cột N: cự ly, cột P: cước cơ bản, cột D: thuế VAT, cột Q: chi phí khác
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=E{args[0]}*G{args[0]}*L{args[1]}*N{args[1]}*P{args[1]}/(1+D5)+Q{args[1]}"; // Cột E: khối lượng đơn vị, cột G: hệ số bậc hàng, cột L: hệ số phương tiện, cột N: cự ly, cột P: cước cơ bản, cột D: thuế VAT, cột Q: chi phí khác
         }
     }
 }

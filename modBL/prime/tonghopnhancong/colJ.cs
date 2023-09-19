@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopnhancong
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.NHAN_CONG}'!E{args[0]}";
+            return $"='{SheetName.NHAN_CONG}'!E{args[0]}"; // Cột E: giá gốc nhân công
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.NHAN_CONG}_{hmId}'!E{args[0]}"; // Cột E: giá gốc nhân công
         }
     }
 }

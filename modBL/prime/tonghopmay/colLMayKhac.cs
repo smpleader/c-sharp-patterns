@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopmay
 {
     // Đơn giá TB vật liệu khác theo công việc
-    internal class colLMayKhac : ACell
+    public class colLMayKhac : ACell
     {
         public colLMayKhac(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PTVT!K{args[0]}";
+            return $"={SheetName.PHAN_TICH_VAT_TU}!K{args[0]}"; // Cột K: giá TB máy khác
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"={SheetName.PHAN_TICH_VAT_TU}_{hmId}!K{args[0]}"; // Cột K: giá TB máy khác
+        } 
     }
 }

@@ -24,7 +24,7 @@ namespace modBL.prime.tinhgiacamay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PRODUCT(E{args[0]};F{args[0]})";
+            return $"=B{args[0]}";
         }
     }
 }

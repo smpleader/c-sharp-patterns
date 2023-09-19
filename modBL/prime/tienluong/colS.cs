@@ -24,7 +24,11 @@ namespace modBL.prime.tienluong
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=M{args[0]}*O{args[0]}";
+            return $"=M{args[0]}*O{args[0]}"; // Cột M: Khối lượng, cột O: Đơn giá vật liệu phụ
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=M{args[0]}*O{args[0]}"; // Cột M: Khối lượng, cột O: Đơn giá vật liệu phụ
         }
     }
 }

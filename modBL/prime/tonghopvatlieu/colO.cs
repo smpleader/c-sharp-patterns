@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Tính thành tiền chênh lệch giá TB cho một vật liệu
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=I{args[0]}*N{args[0]}";
+            return $"=I{args[0]}*N{args[0]}"; // CỘt I: hao phí vật liệu, cột N: chênh lệch giá thông báo vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=I{args[0]}*N{args[0]}"; // CỘt I: hao phí vật liệu, cột N: chênh lệch giá thông báo vật liệu
         }
     }
 }

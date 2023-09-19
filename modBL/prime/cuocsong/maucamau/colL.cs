@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maucamau
 {
-    internal class colL : ACell
+    public class colL : ACell
     {
         public colL(Option opt) : base(opt)
         {
@@ -24,7 +24,7 @@ namespace modBL.prime.cuocsong.maucamau
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=I{args[0]}*K{args[0]}";
+            return $"=I{args[0]}*K{args[0]}"; //Cột I: hệ số, cột K: cự ly quy đổi
         }
     }
 }

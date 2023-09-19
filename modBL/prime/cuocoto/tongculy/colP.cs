@@ -23,7 +23,11 @@ namespace modBL.prime.cuocoto.tongculy
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=O{args[0]}/(1+X5)";
+            return $"=O{args[0]}/(1+X5)"; // Cột O: sau thuế, cột X: thuế VAT
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=O{args[0]}/(1+X5)"; // Cột O: sau thuế, cột X: thuế VAT
         }
     }
 }

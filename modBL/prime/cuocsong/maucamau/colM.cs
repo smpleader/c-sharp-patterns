@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maucamau
 {
-    internal class colM : ACell
+    public class colM : ACell
     {
         public colM(Option opt) : base(opt)
         {
@@ -25,7 +25,7 @@ namespace modBL.prime.cuocsong.maucamau
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(L{args[0]}:L{args[1]})";
+            return $"=SUM(L{args[0]}:L{args[1]})"; // Cột L: tổng thành tiền theo cự ly
         }
     }
 }

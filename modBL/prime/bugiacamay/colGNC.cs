@@ -25,7 +25,11 @@ namespace modBL.prime.bugiacamay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PRODUCT(E{args[0]};F{args[0]})";
+            return $"=PRODUCT(E{args[0]};F{args[0]})"; // Cột E: định mức, cột F: nhiên liệu phụ
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=PRODUCT(E{args[0]};F{args[0]})"; // Cột E: định mức, cột F: nhiên liệu phụ
         }
     }
 }

@@ -24,6 +24,9 @@ namespace modDisplay.templates.tienluong.row
         public CellT cellT { get; set; }
         public CellU cellU { get; set; }
 
+       
+
+        
         public void bind()
         {
             Id = this.FindIndexRowFooter(gridControl, masksheet, start);

@@ -18,7 +18,11 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_KhoiLuong";
         public override string formula(string[] args)
         {
-            return $"=SUM(L{args[0]}:L{args[1]})";
+            return $"=SUM(L{args[0]}:L{args[1]})"; // Cột L: khối lượng phụ
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(L{args[0]}:L{args[1]})"; // Cột L: khối lượng phụ
         }
     }
 }

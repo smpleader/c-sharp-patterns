@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocthucong.dinhmuc1778
 {
-    internal class colR : ACell
+    public class colR : ACell
     {
         public colR(Option opt) : base(opt)
         {
@@ -27,9 +27,9 @@ namespace modBL.prime.cuocthucong.dinhmuc1778
         {
             //R4*R5*H12*J12*P12+Q12+R4*R5*H12*J13*P13+Q13+R4*R5*H12*J14*P14+Q14
             var tmp = $"=";
-            for (var i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length-1; i++)
             {
-                tmp += $"R4*R5*H{args[0]}*J{args[i]}*P{args[i]}+Q{args[i]}+";
+                tmp += $"R4*R5*H{args[0]}*J{args[i+1]}*P{args[i+1]}+Q{args[i+1]}+";
             }
             var formula = tmp.TrimEnd('+');
             return formula;

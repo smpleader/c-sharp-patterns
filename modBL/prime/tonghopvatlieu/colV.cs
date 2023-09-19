@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Tính thành tiền cước vận chuyển cho một vật liệu
-    internal class colV : ACell
+    public class colV : ACell
     {
         public colV(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=I{args[0]}*U{args[0]}";
+            return $"=I{args[0]}*U{args[0]}"; // Cột I: hao phí vật liệu, cột U: cước vận chuyển
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=I{args[0]}*U{args[0]}"; // Cột I: hao phí vật liệu, cột U: cước vận chuyển
         }
     }
 }

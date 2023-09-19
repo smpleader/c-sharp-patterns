@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PTVT!F{args[0]}";
+            return $"={SheetName.PHAN_TICH_VAT_TU}!F{args[0]}"; // Cột F: Định mức máy
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"={SheetName.PHAN_TICH_VAT_TU}_{hmId}!F{args[0]}"; // Cột F: Định mức máy
         }
     }
 }

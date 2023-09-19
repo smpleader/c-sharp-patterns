@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     //Tổng thành tiền cước vận chuyển vật liệu khác
-    internal class colVTongKhac : ACell
+    public class colVTongKhac : ACell
     {
         public colVTongKhac(Option opt) : base(opt)
         {
@@ -26,7 +26,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(V{args[0]}:V{args[1]})";
+            return $"=SUM(V{args[0]}:V{args[1]})"; // Cột V: thành tiền cước VC vật liệu khác
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(V{args[0]}:V{args[1]})"; // Cột V: thành tiền cước VC vật liệu khác
         }
     }
 }

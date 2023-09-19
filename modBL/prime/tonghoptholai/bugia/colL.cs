@@ -26,5 +26,9 @@ namespace modBL.prime.tonghoptholai.bugia
         {
             return $"='{SheetName.BU_GIA_CA_MAY}'!Q{args[0]}"; // Cột Q: Giá HT nhân công, nhiên liệu trong bảng phụ
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.BU_GIA_CA_MAY}_{hmId}'!Q{args[0]}"; // Cột Q: Giá HT nhân công, nhiên liệu trong bảng phụ
+        }
     }
 }

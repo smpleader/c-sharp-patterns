@@ -18,7 +18,11 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_KhoiLuongPhu";
         public override string formula(string[] args)
         {
-            return $"=PRODUCT(G{args[0]}:K{args[0]})";
+            return $"=PRODUCT(G{args[0]}:K{args[0]})"; // Cột G->K diễn giải khối lượng
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=PRODUCT(G{args[0]}:K{args[0]})"; // Cột G->K diễn giải khối lượng
         }
     }
 }

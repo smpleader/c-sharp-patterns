@@ -30,9 +30,21 @@ namespace modBL.prime.nhancong
                 case PPTGiaNhanCong.TinhTrucTiep:
                     return "";
                 case PPTGiaNhanCong.NhanHeSo:
-                    return $"=F{args[0]}*G{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaNhanCong)
+            {
+                case PPTGiaNhanCong.NhapTay:
+                case PPTGiaNhanCong.TinhTrucTiep:
+                    return "";
+                case PPTGiaNhanCong.NhanHeSo:
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
+            }
+            return base.formula(hmId, args);
         }
     }
 }

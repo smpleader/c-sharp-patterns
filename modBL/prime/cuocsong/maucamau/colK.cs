@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maucamau
 {
-    internal class colK : ACell
+    public class colK : ACell
     {
         public colK(Option opt) : base(opt)
         {
@@ -27,7 +27,7 @@ namespace modBL.prime.cuocsong.maucamau
         public override string formula(string[] args)
         {
             //IF(J10<=0;0;IF(J10<=30;J10*932;30*932))+IF(J10>30;(J10-30)*330;0)  
-            return $"=IF(J{args[0]}<=0;0;IF(J{args[0]}<=30;J{args[0]}*{args[1]};30*{args[1]}))+IF(J{args[0]}>30;(J{args[0]}-30)*{args[2]};0)";
+            return $"=IF(J{args[0]}<=0;0;IF(J{args[0]}<=30;J{args[0]}*{args[1]};30*{args[1]}))+IF(J{args[0]}>30;(J{args[0]}-30)*{args[2]};0)"; //Cột J: Cự ly
         }
     }
 }

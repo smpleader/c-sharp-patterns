@@ -15,7 +15,7 @@ namespace modBL.prime.tonghopnhienlieu.bugia
         }
 
         public override string CName => "M";
-        public override string UName => "TongHopNL_BuGia_TongThanhTienGiaGocNhienLieu";
+        public override string UName => "TongHopNL_BuGia_ThanhTienGiaHienTruong";
 
         /// <summary>
         /// 1 tham số

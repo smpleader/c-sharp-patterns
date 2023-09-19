@@ -23,7 +23,11 @@ namespace modBL.prime.cuocoto.quangbinh
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=D4*T{args[0]}";
+            return $"=D4*T{args[0]}"; // Cột D: lương nhân công bốc dỡ, cột T: định mức bốc xếp chi phí trung chuyển
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=D4*T{args[0]}"; // Cột D: lương nhân công bốc dỡ, cột T: định mức bốc xếp chi phí trung chuyển
         }
     }
 }

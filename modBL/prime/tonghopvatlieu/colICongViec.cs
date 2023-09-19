@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Hao phí theo công việc
-    internal class colICongViec : ACell
+    public class colICongViec : ACell
     {
         public colICongViec(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PRODUCT(F{args[0]};G{args[0]};H{args[0]})";
+            return $"=PRODUCT(F{args[0]};G{args[0]};H{args[0]})"; // Cột F: khối lượng thi công, cột G: định mức vật liệu, cột H: hệ số điều chỉnh vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=PRODUCT(F{args[0]};G{args[0]};H{args[0]})"; // Cột F: khối lượng thi công, cột G: định mức vật liệu, cột H: hệ số điều chỉnh vật liệu
         }
     }
 }

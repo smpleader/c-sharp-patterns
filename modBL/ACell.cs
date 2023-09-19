@@ -33,7 +33,7 @@ namespace modBL
         {
             return "";
         }
-        public virtual string formula(string hangMucId,string[] args)
+        public virtual string formula(string hangMucId, string[] args)
         {
             return "";
         }

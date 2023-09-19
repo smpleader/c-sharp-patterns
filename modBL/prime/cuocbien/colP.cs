@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocbien
 {
-    internal class colP : ACell
+    public class colP : ACell
     {
         public colP(Option opt) : base(opt)
         {

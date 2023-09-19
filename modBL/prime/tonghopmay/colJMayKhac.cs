@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopmay
 {
     // Đơn giá gốc máy khác theo công việc
-    internal class colJMayKhac : ACell
+    public class colJMayKhac : ACell
     {
         public colJMayKhac(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=PTVT!I{args[0]}";
+            return $"={SheetName.PHAN_TICH_VAT_TU}!I{args[0]}"; // Cột I: giá gốc máy khác
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"={SheetName.PHAN_TICH_VAT_TU}_{hmId}!I{args[0]}"; // Cột I: giá gốc máy khác
         }
     }
 }

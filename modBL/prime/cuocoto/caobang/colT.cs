@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.caobang
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=IF(E{args[0]}*N{args[0]}=0;0;(G{args[0]}+SUM(P{args[0]}:P{args[1]}))*S{args[0]})";
+            return $"=IF(E{args[0]}*N{args[0]}=0;0;(G{args[0]}+SUM(P{args[0]}:P{args[1]}))*S{args[0]})"; // Cột E: khối lượng đơn vị, cột N: tổng cự ly, cột G: giá mua, cột P: thành tiền chi phí vận chuyển, cột S: định mức hao hụt
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=IF(E{args[0]}*N{args[0]}=0;0;(G{args[0]}+SUM(P{args[0]}:P{args[1]}))*S{args[0]})"; // Cột E: khối lượng đơn vị, cột N: tổng cự ly, cột G: giá mua, cột P: thành tiền chi phí vận chuyển, cột S: định mức hao hụt
         }
     }
 }

@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.MAY}'!C{args[0]}";
+            return $"='{SheetName.MAY}'!C{args[0]}"; // Cột C: tên máy
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.MAY}_{hmId}'!C{args[0]}"; // Cột C: tên máy
         }
     }
 }

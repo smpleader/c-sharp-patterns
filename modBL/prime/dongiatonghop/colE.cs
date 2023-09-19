@@ -26,5 +26,9 @@ namespace modBL.prime.dongiatonghop
         {
             return $"='{SheetName.TIEN_LUONG}'!E{args[0]}"; // Cột E: Đơn vị
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.TIEN_LUONG}_{hmId}'!E{args[0]}"; // Cột E: Đơn vị
+        }
     }
 }

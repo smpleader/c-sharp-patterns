@@ -23,7 +23,11 @@ namespace modBL.prime.cuocoto.quangbinh
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=Z{args[0]}+AJ{args[0]}";
+            return $"=Z{args[0]}+AJ{args[0]}"; // Cột Z: giá vật liệu bình quân đến chân công trình, cột AJ: cộng chi phí tại hiện trường
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=Z{args[0]}+AJ{args[0]}"; // Cột Z: giá vật liệu bình quân đến chân công trình, cột AJ: cộng chi phí tại hiện trường
         }
     }
 }

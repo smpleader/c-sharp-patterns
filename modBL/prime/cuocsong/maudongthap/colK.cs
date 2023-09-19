@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maudongthap
 {
-    internal class colK : ACell
+    public class colK : ACell
     {
         public colK(Option opt) : base(opt)
         {

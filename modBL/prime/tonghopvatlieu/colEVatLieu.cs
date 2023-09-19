@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Đơn vị vật liệu
-    internal class colEVatLieu : ACell
+    public class colEVatLieu : ACell
     {
         public colEVatLieu(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.VAT_LIEU}'!D{args[0]}";
+            return $"='{SheetName.VAT_LIEU}'!D{args[0]}"; // Cột D: Đơn vị vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.VAT_LIEU}_{hmId}'!D{args[0]}"; // Cột D: Đơn vị vật liệu
         }
     }
 }

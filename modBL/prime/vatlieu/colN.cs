@@ -31,11 +31,11 @@ namespace modBL.prime.vatlieu
                     return "";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=SUM(I{args[0]}:L{args[0]})";
+                    return $"=SUM(I{args[0]}:L{args[0]})"; // Cột I->L: cước ô tô, sông, biển, thủ công
             }
             return base.formula(args);
         }
-        public override string formula( string hmId,string[] args)
+        public override string formula(string hmId, string[] args)
         {
             switch (Option.PPTGiaVatLieu)
             {
@@ -44,9 +44,9 @@ namespace modBL.prime.vatlieu
                     return "";
                 case PPTGiaVatLieu.CongCuocVanChuyen:
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=SUM(I{args[0]}:L{args[0]})";
+                    return $"=SUM(I{args[0]}:L{args[0]})"; // Cột I->L: cước ô tô, sông, biển, thủ công
             }
-            return base.formula(args);
+            return base.formula(hmId, args);
         }
     }
 }

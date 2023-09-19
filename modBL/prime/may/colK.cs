@@ -35,12 +35,32 @@ namespace modBL.prime.may
                     string tmp = $"=";
                     for (var i = 0; i < args.Length; i++)
                     {
-                        tmp += $"'{SheetName.BU_GIA_CA_MAY}'!L{args[i]}+";
+                        tmp += $"'{SheetName.BU_GIA_CA_MAY}'!L{args[i]}+"; // Cột L: Bù giá nhiên liệu
                     }
                     string formula = tmp.TrimEnd('+');
                     return formula;
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaMay)
+            {
+                case PPTGiaMay.NhapTay:
+                case PPTGiaMay.TinhTrucTiep:
+                case PPTGiaMay.NhanHeSo:
+                    return "";
+                case PPTGiaMay.BuGia:
+                case PPTGiaMay.NhanHeSoCongBuGia:
+                    string tmp = $"=";
+                    for (var i = 0; i < args.Length; i++)
+                    {
+                        tmp += $"'{SheetName.BU_GIA_CA_MAY}_{hmId}'!L{args[i]}+"; // Cột L: Bù giá nhiên liệu
+                    }
+                    string formula = tmp.TrimEnd('+');
+                    return formula;
+            }
+            return base.formula(hmId, args);
         }
     }
 }

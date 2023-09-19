@@ -25,7 +25,11 @@ namespace modBL.prime.dongiatonghop
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";H{args[0]}:H{args[1]})"; //Cột H: thành tiền công việc
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";H{args[0]}:H{args[1]})"; //Cột B: số thứ tự, cột H: thành tiền công việc
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";H{args[0]}:H{args[1]})"; //Cột B: số thứ tự, cột H: thành tiền công việc
         }
     }
 }

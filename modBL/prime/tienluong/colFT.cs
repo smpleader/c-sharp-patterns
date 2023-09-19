@@ -18,7 +18,11 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_TongThanhTienNhanCong";
         public override string formula(string[] args)
         {
-            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";T{args[0]}:T{args[1]})";
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";T{args[0]}:T{args[1]})"; // Cột B: số thứ tự, cột T: thành tiền nhân công
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUMIF(B{args[0]}:B{args[1]};\">0\";T{args[0]}:T{args[1]})"; // Cột B: số thứ tự, cột T: thành tiền nhân công
         }
     }
 }

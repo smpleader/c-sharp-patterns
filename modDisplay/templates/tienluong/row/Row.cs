@@ -94,23 +94,23 @@ namespace modDisplay.templates.tienluong.row
 
         public void AddSimpleData()
         {
-            //gridControl.SetCellValue(C, "AG.11111");
-            //gridControl.SetCellValue(D, "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)");
-            //gridControl.SetCellValue(E, "m3");
+            Display.ActiveMaskSheetDebug = Display.WorkSheetsDebug["Tiên lượng"];
 
-            //gridControl.SetCellValue(V, "1");
-            //gridControl.SetCellValue(W, "1");
-            //gridControl.SetCellValue(X, "1");
+            cellC.Range.Value2 = "AG.11111";
+            cellD.Range.Value2 = "Bê tông cọc, cột, bê tông M100, đá 1x2, PCB30 - Đổ bê tông đúc sẵn bằng thủ công (vữa bê tông sản xuất bằng máy trộn)";
+            cellE.Range.Value2 = "m3";
+            cellV.Range.Value2 = 1;
+            cellW.Range.Value2 = 1;
+            cellX.Range.Value2 = 1;
 
-            //gridControl.SetCellValue(Y, "DinhMuc_2021XD_D12");
-
-            //gridControl.SetCellValue(Z, "685204");
-            //gridControl.SetCellValue(AA, "0");
-            //gridControl.SetCellValue(AB, "288111");
-            //gridControl.SetCellValue(AC, "70230");
+            cellY.Range.Value2 = "DinhMuc_2021XD_D12";
+            cellZ.Range.Value2 = 685204;
+            cellAA.Range.Value2 = 0;
+            cellAB.Range.Value2 = 288111;
+            cellAC.Range.Value2 = 70230;
 
             // set màu chữ thành không màu
-            IRange range = masksheet.Range[cellZ.Range.AddressLocal + ":" + cellAC.Range.AddressLocal];
+            IRange range = workingsheet.Range[cellZ.Range.AddressLocal + ":" + cellAC.Range.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopmay
 {
     // Đơn giá HT máy
-    internal class colW : ACell
+    public class colW : ACell
     {
         public colW(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.MAY}'!M{args[0]}";
+            return $"='{SheetName.MAY}'!M{args[0]}"; // Cột M: giá hiện trường
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.MAY}_{hmId}'!M{args[0]}"; // Cột M: giá hiện trường
         }
     }
 }

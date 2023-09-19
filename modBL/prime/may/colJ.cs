@@ -24,8 +24,6 @@ namespace modBL.prime.may
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            string tmp = "";
-            string formula = "";
             switch (Option.PPTGiaMay)
             {
                 case PPTGiaMay.NhapTay:
@@ -34,16 +32,37 @@ namespace modBL.prime.may
                     return "";
                 case PPTGiaMay.BuGia:
                 case PPTGiaMay.NhanHeSoCongBuGia:
-                    tmp = $"=";
+                    string tmp = $"=";
                     for (var i = 0; i < args.Length; i++)
                     {
-                        tmp += $"'{SheetName.BU_GIA_CA_MAY}'!L{args[i]}+";
+                        tmp += $"'{SheetName.BU_GIA_CA_MAY}'!L{args[i]}+"; // Cột L: bù giá nhân công
                     }
-                    formula = tmp.TrimEnd('+');
+                    string formula = tmp.TrimEnd('+');
                     return formula;
                 
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaMay)
+            {
+                case PPTGiaMay.NhapTay:
+                case PPTGiaMay.TinhTrucTiep:
+                case PPTGiaMay.NhanHeSo:
+                    return "";
+                case PPTGiaMay.BuGia:
+                case PPTGiaMay.NhanHeSoCongBuGia:
+                    string tmp = $"=";
+                    for (var i = 0; i < args.Length; i++)
+                    { 
+                        tmp += $"'{SheetName.BU_GIA_CA_MAY}_{hmId}'!L{args[i]}+"; // Cột L: bù giá nhân công
+                    }
+                    string formula = tmp.TrimEnd('+');
+                    return formula;
+
+            }
+            return base.formula(hmId, args);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace modBL.prime.tonghopnhienlieu.bugia
         }
 
         public override string CName => "L";
-        public override string UName => "TongHopNL_BuGia_TongThanhTienGiaGocNhienLieu";
+        public override string UName => "TongHopNL_BuGia_GiaHienTruong";
 
         /// <summary>
         /// 1 tham số
@@ -25,6 +25,10 @@ namespace modBL.prime.tonghopnhienlieu.bugia
         public override string formula(string[] args)
         {
             return $"='{SheetName.BU_GIA_CA_MAY}'!Q{args[0]}"; // Cột Q: Giá HT nhân công, nhiên liệu trong bảng phụ
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.BU_GIA_CA_MAY}_{hmId}'!Q{args[0]}"; // Cột Q: Giá HT nhân công, nhiên liệu trong bảng phụ
         }
     }
 }

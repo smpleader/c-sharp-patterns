@@ -26,5 +26,9 @@ namespace modBL.prime.dongiatonghop
         {
             return $"='{SheetName.CHIET_TINH}'!I{args[0]}"; //Cột I: thành tiền chi phí sau thuế của công việc trong bảng
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.CHIET_TINH}_{hmId}'!I{args[0]}"; //Cột I: thành tiền chi phí sau thuế của công việc trong bảng
+        }
     }
 }

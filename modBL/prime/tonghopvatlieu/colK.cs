@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Tính thành tiền giá gốc cho một vật liệu
-    internal class colK : ACell
+    public class colK : ACell
     {
         public colK(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=I{args[0]}*J{args[0]}";
+            return $"=I{args[0]}*J{args[0]}"; // Cột I: Hao phí vật liệu, cột J: giá gốc vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=I{args[0]}*J{args[0]}"; // Cột I: Hao phí vật liệu, cột J: giá gốc vật liệu
         }
     }
 }

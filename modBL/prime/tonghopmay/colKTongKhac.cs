@@ -26,7 +26,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(K{args[0]}:K{args[1]})";
+            return $"=SUM(K{args[0]}:K{args[1]})"; // Cột K: thành tiền giá gốc máy khác
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(K{args[0]}:K{args[1]})"; // Cột K: thành tiền giá gốc máy khác
         }
     }
 }

@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.quangbinh
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=IF(AF{args[0]}<=0;0;{args[1]})";
+            return $"=IF(AF{args[0]}<=0;0;{args[1]})"; // Cột AF: cự ly chi phí vận chuyển nội bộ
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=IF(AF{args[0]}<=0;0;{args[1]})"; // Cột AF: cự ly chi phí vận chuyển nội bộ
         }
     }
 }

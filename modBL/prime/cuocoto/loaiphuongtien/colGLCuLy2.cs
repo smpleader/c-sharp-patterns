@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.cuocoto.loaiphuongtien
 {
     // Cột L cho group object dòng cước cự ly nhỏ hơn hoặc bằng 7km
-    internal class colGLCuLy2 : ACell
+    public class colGLCuLy2 : ACell
     {
         public colGLCuLy2(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=G{args[0]}*J{args[1]}*K{args[1]}";
+            return $"=G{args[0]}*J{args[1]}*K{args[1]}"; // Cột G: Hệ số quy đổi đơn vị, cột J: cự ly trong phạm vi <= 7km, cột K: giá cước trong phạm vi <= 7km
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=G{args[0]}*J{args[1]}*K{args[1]}"; // Cột G: Hệ số quy đổi đơn vị, cột J: cự ly trong phạm vi <= 7km, cột K: giá cước trong phạm vi <= 7km
         }
     }
 }

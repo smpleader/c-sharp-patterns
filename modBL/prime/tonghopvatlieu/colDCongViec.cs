@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Tên công việc
-    internal class colDCongViec : ACell
+    public class colDCongViec : ACell
     {
         public colDCongViec(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.TIEN_LUONG}'!D{args[0]}";
+            return $"='{SheetName.TIEN_LUONG}'!D{args[0]}"; // Cột D: Tên công việc
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.TIEN_LUONG}_{hmId}'!D{args[0]}"; // Cột D: Tên công việc
         }
     }
 }

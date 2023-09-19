@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.cuocthucong.cuocthucongchung
 {
     // Tính giá cước vận chuyển
-    internal class colMVanChuyen : ACell
+    public class colMVanChuyen : ACell
     {
         public colMVanChuyen(Option opt) : base(opt)
         {

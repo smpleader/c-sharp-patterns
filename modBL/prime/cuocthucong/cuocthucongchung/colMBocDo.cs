@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.cuocthucong.cuocthucongchung
 {
     // Tính giá cước bốc dỡ
-    internal class colMBocDo : ACell
+    public class colMBocDo : ACell
     {
         public colMBocDo(Option opt) : base(opt)
         {

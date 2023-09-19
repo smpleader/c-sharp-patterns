@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     //Tổng thành tiền chênh lệch giá TB các vật liệu
-    internal class colOTong : ACell
+    public class colOTong : ACell
     {
         public colOTong(Option opt) : base(opt)
         {
@@ -26,7 +26,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUMIF(A{args[0]}:A{args[1]};\"VT\";O{args[0]}:O{args[1]})";
+            return $"=SUMIF(A{args[0]}:A{args[1]};\"VT\";O{args[0]}:O{args[1]})"; // Cột A: chưa có tên cột, cột O: thành tiền chênh lệch giá TB
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUMIF(A{args[0]}:A{args[1]};\"VT\";O{args[0]}:O{args[1]})"; // Cột A: chưa có tên cột, cột O: thành tiền chênh lệch giá TB
         }
     }
 }

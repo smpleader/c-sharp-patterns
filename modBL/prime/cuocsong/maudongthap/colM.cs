@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maudongthap
 {
-    internal class colM : ACell
+    public class colM : ACell
     {
         public colM(Option opt) : base(opt)
         {
@@ -29,7 +29,7 @@ namespace modBL.prime.cuocsong.maudongthap
         public override string formula(string[] args)
         {
             //IF(L12<=0;0;IF(L12<=10;48182;IF(L12<=20;59091;IF(L12<=30;66364;66364))))+IF(L12>30;(L12-30)*899;0)
-            return $"=IF(L{args[0]}<=0;0;IF(L{args[0]}<=10;{args[1]};IF(L{args[0]}<=20;{args[2]};IF(L12<=30;{args[3]};{args[3]}))))+IF(L12>30;(L12-30)*{args[3]};0)";
+            return $"=IF(L{args[0]}<=0;0;IF(L{args[0]}<=10;{args[1]};IF(L{args[0]}<=20;{args[2]};IF(L{args[0]}<=30;{args[3]};{args[3]}))))+IF(L{args[0]}>30;(L{args[0]}-30)*{args[4]};0)";
         }
     }
 }

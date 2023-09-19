@@ -45,5 +45,9 @@ namespace BaseInterface
         public static readonly string TONG_HOP_DU_TOAN_GOI_THAU = "GGTXD";
 
         public static readonly string TONG_HOP_KINH_PHI_HANG_MUC = "THKPHM";
+
+        public static readonly string THONG_TIN = "Thông tin";
+
+        public static readonly string TRA_DINH_MUC = "Tra định mức";
     }
 }

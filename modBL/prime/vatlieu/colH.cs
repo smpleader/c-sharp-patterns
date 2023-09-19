@@ -31,11 +31,11 @@ namespace modBL.prime.vatlieu
                     return "";
                 case PPTGiaVatLieu.NhanHeSo:
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=F{args[0]}*G{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
             }
             return base.formula(args);
         }
-        public override string formula(string hmId ,string[] args)
+        public override string formula(string hmId, string[] args)
         {
             switch (Option.PPTGiaVatLieu)
             {
@@ -44,9 +44,9 @@ namespace modBL.prime.vatlieu
                     return "";
                 case PPTGiaVatLieu.NhanHeSo:
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=F{args[0]}*G{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
             }
-            return base.formula(args);
+            return base.formula(hmId, args);
         }
     }
 }

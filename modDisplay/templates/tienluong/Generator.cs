@@ -38,7 +38,7 @@ namespace modDisplay.templates.tienluong
             {
                 { "Header", new HeaderGroup(gridControl, masksheet, workingsheet) },
                 { "Body", new Body(gridControl, masksheet, workingsheet) },
-                { "Footer", new Body(gridControl, masksheet, workingsheet) },
+                { "Footer", new FooterGroup(gridControl, masksheet, workingsheet) },
 
             };
             // bind
@@ -62,15 +62,17 @@ namespace modDisplay.templates.tienluong
         {
             // thêm công việc vào dòng đang chọn
             int selectedIndexRow = Display.Row;
-            if (selectedIndexRow >= Positions["Body"].start && selectedIndexRow <= Positions["Body"].end)
+            if (Positions["Body"].HasRow(selectedIndexRow))
             {
                 // bắt đầu thêm công việc
                 IsEditting = true;
                 ((Body)Positions["Body"]).rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
                 Row selectedRow = ((Body)Positions["Body"]).rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
-                ((Body)Positions["Body"]).bind();
-                ((Body)Positions["Body"]).render();
+                ((Body)Positions["Body"]).bindInWoringsheet();
+                ((Body)Positions["Body"]).renderInWorkingsheet();
+                Display.showDataDebug();
+                Display.showData();
                 IsEditting = false;
             }
         }

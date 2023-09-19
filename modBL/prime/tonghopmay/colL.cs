@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.MAY}'!F{args[0]}";
+            return $"='{SheetName.MAY}'!F{args[0]}"; // Cột F: giá TB
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.MAY}_{hmId}'!F{args[0]}"; // Cột F: giá TB
         }
     }
 }

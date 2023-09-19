@@ -26,13 +26,13 @@ namespace modBL.prime.vatlieu
             switch (Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
-                    return $"=F{args[0]}+M{args[0]}";
+                    return $"=F{args[0]}+M{args[0]}"; //Cột F: giá TB, cột M: cước khác
                 case PPTGiaVatLieu.NhanHeSo:
-                    return $"=H{args[0]}";
+                    return $"=H{args[0]}"; //Cột H: giá TBxHS
                 case PPTGiaVatLieu.CongCuocVanChuyen:
-                    return $"=F{args[0]}+N{args[0]}";
+                    return $"=F{args[0]}+N{args[0]}"; //Cột F: giá TB, cột N: Tổng cước
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=H{args[0]}+N{args[0]}";
+                    return $"=H{args[0]}+N{args[0]}"; //Cột H: giá TBxHS, cột N: Tổng cước
             }
             return base.formula(args);
         }
@@ -41,15 +41,15 @@ namespace modBL.prime.vatlieu
             switch (Option.PPTGiaVatLieu)
             {
                 case PPTGiaVatLieu.NhapTay:
-                    return $"=F{args[0]}+M{args[0]}";
+                    return $"=F{args[0]}+M{args[0]}"; //Cột F: giá TB, cột M: cước khác
                 case PPTGiaVatLieu.NhanHeSo:
-                    return $"=H{args[0]}";
+                    return $"=H{args[0]}"; //Cột H: giá TBxHS
                 case PPTGiaVatLieu.CongCuocVanChuyen:
-                    return $"=F{args[0]}+N{args[0]}";
+                    return $"=F{args[0]}+N{args[0]}"; //Cột F: giá TB, cột N: Tổng cước
                 case PPTGiaVatLieu.NhanHeSoCongCuocVanChuyen:
-                    return $"=H{args[0]}+N{args[0]}";
+                    return $"=H{args[0]}+N{args[0]}"; //Cột H: giá TBxHS, cột N: Tổng cước
             }
-            return base.formula(args);
+            return base.formula(hmId, args);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.cuocthucong.laocai
 {
     // Dòng đầu tiên tính cước vật liệu 
-    internal class colODong1 : ACell
+    public class colODong1 : ACell
     {
         public colODong1(Option opt) : base(opt)
         {
@@ -18,7 +18,7 @@ namespace modBL.prime.cuocthucong.laocai
         public override string UName => "CuocTC_LaoCai_ThanhTienDongCuocDau";
 
         /// <summary>
-        /// 2 tham số
+        /// 1 tham số
         /// <para> Tham số 1 là chỉ số dòng tính cước vật liệu </para>
         /// </summary>
         /// <param name="args"></param>

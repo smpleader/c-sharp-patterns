@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.mauchung
 {
-    internal class colL : ACell
+    public class colL : ACell
     {
         public colL(Option opt) : base(opt)
         {
@@ -25,7 +25,7 @@ namespace modBL.prime.cuocsong.mauchung
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(K{args[0]}:K{args[1]})";
+            return $"=SUM(K{args[0]}:K{args[1]})"; // cột K: cự ly quy đổi
         }
     }
 }

@@ -20,6 +20,7 @@ namespace modDisplay.templates.tienluong.row.row
        
         public override void Render()
         {
+
         }
         public override void Bind()
         {

@@ -26,7 +26,17 @@ namespace modBL.prime.cuocoto.quangbinh
             var tmp = $"=";
             for (var i = 0; i < args.Length; i++)
             {
-                tmp += $"R{args[i]}+";
+                tmp += $"R{args[i]}+"; // Cột R: thành tiền chi phí vận chuyển
+            }
+            var formula = tmp.TrimEnd('+');
+            return formula;
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            var tmp = $"=";
+            for (var i = 0; i < args.Length; i++)
+            {
+                tmp += $"R{args[i]}+"; // Cột R: thành tiền chi phí vận chuyển
             }
             var formula = tmp.TrimEnd('+');
             return formula;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocthucong.laocai
 {
-    internal class colQ : ACell
+    public class colQ : ACell
     {
         public colQ(Option opt) : base(opt)
         {
@@ -27,9 +27,9 @@ namespace modBL.prime.cuocthucong.laocai
         {
             //F10*(O10+P10+O11+P11+O12+P12)
             var tmp = $"=F{args[0]}*(";
-            for (var i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length-1; i++)
             {
-                tmp += $"O{args[i]}+P{args[i]}+";
+                tmp += $"O{args[i+1]}+P{args[i+1]}+";
             }
             var formula = tmp.TrimEnd('+');
             formula += ")";

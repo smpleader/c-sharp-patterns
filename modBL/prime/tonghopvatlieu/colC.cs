@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tonghopvatlieu
 {
-    internal class colC : ACell
+    public class colC : ACell
     {
         public colC(Option opt) : base(opt)
         {
@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.TIEN_LUONG}'!C{args[0]}";
+            return $"='{SheetName.TIEN_LUONG}'!C{args[0]}"; // Cột C: Mã công việc
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.TIEN_LUONG}_{hmId}'!C{args[0]}"; // Cột C: Mã công việc
         }
     }
 }

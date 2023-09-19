@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tonghopvatlieu
 {
-    // Hao phí vật liệu
-    internal class colIVatLieu : ACell
+    /// <summary>
+    /// Hao phí vật liệu
+    /// </summary>
+    public class colIVatLieu : ACell
     {
         public colIVatLieu(Option opt) : base(opt)
         {
@@ -26,7 +28,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(I{args[0]}:I{args[1]})";
+            return $"=SUM(I{args[0]}:I{args[1]})"; // Cột I: Hao phí vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(I{args[0]}:I{args[1]})"; // Cột I: Hao phí vật liệu
         }
     }
 }

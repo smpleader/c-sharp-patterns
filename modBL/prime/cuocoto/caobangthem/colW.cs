@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.caobangthem
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(Q{args[0]}:Q{args[1]})+SUM(S{args[0]}:S{args[1]})+U{args[0]}+SUM(V{args[0]}:V{args[1]})";
+            return $"=SUM(Q{args[0]}:Q{args[1]})+SUM(S{args[0]}:S{args[1]})+U{args[0]}+SUM(V{args[0]}:V{args[1]})"; // Cột Q: thành tiền chi phí vận chuyển, cột S: thành tiền chi phí bốc dỡ, cột U: thành tiền hao hụt, cột V: chi phí khác
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(Q{args[0]}:Q{args[1]})+SUM(S{args[0]}:S{args[1]})+U{args[0]}+SUM(V{args[0]}:V{args[1]})"; // Cột Q: thành tiền chi phí vận chuyển, cột S: thành tiền chi phí bốc dỡ, cột U: thành tiền hao hụt, cột V: chi phí khác
         }
     }
 }

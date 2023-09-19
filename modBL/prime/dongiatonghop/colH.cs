@@ -26,5 +26,9 @@ namespace modBL.prime.dongiatonghop
         {
             return $"=F{args[0]}*G{args[0]}"; //Cột F: khối lượng, cột G: đơn giá
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=F{args[0]}*G{args[0]}"; //Cột F: khối lượng, cột G: đơn giá
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.tonghopvatlieu
 {
-    internal class colH : ACell
+    public class colH : ACell
     {
         public colH(Option opt) : base(opt)
         {
@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.TIEN_LUONG}'!V{args[0]}";
+            return $"='{SheetName.TIEN_LUONG}'!V{args[0]}"; // Cột V: Hệ số điều chỉnh vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.TIEN_LUONG}_{hmId}'!V{args[0]}"; // Cột V: Hệ số điều chỉnh vật liệu
         }
     }
 }

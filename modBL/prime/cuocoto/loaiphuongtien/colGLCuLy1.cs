@@ -25,7 +25,11 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=G{args[0]}*J{args[1]}*K{args[1]}";
+            return $"=G{args[0]}*J{args[1]}*K{args[1]}"; // Cột G: Hệ số quy đổi đơn vị, cột J: cự ly trong phạm vi <= 1km, cột K: giá cước trong phạm vi <= 1km
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=G{args[0]}*J{args[1]}*K{args[1]}"; // Cột G: Hệ số quy đổi đơn vị, cột J: cự ly trong phạm vi <= 1km, cột K: giá cước trong phạm vi <= 1km
         }
     }
 }

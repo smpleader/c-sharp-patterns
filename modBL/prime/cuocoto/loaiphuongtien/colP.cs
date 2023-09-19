@@ -23,7 +23,11 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=T4*M{args[0]}*(N{args[0]}+O{args[0]})";
+            return $"=T4*M{args[0]}*(N{args[0]}+O{args[0]})"; // Cột T: lương ngày công, cột M: trọng lượng tấn, cột N: chi phí bốc lên, cột O: chi phí dỡ xuống
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=T4*M{args[0]}*(N{args[0]}+O{args[0]})"; // Cột T: lương ngày công, cột M: trọng lượng tấn, cột N: chi phí bốc lên, cột O: chi phí dỡ xuống
         }
     }
 }

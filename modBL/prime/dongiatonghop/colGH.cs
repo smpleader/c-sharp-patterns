@@ -27,5 +27,9 @@ namespace modBL.prime.dongiatonghop
         {
             return $"=SUM(H{args[0]}:H{args[1]})"; //Cột H: thành tiền công việc
         }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(H{args[0]}:H{args[1]})"; //Cột H: thành tiền công việc
+        }
     }
 }

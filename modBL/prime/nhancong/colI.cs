@@ -28,13 +28,26 @@ namespace modBL.prime.nhancong
             switch (Option.PPTGiaNhanCong)
             {
                 case PPTGiaNhanCong.NhapTay:
-                    return $"=F{args[0]}";
+                    return $"=F{args[0]}"; // Cột F: giá TB
                 case PPTGiaNhanCong.TinhTrucTiep:
-                    return $"='{SheetName.TINH_GIA_NHAN_CONG}'!Q{args[0]}";
+                    return $"='{SheetName.TINH_GIA_NHAN_CONG}'!P{args[0]}"; // Cột P: lương ngày công
                 case PPTGiaNhanCong.NhanHeSo:
-                    return $"=F{args[0]}*G{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaNhanCong)
+            {
+                case PPTGiaNhanCong.NhapTay:
+                    return $"=F{args[0]}"; // Cột F: giá TB
+                case PPTGiaNhanCong.TinhTrucTiep:
+                    return $"='{SheetName.TINH_GIA_NHAN_CONG}_{hmId}'!P{args[0]}"; // Cột P: lương ngày công
+                case PPTGiaNhanCong.NhanHeSo:
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
+            }
+            return base.formula(hmId, args);
         }
     }
 }

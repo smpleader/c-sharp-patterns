@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.tongculy
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(L{args[0]}:L{args[1]})";
+            return $"=SUM(L{args[0]}:L{args[1]})"; // Cột L: cự ly
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(L{args[0]}:L{args[1]})"; // Cột L: cự ly
         }
     }
 }

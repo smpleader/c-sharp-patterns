@@ -28,17 +28,34 @@ namespace modBL.prime.may
             switch (Option.PPTGiaMay)
             {
                 case PPTGiaMay.NhapTay:
-                    return $"=F{args[0]}";
+                    return $"=F{args[0]}"; // Cột F: giá TB
                 case PPTGiaMay.BuGia:
-                    return $"=F{args[0]}+L{args[0]}";
+                    return $"=F{args[0]}+L{args[0]}"; // Cột F: giá TB, cột L: bù giá
                 case PPTGiaMay.TinhTrucTiep:
-                    return $"='{SheetName.TINH_GIA_CA_MAY}'!I{args[0]}";
+                    return $"='{SheetName.TINH_GIA_CA_MAY}'!I{args[0]}"; // Cột I: Lương ngày công
                 case PPTGiaMay.NhanHeSo:
-                    return $"=F{args[0]}*G{args[0]}"; ;
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
                 case PPTGiaMay.NhanHeSoCongBuGia:
-                    return $"=H{args[0]}+L{args[0]}";
+                    return $"=H{args[0]}+L{args[0]}"; // Cột H: giá TBxHS, cột L: bù giá
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaMay)
+            {
+                case PPTGiaMay.NhapTay:
+                    return $"=F{args[0]}"; // Cột F: giá TB
+                case PPTGiaMay.BuGia:
+                    return $"=F{args[0]}+L{args[0]}"; // Cột F: giá TB, cột L: bù giá
+                case PPTGiaMay.TinhTrucTiep:
+                    return $"='{SheetName.TINH_GIA_CA_MAY}_{hmId}'!I{args[0]}"; // Cột I: Lương ngày công
+                case PPTGiaMay.NhanHeSo:
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá TB, cột G: hệ số
+                case PPTGiaMay.NhanHeSoCongBuGia:
+                    return $"=H{args[0]}+L{args[0]}"; // Cột H: giá TBxHS, cột L: bù giá
+            }
+            return base.formula(hmId, args);
         }
     }
 }

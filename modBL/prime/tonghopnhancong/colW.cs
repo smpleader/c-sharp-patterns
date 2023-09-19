@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopnhancong
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=U{args[0]}-J{args[0]}";
+            return $"=U{args[0]}-J{args[0]}"; // Cột U: giá HT, cột J: giá gốc
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=U{args[0]}-J{args[0]}"; // Cột U: giá HT, cột J: giá gốc
         }
     }
 }

@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=I{args[0]}*Y{args[0]}";
+            return $"=I{args[0]}*Y{args[0]}"; // Cột I: hao phí máy, cột Y: chênh lệch giá HT máy
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=I{args[0]}*Y{args[0]}"; // Cột I: hao phí máy, cột Y: chênh lệch giá HT máy
         }
     }
 }

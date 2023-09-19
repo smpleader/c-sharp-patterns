@@ -32,9 +32,23 @@ namespace modBL.prime.may
                 case PPTGiaMay.NhanHeSo:
                     return "";
                 case PPTGiaMay.NhanHeSoCongBuGia:
-                    return $"=F{args[0]}*G{args[0]}";
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá thông báo, cột G: hệ số
             }
             return base.formula(args);
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            switch (Option.PPTGiaMay)
+            {
+                case PPTGiaMay.NhapTay:
+                case PPTGiaMay.BuGia:
+                case PPTGiaMay.TinhTrucTiep:
+                case PPTGiaMay.NhanHeSo:
+                    return "";
+                case PPTGiaMay.NhanHeSoCongBuGia:
+                    return $"=F{args[0]}*G{args[0]}"; // Cột F: giá thông báo, cột G: hệ số
+            }
+            return base.formula(hmId, args);
         }
     }
 }

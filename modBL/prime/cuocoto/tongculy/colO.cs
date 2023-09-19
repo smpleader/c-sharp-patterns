@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.tongculy
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=X6*E{args[0]}*G{args[0]}*J{args[1]}*L{args[1]}*N{args[1]}";
+            return $"=X6*E{args[0]}*G{args[0]}*J{args[1]}*L{args[1]}*N{args[1]}"; // Cột X: hệ số điều chỉnh, cột E: khối lượng đơn vị, cột G: hệ số bậc hàng, cột J: hệ số Ptien, cột L: cự ly, cột N:cước cơ bản
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=X6*E{args[0]}*G{args[0]}*J{args[1]}*L{args[1]}*N{args[1]}"; // Cột X: hệ số điều chỉnh, cột E: khối lượng đơn vị, cột G: hệ số bậc hàng, cột J: hệ số Ptien, cột L: cự ly, cột N:cước cơ bản
         }
     }
 }

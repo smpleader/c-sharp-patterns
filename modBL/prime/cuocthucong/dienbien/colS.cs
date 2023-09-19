@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocthucong.dienbien
 {
-    internal class colS : ACell
+    public class colS : ACell
     {
         public colS(Option opt) : base(opt)
         {
@@ -17,8 +17,8 @@ namespace modBL.prime.cuocthucong.dienbien
         public override string UName => "CuocTC_DienBien_TongCuoc";
 
         /// <summary>
-        /// n tham số
-        /// <para> Tham số là số lượng dòng tính cước cho một vật liệu</para>
+        /// 1 tham số
+        /// <para> chỉ số dòng vật liệu</para>
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>

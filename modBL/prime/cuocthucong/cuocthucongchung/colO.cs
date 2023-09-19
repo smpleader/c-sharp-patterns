@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocthucong.cuocthucongchung
 {
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -25,7 +25,7 @@ namespace modBL.prime.cuocthucong.cuocthucongchung
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            //H10*SUM(M10:M13)+SUM(N10:N13)
+            //H8*SUM(M8:M10)+SUM(N8:N10)
             return $"=H{args[0]}*SUM(M{args[0]}:M{args[1]})+SUM(N{args[0]}:N{args[1]})";
         }
     }

@@ -24,7 +24,11 @@ namespace modBL.prime.tonghopmay
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.TIEN_LUONG}'!X{args[0]}";
+            return $"='{SheetName.TIEN_LUONG}'!X{args[0]}"; // Cột X: Hệ số điều chỉnh máy
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.TIEN_LUONG}_{hmId}'!X{args[0]}"; // Cột X: Hệ số điều chỉnh máy
         }
     }
 }

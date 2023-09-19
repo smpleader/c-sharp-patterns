@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.maucamau
 {
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -24,7 +24,7 @@ namespace modBL.prime.cuocsong.maucamau
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=E{args[0]}*M{args[0]}+N{args[0]}";
+            return $"=E{args[0]}*M{args[0]}+N{args[0]}"; // Cột E: khối lượng đơn vị, cột M: giá cước, cột N: chi phí khác
         }
     }
 }

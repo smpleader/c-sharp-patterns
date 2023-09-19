@@ -18,7 +18,11 @@ namespace modBL.prime.tienluong
         public override string UName => "CongViec_DonGiaMay";
         public override string formula(string[] args)
         {
-            return $"={args[1]}*X{args[0]}";
+            return $"={args[1]}*X{args[0]}"; //Cột X: hệ số điều chỉnh máy
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"={args[1]}*X{args[0]}"; //Cột X: hệ số điều chỉnh máy
         }
     }
 }

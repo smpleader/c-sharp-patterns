@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.loaiphuongtien
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=SUM(J{args[0]}:J{args[1]})";
+            return $"=SUM(J{args[0]}:J{args[1]})"; // Cột J: Cự ly theo các phạm vi
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=SUM(J{args[0]}:J{args[1]})"; // Cột J: Cự ly theo các phạm vi
         }
     }
 }

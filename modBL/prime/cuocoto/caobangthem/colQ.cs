@@ -24,7 +24,11 @@ namespace modBL.prime.cuocoto.caobangthem
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"=W6*E{args[0]}*I{args[0]}*K{args[1]}*M{args[1]}*(O{args[1]}+P{args[1]})";
+            return $"=W6*E{args[0]}*I{args[0]}*K{args[1]}*M{args[1]}*(O{args[1]}+P{args[1]})"; // Cộ W: hệ số điều chỉnh, cột E: khối lượng đơn vị, cột I: hệ số bậc hàng, cột K: hệ số phương tiện, cột M: cự ly, cột O: cước cơ bản, cột P: cước tăng giảm thêm
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"=W6*E{args[0]}*I{args[0]}*K{args[1]}*M{args[1]}*(O{args[1]}+P{args[1]})"; // Cộ W: hệ số điều chỉnh, cột E: khối lượng đơn vị, cột I: hệ số bậc hàng, cột K: hệ số phương tiện, cột M: cự ly, cột O: cước cơ bản, cột P: cước tăng giảm thêm
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocthucong.dienbien
 {
-    internal class colO : ACell
+    public class colO : ACell
     {
         public colO(Option opt) : base(opt)
         {
@@ -28,7 +28,7 @@ namespace modBL.prime.cuocthucong.dienbien
             var tmp = $"=";
             for (var i = 0; i < args.Length; i++)
             {
-                tmp += $"K{args[i]}+M{args[i]}+N{args[i]}+";
+                tmp += $"K{args[i]}*M{args[i]}*N{args[i]}+";
             }
             var formula = tmp.TrimEnd('+');
             return formula;

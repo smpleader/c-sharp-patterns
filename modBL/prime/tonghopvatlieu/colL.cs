@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace modBL.prime.tonghopvatlieu
 {
     // Đơn giá TB vật liệu
-    internal class colL : ACell
+    public class colL : ACell
     {
         public colL(Option opt) : base(opt)
         {
@@ -25,7 +25,11 @@ namespace modBL.prime.tonghopvatlieu
         /// <returns></returns>
         public override string formula(string[] args)
         {
-            return $"='{SheetName.VAT_LIEU}'!F{args[0]}";
+            return $"='{SheetName.VAT_LIEU}'!F{args[0]}"; // Cột F: đơn giá thông báo vật liệu
+        }
+        public override string formula(string hmId, string[] args)
+        {
+            return $"='{SheetName.VAT_LIEU}_{hmId}'!F{args[0]}"; // Cột F: đơn giá thông báo vật liệu
         }
     }
 }

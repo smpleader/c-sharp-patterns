@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace modBL.prime.cuocsong.mauchung
 {
-    internal class colM : ACell
+    public class colM : ACell
     {
         public colM(Option opt) : base(opt)
         {
@@ -27,7 +27,7 @@ namespace modBL.prime.cuocsong.mauchung
         public override string formula(string[] args)
         {
             //IF(L10<=0;0;IF(L10<=30;43025;43025))+IF(L10>30;(L10-30)*295;0)
-            return $"=IF(L{args[0]}<=0;0;IF(L{args[0]}<=30;{args[1]};{args[1]}))+IF(L{args[0]}>30;(L{args[0]}-30)*{args[2]};0)";
+            return $"=IF(L{args[0]}<=0;0;IF(L{args[0]}<=30;{args[1]};{args[1]}))+IF(L{args[0]}>30;(L{args[0]}-30)*{args[2]};0)"; // Cột L: cự ly
         }
     }
 }
