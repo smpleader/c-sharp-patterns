@@ -23,9 +23,6 @@ namespace modDisplay.templates.tienluong.row
         public CellS cellS { get; set; }
         public CellT cellT { get; set; }
         public CellU cellU { get; set; }
-
-       
-
         
         public void bind()
         {

@@ -23,7 +23,7 @@ namespace modDisplay.templates.tienluong.row.row
                 return ((Row)Row).cellZ.Range.Value.ToString();
             }
         }
-        public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
+        public override string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
 
         public CellN(Row r) : base(r)
         {

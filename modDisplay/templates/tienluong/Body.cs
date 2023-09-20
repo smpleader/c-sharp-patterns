@@ -120,7 +120,6 @@ namespace modDisplay.templates.tienluong
                 cv.HaveInterpretiveFormula = haveInterpretiveFormula;
                 cv.bind();
             }
-
         }
         /// <summary>
         /// Xác định vị trí của row object -> bind data từ masksheet tới workingsheet
@@ -128,7 +127,7 @@ namespace modDisplay.templates.tienluong
         /// <param name="row">Dòng mà có dữ liệu thay đổi</param>
         public override void bindInMaskSheet(int row)
         {
-        
+            
         }
         public override void bind(bool maskToWorking = true)
         {

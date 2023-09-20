@@ -1,6 +1,5 @@
 ﻿using modDisplay.templates.cuocoto.tongculy.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using AdditionalRow = modDisplay.templates.cuocoto.loaiphuongtien.row.AdditionalRow;
 using Row = modDisplay.templates.cuocoto.loaiphuongtien.row.Row;
@@ -10,12 +9,14 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
     internal class Body : APosition
     {
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
-
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-        public readonly int start = 5;
-        public int end = 15;
+    
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
+        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
+        {
+            start = 5;
+            end = 15;
+        }
         public override void bind(bool maskToWorking = true)
         {
             for (int indexRow = start; indexRow <= masksheet.Rows.Length; indexRow++)

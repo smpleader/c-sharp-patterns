@@ -66,7 +66,7 @@ namespace modDisplay
         public static SpreadsheetGrid ActiveGridDebug;
         public static IWorksheet ActiveMaskSheetDebug;
         public static IWorksheets WorkSheetsDebug;
-        public static IWorkbook WorkingBookDebug;
+        public static IWorkbook WorkingBook;
         #endregion
 
         /// <summary>
@@ -83,8 +83,9 @@ namespace modDisplay
 
             ExcelEngine excelEngine = new ExcelEngine();
             var application = excelEngine.Excel;
-            WorkingBookDebug = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
-            Workingsheets = WorkingBookDebug.Worksheets;
+            WorkingBook = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            WorkingBook.SetSeparators(';', ',');
+            Workingsheets = WorkingBook.Worksheets;
             foreach (var worksheet in Workingsheets)
             {
                 DefaultSheetNames.Add(worksheet.Name);

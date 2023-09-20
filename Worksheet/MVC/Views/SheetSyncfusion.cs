@@ -213,7 +213,7 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        Display.WorkingBookDebug.SaveAs(saveFileDialog.FileName);
+                        Display.WorkingBook.SaveAs(saveFileDialog.FileName);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
