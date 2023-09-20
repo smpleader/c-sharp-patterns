@@ -8,7 +8,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     public class AdditionalRow : ARowObject
     {
-        public AdditionalRow(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id, int parentId) : base(gridControl, worksheet, workingsheet)
+        public AdditionalRow(GridControl gridControl, IWorksheet workingsheet, int id, int parentId) : base(gridControl, workingsheet)
         {
             Id = id;
             ParentId = parentId;
@@ -27,11 +27,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 
         public void bind()
         {
-            string A = masksheet.Range["A" + Id].Value;
-            if (string.IsNullOrWhiteSpace(A))
-            {
-                // todo: detect an additional line
-            }
+           
         }
 
         internal void render()

@@ -12,7 +12,7 @@ namespace modDisplay.templates.cuocoto.tongculy
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
+        public Body(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) 
         {
             start = 9;
             end = 15;
@@ -22,9 +22,9 @@ namespace modDisplay.templates.cuocoto.tongculy
             List<int> indexAdditionalRows = new List<int>();
             List<int> indexRows = new List<int>();
 
-            for (int indexRow = start; indexRow <= masksheet.Rows.Length; indexRow++)
+            for (int indexRow = start; indexRow <= workingsheet.Rows.Length; indexRow++)
             {
-                if (Helper.IsRowObject(gridControl, masksheet, indexRow))
+                if (Helper.IsRowObject(gridControl, workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                 }
@@ -35,14 +35,14 @@ namespace modDisplay.templates.cuocoto.tongculy
             }
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, masksheet, workingsheet, indexAdditionalRows[i], 9);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, workingsheet, indexAdditionalRows[i], 9);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của vật liệu trên sheet
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                 Row vl = rows[indexRow];
                 int startRow, endRow;
                 int endTemplate = indexRows[indexRows.Count - 1];

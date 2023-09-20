@@ -12,10 +12,8 @@ namespace modDisplay.templates.vatlieu
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                masksheet = Display.WorkSheets[tabName];
                 gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
-                masksheet.UseRangesCache = false;
             }
         }
 
@@ -23,7 +21,7 @@ namespace modDisplay.templates.vatlieu
         {
             Positions = new Dictionary<string, APosition>()
             {
-                { "Body", new Body(gridControl, masksheet, workingsheet) },
+                { "Body", new Body(gridControl, workingsheet) },
             };
 
             // todo: chuyển lại vị trí render và bind do sau mở công trình cũ cần lấy dữ liệu từ workingfile
@@ -93,7 +91,7 @@ namespace modDisplay.templates.vatlieu
             if (selectedIndexRow >= ((Body)Positions["Body"]).start && selectedIndexRow <= ((Body)Position("Body")).end)
             {
                 // bắt đầu thêm vật liệu
-                ((Body)Position("Body")).rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
+                ((Body)Position("Body")).rows[selectedIndexRow] = new Row(gridControl, workingsheet, selectedIndexRow);
                 Row selectedRow = ((Body)Position("Body")).rows[selectedIndexRow];
 
                 gridControl.BeginUpdate();

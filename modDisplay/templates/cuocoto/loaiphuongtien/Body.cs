@@ -11,19 +11,19 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
+        public Body(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) 
         {
             start = 5;
             end = 15;
         }
         public override void bind(bool maskToWorking = true)
         {
-            for (int indexRow = start; indexRow <= masksheet.Rows.Length; indexRow++)
+            for (int indexRow = start; indexRow <= workingsheet.Rows.Length; indexRow++)
             {
-                if (Helper.IsRowObject(gridControl, masksheet, indexRow))
+                if (Helper.IsRowObject(gridControl,workingsheet, indexRow))
                 {
                     int parentId = indexRow;
-                    rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                     Row vl = rows[indexRow];
                     vl.start = indexRow + 1;
                     vl.end = indexRow + 3;
@@ -31,17 +31,17 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
 
                     // dòng cước phạm vi <= 1000m
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(gridControl, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(gridControl, workingsheet, indexRow, parentId);
                     additionalRows[indexRow].bind();
 
                     // dòng cước phạm vi <= 7km
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(gridControl, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(gridControl, workingsheet, indexRow, parentId);
                     additionalRows[indexRow].bind();
 
                     // dòng cước phạm vi > 7km
                     indexRow++;
-                    additionalRows[indexRow] = new AdditionalRow(gridControl, masksheet, workingsheet, indexRow, parentId);
+                    additionalRows[indexRow] = new AdditionalRow(gridControl, workingsheet, indexRow, parentId);
                     additionalRows[indexRow].bind();
                 }
             }
@@ -60,7 +60,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
 
             // Đánh lại số  thứ tự cho các vật liệu
             int beginRow = 1;
-            for (int rowIndex = start; rowIndex <= masksheet.Rows.Length; rowIndex++)
+            for (int rowIndex = start; rowIndex <= workingsheet.Rows.Length; rowIndex++)
             {
                 if (rows.ContainsKey(rowIndex))
                 {

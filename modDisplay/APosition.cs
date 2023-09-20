@@ -1,5 +1,4 @@
 ﻿using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay
@@ -8,7 +7,6 @@ namespace modDisplay
     {
         public virtual string Name { get { return "--"; } }
         public GridControl gridControl { get; set; }
-        public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
         public int Id { get; set; }
         public int start { get; set; }
@@ -38,10 +36,9 @@ namespace modDisplay
         {
             // should override bindInWoringsheet
         }
-        public APosition(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet)
+        public APosition(GridControl gridControl, IWorksheet workingsheet)
         {
             this.gridControl = gridControl;
-            this.masksheet = worksheet;
             this.workingsheet = workingsheet;
 
             // Lấy hạng mục ID từ tên của workingsheet

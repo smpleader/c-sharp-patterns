@@ -7,7 +7,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Group : ARowObject
     {
-        public Group(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
+        public Group(GridControl gridControl, IWorksheet workingsheet, int id) : base(gridControl, workingsheet)
         {
             Id = id;
             cellA = new CellA(this);
@@ -45,7 +45,7 @@ namespace modDisplay.templates.tienluong.row
                 }
 
                 // merge khi có dấu hiệu của group
-                IRange raneMerge = masksheet.Range[cellB.Range.AddressLocal + ":" + cellQ.Range.AddressLocal];
+                IRange raneMerge = workingsheet.Range[cellB.Range.AddressLocal + ":" + cellQ.Range.AddressLocal];
                 //GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
                 //var excelRange = gridRange.ConvertGridRangeToExcelRange(gridControl);
                 var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
@@ -57,11 +57,11 @@ namespace modDisplay.templates.tienluong.row
 
                 #region style lại cho group object
 
-                IRange range = masksheet.Range[cellB.Range.AddressLocal];
+                IRange range = workingsheet.Range[cellB.Range.AddressLocal];
                 range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignLeft;
 
                 string addressRangeGroup = cellA.Range.AddressLocal + ":" + cellX.Range.AddressLocal;
-                IRange rangeGroup = masksheet.Range[addressRangeGroup];
+                IRange rangeGroup = workingsheet.Range[addressRangeGroup];
                 rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
                 rangeGroup.BorderAround(ExcelLineStyle.Thin);
 

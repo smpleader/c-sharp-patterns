@@ -8,7 +8,6 @@ namespace modDisplay
         public virtual string Name { get { return "--"; } }
         public bool IsEditting = false;
         public GridControl gridControl { get; set; }
-        public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
 
         public Dictionary<string, APosition> Positions;
@@ -33,7 +32,7 @@ namespace modDisplay
         {
             if (!Positions.Keys.Contains(name))
             {
-                Positions[name] = new APosition(gridControl, masksheet, workingsheet);
+                Positions[name] = new APosition(gridControl, workingsheet);
             }
             return Positions[name];
         }

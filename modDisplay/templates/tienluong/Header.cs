@@ -12,15 +12,15 @@ namespace modDisplay.templates.tienluong
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
+        public Header(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) { }
 
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
 
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state
-            headers[2] = new HeaderRow(gridControl, masksheet, workingsheet, 2);
-            headers[3] = new HeaderRow(gridControl, masksheet, workingsheet, 3);
+            headers[2] = new HeaderRow(gridControl, workingsheet, 2);
+            headers[3] = new HeaderRow(gridControl, workingsheet, 3);
             foreach (var item in headers)
             {
                 item.Value.bind();

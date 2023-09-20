@@ -8,7 +8,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Header : ARowObject
     {
-        public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
+        public Header(GridControl gridControl, IWorksheet workingsheet, int id) : base(gridControl, workingsheet)
         {
             Id = id;
             cellB = new CellB(this);

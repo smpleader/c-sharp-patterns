@@ -7,7 +7,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class AdditionalRow : ARowObject
     {
-        public AdditionalRow(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
+        public AdditionalRow(GridControl gridControl, IWorksheet workingsheet, int id) : base(gridControl, workingsheet)
         {
             Id = id;
             cellB = new CellB(this);

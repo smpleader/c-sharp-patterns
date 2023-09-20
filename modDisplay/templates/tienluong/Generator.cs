@@ -14,10 +14,8 @@ namespace modDisplay.templates.tienluong
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                masksheet = Display.WorkSheets[tabName];
                 gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
-                masksheet.UseRangesCache = false;
             }
         }
 
@@ -36,9 +34,9 @@ namespace modDisplay.templates.tienluong
             gridControl.Cols.Hidden.SetRange(18, 18, true);
             Positions = new Dictionary<string, APosition>()
             {
-                { "Header", new HeaderGroup(gridControl, masksheet, workingsheet) },
-                { "Body", new Body(gridControl, masksheet, workingsheet) },
-                { "Footer", new FooterGroup(gridControl, masksheet, workingsheet) },
+                { "Header", new HeaderGroup(gridControl, workingsheet) },
+                { "Body", new Body(gridControl, workingsheet) },
+                { "Footer", new FooterGroup(gridControl, workingsheet) },
 
             };
             // bind
@@ -66,7 +64,7 @@ namespace modDisplay.templates.tienluong
             {
                 // bắt đầu thêm công việc
                 IsEditting = true;
-                ((Body)Positions["Body"]).rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
+                ((Body)Positions["Body"]).rows[selectedIndexRow] = new Row(gridControl, workingsheet, selectedIndexRow);
                 Row selectedRow = ((Body)Positions["Body"]).rows[selectedIndexRow];
                 selectedRow.AddSimpleData();
                 ((Body)Positions["Body"]).bindInWoringsheet();

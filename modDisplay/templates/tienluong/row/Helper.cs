@@ -1,5 +1,4 @@
 ﻿using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong.row
@@ -29,7 +28,18 @@ namespace modDisplay.templates.tienluong.row
             }
             return -1;
         }
-
+        public static bool IsRowObject(GridControl gridControl, int indexRow)
+        {
+            if (!gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow,Util.CellUtility.GetExcelColumnNumber("B"))))
+            {
+                string C = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("C")].Text;
+                if (!string.IsNullOrWhiteSpace(C) && !C.StartsWith("*"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public static bool IsRowObject(IWorksheet worksheet, int indexRow)
         {
             if (!worksheet.Range["B" + indexRow].IsMerged)
@@ -78,16 +88,6 @@ namespace modDisplay.templates.tienluong.row
                 }
             }
             return false;
-        }
-        public static IRange Cell(this ARowObject aRowObject, string colName)
-        {
-            IRange cell = aRowObject.masksheet.Range[colName + aRowObject.Id];
-            return cell;
-        }
-        public static IRange Cell(this ARowObject aRowObject, string colName, string row)
-        {
-            IRange cell = aRowObject.masksheet.Range[colName + row];
-            return cell;
         }
     }
 }

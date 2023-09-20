@@ -9,7 +9,7 @@ namespace modDisplay.templates.vatlieu
     {
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet masksheet, IWorksheet workingsheet) : base(gridControl, masksheet, workingsheet) 
+        public Body(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) 
         {
             start = 5;
             end = 15;
@@ -34,7 +34,7 @@ namespace modDisplay.templates.vatlieu
                 int indexRow = indexRows[i];
                 if(!rows.Keys.Contains(indexRow))
                 {
-                    rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace modDisplay.templates.vatlieu
             // nếu không có thì tạo mới 1 row object
             if (!rows.Keys.Contains(row))
             {
-                rows[row] = new Row(gridControl, masksheet, workingsheet, row);
+                rows[row] = new Row(gridControl, workingsheet, row);
             }
             rows[row].bind();
         }
@@ -58,7 +58,7 @@ namespace modDisplay.templates.vatlieu
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsRowObject(masksheet , indexRow))
+                if (Helper.IsRowObject(gridControl, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
@@ -71,7 +71,7 @@ namespace modDisplay.templates.vatlieu
                 int indexRow = indexRows[i];
                 if (!rows.Keys.Contains(indexRow))
                 {
-                    rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                    rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                 }
                 Row vl = rows[indexRow];
                 vl.bind();

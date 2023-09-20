@@ -8,20 +8,20 @@ namespace modDisplay.templates.cuocoto.tongculy
     {
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override string Name { get { return "Header"; } }
-        public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
+        public Header(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) { }
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state
             // Tên công trình và hạng mục
-            headers[2] = new HeaderRow(gridControl, masksheet, workingsheet, 2);
-            headers[3] = new HeaderRow(gridControl, masksheet, workingsheet, 3);
+            headers[2] = new HeaderRow(gridControl, workingsheet, 2);
+            headers[3] = new HeaderRow(gridControl, workingsheet, 3);
 
             // Lương nhân công bốc dỡ
-            headers[4] = new HeaderRow(gridControl, masksheet, workingsheet, 4);
+            headers[4] = new HeaderRow(gridControl, workingsheet, 4);
             // Thuế VAT
-            headers[5] = new HeaderRow(gridControl, masksheet, workingsheet, 5);
+            headers[5] = new HeaderRow(gridControl, workingsheet, 5);
             // Hệ số điều chỉnh
-            headers[6] = new HeaderRow(gridControl, masksheet, workingsheet, 6);
+            headers[6] = new HeaderRow(gridControl, workingsheet, 6);
 
             foreach (var item in headers)
             {

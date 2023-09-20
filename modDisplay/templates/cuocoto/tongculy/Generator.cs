@@ -17,21 +17,19 @@ namespace modDisplay.templates.cuocoto.tongculy
         {
             if (Display.WorkSheets[tabName] != null)
             {
-                masksheet = Display.WorkSheets[tabName];
                 gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
-                masksheet.UseRangesCache = false;
             }
         }
 
         public override void loadData()
         {
             // header
-            header = new HeaderGroup(gridControl, masksheet, workingsheet);
+            header = new HeaderGroup(gridControl, workingsheet);
             header.bind();
             header.render();
 
-            body = new Body(gridControl, masksheet, workingsheet);
+            body = new Body(gridControl, workingsheet);
             body.bind();
             body.render();
         }
@@ -61,7 +59,7 @@ namespace modDisplay.templates.cuocoto.tongculy
             {
                 // bắt đầu thêm vật liệu
                 IsEditting = true;
-                body.rows[selectedIndexRow] = new Row(gridControl, masksheet, workingsheet, selectedIndexRow);
+                body.rows[selectedIndexRow] = new Row(gridControl, workingsheet, selectedIndexRow);
                 Row selectedRow = body.rows[selectedIndexRow];
                 gridControl.BeginUpdate();
                 selectedRow.AddSimpleData();

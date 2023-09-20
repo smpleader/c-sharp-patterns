@@ -13,7 +13,7 @@ namespace modDisplay.templates.tienluong
         public Dictionary<int, Group> groups = new Dictionary<int, Group>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
+        public Body(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) 
         {
             start = 6;
         }
@@ -26,17 +26,17 @@ namespace modDisplay.templates.tienluong
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsGroupObject(masksheet, indexRow))
+                if (Helper.IsGroupObject(workingsheet, indexRow))
                 {
                     indexGroups.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsRowObject(masksheet, indexRow))
+                if (Helper.IsRowObject(workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsAdditionalRowObject(masksheet, indexRow))
+                if (Helper.IsAdditionalRowObject(workingsheet, indexRow))
                 {
                     indexAdditionalRows.Add(indexRow);
                 }
@@ -45,7 +45,7 @@ namespace modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(gridControl, masksheet, workingsheet, indexGroups[i]);
+                groups[indexGroups[i]] = new Group(gridControl, workingsheet, indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -73,7 +73,7 @@ namespace modDisplay.templates.tienluong
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, masksheet, workingsheet, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, workingsheet, indexAdditionalRows[i]);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
 
@@ -81,7 +81,7 @@ namespace modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                 int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;
@@ -137,17 +137,17 @@ namespace modDisplay.templates.tienluong
 
             for (int indexRow = start; indexRow <= end; indexRow++)
             {
-                if (Helper.IsGroupObject(masksheet, indexRow))
+                if (Helper.IsGroupObject(workingsheet, indexRow))
                 {
                     indexGroups.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsRowObject(masksheet, indexRow))
+                if (Helper.IsRowObject(workingsheet, indexRow))
                 {
                     indexRows.Add(indexRow);
                     continue;
                 }
-                if (Helper.IsAdditionalRowObject(masksheet, indexRow))
+                if (Helper.IsAdditionalRowObject(workingsheet, indexRow))
                 {
                     indexAdditionalRows.Add(indexRow);
                 }
@@ -156,7 +156,7 @@ namespace modDisplay.templates.tienluong
             // đặt lại chỉ số hàng bắt đầu và hàng kết thúc của group trên sheet
             for (int i = 0; i < indexGroups.Count; i++)
             {
-                groups[indexGroups[i]] = new Group(gridControl, masksheet, workingsheet, indexGroups[i]);
+                groups[indexGroups[i]] = new Group(gridControl, workingsheet, indexGroups[i]);
                 Group groupCV = groups[indexGroups[i]];
                 int startGroup, endGroup;
                 if (i == indexGroups.Count - 1)
@@ -184,7 +184,7 @@ namespace modDisplay.templates.tienluong
 
             for (int i = 0; i < indexAdditionalRows.Count; i++)
             {
-                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, masksheet, workingsheet, indexAdditionalRows[i]);
+                additionalRows[indexAdditionalRows[i]] = new AdditionalRow(gridControl, workingsheet, indexAdditionalRows[i]);
                 additionalRows[indexAdditionalRows[i]].bind();
             }
 
@@ -192,7 +192,7 @@ namespace modDisplay.templates.tienluong
             for (int i = 0; i < indexRows.Count; i++)
             {
                 int indexRow = indexRows[i];
-                rows[indexRow] = new Row(gridControl, masksheet, workingsheet, indexRow);
+                rows[indexRow] = new Row(gridControl, workingsheet, indexRow);
                 int endRowGroup = LastIndexInGroup(indexRow) != -1 ? LastIndexInGroup(indexRow) : end;
                 Row cv = rows[indexRow];
                 int startRow, endRow;

@@ -13,7 +13,7 @@ namespace modDisplay.templates.tienluong
     internal class Footer : APosition
     {
         FooterRow footer;
-        public Footer(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet)
+        public Footer(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet)
         {
             Id = 16;
             start = Id;
@@ -21,7 +21,7 @@ namespace modDisplay.templates.tienluong
         }
         public override void bindInWoringsheet()
         {
-            footer = new FooterRow(gridControl, masksheet, workingsheet);
+            footer = new FooterRow(gridControl, workingsheet);
             footer.bind();
             Id = footer.Id;
             start = footer.Id;
@@ -34,7 +34,7 @@ namespace modDisplay.templates.tienluong
 
         public override void bind(bool maskToWorking = true)
         {
-            footer = new FooterRow(gridControl, masksheet, workingsheet);
+            footer = new FooterRow(gridControl, workingsheet);
             footer.bind();
             Id = footer.Id;
             start = footer.Id;

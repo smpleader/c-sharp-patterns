@@ -8,7 +8,7 @@ namespace modDisplay.templates.tienluong.row
 {
     public class Footer : ARowObject
     {
-        public Footer(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet)
+        public Footer(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet)
         {
             Id = 16;
             start = 6;
@@ -26,7 +26,7 @@ namespace modDisplay.templates.tienluong.row
         
         public void bind()
         {
-            Id = this.FindIndexRowFooter(gridControl, masksheet, start);
+            Id = this.FindIndexRowFooter(gridControl, workingsheet, start);
             end = Id - 1;
         }
 

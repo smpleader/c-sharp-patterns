@@ -1,5 +1,4 @@
 ﻿using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 using Row = modData.Memories.ARecord;
 
@@ -7,10 +6,9 @@ namespace modDisplay
 {
     public class ARowObject : Row
     {
-        public ARowObject(GridControl gridControl, IWorksheet masksheet, IWorksheet workingsheet)
+        public ARowObject(GridControl gridControl, IWorksheet workingsheet)
         {
             this.gridControl = gridControl;
-            this.masksheet = masksheet;
             this.workingsheet = workingsheet;
 
             // Lấy hạng mục ID từ tên của workingsheet
@@ -19,7 +17,6 @@ namespace modDisplay
             this.HangMucId = workingsheetName.Substring(indexSub+1);
         }
         public GridControl gridControl { get; set; }
-        public IWorksheet masksheet { get; set; }
         public IWorksheet workingsheet { get; set; }
         public string HangMucId { get; set; }   
         public int start { get; set; }

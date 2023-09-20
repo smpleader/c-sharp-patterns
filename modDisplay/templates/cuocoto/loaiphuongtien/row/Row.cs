@@ -6,7 +6,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
 {
     public class Row : ARowObject
     {
-        public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet workingsheet, int id) : base(gridControl, workingsheet)
         {
             Id = id;
             cellA = new CellA(this);

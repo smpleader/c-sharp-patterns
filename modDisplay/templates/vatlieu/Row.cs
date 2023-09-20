@@ -8,7 +8,7 @@ namespace modDisplay.templates.vatlieu
 {
     public class Row : ARowObject
     {
-        public Row(GridControl gridControl, IWorksheet masksheet, IWorksheet workingsheet, int id) : base(gridControl, masksheet, workingsheet)
+        public Row(GridControl gridControl, IWorksheet workingsheet, int id) : base(gridControl, workingsheet)
         {
             Id = id;
             cellA = new CellA(this);
