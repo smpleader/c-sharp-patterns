@@ -12,19 +12,12 @@ namespace modDisplay.templates.cuocoto.tongculy.row.row
     /// </summary>
     public class CellJ : ACell
     {
-        public override string UniqueName { get { return "CuocOto_TongCuLy_HeSoPhuongTien"; } }
+        public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_TongCuLy"; } }
         public override string Col { get { return "J"; } }
+        public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
+
         public CellJ(Row r) : base(r)
         {
-        }
-       
-        public override void Render()
-        {
-
-        }
-        public override void Bind()
-        {
-            base.Bind();
         }
     }
 }

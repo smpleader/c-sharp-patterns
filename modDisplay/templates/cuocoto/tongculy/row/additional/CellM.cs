@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace modDisplay.templates.cuocoto.tongculy.row.row
+namespace modDisplay.templates.cuocoto.tongculy.row.additional
 {
     /// <summary>
-    /// Cự ly	
+    /// Tổng cự ly
     /// </summary>
-    public class CellL : ACell
+    public class CellM : ACell
     {
-        public override string UniqueName { get { return "CuocOto_LoaiPhuongTien_ThanhTienChiPhiVanChuyen"; } }
-        public override string Col { get { return "L"; } }
+        public override string UniqueName { get { return "CuocOto_TongCuLy_TongCuLy"; } }
+        public override string Col { get { return "M"; } }
         public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
-
-        public CellL(Row r) : base(r)
+        public CellM(AdditionalRow r) : base(r)
         {
         }
     }

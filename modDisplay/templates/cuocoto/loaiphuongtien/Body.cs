@@ -10,7 +10,6 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
     {
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-    
         public override string Name { get { return "Body"; } }
         public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
         {
@@ -67,7 +66,7 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        row.A.Value2 = beginRow;
+                        row.cellA.Range.Value2 = beginRow;
                         beginRow++;
                     }
                 }

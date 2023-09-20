@@ -1,29 +1,31 @@
-﻿using modDisplay.templates.tienluong.row;
+﻿using modDisplay.templates.cuocoto.tongculy.row.header;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 
 namespace modDisplay.templates.cuocoto.tongculy.row
 {
-    internal class Header : ARowObject
+    public class Header : ARowObject
     {
         public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
+            cellA = new CellA(this);
+            cellX = new CellX(this);
         }
         /// <summary>
         /// <para>A2: Tên công trình</para>
         /// <para>A3: Tên hạng mục</para>
         /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
+        public CellA cellA { get; set; }
 
         /// <summary>
         /// <para>X4: Lương nhân công bốc dỡ</para>
         /// <para>X5: Thuế VAT</para>
         /// <para>X6: Hệ số điều chỉnh</para>
         /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
+        public CellX cellX { get; set; }
+
         public void bind()
         {
             // todo: Lưu giá trị của header tới global state

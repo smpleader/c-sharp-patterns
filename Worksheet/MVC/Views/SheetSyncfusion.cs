@@ -110,7 +110,7 @@ namespace Worksheet.MVC.Views
 
         private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.Cols.Hidden.SetRange(5, 12, !chkbx_KichThuoc.Checked);
+            Display.ActiveGrid.Cols.Hidden.SetRange(6, 12, !chkbx_KichThuoc.Checked);
         }
 
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
@@ -314,7 +314,7 @@ namespace Worksheet.MVC.Views
             {
                 case "Tiên lượng":
                     pnl_VatLieu.Visible = false;
-                    Display.ActiveGrid.Cols.Hidden.SetRange(5, 12, !chkbx_KichThuoc.Checked);
+                    Display.ActiveGrid.Cols.Hidden.SetRange(6, 12, !chkbx_KichThuoc.Checked);
                     btn_ThemCongViec.Enabled = true;
                     chkbx_KichThuoc.Enabled = true;
                     break;

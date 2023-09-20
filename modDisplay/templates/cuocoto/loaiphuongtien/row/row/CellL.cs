@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace modDisplay.templates.cuocoto.tongculy.row.row
+namespace modDisplay.templates.cuocoto.loaiphuongtien.row.row
 {
     /// <summary>
-    /// Cự ly	
+    /// Thành tiền	
     /// </summary>
     public class CellL : ACell
     {
