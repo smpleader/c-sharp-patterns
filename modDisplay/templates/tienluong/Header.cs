@@ -1,22 +1,20 @@
 ﻿using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HeaderRow = modDisplay.templates.tienluong.row.Header;
 namespace modDisplay.templates.tienluong
 {
     internal class Header : APosition
     {
         public override string Name { get { return "Header"; } }
-        public Header(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) { }
+        public Header(GridControl gridControl, IWorksheet workingsheet) : base(gridControl, workingsheet) 
+        {
+            start = 1;
+            end = 3;
+        }
 
         private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
 
-        public override void bind(bool maskToWorking = true)
+        public override void bindInWoringsheet()
         {
             // todo: Lưu giá trị của header tới global state
             headers[2] = new HeaderRow(gridControl, workingsheet, 2);
@@ -26,8 +24,7 @@ namespace modDisplay.templates.tienluong
                 item.Value.bind();
             }
         }
-
-        public override void render(bool maskToWorking = true)
+        public override void renderInWorkingsheet()
         {
             // todo: render khi thay đổi tên công trình, hạng mục từ 1 số màn hình khác
             foreach (var item in headers)

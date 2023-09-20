@@ -30,14 +30,14 @@ namespace modDisplay.templates.tienluong
         {
             IsEditting = true;
             gridControl.Cols.Hidden.SetRange(6, 12, true);
-            gridControl.Cols.Hidden.SetRange(14, 14, true);
-            gridControl.Cols.Hidden.SetRange(18, 18, true);
+            gridControl.Cols.Hidden.SetRange(15, 15, true);
+            gridControl.Cols.Hidden.SetRange(19, 19, true);
+
             Positions = new Dictionary<string, APosition>()
             {
                 { "Header", new HeaderGroup(gridControl, workingsheet) },
                 { "Body", new Body(gridControl, workingsheet) },
                 { "Footer", new FooterGroup(gridControl, workingsheet) },
-
             };
             // bind
 

@@ -1,7 +1,5 @@
-﻿using modDisplay.row;
-using modDisplay.templates.vatlieu.row;
+﻿using modDisplay.templates.vatlieu.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.vatlieu

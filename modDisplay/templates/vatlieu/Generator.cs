@@ -1,8 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
-using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Tools;
-using Syncfusion.XlsIO;
-
+﻿
 namespace modDisplay.templates.vatlieu
 {
     public class Generator : AGenerator

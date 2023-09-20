@@ -31,19 +31,5 @@ namespace modDisplay.templates.tienluong
         {
             footer.render();
         }
-
-        public override void bind(bool maskToWorking = true)
-        {
-            footer = new FooterRow(gridControl, workingsheet);
-            footer.bind();
-            Id = footer.Id;
-            start = footer.Id;
-            end = footer.Id;
-
-        }
-        public override void render(bool maskToWorking = true)
-        {
-            footer.render();
-        }
     }
 }
