@@ -1,7 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.cuocoto.loaiphuongtien.row
@@ -14,119 +13,85 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
         }
 
         /// <summary>
-        /// Ký hiệu bản vẽ
+        /// Số thứ tự
         /// </summary>
         public IRange A { get { return this.Cell("A"); } }
         /// <summary>
-        /// STT
+        /// Mã vật liệu
         /// </summary>
         public IRange B { get { return this.Cell("B"); } }
         /// <summary>
-        /// MSCV
+        /// Tên vật liệu
         /// </summary>
         public IRange C { get { return this.Cell("C"); } }
         /// <summary>
-        /// Tên công việc
+        /// Đơn vị
         /// </summary>
         public IRange D { get { return this.Cell("D"); } }
         /// <summary>
-        /// Đơn vị
+        /// Nhóm hàng
         /// </summary>
         public IRange E { get { return this.Cell("E"); } }
         /// <summary>
-        /// Tên CK
+        /// Đơn vị nhóm hàng	
         /// </summary>
         public IRange F { get { return this.Cell("F"); } }
         /// <summary>
-        /// Số CK
+        /// Hệ số quy đổi đơn vị
         /// </summary>
         public IRange G { get { return this.Cell("G"); } }
         /// <summary>
-        /// Dài
+        /// Nguồn hàng
         /// </summary>
         public IRange H { get { return this.Cell("H"); } }
         /// <summary>
-        /// Rộng
+        /// Loại phương tiện
         /// </summary>
         public IRange I { get { return this.Cell("I"); } }
         /// <summary>
-        /// Cao
+        /// Tổng cự ly
         /// </summary>
         public IRange J { get { return this.Cell("J"); } }
         /// <summary>
-        /// HS phụ
+        /// Giá cước cự ly 
         /// </summary>
         public IRange K { get { return this.Cell("K"); } }
         /// <summary>
-        /// KL Phụ
+        /// Thành tiền chi phí vận chuyển
         /// </summary>
         public IRange L { get { return this.Cell("L"); } }
         /// <summary>
-        /// Khối lượng
+        /// Trọng lượng tấn
         /// </summary>
         public IRange M { get { return this.Cell("M"); } }
         /// <summary>
-        /// Đơn giá vật liệu
+        /// Định mức bốc lên
         /// </summary>
         public IRange N { get { return this.Cell("N"); } }
         /// <summary>
-        /// Đơn giá vật liệu phụ
+        /// Định mức dỡ xuống
         /// </summary>
         public IRange O { get { return this.Cell("O"); } }
         /// <summary>
-        /// Đơn giá nhân công
+        /// Thành tiền chi phí bốc dỡ
         /// </summary>
         public IRange P { get { return this.Cell("P"); } }
         /// <summary>
-        /// Đơn giá máy
+        /// Định mức hao hụt
         /// </summary>
         public IRange Q { get { return this.Cell("Q"); } }
         /// <summary>
-        /// Thành tiền vật liệu
+        /// Thành tiền
         /// </summary>
         public IRange R { get { return this.Cell("R"); } }
         /// <summary>
-        /// Thành tiền vật liệu phụ
+        /// Cước khác	
         /// </summary>
         public IRange S { get { return this.Cell("S"); } }
         /// <summary>
-        /// Thành tiền nhân công
+        /// Tổng cước
         /// </summary>
         public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Thành tiền máy
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh vật liệu
-        /// </summary>
-        public IRange V { get { return this.Cell("V"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh nhân công
-        /// </summary>
-        public IRange W { get { return this.Cell("W"); } }
-        /// <summary>
-        /// Hệ số điều chỉnh máy
-        /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
-        /// <summary>
-        /// Thông tin đơn giá
-        /// </summary>
-        public IRange Y { get { return this.Cell("Y"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu
-        /// </summary>
-        public IRange Z { get { return this.Cell("Z"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các vật liệu phụ
-        /// </summary>
-        public IRange AA { get { return this.Cell("AA"); } }
-        /// <summary>
-        /// Tổng giá của tất cả các nhân công
-        /// </summary>
-        public IRange AB { get { return this.Cell("AB"); } }
-        /// Tổng giá của tất cả các máy
-        public IRange AC { get { return this.Cell("AC"); } }
 
         class ColJ : ACell
         {
@@ -195,7 +160,6 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
             //gridControl.SetCellValue(K, "1");
             //gridControl.SetCellValue(G, "389809");
             //gridControl.SetCellValue(J, "389809");
-
         }
     }
 }

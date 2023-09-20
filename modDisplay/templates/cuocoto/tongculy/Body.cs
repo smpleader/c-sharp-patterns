@@ -11,10 +11,12 @@ namespace modDisplay.templates.cuocoto.tongculy
     {
         public Dictionary<int, AdditionalRow> additionalRows = new Dictionary<int, AdditionalRow>();
         public Dictionary<int, Row> rows = new Dictionary<int, Row>();
-        public readonly int start = 9;
-        public int end = 15;
         public override string Name { get { return "Body"; } }
-        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
+        public Body(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) 
+        {
+            start = 9;
+            end = 15;
+        }
         public override void bind(bool maskToWorking = true)
         {
             List<int> indexAdditionalRows = new List<int>();
@@ -99,14 +101,11 @@ namespace modDisplay.templates.cuocoto.tongculy
                 {
                     if (rows.TryGetValue(rowIndex, out Row row))
                     {
-                        row.A.Value2 = beginRow;
+                        row.cellA.Range.Value2 = beginRow;
                         beginRow++;
                     }
                 }
             }
-            //masksheet.Calculate();
-            //gridControl.InvalidateCells();
         }
-
     }
 }

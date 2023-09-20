@@ -6,9 +6,9 @@ namespace modDisplay.templates.cuocoto.tongculy
 {
     internal class Header : APosition
     {
+        private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override string Name { get { return "Header"; } }
         public Header(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet) : base(gridControl, worksheet, workingsheet) { }
-        private Dictionary<int, HeaderRow> headers = new Dictionary<int, HeaderRow>();
         public override void bind(bool maskToWorking = true)
         {
             // todo: Lưu giá trị của header tới global state

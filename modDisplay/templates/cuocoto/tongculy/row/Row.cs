@@ -1,185 +1,73 @@
-﻿using modDisplay.row;
-using modDisplay.templates.tienluong.row;
+﻿using modDisplay.templates.cuocoto.tongculy.row.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.cuocoto.tongculy.row
 {
-    internal class Row : ARowObject
+    public class Row : ARowObject
     {
         public Row(GridControl gridControl, IWorksheet worksheet, IWorksheet workingsheet, int id) : base(gridControl, worksheet, workingsheet)
         {
             Id = id;
+            cellA = new CellA(this);
+            cellB = new CellB(this);
+            cellC = new CellC(this);
+            cellD = new CellD(this);
+            cellE = new CellE(this);    
+            cellF = new CellF(this);
+            cellG = new CellG(this);
+            cellH = new CellH(this);
+            cellI = new CellI(this);
+            cellJ = new CellJ(this);
+            cellK = new CellK(this);
+            cellL = new CellL(this);
+            cellM = new CellM(this);
+            cellN = new CellN(this);
+            cellO = new CellO(this);
+            cellP = new CellP(this);
+            cellS = new CellS(this);
+            cellT = new CellT(this);
+            cellU = new CellU(this);
+            cellV = new CellV(this);
+            cellW = new CellW(this);
+            cellX = new CellX(this);
+
         }
         public bool HaveAdditionalLines { get; set; } = false;
-        /// <summary>
-        /// STT
-        /// </summary>
-        public IRange A { get { return this.Cell("A"); } }
-        /// <summary>
-        /// MSCV
-        /// </summary>
-        public IRange B { get { return this.Cell("B"); } }
-        /// <summary>
-        /// Tên vật liệu
-        /// </summary>
-        public IRange C { get { return this.Cell("C"); } }
-        /// <summary>
-        /// Đơn vị
-        /// </summary>
-        public IRange D { get { return this.Cell("D"); } }
-        /// <summary>
-        /// Khối lượng đơn vị
-        /// </summary>
-        public IRange E { get { return this.Cell("E"); } }
-        /// <summary>
-        /// Bậc hàng
-        /// </summary>
-        public IRange F { get { return this.Cell("F"); } }
-        /// <summary>
-        /// Hệ số bậc hàng
-        /// </summary>
-        public IRange G { get { return this.Cell("G"); } }
-        /// <summary>
-        /// Nguồn mua
-        /// </summary>
-        public IRange H { get { return this.Cell("H"); } }
-        /// <summary>
-        /// Phương tiện
-        /// </summary>
-        public IRange I { get { return this.Cell("I"); } }
-        /// <summary>
-        /// Hệ số phương tiện
-        /// </summary>
-        public IRange J { get { return this.Cell("J"); } }
-        /// <summary>
-        /// Loại đường
-        /// </summary>
-        public IRange K { get { return this.Cell("K"); } }
-        /// <summary>
-        /// Cự ly (km)
-        /// </summary>
-        public IRange L { get { return this.Cell("L"); } }
-        /// <summary>
-        /// Tổng cự ly
-        /// </summary>
-        public IRange M { get { return this.Cell("M"); } }
-        /// <summary>
-        /// Cước cơ bản
-        /// </summary>
-        public IRange N { get { return this.Cell("N"); } }
-        /// <summary>
-        /// Cước sau thuế
-        /// </summary>
-        public IRange O { get { return this.Cell("O"); } }
-        /// <summary>
-        /// Trước thuế
-        /// </summary>
-        public IRange P { get { return this.Cell("P"); } }
-        /// <summary>
-        /// Định mức bốc dỡ
-        /// </summary>
-        public IRange Q { get { return this.Cell("Q"); } }
-        /// <summary>
-        /// Cước nâng hạ
-        /// </summary>
-        public IRange R { get { return this.Cell("R"); } }
-        /// <summary>
-        /// Thành tiền vật
-        /// </summary>
-        public IRange S { get { return this.Cell("S"); } }
-        /// <summary>
-        /// Giá TB
-        /// </summary>
-        public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Định mức hao hụt
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Thành tiền hao hụt
-        /// </summary>
-        public IRange V { get { return this.Cell("V"); } }
-        /// <summary>
-        /// Chi phí khác
-        /// </summary>
-        public IRange W { get { return this.Cell("W"); } }
-        /// <summary>
-        /// Tổng cước trước thuế
-        /// </summary>
-        public IRange X { get { return this.Cell("X"); } }
-
-        class ColM : ACell
-        {
-            public override string UniqueName { get { return "CuocOto_TongCuLy"; } }
-            public override string Col { get { return "M"; } }
-            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
-            public ColM(Row r) : base(r)
-            {
-            }
-        }
-
-        class ColO : ACell
-        {
-            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenSauThue"; } }
-            public override string Col { get { return "O"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.Id.ToString() }; } }
-
-            public ColO(Row r) : base(r)
-            {
-            }
-        }
-        class ColP : ACell
-        {
-            public override string UniqueName { get { return "CuocOto_ChiPhiVanChuyenTruocThue"; } }
-            public override string Col { get { return "P"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColP(Row r) : base(r)
-            {
-            }
-        }
-        class ColS : ACell
-        {
-            public override string UniqueName { get { return "CuocOto_ThanhTienChiPhiBocDo"; } }
-            public override string Col { get { return "S"; } }
-            // Chưa lấy đúng refer cần xác định refer khi có modData
-            public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
-
-            public ColS(Row r) : base(r)
-            {
-            }
-        }
-        class ColX : ACell
-        {
-            public override string UniqueName { get { return "CuocOto_TongCuoc"; } }
-            public override string Col { get { return "X"; } }
-            public override string[] Params { get { return new string[2] { Row.Id.ToString(), Row.end.ToString() }; } }
-
-            public ColX(Row r) : base(r)
-            {
-            }
-        }
-
+        public CellA cellA { get; set; }
+        public CellB cellB { get; set; }
+        public CellC cellC { get; set; }
+        public CellD cellD { get; set; }
+        public CellE cellE { get; set; }
+        public CellF cellF { get; set; }
+        public CellG cellG { get; set; }
+        public CellH cellH { get; set; }
+        public CellI cellI { get; set; }
+        public CellJ cellJ { get; set; }
+        public CellK cellK { get; set; }
+        public CellL cellL { get; set; }
+        public CellM cellM { set; get; }
+        public CellN cellN { set; get; }
+        public CellO cellO { set; get; }
+        public CellP cellP { set; get; }
+        public CellQ cellQ { set; get; }
+        public CellS cellS { set; get; }
+        public CellT cellT { set; get; }
+        public CellU cellU { set; get; }
+        public CellV cellV { set; get; }
+        public CellW cellW { set; get; }
+        public CellX cellX { set; get; }
         internal void bind()
         {
             // todo: khi thay đổi thì cập nhật giá các công việc có chứa vật tư
         }
         internal void render()
         {
-            ColM colM = new ColM(this);
-            colM.Render();
-            ColO colO = new ColO(this);
-            colO.Render();
-            ColP colP = new ColP(this);
-            colP.Render();
-            ColS colS = new ColS(this);
-            colS.Render();
-            ColX colX = new ColX(this);
-            colX.Render();
+            cellM.Render();
+            cellO.Render();
+            cellP.Render();
+            cellS.Render();
+            cellX.Render();
         }
         public void AddSimpleData()
         {

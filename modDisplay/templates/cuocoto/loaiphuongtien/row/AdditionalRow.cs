@@ -1,7 +1,6 @@
 ﻿using modDisplay.row;
 using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.cuocoto.loaiphuongtien.row
@@ -14,70 +13,23 @@ namespace modDisplay.templates.cuocoto.loaiphuongtien.row
             ParentId = parentId;
         }
         public int ParentId { get; set; }
+
         /// <summary>
-        /// Nguồn mua
+        /// Tên vật liệu
         /// </summary>
-        public IRange H { get { return this.Cell("H"); } }
-        /// <summary>
-        /// Phương tiện
-        /// </summary>
-        public IRange I { get { return this.Cell("I"); } }
-        /// <summary>
-        /// Hệ số phương tiện
-        /// </summary>
-        public IRange J { get { return this.Cell("J"); } }
-        /// <summary>
-        /// Loại đường
-        /// </summary>
-        public IRange K { get { return this.Cell("K"); } }
+        public IRange C { get { return this.Cell("C"); } }
         /// <summary>
         /// Cự ly (km)
         /// </summary>
+        public IRange J { get { return this.Cell("J"); } }
+        /// <summary>
+        /// Giá cước
+        /// </summary>
+        public IRange K { get { return this.Cell("K"); } }
+        /// <summary>
+        /// Thành tiền
+        /// </summary>
         public IRange L { get { return this.Cell("L"); } }
-        /// <summary>
-        /// Tổng cự ly
-        /// </summary>
-        public IRange M { get { return this.Cell("M"); } }
-        /// <summary>
-        /// Cước cơ bản
-        /// </summary>
-        public IRange N { get { return this.Cell("N"); } }
-        /// <summary>
-        /// Cước sau thuế
-        /// </summary>
-        public IRange O { get { return this.Cell("O"); } }
-        /// <summary>
-        /// Trước thuế
-        /// </summary>
-        public IRange P { get { return this.Cell("P"); } }
-        /// <summary>
-        /// Định mức bốc dỡ
-        /// </summary>
-        public IRange Q { get { return this.Cell("Q"); } }
-        /// <summary>
-        /// Cước nâng hạ
-        /// </summary>
-        public IRange R { get { return this.Cell("R"); } }
-        /// <summary>
-        /// Thành tiền vật
-        /// </summary>
-        public IRange S { get { return this.Cell("S"); } }
-        /// <summary>
-        /// Giá TB
-        /// </summary>
-        public IRange T { get { return this.Cell("T"); } }
-        /// <summary>
-        /// Định mức hao hụt
-        /// </summary>
-        public IRange U { get { return this.Cell("U"); } }
-        /// <summary>
-        /// Thành tiền hao hụt
-        /// </summary>
-        public IRange V { get { return this.Cell("V"); } }
-        /// <summary>
-        /// Chi phí khác
-        /// </summary>
-        public IRange W { get { return this.Cell("W"); } }
 
         class ColL : ACell
         {
