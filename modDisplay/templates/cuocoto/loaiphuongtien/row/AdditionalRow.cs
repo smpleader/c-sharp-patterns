@@ -1,6 +1,4 @@
-﻿using modDisplay.row;
-using modDisplay.templates.cuocoto.loaiphuongtien.row.additional;
-using modDisplay.templates.tienluong.row;
+﻿using modDisplay.templates.cuocoto.loaiphuongtien.row.additional;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
 

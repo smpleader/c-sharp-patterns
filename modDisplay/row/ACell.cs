@@ -21,7 +21,6 @@ namespace modDisplay.row
         public virtual string UniqueName { get { return ""; } }
         public virtual string Col { get { return "A"; } }
         public virtual int ColIndex { get { return Util.CellUtility.GetExcelColumnNumber(Col); } }
-
         public virtual string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
         /// <summary>
@@ -43,6 +42,11 @@ namespace modDisplay.row
             {
                 return Row.gridControl[Row.Id, ColIndex].CellValue;
             }
+            set
+            {
+                Row.gridControl[Row.Id, ColIndex].CellValue = value;
+            } 
+                
         }
         /// <summary>
         /// IRange cột trong workingsheet

@@ -1,6 +1,5 @@
 ﻿using modDisplay.templates.tienluong.row.footer;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
 
 
@@ -26,7 +25,7 @@ namespace modDisplay.templates.tienluong.row
         
         public void bind()
         {
-            Id = this.FindIndexRowFooter(gridControl, workingsheet, start);
+            Id = Helper.FindIndexRowFooter(gridControl, workingsheet, start);
             end = Id - 1;
         }
 

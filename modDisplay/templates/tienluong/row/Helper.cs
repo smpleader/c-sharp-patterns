@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Forms.Grid;
+﻿using Microsoft.Office.Interop.Excel;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong.row
@@ -12,7 +13,7 @@ namespace modDisplay.templates.tienluong.row
         /// <param name="ws">Template</param>
         /// <param name="start">Chỉ số dòng bắt đầu tìm</param>
         /// <returns></returns>
-        public static int FindIndexRowFooter(this Footer footer, GridControl ws, IWorksheet worksheet, int start)
+        public static int FindIndexRowFooter(GridControl ws, IWorksheet worksheet, int start)
         {
             for (int indexRow = start; indexRow <= ws.RowCount; indexRow++)
             {
@@ -52,6 +53,22 @@ namespace modDisplay.templates.tienluong.row
             }
             return false;
         }
+        public static bool IsGroupObject(GridControl gridControl, int indexRow)
+        {
+            if (!gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow, Util.CellUtility.GetExcelColumnNumber("B"))))
+            {
+                return true;
+            }
+            else
+            {
+                string C = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("C")].Text;
+                if (!string.IsNullOrWhiteSpace(C) && !C.StartsWith("*"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public static bool IsGroupObject( IWorksheet worksheet, int indexRow)
         {
             if (worksheet.Range["B" + indexRow].IsMerged)
@@ -64,6 +81,27 @@ namespace modDisplay.templates.tienluong.row
                 if (!string.IsNullOrWhiteSpace(C) && C.StartsWith("*"))
                 {
                     return true;
+                }
+            }
+            return false;
+        }
+        public static bool IsAdditionalRowObject(GridControl gridControl, int indexRow)
+        {
+            if (!gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow, Util.CellUtility.GetExcelColumnNumber("B"))))
+            {
+                string C = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("C")].Text;
+                string B = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("B")].Text;
+
+                if (string.IsNullOrWhiteSpace(C) && string.IsNullOrWhiteSpace(B))
+                {
+                    string D = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("D")].Text;
+                    string L = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("L")].Text;
+
+                    // check công thức diễn giải khi nhập vào
+                    if (!string.IsNullOrWhiteSpace(D) || !string.IsNullOrWhiteSpace(L))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

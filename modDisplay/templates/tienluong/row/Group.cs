@@ -1,6 +1,8 @@
 ﻿using modDisplay.templates.tienluong.row.group;
+using Syncfusion.Styles;
 using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong.row
@@ -45,17 +47,15 @@ namespace modDisplay.templates.tienluong.row
                 }
 
                 // merge khi có dấu hiệu của group
-                IRange raneMerge = workingsheet.Range[cellB.Range.AddressLocal + ":" + cellQ.Range.AddressLocal];
-                //GridRangeInfo gridRange = GridExcelHelper.ConvertExcelRangeToGridRange(raneMerge);
-                //var excelRange = gridRange.ConvertGridRangeToExcelRange(gridControl);
-                var coverCell = new CoveredCellInfo(raneMerge.Row, raneMerge.Column, raneMerge.LastRow, raneMerge.LastColumn);
-                //var coverCell = new CoveredCellInfo(gridRange.Top, gridRange.Left, gridRange.Bottom, gridRange.Right);
+                IRange rangeMerge = workingsheet.Range[cellB.Range.AddressLocal + ":" + cellQ.Range.AddressLocal];
 
-                //masksheet.Range[excelRange].Merge();
-                //gridControl.SetCellValue(B, nameGroup);
-                //gridControl.CoveredCells.Add(coverCell);
+                rangeMerge.Merge();
+                cellB.Range.Value = nameGroup;
 
-                #region style lại cho group object
+                this.gridControl.Model.CoveredRanges.Add(Syncfusion.Windows.Forms.Grid.GridRangeInfo.Cells(rangeMerge.Row, rangeMerge.Column, rangeMerge.LastRow, rangeMerge.LastColumn));
+                cellB.ValueOnMask = nameGroup;
+
+                #region style lại cho group object in workingsheet
 
                 IRange range = workingsheet.Range[cellB.Range.AddressLocal];
                 range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignLeft;
@@ -65,6 +65,15 @@ namespace modDisplay.templates.tienluong.row
                 rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
                 rangeGroup.BorderAround(ExcelLineStyle.Thin);
 
+                #endregion
+
+                #region style lại cho group object in masksheet
+                cellB.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Left;
+                GridStyleInfo style = new GridStyleInfo();
+                style.BackColor = Color.LightGreen;
+                style.Borders.All = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Thin);
+                var rangeGroupGridcontrol = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Cells(rangeGroup.Row, rangeGroup.Column, rangeGroup.LastRow, rangeGroup.LastColumn);
+                this.gridControl.ChangeCells(rangeGroupGridcontrol, style, StyleModifyType.Override);
                 #endregion
             }
         }

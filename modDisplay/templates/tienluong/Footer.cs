@@ -1,11 +1,5 @@
 ﻿using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FooterRow = modDisplay.templates.tienluong.row.Footer;
 
 namespace modDisplay.templates.tienluong

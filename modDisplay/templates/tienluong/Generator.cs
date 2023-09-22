@@ -1,9 +1,6 @@
-﻿using Syncfusion.XlsIO;
-using Syncfusion.Windows.Forms.Spreadsheet;
-using HeaderGroup = modDisplay.templates.tienluong.Header;
+﻿using HeaderGroup = modDisplay.templates.tienluong.Header;
 using FooterGroup = modDisplay.templates.tienluong.Footer;
 using modDisplay.templates.tienluong.row;
-using Syncfusion.Windows.Forms.Grid;
 
 namespace modDisplay.templates.tienluong
 {
