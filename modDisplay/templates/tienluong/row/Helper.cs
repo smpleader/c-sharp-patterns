@@ -55,14 +55,14 @@ namespace modDisplay.templates.tienluong.row
         }
         public static bool IsGroupObject(GridControl gridControl, int indexRow)
         {
-            if (!gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow, Util.CellUtility.GetExcelColumnNumber("B"))))
+            if (gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow, Util.CellUtility.GetExcelColumnNumber("B"))))
             {
                 return true;
             }
             else
             {
                 string C = gridControl[indexRow, Util.CellUtility.GetExcelColumnNumber("C")].Text;
-                if (!string.IsNullOrWhiteSpace(C) && !C.StartsWith("*"))
+                if (!string.IsNullOrWhiteSpace(C) && C.StartsWith("*"))
                 {
                     return true;
                 }
