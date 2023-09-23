@@ -136,7 +136,7 @@ namespace modDisplay.CustomGrid
             model.ColCount = 100;
             model.Rows.DefaultSize = 125;
             model.Cols.DefaultSize = 65;
-            model.RowHeights[0] = 155;
+            model.RowHeights[0] = 30;
             model.ColWidths[0] = 45;
 
             // style chiều cao của từng dòng

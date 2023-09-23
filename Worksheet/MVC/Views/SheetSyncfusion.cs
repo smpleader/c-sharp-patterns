@@ -95,14 +95,13 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        //sheet_mask.SaveAs(saveFileDialog.FileName);
+                        Display.WorkingBook.SaveAs(saveFileDialog.FileName);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Lưu lỗi. {ex}");
                         MessageBox.Show("Lưu thất bại! " + ex);
-
                     }
                 }
             }
@@ -137,9 +136,8 @@ namespace Worksheet.MVC.Views
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
             sheet_working.WorkbookLoaded += AfterLoad2;
-
-            
         }
+
         private void MainForm_OnButtonClick(object sender, EventArgs e)
         {
             MessageBox.Show("Event click is triggered ");
@@ -220,7 +218,6 @@ namespace Worksheet.MVC.Views
                     {
                         Console.WriteLine($"Lưu lỗi. {ex}");
                         MessageBox.Show("Lưu thất bại! " + ex);
-
                     }
                 }
             }
@@ -281,12 +278,16 @@ namespace Worksheet.MVC.Views
             GridExcelConverterControl gecc = new GridExcelConverterControl();
             gecc.GridToExcel(gridControl.Model, worksheet);
         }
+        List<GridModel> models = new List<GridModel>();
         private void cbb_SheetActive_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Display.IsChangeTab = true;
             if (Display.ActiveSheet != null)
             {
-                ConvertGridToWorksheet(this.workbook._grid, Display.ActiveSheet);
-                // Get the row and column indexes from the IRange
+                GridExcelConverterControl gecc1 = new GridExcelConverterControl();
+                gecc1.GridToExcel(this.workbook._grid.Model, Display.ActiveSheet);
+                //Get the row and column indexes from the IRange
+
                 int startRow = Display.ActiveSheet.UsedRange.Row;
                 int endRow = Display.ActiveSheet.UsedRange.Row + Display.ActiveSheet.UsedRange.Rows.Length - 1;
                 endRow = endRow > 0 ? endRow : 0;
@@ -343,6 +344,7 @@ namespace Worksheet.MVC.Views
                     break;
             }
             Display.showData();
+            Display.IsChangeTab = false;
         }
         bool isShowBottom = true;
         private void btn_ShowDebug_Click(object sender, EventArgs e)

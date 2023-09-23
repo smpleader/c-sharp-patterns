@@ -38,6 +38,8 @@ namespace modDisplay
         public static string Col;
         public static int Row;
 
+        public static bool IsChangeTab = false;
+
         #endregion
 
         #region [ Working sheet]
@@ -341,13 +343,13 @@ namespace modDisplay
         // Lưu lại sự thay đổi của Row từ masksheet vào workingsheet
         private static void Model_RowHeightsChanged(object sender, GridRowColSizeChangedEventArgs e)
         {
-            if(e.Success)
+            if(e.Success && !IsChangeTab)
             {
                 int to = e.To;
                 int start = e.From;
                 while (start <= to)
                 {
-                    double value = Workingsheet.PixelsToColumnWidth(ActiveGrid.RowHeights[start]);
+                    double value = ActiveGrid.RowHeights[start];
                     Workingsheet.SetRowHeight(start, value);
                     start++;
                 }
@@ -357,7 +359,7 @@ namespace modDisplay
         // Lưu lại sự thay đổi của Col từ masksheet vào workingsheet
         private static void Model_ColWidthsChanged(object sender, GridRowColSizeChangedEventArgs e)
         {
-            if (e.Success)
+            if (e.Success && !IsChangeTab)
             {
                 int to = e.To;
                 int start = e.From;
