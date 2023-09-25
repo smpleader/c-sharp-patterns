@@ -8,6 +8,7 @@ namespace modDisplay.templates.tienluong
 {
     public class Generator : AGenerator
     {
+        public int HeightRow = 35;
         public override string Name { get { return "templates/tienluong"; } }
         public override void init(string tabName)
         {
@@ -148,6 +149,73 @@ namespace modDisplay.templates.tienluong
             {
                 Display.showData();
             }
+            Style();
+            int i = 0;
+            while(count>i)
+            {
+                Display.ActiveGrid.RowHeights[indexRow-i] = HeightRow;
+                i++;
+            }
+        }
+
+        public void Style()
+        {
+            // style cho cột B
+            GridStyleInfo styleColB = new GridStyleInfo();
+            styleColB.HorizontalAlignment = GridHorizontalAlignment.Center;
+            styleColB.VerticalAlignment = GridVerticalAlignment.Top;
+            styleColB.TextColor = Color.Black;
+            int colB = Util.CellUtility.GetExcelColumnNumber("B");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colB, Positions["Body"].end, colB), styleColB, StyleModifyType.Override);
+
+            // style cho cột C
+            GridStyleInfo styleColC = new GridStyleInfo();
+            styleColC.TextColor = Color.Black;
+            int colC = Util.CellUtility.GetExcelColumnNumber("C");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colC, Positions["Body"].end, colC), styleColC, StyleModifyType.Override);
+
+            // style cho cột D
+            GridStyleInfo styleColD = new GridStyleInfo();
+            styleColD.TextColor = Color.Black;
+            int colD = Util.CellUtility.GetExcelColumnNumber("D");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colD, Positions["Body"].end, colD), styleColD, StyleModifyType.Override);
+
+            // style cho cột E
+            GridStyleInfo styleColE = new GridStyleInfo();
+            styleColE.HorizontalAlignment = GridHorizontalAlignment.Center;
+            styleColE.VerticalAlignment = GridVerticalAlignment.Top;
+            styleColE.TextColor = Color.Black;
+            int colE = Util.CellUtility.GetExcelColumnNumber("E");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colE, Positions["Body"].end, colE), styleColE, StyleModifyType.Override);
+
+            // style cho cột M
+            GridStyleInfo styleColM = new GridStyleInfo();
+            styleColM.TextColor = Color.Blue;
+            styleColM.HorizontalAlignment = GridHorizontalAlignment.Right;
+            styleColM.VerticalAlignment = GridVerticalAlignment.Top;
+            styleColM.Format = "###,###,##0.0000";
+            int colG = Util.CellUtility.GetExcelColumnNumber("M");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colG, Positions["Body"].end, colG), styleColM, StyleModifyType.Override);
+
+            // style cho cột N->U
+            GridStyleInfo styleColNU = new GridStyleInfo();
+            styleColNU.TextColor = Color.Black;
+            styleColNU.Format = "###,###,###,##0";
+            styleColNU.HorizontalAlignment = GridHorizontalAlignment.Right;
+            styleColNU.VerticalAlignment = GridVerticalAlignment.Top;
+            int colN = Util.CellUtility.GetExcelColumnNumber("N");
+            int colU = Util.CellUtility.GetExcelColumnNumber("U");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colN, Positions["Body"].end, colU), styleColNU, StyleModifyType.Override);
+
+            // style cho cột V->X
+            GridStyleInfo styleColVX = new GridStyleInfo();
+            styleColVX.TextColor = Color.Blue;
+            styleColVX.HorizontalAlignment = GridHorizontalAlignment.Right;
+            styleColVX.VerticalAlignment = GridVerticalAlignment.Top;
+            int colV = Util.CellUtility.GetExcelColumnNumber("V");
+            int colX = Util.CellUtility.GetExcelColumnNumber("X");
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, colV, Positions["Body"].end, colX), styleColVX, StyleModifyType.Override);
+
             // Creates a GridStyleInfo object.
             GridStyleInfo styleBody = new GridStyleInfo();
 
@@ -155,11 +223,11 @@ namespace modDisplay.templates.tienluong
 
             styleBody.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
             styleBody.Borders.Bottom = new GridBorder(GridBorderStyle.Dotted, Color.Black, GridBorderWeight.Thin);
-            //style.Borders.Left = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Medium);
-
+            styleBody.Font.Facename = "Times New Roman";
+            styleBody.Font.Size = 11.0f;
 
             // Applies styles to a range of cells.
-            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, Util.CellUtility.GetExcelColumnNumber("A") , Positions["Body"].end, Util.CellUtility.GetExcelColumnNumber("X")), styleBody, StyleModifyType.Override);
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, Util.CellUtility.GetExcelColumnNumber("A"), Positions["Body"].end, Util.CellUtility.GetExcelColumnNumber("X")), styleBody, StyleModifyType.Override);
 
 
             GridStyleInfo styleFooter = new GridStyleInfo();
@@ -168,16 +236,11 @@ namespace modDisplay.templates.tienluong
             styleFooter.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
             styleFooter.Borders.Bottom = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
 
-
             // Applies styles to a range of cells.
             Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Footer"].Id, Util.CellUtility.GetExcelColumnNumber("A"), Positions["Footer"].Id, Util.CellUtility.GetExcelColumnNumber("X")), styleFooter, StyleModifyType.Override);
-            int i = 0;
-            while(count>i)
-            {
-                Display.ActiveGrid.RowHeights[indexRow-i] = 35;
-                i++;
-            }
+
         }
+
         public override void deleteRow(int indexRow, int count)
         {
             //((Body)Position("Body")).end -= count;
