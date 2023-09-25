@@ -149,17 +149,34 @@ namespace modDisplay.templates.tienluong
                 Display.showData();
             }
             // Creates a GridStyleInfo object.
-            GridStyleInfo style = new GridStyleInfo();
+            GridStyleInfo styleBody = new GridStyleInfo();
 
             // Set values and properties.
-          
-            style.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Thin);
-            style.Borders.Bottom = new GridBorder(GridBorderStyle.Dotted, Color.Gray, GridBorderWeight.Thin);
+
+            styleBody.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+            styleBody.Borders.Bottom = new GridBorder(GridBorderStyle.Dotted, Color.Black, GridBorderWeight.Thin);
             //style.Borders.Left = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Medium);
 
 
             // Applies styles to a range of cells.
-            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, Util.CellUtility.GetExcelColumnNumber("A") , Positions["Body"].end -1, Util.CellUtility.GetExcelColumnNumber("X")), style, StyleModifyType.Override);
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, Util.CellUtility.GetExcelColumnNumber("A") , Positions["Body"].end, Util.CellUtility.GetExcelColumnNumber("X")), styleBody, StyleModifyType.Override);
+
+
+            GridStyleInfo styleFooter = new GridStyleInfo();
+            // Set values and properties.
+            styleFooter.Borders.Top = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+            styleFooter.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+            styleFooter.Borders.Bottom = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+
+
+            // Applies styles to a range of cells.
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Footer"].Id, Util.CellUtility.GetExcelColumnNumber("A"), Positions["Footer"].Id, Util.CellUtility.GetExcelColumnNumber("X")), styleFooter, StyleModifyType.Override);
+            int i = 0;
+            while(count>i)
+            {
+                Display.ActiveGrid.RowHeights[indexRow-i] = 35;
+                i++;
+            }
         }
         public override void deleteRow(int indexRow, int count)
         {
