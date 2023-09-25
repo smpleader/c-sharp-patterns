@@ -265,7 +265,8 @@ namespace modDisplay.CustomGrid
             _grid.MouseMove += _grid_MouseMove;
 
             i++;
-            _grid.TableStyle.WrapText = false;
+            _grid.TableStyle.WrapText = true;
+            _grid.TableStyle.AutoSize = true;
 
             RegisterCellModel.GridCellType(_grid, CustomCellTypes.XhtmlCell);
 

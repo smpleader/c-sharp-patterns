@@ -115,7 +115,7 @@ namespace modDisplay.templates.tienluong
                     }
                 }
                 cv.HaveInterpretiveFormula = haveInterpretiveFormula;
-                cv.bind();
+                //cv.bind();
             }
         }
         /// <summary>

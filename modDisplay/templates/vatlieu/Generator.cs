@@ -38,10 +38,12 @@ namespace modDisplay.templates.vatlieu
             switch (Display.Col)
             {
                 case "B":
+                    var a = Display.Cell;
                     if (!((Body)Position("Body")).rows.Keys.Contains(Display.Row))
                     {
                         //Display.Cell.IsReadOnly = true;
                     }
+                    var b = Display.ActiveGrid[Display.Row, Util.CellUtility.GetExcelColumnNumber( Display.Col )];
                     break;
                 case "R":
                 case "S":

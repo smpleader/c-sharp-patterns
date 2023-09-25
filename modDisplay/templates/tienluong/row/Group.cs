@@ -4,6 +4,7 @@ using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
+using GridRangeInfo = Syncfusion.Windows.Forms.Grid.GridRangeInfo;
 
 namespace modDisplay.templates.tienluong.row
 {
@@ -52,7 +53,7 @@ namespace modDisplay.templates.tienluong.row
                 rangeMerge.Merge();
                 cellB.Range.Value = nameGroup;
 
-                this.gridControl.Model.CoveredRanges.Add(Syncfusion.Windows.Forms.Grid.GridRangeInfo.Cells(rangeMerge.Row, rangeMerge.Column, rangeMerge.LastRow, rangeMerge.LastColumn));
+                this.gridControl.Model.CoveredRanges.Add(GridRangeInfo.Cells(rangeMerge.Row, rangeMerge.Column, rangeMerge.LastRow, rangeMerge.LastColumn));
                 cellB.ValueOnMask = nameGroup;
 
                 #region style lại cho group object in workingsheet
@@ -71,8 +72,8 @@ namespace modDisplay.templates.tienluong.row
                 cellB.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Left;
                 GridStyleInfo style = new GridStyleInfo();
                 style.BackColor = Color.LightGreen;
-                style.Borders.All = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Thin);
-                var rangeGroupGridcontrol = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Cells(rangeGroup.Row, rangeGroup.Column, rangeGroup.LastRow, rangeGroup.LastColumn);
+                style.Borders.All = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+                var rangeGroupGridcontrol = GridRangeInfo.Cells(rangeGroup.Row, rangeGroup.Column, rangeGroup.LastRow, rangeGroup.LastColumn);
                 this.gridControl.ChangeCells(rangeGroupGridcontrol, style, StyleModifyType.Override);
                 #endregion
             }

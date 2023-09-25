@@ -55,7 +55,7 @@ namespace modDisplay.templates.tienluong.row
         }
         public static bool IsGroupObject(GridControl gridControl, int indexRow)
         {
-            if (gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cell(indexRow, Util.CellUtility.GetExcelColumnNumber("B"))))
+            if (gridControl.Model.CoveredRanges.Ranges.Contains(GridRangeInfo.Cells(indexRow, Util.CellUtility.GetExcelColumnNumber("B"), indexRow, Util.CellUtility.GetExcelColumnNumber("Q"))))
             {
                 return true;
             }

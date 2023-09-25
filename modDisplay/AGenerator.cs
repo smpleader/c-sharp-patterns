@@ -27,7 +27,10 @@ namespace modDisplay
         public virtual void afterCellInput() { }
         public virtual void addMenu() { }
         public virtual void cellDataChanged() { }
-        
+        public virtual void insertRow(int indexRow, int count) { }
+        public virtual void deleteRow(int indexRow, int count) { }
+
+
         public APosition Position(string name)
         {
             if (!Positions.Keys.Contains(name))

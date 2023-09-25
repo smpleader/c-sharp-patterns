@@ -73,7 +73,13 @@ namespace modDisplay.templates.tienluong.row
        
         public void bind()
         {
-
+            cellC.Bind();
+            cellD.Bind();
+            cellE.Bind();
+            cellM.Bind();
+            cellV.Bind();
+            cellW.Bind();
+            cellX.Bind();
         }
        
         public void render()

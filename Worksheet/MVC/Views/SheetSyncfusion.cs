@@ -1,25 +1,12 @@
-﻿using Syncfusion.Windows.Forms.CellGrid.ScrollAxis;
-using Syncfusion.Windows.Forms.Spreadsheet;
-using Syncfusion.Windows.Forms.Spreadsheet.GraphicCells;
+﻿
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
-using Syncfusion.XlsIO.Implementation.Shapes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using modDisplay;
 using Worksheet.MVC.Presenters;
 using Worksheet.MVC.Presenters.SheetTemplate;
 using BaseInterface;
 using Util;
 using modDisplay.CustomGrid;
-using Microsoft.Office.Interop.Excel;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.GridExcelConverter;
 
@@ -95,7 +82,9 @@ namespace Worksheet.MVC.Views
                 {
                     try
                     {
-                        Display.WorkingBook.SaveAs(saveFileDialog.FileName);
+                        GridExcelConverterControl gecc1 = new GridExcelConverterControl();
+                        gecc1.GridToExcel(this.workbook._grid.Model, Display.ActiveSheet);
+                        Display.workbook.SaveAs(saveFileDialog.FileName);
                         MessageBox.Show("Lưu thành công! " + saveFileDialog.FileName);
                     }
                     catch (Exception ex)
@@ -296,6 +285,7 @@ namespace Worksheet.MVC.Views
                 endColumn = endColumn > 0 ? endColumn : 0;
                 GridRangeInfo gridRangeInfo = GridRangeInfo.Cells(startRow, startColumn, endRow, endColumn);
                 this.workbook._grid.Model.ClearCells(gridRangeInfo, true);
+                this.workbook._grid.CoveredRanges.Clear();
             }
             Syncfusion.GridExcelConverter.GridExcelConverterControl gecc = new Syncfusion.GridExcelConverter.GridExcelConverterControl();
             Display.ActiveSheet = Display.WorkSheets[cbb_SheetActive.Text];
@@ -316,6 +306,9 @@ namespace Worksheet.MVC.Views
                 case "Tiên lượng":
                     pnl_VatLieu.Visible = false;
                     Display.ActiveGrid.Cols.Hidden.SetRange(6, 12, !chkbx_KichThuoc.Checked);
+                    Display.ActiveGrid.Cols.Hidden.SetRange(13, 14, false);
+                    Display.ActiveGrid.Cols.Hidden.SetRange(15, 15, true);
+                    Display.ActiveGrid.Cols.Hidden.SetRange(19, 19, true);
                     btn_ThemCongViec.Enabled = true;
                     chkbx_KichThuoc.Enabled = true;
                     break;
@@ -327,9 +320,9 @@ namespace Worksheet.MVC.Views
                     {
                         case PPTGiaVatLieu.NhapTay:
                             rdbtn_PPT_NhapTay.Checked = true;
-                            Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
-                            Display.ActiveGrid.Cols.Hidden.SetRange(7, 12, true);
-                            Display.ActiveGrid.Cols.Hidden.SetRange(14, 14, true);
+                            //Display.ActiveGrid.Cols.Hidden.SetRange(1, 16, false);
+                            //Display.ActiveGrid.Cols.Hidden.SetRange(7, 12, true);
+                            //Display.ActiveGrid.Cols.Hidden.SetRange(14, 14, true);
                             break;
                         case PPTGiaVatLieu.CongCuocVanChuyen:
                             rdbtn_PPT_CongCuocVC.Checked = true;

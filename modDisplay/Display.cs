@@ -205,7 +205,8 @@ namespace modDisplay
                         //Debug.WriteLine($"Giá trị của ô [{row},{col}]: {cellValue}");
 
                         GridStyleInfo cellUI = ActiveGrid[row, col];
-                        cellUI.Text = cell.HasFormula ? cell.CalculatedValue : cellValue; // hiển thị dạng text
+                        cellUI.Text = cell.HasFormula ? (cell.CalculatedValue == "wrong number of arguments"?"0":cell.CalculatedValue) : cellValue; // hiển thị dạng text
+                        ActiveGrid.RowHeights.ResizeToFit(GridRangeInfo.Rows(row, row));
                     }
                 }
             }
@@ -324,6 +325,21 @@ namespace modDisplay
             }
         }
 
+        public static void hook(string name, int indexRow, int count)
+        {
+            switch (name)
+            {
+                case "insertRow":
+                case "InsertRow":
+                    tab().insertRow(indexRow,count);
+                    break;
+                case "deleteRow":
+                case "DeleteRow":
+                    tab().deleteRow(indexRow, count);
+                    break;
+            }
+        }
+
         private static void attachEvent()
         {
             foreach (var tab in currentTemplate.Tabs)
@@ -335,9 +351,30 @@ namespace modDisplay
             WControl._grid.CurrentCellEditingComplete += new EventHandler(_grid_CurrentCellEditingComplete);
             WControl._grid.Model.ColWidthsChanged += Model_ColWidthsChanged;
             WControl._grid.Model.RowHeightsChanged += Model_RowHeightsChanged; ;
-
+            WControl.OnRowDeleted += WorkBook_OnRowDeleted;
+            WControl.OnRowInserted += WorkBook_OnRowInserted;
+            WControl.OnContentDeleted += WorkBook_OnContentDeleted;
 
             contextMenu.Opening += contextMenuOpen;
+        }
+
+        private static void WorkBook_OnContentDeleted(GridRangeInfoList ranges)
+        {
+            
+        }
+
+        private static void WorkBook_OnRowInserted(int insertAt, int count)
+        {
+            Workingsheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsBefore);
+            ActiveSheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsBefore);
+            hook("InsertRow", insertAt, count);
+        }
+
+        private static void WorkBook_OnRowDeleted(int rowIndex, int count)
+        {
+            Workingsheet.DeleteRow(rowIndex, count);
+            ActiveSheet.DeleteRow(rowIndex, count);
+            hook("DeleteRow", rowIndex, count);
         }
 
         // Lưu lại sự thay đổi của Row từ masksheet vào workingsheet

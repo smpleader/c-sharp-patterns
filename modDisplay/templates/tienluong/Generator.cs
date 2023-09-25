@@ -1,6 +1,8 @@
 ﻿using HeaderGroup = modDisplay.templates.tienluong.Header;
 using FooterGroup = modDisplay.templates.tienluong.Footer;
 using modDisplay.templates.tienluong.row;
+using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.Styles;
 
 namespace modDisplay.templates.tienluong
 {
@@ -51,6 +53,14 @@ namespace modDisplay.templates.tienluong
             Positions["Body"].bindInWoringsheet();
             Positions["Body"].renderInWorkingsheet();
 
+            if (Display.ActiveMaskSheetDebug != null)
+            {
+                Display.showDataDebug();
+            }
+            if (Display.ActiveGrid != null)
+            {
+                Display.showData();
+            }
             IsEditting = false;
         }
         public void updateData()
@@ -89,6 +99,7 @@ namespace modDisplay.templates.tienluong
                     //Display.Cell.IsReadOnly = true;
                     break;
             }
+            var b = Display.ActiveGrid[Display.Row, Util.CellUtility.GetExcelColumnNumber(Display.Col)];
         }
 
         public override void afterCellInput()
@@ -104,6 +115,84 @@ namespace modDisplay.templates.tienluong
             Display.showDataDebug();
             Display.showData();
             IsEditting = false;
+        }
+        public override void insertRow(int indexRow, int count)
+        {
+            //((Body)Position("Body")).end += count;
+            Positions = new Dictionary<string, APosition>()
+            {
+                { "Header", new HeaderGroup(gridControl, workingsheet) },
+                { "Body", new Body(gridControl, workingsheet) },
+                { "Footer", new FooterGroup(gridControl, workingsheet) },
+            };
+            // bind
+
+            // header
+            Positions["Header"].bindInWoringsheet();
+            Positions["Header"].renderInWorkingsheet();
+
+            // footer
+            Positions["Footer"].bindInWoringsheet();
+            Positions["Footer"].renderInWorkingsheet();
+
+            // body 
+            Positions["Body"].end = Positions["Footer"].Id - 1;
+            Positions["Body"].bindInWoringsheet();
+            Positions["Body"].renderInWorkingsheet();
+
+            if (Display.ActiveMaskSheetDebug != null)
+            {
+                Display.showDataDebug();
+            }
+            if (Display.ActiveGrid != null)
+            {
+                Display.showData();
+            }
+            // Creates a GridStyleInfo object.
+            GridStyleInfo style = new GridStyleInfo();
+
+            // Set values and properties.
+          
+            style.Borders.Right = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Thin);
+            style.Borders.Bottom = new GridBorder(GridBorderStyle.Dotted, Color.Gray, GridBorderWeight.Thin);
+            //style.Borders.Left = new GridBorder(GridBorderStyle.Solid, Color.Gray, GridBorderWeight.Medium);
+
+
+            // Applies styles to a range of cells.
+            Display.ActiveGrid.ChangeCells(GridRangeInfo.Cells(Positions["Body"].start, Util.CellUtility.GetExcelColumnNumber("A") , Positions["Body"].end -1, Util.CellUtility.GetExcelColumnNumber("X")), style, StyleModifyType.Override);
+        }
+        public override void deleteRow(int indexRow, int count)
+        {
+            //((Body)Position("Body")).end -= count;
+            Positions = new Dictionary<string, APosition>()
+            {
+                { "Header", new HeaderGroup(gridControl, workingsheet) },
+                { "Body", new Body(gridControl, workingsheet) },
+                { "Footer", new FooterGroup(gridControl, workingsheet) },
+            };
+            // bind
+
+            // header
+            Positions["Header"].bindInWoringsheet();
+            Positions["Header"].renderInWorkingsheet();
+
+            // footer
+            Positions["Footer"].bindInWoringsheet();
+            Positions["Footer"].renderInWorkingsheet();
+
+            // body 
+            Positions["Body"].end = Positions["Footer"].Id - 1;
+            Positions["Body"].bindInWoringsheet();
+            Positions["Body"].renderInWorkingsheet();
+
+            if (Display.ActiveMaskSheetDebug != null)
+            {
+                Display.showDataDebug();
+            }
+            if (Display.ActiveGrid != null)
+            {
+                Display.showData();
+            }
         }
     }
 }
