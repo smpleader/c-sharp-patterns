@@ -26,5 +26,9 @@ namespace modDisplay
         {
             // todo : asign column from masksheet
         }
+        public virtual void style()
+        {
+
+        }
     }
 }

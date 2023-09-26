@@ -122,5 +122,9 @@ namespace modDisplay.templates.tienluong.row
         {
 
         }
+        public override void style()
+        {
+
+        }
     }
 }

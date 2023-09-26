@@ -4,6 +4,7 @@ using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
+using Syncfusion.XlsIO.Implementation.Collections.Grouping;
 using GridRangeInfo = Syncfusion.Windows.Forms.Grid.GridRangeInfo;
 
 namespace modDisplay.templates.tienluong.row
@@ -85,6 +86,25 @@ namespace modDisplay.templates.tienluong.row
             cellS.Render();
             cellT.Render();
             cellU.Render();
+        }
+        public override void style()
+        {
+            string addressRangeGroup = cellA.Range.AddressLocal + ":" + cellX.Range.AddressLocal;
+            IRange rangeGroup = workingsheet.Range[addressRangeGroup];
+            rangeGroup.CellStyle.ColorIndex = ExcelKnownColors.Light_green;
+            rangeGroup.BorderAround(ExcelLineStyle.Thin);
+            cellB.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Left;
+            GridStyleInfo style = new GridStyleInfo();
+            style.BackColor = Color.LightGreen;
+            style.Borders.All = new GridBorder(GridBorderStyle.Solid, Color.Black, GridBorderWeight.Thin);
+            var rangeGroupGridcontrol = GridRangeInfo.Cells(rangeGroup.Row, rangeGroup.Column, rangeGroup.LastRow, rangeGroup.LastColumn);
+            this.gridControl.ChangeCells(rangeGroupGridcontrol, style, StyleModifyType.Override);
+
+            // style cho cột R->U
+            cellR.GridStyleInfo.TextColor = cellS.GridStyleInfo.TextColor = cellT.GridStyleInfo.TextColor = cellU.GridStyleInfo.TextColor = Color.Black;
+            cellR.GridStyleInfo.Format = cellS.GridStyleInfo.Format = cellT.GridStyleInfo.Format = cellU.GridStyleInfo.Format = "###,###,###,##0";
+            cellR.GridStyleInfo.HorizontalAlignment = cellS.GridStyleInfo.HorizontalAlignment = cellT.GridStyleInfo.HorizontalAlignment = cellU.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Right;
+            cellR.GridStyleInfo.VerticalAlignment = cellS.GridStyleInfo.VerticalAlignment = cellT.GridStyleInfo.VerticalAlignment = cellU.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
         }
     }
 }

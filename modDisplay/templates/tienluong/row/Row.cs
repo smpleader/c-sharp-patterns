@@ -1,4 +1,5 @@
 ﻿using modDisplay.templates.tienluong.row.row;
+using Syncfusion.Styles;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
 
@@ -118,6 +119,45 @@ namespace modDisplay.templates.tienluong.row
             // set màu chữ thành không màu
             IRange range = workingsheet.Range[cellZ.Range.AddressLocal + ":" + cellAC.Range.AddressLocal];
             range.CellStyle.Font.Color = Syncfusion.XlsIO.ExcelKnownColors.White;
+        }
+        public override void style()
+        {
+            // style cho cột B
+            cellB.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Center;
+            cellB.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
+            cellB.GridStyleInfo.TextColor = Color.Black;
+
+            // style cho cột C
+            cellC.GridStyleInfo.TextColor = Color.Black;
+
+            // style cho cột D
+            cellD.GridStyleInfo.TextColor = Color.Black;
+
+            // style cho cột E
+            cellE.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Center;
+            cellE.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
+            cellE.GridStyleInfo.TextColor = Color.Black;
+
+            // style cho cột M
+            cellM.GridStyleInfo.TextColor = Color.Blue;
+            cellM.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Right;
+            cellM.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
+            cellM.GridStyleInfo.Format = "###,###,##0.0000";
+
+            // style cho cột N->U
+            cellN.GridStyleInfo.TextColor = cellO.GridStyleInfo.TextColor = cellP.GridStyleInfo.TextColor = cellQ.GridStyleInfo.TextColor
+                = cellR.GridStyleInfo.TextColor = cellS.GridStyleInfo.TextColor = cellT.GridStyleInfo.TextColor = cellU.GridStyleInfo.TextColor = Color.Black;
+            cellN.GridStyleInfo.Format = cellO.GridStyleInfo.Format = cellP.GridStyleInfo.Format = cellQ.GridStyleInfo.Format
+                = cellR.GridStyleInfo.Format = cellS.GridStyleInfo.Format = cellT.GridStyleInfo.Format = cellU.GridStyleInfo.Format = "###,###,###,##0";
+            cellN.GridStyleInfo.HorizontalAlignment = cellO.GridStyleInfo.HorizontalAlignment = cellP.GridStyleInfo.HorizontalAlignment = cellQ.GridStyleInfo.HorizontalAlignment
+                = cellR.GridStyleInfo.HorizontalAlignment = cellS.GridStyleInfo.HorizontalAlignment = cellT.GridStyleInfo.HorizontalAlignment = cellU.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Right;
+            cellN.GridStyleInfo.VerticalAlignment = cellO.GridStyleInfo.VerticalAlignment = cellP.GridStyleInfo.VerticalAlignment = cellQ.GridStyleInfo.VerticalAlignment
+                = cellR.GridStyleInfo.VerticalAlignment = cellS.GridStyleInfo.VerticalAlignment = cellT.GridStyleInfo.VerticalAlignment = cellU.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
+
+            // style cho cột V->X
+            cellV.GridStyleInfo.TextColor = cellW.GridStyleInfo.TextColor = cellX.GridStyleInfo.TextColor = Color.Blue;
+            cellV.GridStyleInfo.HorizontalAlignment = cellW.GridStyleInfo.HorizontalAlignment = cellX.GridStyleInfo.HorizontalAlignment = GridHorizontalAlignment.Right;
+            cellV.GridStyleInfo.VerticalAlignment = cellW.GridStyleInfo.VerticalAlignment = cellX.GridStyleInfo.VerticalAlignment = GridVerticalAlignment.Top;
         }
     }
 }

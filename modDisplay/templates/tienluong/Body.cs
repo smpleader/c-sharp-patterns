@@ -15,6 +15,48 @@ namespace modDisplay.templates.tienluong
             start = 6;
         }
 
+        public void Style()
+        {
+            List<int> indexAdditionalRows = new List<int>();
+            List<int> indexRows = new List<int>();
+            List<int> indexGroups = new List<int>();
+
+            for (int indexRow = start; indexRow <= end; indexRow++)
+            {
+                if (Helper.IsGroupObject(gridControl, indexRow))
+                {
+                    indexGroups.Add(indexRow);
+                    continue;
+                }
+                if (Helper.IsRowObject(gridControl, indexRow))
+                {
+                    indexRows.Add(indexRow);
+                    continue;
+                }
+                if (Helper.IsAdditionalRowObject(gridControl, indexRow))
+                {
+                    indexAdditionalRows.Add(indexRow);
+                }
+            }
+            for (int i = 0; i < indexGroups.Count; i++)
+            {
+                Group groupCV = groups[indexGroups[i]];
+                groupCV.style();
+            }
+
+            for (int i = 0; i < indexAdditionalRows.Count; i++)
+            {
+                AdditionalRow additionalRow = additionalRows[indexAdditionalRows[i]];
+                additionalRow.style();
+            }
+
+            for (int i = 0; i < indexRows.Count; i++)
+            {
+                Row cv = rows[indexRows[i]];
+                cv.style();
+            }
+        }
+
         public override void bindInWoringsheet()
         {
             List<int> indexAdditionalRows = new List<int>();

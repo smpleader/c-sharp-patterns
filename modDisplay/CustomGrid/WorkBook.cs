@@ -599,11 +599,16 @@ namespace modDisplay.CustomGrid
                 if (gridControl[row, col].Text == "1")
                 {
                     // Calculate the cell bounds manually based on row height and column width.
-                    int leftEdge = gridControl.ColWidths.GetRange(1, col - 1).Sum();
-                    int rightEdge = leftEdge + gridControl.ColWidths[col];
-                    int topEdge = gridControl.RowHeights.GetRange(1, row - 1).Sum();
-                    //int bottomEdge = topEdge + gridControl.RowHeights[row];
-
+                    int rightEdge = 0; 
+                    for(int i =1; i <= col; i++)
+                    {
+                        rightEdge += gridControl.ColWidths[i]; // tính như vậy sẽ bỏ qua cột bị ẩn để hiển thị chính xác vị trí ô
+                    }
+                    int topEdge = 0;
+                    for (int i = 1; i < row; i++)
+                    {
+                        topEdge += gridControl.RowHeights[i]; // tính như vậy sẽ bỏ qua hàng bị ẩn để hiển thị chính xác vị trí ô
+                    }
                     // Set the panel's location and make it visible.
                     panelInfo.Location = new Point(rightEdge + 30, topEdge);
 
