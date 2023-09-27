@@ -10,6 +10,7 @@ namespace modDisplay.templates.vatlieu
             {
                 gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
+                workingsheet.EnableSheetCalculations();
             }
         }
 

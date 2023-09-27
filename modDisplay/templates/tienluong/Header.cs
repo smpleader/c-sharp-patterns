@@ -32,5 +32,13 @@ namespace modDisplay.templates.tienluong
                 item.Value.render();
             }
         }
+        public override string GetFormula(int row, int col)
+        {
+            if (headers.Keys.Contains(row))
+            {
+                return headers[row].GetFormula(col);
+            }
+            return workingsheet.Range[row, col].Value;
+        }
     }
 }

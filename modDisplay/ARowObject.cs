@@ -1,5 +1,7 @@
-﻿using Syncfusion.Windows.Forms.Grid;
+﻿using modDisplay.row;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.XlsIO;
+using System.Reflection;
 using Row = modData.Memories.ARecord;
 
 namespace modDisplay
@@ -29,6 +31,26 @@ namespace modDisplay
         public virtual void style()
         {
 
+        }
+
+        public virtual string GetFormula(int col)
+        {
+            // Lấy ra danh sách các property của class
+            PropertyInfo[] properties = this.GetType().GetProperties();
+
+            // Duyệt qua từng property và hiển thị tên của nó
+            foreach (PropertyInfo property in properties)
+            {
+                object propertyValue = property.GetValue(this);
+                if (propertyValue is ACell)
+                {
+                    if (((ACell)propertyValue).Col == Util.CellUtility.GetExcelColumnLetter(col) && ((ACell)propertyValue).HasFormula)
+                    {
+                        return ((ACell)propertyValue).GetFormula();
+                    }
+                }
+            }
+            return workingsheet.Range[Id, col].Value;
         }
     }
 }

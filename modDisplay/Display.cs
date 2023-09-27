@@ -85,7 +85,8 @@ namespace modDisplay
             ExcelEngine excelEngine = new ExcelEngine();
             var application = excelEngine.Excel;
             WorkingBook = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
-            WorkingBook.SetSeparators(';', ',');
+            //WorkingBook.SetSeparators(';', ',');
+            WorkingBook.CalculationOptions.CalculationMode = ExcelCalculationMode.Automatic;
             Workingsheets = WorkingBook.Worksheets;
             foreach (var worksheet in Workingsheets)
             {
@@ -108,7 +109,6 @@ namespace modDisplay
                 worksheet.Name += "_"+ hangMucId;
                 worksheet.EnableSheetCalculations();
                 Workingsheets.AddCopy(worksheet);
-
             }
         }
         /// <summary>
@@ -191,7 +191,7 @@ namespace modDisplay
         {
 
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
-
+            Workingsheet.Calculate();
             //// Duyệt qua các ô trên tờ và lấy giá trị của từng ô
             for (int row = 1; row <= Workingsheet.Rows.Length; row++)
             {
@@ -210,6 +210,7 @@ namespace modDisplay
                     }
                 }
             }
+            Workingsheet.DisableSheetCalculations();
         }
 
         /// <summary>
@@ -237,7 +238,9 @@ namespace modDisplay
                     }
                 }
             }
-            WControlDebug.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
+            Workingsheet.DisableSheetCalculations();
+
+            //WControlDebug.ActiveGrid.InvalidateCells(); // hiển thị lên spreadsheet
         }
 
         public static void setControl(WorkBook control)
@@ -365,8 +368,8 @@ namespace modDisplay
 
         private static void WorkBook_OnRowInserted(int insertAt, int count)
         {
-            Workingsheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsBefore);
-            ActiveSheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsBefore);
+            Workingsheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsAfter);
+            ActiveSheet.InsertRow(insertAt, count, ExcelInsertOptions.FormatAsAfter);
             hook("InsertRow", insertAt, count);
         }
 

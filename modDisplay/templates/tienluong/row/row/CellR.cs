@@ -17,6 +17,7 @@ namespace modDisplay.templates.tienluong.row.row
         public override string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
         public CellR(Row r) : base(r)
         {
+            HasFormula = true;
         }
     }
 }

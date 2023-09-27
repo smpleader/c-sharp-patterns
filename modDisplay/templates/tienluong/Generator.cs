@@ -3,7 +3,6 @@ using FooterGroup = modDisplay.templates.tienluong.Footer;
 using modDisplay.templates.tienluong.row;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Styles;
-using System.Windows.Forms;
 using Syncfusion.XlsIO;
 
 namespace modDisplay.templates.tienluong
@@ -19,6 +18,7 @@ namespace modDisplay.templates.tienluong
             {
                 gridControl = Display.ActiveGrid;
                 workingsheet = Display.Workingsheets[tabName + "_" + Display.HangMucId];
+                workingsheet.EnableSheetCalculations();
             }
         }
 

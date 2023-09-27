@@ -25,5 +25,9 @@ namespace modDisplay.templates.tienluong
         {
             footer.render();
         }
+        public override string GetFormula(int row, int col)
+        {
+            return footer.GetFormula(col);
+        }
     }
 }

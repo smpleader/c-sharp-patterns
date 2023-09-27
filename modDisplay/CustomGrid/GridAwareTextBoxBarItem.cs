@@ -1,4 +1,4 @@
-#region Copyright Syncfusion Inc. 2001 - 2023
+﻿#region Copyright Syncfusion Inc. 2001 - 2023
 //
 //  Copyright Syncfusion Inc. 2001 - 2023. All rights reserved.
 //
@@ -9,22 +9,8 @@
 //
 #endregion
 
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections;
-using System.ComponentModel;
-using System.ComponentModel.Design;
+
 using Syncfusion.Windows.Forms;
-using Syncfusion.Windows.Forms.Design;
-using Syncfusion.Collections;
-using Syncfusion.ComponentModel;
-using System.Drawing.Design;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Reflection;
-using Syncfusion.Runtime.Serialization;
 using Syncfusion.Windows.Forms.Tools.XPMenus;
 using Syncfusion.Windows.Forms.Grid;
 
@@ -78,7 +64,7 @@ namespace modDisplay.CustomGrid
         void _grid_CurrentCellMoved(object sender, GridCurrentCellMovedEventArgs e)
         {
             if (rangeofgrid)
-                TextBoxValue = string.Format("R{0}C{0}", _grid.CurrentCell.RowIndex, _grid.CurrentCell.ColIndex);
+                TextBoxValue = Display.Col + Display.Row;// string.Format("R{0}C{0}", _grid.CurrentCell.RowIndex, _grid.CurrentCell.ColIndex);
         }
 
         public override string TextBoxValue
@@ -90,7 +76,9 @@ namespace modDisplay.CustomGrid
             set
             {
                 if (rangeofgrid || ignoreSync)
+                {
                     base.TextBoxValue = value;
+                }
                 else
                 {
                     if (_grid != null)
@@ -98,7 +86,7 @@ namespace modDisplay.CustomGrid
                         //Set textbox value to current cell value
                         GridCurrentCell cc = GetCurrentCell();
                         cc.MoveTo(cc.RowIndex, cc.ColIndex, GridSetCurrentCellOptions.ScrollInView);
-                        gridAwareTextBox.Text = value;
+                        //gridAwareTextBox.Text = value; // comment để k cho phép thay đổi giá trị của ô
                         base.TextBoxValue = value;
                     }
                 }
@@ -107,12 +95,15 @@ namespace modDisplay.CustomGrid
 
         private void gridAwareTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!rangeofgrid)
-            {
-                ignoreSync = true;
-                TextBoxValue = gridAwareTextBox.Text;
-                ignoreSync = false;
-            }
+            //if (!rangeofgrid)
+            //{
+            //    ignoreSync = true;
+            //    GridCurrentCell cc = GetCurrentCell();
+            //    cc.MoveTo(cc.RowIndex, cc.ColIndex, GridSetCurrentCellOptions.ScrollInView);
+            //    TextBoxValue = Display.tab().GetFormula(cc.RowIndex, cc.ColIndex);
+            //    //TextBoxValue = gridAwareTextBox.Text;
+            //    ignoreSync = false;
+            //}
         }
 
         private void Model_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
@@ -120,6 +111,15 @@ namespace modDisplay.CustomGrid
             //Change the NameBox value to reflect the current selection range
             if (rangeofgrid)
                 TextBoxValue = e.Range.ToString();
+            else
+            {
+                ignoreSync = true;
+                GridCurrentCell cc = GetCurrentCell();
+                cc.MoveTo(cc.RowIndex, cc.ColIndex, GridSetCurrentCellOptions.ScrollInView);
+                TextBoxValue = Display.tab().GetFormula(cc.RowIndex, cc.ColIndex);
+                ignoreSync = false;
+            } 
+                
         }
         #endregion
 

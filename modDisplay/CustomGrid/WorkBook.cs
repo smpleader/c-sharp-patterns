@@ -535,7 +535,6 @@ namespace modDisplay.CustomGrid
         void _grid_PrepareViewStyleInfo(object sender, GridPrepareViewStyleInfoEventArgs e)
         {
             GridControl grid = (GridControl)sender;
-            var a = grid.Model;
             GridCurrentCell cc = grid.CurrentCell;
             if (grid.Selections.Ranges.Count != 0)
             {

@@ -17,6 +17,7 @@ namespace modDisplay.templates.tienluong.row.footer
         public override string[] Params { get { return new string[2] { Row.start.ToString(), Row.end.ToString() }; } }
         public CellR(Footer r) : base(r)
         {
+            HasFormula = true;
         }
     }
 }

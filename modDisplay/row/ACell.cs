@@ -20,6 +20,7 @@ namespace modDisplay.row
         public string HangMucId { get; set; }
         public virtual string UniqueName { get { return ""; } }
         public virtual string Col { get { return "A"; } }
+        public bool HasFormula { get; set; } = false;
         public virtual int ColIndex { get { return Util.CellUtility.GetExcelColumnNumber(Col); } }
         public virtual string[] Params { get { return new string[1] { Row.Id.ToString() }; } }
 
@@ -68,6 +69,11 @@ namespace modDisplay.row
         /// Xử lý dữ liệu
         /// </summary>
         public IData Data { get; set; }
+
+        public virtual string GetFormula()
+        {
+            return modBLContainer.Get(UniqueName).formula(Params);
+        }
 
         /// <summary>
         /// Cập nhật data vào working sheet

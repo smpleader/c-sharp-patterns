@@ -2,6 +2,8 @@
 using System.Data;
 using Syncfusion.Windows.Forms.Grid;
 using modDisplay.templates.tienluong.row.additional;
+using System.Reflection;
+using modDisplay.row;
 
 namespace modDisplay.templates.tienluong.row
 {

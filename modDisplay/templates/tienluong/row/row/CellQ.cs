@@ -27,6 +27,7 @@ namespace modDisplay.templates.tienluong.row.row
 
         public CellQ(Row r) : base(r)
         {
+            HasFormula = true;
         }
     }
 }

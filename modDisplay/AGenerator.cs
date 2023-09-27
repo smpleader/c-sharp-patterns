@@ -9,8 +9,7 @@ namespace modDisplay
         public bool IsEditting = false;
         public GridControl gridControl { get; set; }
         public IWorksheet workingsheet { get; set; }
-
-        public Dictionary<string, APosition> Positions;
+        public Dictionary<string, APosition> Positions { get; set; }
         public virtual void init(string tabName) { }
         /// <summary>
         /// Sử dụng khi mở file
@@ -29,7 +28,6 @@ namespace modDisplay
         public virtual void cellDataChanged() { }
         public virtual void insertRow(int indexRow, int count) { }
         public virtual void deleteRow(int indexRow, int count) { }
-
 
         public APosition Position(string name)
         {
@@ -50,5 +48,9 @@ namespace modDisplay
             }
             return Positions["Body"];
         }
+        public virtual string GetFormula(int row, int col)
+        {
+           return Address(row).GetFormula(row,col);
+        }    
     }
 }

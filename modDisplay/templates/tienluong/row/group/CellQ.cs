@@ -14,18 +14,14 @@ namespace modDisplay.templates.tienluong.row.group
     {
         public override string UniqueName { get { return "CongViec_DonGiaMay"; } }
         public override string Col { get { return "Q"; } }
-        public string TongTienVatTu
-        {
-            get
-            {
-                string valueAC = ((Row)Row).cellAC.Range.Value;
-                if (string.IsNullOrWhiteSpace(valueAC)) return "0";
-                return ((Row)Row).cellAC.Range.Value.ToString();
-            }
-        }
-        public virtual string[] Params { get { return new string[2] { Row.Id.ToString(), TongTienVatTu }; } }
-
+       
         public CellQ(Group r) : base(r)
+        {
+        }
+        public override void Render()
+        {
+        }
+        public override void Bind()
         {
         }
     }

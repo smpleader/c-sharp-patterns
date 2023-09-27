@@ -21,6 +21,12 @@ namespace modDisplay
         {
             return start <= row && row <= end;
         }
+
+        public virtual string GetFormula(int row, int col)
+        {
+            return "";
+        }
+
         public string HangMucId { get; set; }
         public virtual void bind(bool maskToWorking = true) { }
         public virtual void render(bool maskToWorking = true) { }

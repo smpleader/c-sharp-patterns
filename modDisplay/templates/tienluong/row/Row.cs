@@ -71,7 +71,6 @@ namespace modDisplay.templates.tienluong.row
         public CellAA cellAA { get; set; }
         public CellAB cellAB { get; set; }
         public CellAC cellAC { get; set; }
-       
         public void bind()
         {
             cellC.Bind();

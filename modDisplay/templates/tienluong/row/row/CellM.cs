@@ -26,9 +26,11 @@ namespace modDisplay.templates.tienluong.row.row
             {
                 BaseInterface.IModBL modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
                 Range.Formula = string.Format(modBLContainer.Get(UniqueName).formula(Params));
+                HasFormula = true;
             }
             else
             {
+                HasFormula = false;
                 Range.Value2 = ValueOnMask;
             }
         }

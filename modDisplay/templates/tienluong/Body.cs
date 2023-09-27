@@ -56,7 +56,22 @@ namespace modDisplay.templates.tienluong
                 cv.style();
             }
         }
-
+        public override string GetFormula(int row, int col)
+        {
+            if (additionalRows.Keys.Contains(row))
+            {
+                return additionalRows[row].GetFormula(col);
+            }
+            if (groups.Keys.Contains(row))
+            {
+                return groups[row].GetFormula(col);
+            }
+            if (rows.Keys.Contains(row))
+            {
+                return rows[row].GetFormula(col);
+            }
+            return workingsheet.Range[row,col].Value;
+        }
         public override void bindInWoringsheet()
         {
             List<int> indexAdditionalRows = new List<int>();

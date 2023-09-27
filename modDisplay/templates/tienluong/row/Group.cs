@@ -1,10 +1,7 @@
 ﻿using modDisplay.templates.tienluong.row.group;
 using Syncfusion.Styles;
-using Syncfusion.Windows.Forms.CellGrid;
 using Syncfusion.Windows.Forms.Grid;
-using Syncfusion.Windows.Forms.Spreadsheet.Helpers;
 using Syncfusion.XlsIO;
-using Syncfusion.XlsIO.Implementation.Collections.Grouping;
 using GridRangeInfo = Syncfusion.Windows.Forms.Grid.GridRangeInfo;
 
 namespace modDisplay.templates.tienluong.row
@@ -34,7 +31,6 @@ namespace modDisplay.templates.tienluong.row
         public CellT cellT { set; get; }
         public CellU cellU { set; get; }
         public CellX cellX { set; get; }
-
         public void bind()
         {
             // check group object khi mở từ file excel ( bind)
