@@ -20,8 +20,6 @@ namespace modDisplay.CustomGrid
         public delegate void EventColsHidden(int from, int count, bool hide);
         public delegate void EventCellValueChanging(string edittingText);
 
-
-
         public event EventButtonClicked OnButtonClick;
         public event EventRowDeleted OnRowDeleted;
         public event EventRowInserted OnRowInserted;
@@ -626,7 +624,7 @@ namespace modDisplay.CustomGrid
             if (gridControl.PointToRowCol(e.Location, out row, out col))
             {
                 // Kiểm tra điều kiện nhận biết cần show popup
-                if (gridControl[row, col].Text == "1")
+                if (gridControl[row, col].BackColor == Color.LightPink)
                 {
                     // Calculate the cell bounds manually based on row height and column width.
                     int rightEdge = 0; 

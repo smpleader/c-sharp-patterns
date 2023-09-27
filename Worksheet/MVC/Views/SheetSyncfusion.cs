@@ -9,6 +9,7 @@ using Util;
 using modDisplay.CustomGrid;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.GridExcelConverter;
+using System.Diagnostics;
 
 namespace Worksheet.MVC.Views
 {
@@ -98,7 +99,7 @@ namespace Worksheet.MVC.Views
 
         private void chkbx_KichThuoc_CheckedChanged(object sender, EventArgs e)
         {
-            Display.ActiveGrid.Cols.Hidden.SetRange(6, 12, !chkbx_KichThuoc.Checked);
+            Display.WControl.HideCols(6, 6, !chkbx_KichThuoc.Checked);
         }
 
         private void btn_ThemCongViec_Click(object sender, EventArgs e)
@@ -117,7 +118,7 @@ namespace Worksheet.MVC.Views
             // load workbook vào 1 panel chỉ định
             workBook.LoadWorkbook(pnl_Body);
 
-            //workBook._grid.CurrentCellControlKeyMessage += _grid_CurrentCellControlKeyMessage;
+            workBook.OnCellValueChanging += WorkBook_OnCellValueChanging;
 
             #endregion
             BaseInterface.IModBL modBLContainer = modDisplay.SimpleInjectionDI.dynamicContainer.GetInstance<BaseInterface.IModBL>();
@@ -125,6 +126,11 @@ namespace Worksheet.MVC.Views
             syncfusionP = (SyncfusionP)Publisher.get("SyncfusionTienLuong");
             syncfusionP.Setup();
             sheet_working.WorkbookLoaded += AfterLoad2;
+        }
+
+        private void WorkBook_OnCellValueChanging(string edittingText)
+        {
+            Debug.WriteLine(edittingText);
         }
 
         private void MainForm_OnButtonClick(object sender, EventArgs e)
@@ -267,7 +273,6 @@ namespace Worksheet.MVC.Views
             GridExcelConverterControl gecc = new GridExcelConverterControl();
             gecc.GridToExcel(gridControl.Model, worksheet);
         }
-        List<GridModel> models = new List<GridModel>();
         private void cbb_SheetActive_SelectedIndexChanged(object sender, EventArgs e)
         {
             Display.IsChangeTab = true;

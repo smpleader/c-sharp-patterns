@@ -144,6 +144,7 @@ namespace modDisplay.templates.tienluong.row
             cellM.GridStyleInfo.Format = "###,###,##0.0000";
 
             // style cho cột N->U
+            //cellN.GridStyleInfo.BackColor = Color.LightPink;
             cellN.GridStyleInfo.TextColor = cellO.GridStyleInfo.TextColor = cellP.GridStyleInfo.TextColor = cellQ.GridStyleInfo.TextColor
                 = cellR.GridStyleInfo.TextColor = cellS.GridStyleInfo.TextColor = cellT.GridStyleInfo.TextColor = cellU.GridStyleInfo.TextColor = Color.Black;
             cellN.GridStyleInfo.Format = cellO.GridStyleInfo.Format = cellP.GridStyleInfo.Format = cellQ.GridStyleInfo.Format
