@@ -257,7 +257,7 @@ namespace modDisplay.CustomGrid
             _grid.SelectionChanged += _grid_SelectionChanged;
             _grid.PrepareViewStyleInfo += _grid_PrepareViewStyleInfo;
             _grid.CurrentCellChanged += _grid_CurrentCellChanged;
-
+            _grid.CurrentCellControlKeyMessage += _grid_CurrentCellControlKeyMessage;
 
             // maintain the selected cells when right click 
             _grid.Model.SelectionChanging += Model_SelectionChanging;
@@ -283,7 +283,8 @@ namespace modDisplay.CustomGrid
             #endregion
         }
 
-      
+        
+
         private void InitializePanel()
         {
             btn_TinhLaiDonGia = new Button();

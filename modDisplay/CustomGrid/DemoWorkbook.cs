@@ -59,11 +59,11 @@ namespace modDisplay.CustomGrid
             WorkBook workBook = new WorkBook();
             Panel TabBarPane = new Panel();
             Panel formulaPanel = new Panel();
-            //workBook.OnChildTextChanged += MainForm_OnChildTextChanged;
             workBook.OnButtonClick += MainForm_OnButtonClick;
             workBook.OnRowDeleted += WorkBook_OnRowDeleted;
             workBook.OnRowInserted += WorkBook_OnRowInserted;
             workBook.OnContentDeleted += WorkBook_OnContentDeleted;
+            workBook.OnCellValueChanged += WorkBook_OnCellValueChanged;
             this.workBook = workBook;
 
             // load sheet vào 1 panel chỉ định
@@ -85,6 +85,10 @@ namespace modDisplay.CustomGrid
                 }
             }
             #endregion
+        }
+
+        private void WorkBook_OnCellValueChanged(object sender, EventArgs e)
+        {
         }
 
         private void WorkBook_OnContentDeleted(GridRangeInfoList ranges)

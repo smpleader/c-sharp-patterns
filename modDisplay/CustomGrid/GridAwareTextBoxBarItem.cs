@@ -1,15 +1,4 @@
-﻿#region Copyright Syncfusion Inc. 2001 - 2023
-//
-//  Copyright Syncfusion Inc. 2001 - 2023. All rights reserved.
-//
-//  Use of this code is subject to the terms of our license.
-//  A copy of the current license can be obtained at any time by e-mailing
-//  licensing@syncfusion.com. Any infringement will be prosecuted under
-//  applicable laws. 
-//
-#endregion
-
-
+﻿
 using Syncfusion.Windows.Forms;
 using Syncfusion.Windows.Forms.Tools.XPMenus;
 using Syncfusion.Windows.Forms.Grid;
@@ -98,10 +87,7 @@ namespace modDisplay.CustomGrid
             //if (!rangeofgrid)
             //{
             //    ignoreSync = true;
-            //    GridCurrentCell cc = GetCurrentCell();
-            //    cc.MoveTo(cc.RowIndex, cc.ColIndex, GridSetCurrentCellOptions.ScrollInView);
-            //    TextBoxValue = Display.tab().GetFormula(cc.RowIndex, cc.ColIndex);
-            //    //TextBoxValue = gridAwareTextBox.Text;
+            //    TextBoxValue = gridAwareTextBox.Text;
             //    ignoreSync = false;
             //}
         }

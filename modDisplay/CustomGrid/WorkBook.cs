@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
-using System.Windows.Forms;
+using System.ComponentModel;
+using System.Diagnostics;
 using Syncfusion.Windows.Forms.Grid;
 
 namespace modDisplay.CustomGrid
@@ -9,20 +10,27 @@ namespace modDisplay.CustomGrid
     {
         #region Public
         // đăng ký sự kiện 
-        public delegate void ButtonClicked(object sender, EventArgs e);
-        public delegate void RowDeleted(int rowIndex, int count);
-        public delegate void RowInserted(int insertAt, int count);
-        public delegate void ContentDeleted(GridRangeInfoList ranges);
-        public delegate void CurrentCellChanged(GridCurrentCell currentCell);
-        public delegate void CellValueChanged(object sender, EventArgs e);
+        public delegate void EventButtonClicked(object sender, EventArgs e);
+        public delegate void EventRowDeleted(int rowIndex, int count);
+        public delegate void EventRowInserted(int insertAt, int count);
+        public delegate void EventContentDeleted(GridRangeInfoList ranges);
+        public delegate void EventCurrentCellChanged(GridCurrentCell currentCell);
+        public delegate void EventCellValueChanged(object sender, EventArgs e);
+        public delegate void EventRowsHidden(int from, int count, bool hide);
+        public delegate void EventColsHidden(int from, int count, bool hide);
+        public delegate void EventCellValueChanging(string edittingText);
 
 
-        public event ButtonClicked OnButtonClick;
-        public event RowDeleted OnRowDeleted;
-        public event RowInserted OnRowInserted;
-        public event ContentDeleted OnContentDeleted;
-        public event CurrentCellChanged OnCurrentCellChanged;
-        public event CellValueChanged OnCellValueChanged;
+
+        public event EventButtonClicked OnButtonClick;
+        public event EventRowDeleted OnRowDeleted;
+        public event EventRowInserted OnRowInserted;
+        public event EventContentDeleted OnContentDeleted;
+        public event EventCurrentCellChanged OnCurrentCellChanged;
+        public event EventCellValueChanged OnCellValueChanged;
+        public event EventRowsHidden OnRowsHidden;
+        public event EventColsHidden OnColsHidden;
+        public event EventCellValueChanging OnCellValueChanging;
 
         public Panel pnl_FormulaBar;
         public Panel pnl_ActiveSheet;
@@ -515,6 +523,29 @@ namespace modDisplay.CustomGrid
             OnContentDeleted?.Invoke(ranges);
         }
 
+        /// <summary>
+        /// Ẩn/hiện (hide) dòng từ "from" đến "from+count-1" 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="count"></param>
+        /// <param name="hide"></param>
+        public void HideRows(int from, int count, bool hide)
+        {
+            _grid.Rows.Hidden.SetRange(from, from + count -1, hide);
+            OnRowsHidden?.Invoke(from, count,hide);
+        }
+        /// <summary>
+        /// Ẩn/hiện (hide) cột từ "from" đến "from+count-1" 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="count"></param>
+        /// <param name="hide"></param>
+        public void HideCols(int from, int count, bool hide)
+        {
+            _grid.Cols.Hidden.SetRange(from, from + count - 1, hide);
+            OnColsHidden?.Invoke(from, count, hide);
+        }
+
         #endregion
 
         #region Events
@@ -628,6 +659,17 @@ namespace modDisplay.CustomGrid
                 panelInfo.Visible = false;
             }
         }
+
+        /// <summary>
+        /// Lấy giá trị của current cell đang chỉnh sửa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _grid_CurrentCellControlKeyMessage(object sender, GridCurrentCellControlKeyMessageEventArgs e)
+        {
+            OnCellValueChanging?.Invoke(e.Control.Text);
+        }
+
         #endregion
 
         #region Extend Events
