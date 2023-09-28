@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using Syncfusion.Windows.Forms.Grid;
+using static modDisplay.CustomGrid.WorkBook;
 
 namespace modDisplay.CustomGrid
 {
@@ -19,6 +20,8 @@ namespace modDisplay.CustomGrid
         public delegate void EventRowsHidden(int from, int count, bool hide);
         public delegate void EventColsHidden(int from, int count, bool hide);
         public delegate void EventCellValueChanging(string edittingText);
+        public delegate void CurrentCellKeyDown(KeyEventArgs e);
+
 
         public event EventButtonClicked OnButtonClick;
         public event EventRowDeleted OnRowDeleted;
@@ -29,6 +32,7 @@ namespace modDisplay.CustomGrid
         public event EventRowsHidden OnRowsHidden;
         public event EventColsHidden OnColsHidden;
         public event EventCellValueChanging OnCellValueChanging;
+        public event CurrentCellKeyDown OnCurrentCellKeyDown;
 
         public Panel pnl_FormulaBar;
         public Panel pnl_ActiveSheet;
@@ -605,16 +609,7 @@ namespace modDisplay.CustomGrid
         {
             OnCellValueChanged?.Invoke(sender, e);
         }
-
-        void Model_SelectionChanging(object sender, GridSelectionChangingEventArgs e)
-        {
-            // Checking mouse right button.
-            if (e.Reason == Syncfusion.Windows.Forms.Grid.GridSelectionReason.MouseDown && Control.MouseButtons == System.Windows.Forms.MouseButtons.Right)
-            {
-                // giữ lại selection range khi nhấn chuột phải
-                e.Cancel = true;
-            }
-        }
+       
         void _grid_MouseMove(object? sender, MouseEventArgs e)
         {
             GridControl gridControl = sender as GridControl;
@@ -666,6 +661,11 @@ namespace modDisplay.CustomGrid
         private void _grid_CurrentCellControlKeyMessage(object sender, GridCurrentCellControlKeyMessageEventArgs e)
         {
             OnCellValueChanging?.Invoke(e.Control.Text);
+        }
+
+        private void _grid_CurrentCellKeyDown(object sender, KeyEventArgs e)
+        {
+            if(!_grid.CurrentCell.IsEditing) OnCurrentCellKeyDown?.Invoke(e); 
         }
 
         #endregion

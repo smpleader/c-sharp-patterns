@@ -237,6 +237,11 @@ namespace modDisplay.CustomGrid
             _grid.Size = new Size(1000, 1000);
             _grid.Dock = DockStyle.Fill;
             _grid.Visible = true;
+            //Restrict the clearing of selection using the mouse right click.
+            _grid.SelectCellsMouseButtonsMask = System.Windows.Forms.MouseButtons.Left;
+
+            // Cell focus moved to down direction.
+            _grid.EnterKeyBehavior = GridDirectionType.Down;
 
             GridMetroColors grid = new GridMetroColors();
             grid.HeaderColor.NormalColor = Color.Red;
@@ -258,9 +263,7 @@ namespace modDisplay.CustomGrid
             _grid.PrepareViewStyleInfo += _grid_PrepareViewStyleInfo;
             _grid.CurrentCellChanged += _grid_CurrentCellChanged;
             _grid.CurrentCellControlKeyMessage += _grid_CurrentCellControlKeyMessage;
-
-            // maintain the selected cells when right click 
-            _grid.Model.SelectionChanging += Model_SelectionChanging;
+            _grid.CurrentCellKeyDown += _grid_CurrentCellKeyDown;
 
             _grid.MouseMove += _grid_MouseMove;
 
@@ -282,8 +285,6 @@ namespace modDisplay.CustomGrid
             ResumeLayout(true);
             #endregion
         }
-
-        
 
         private void InitializePanel()
         {

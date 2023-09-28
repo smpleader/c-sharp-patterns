@@ -32,9 +32,9 @@ namespace modDisplay.templates.tienluong
         public override void loadData()
         {
             IsEditting = true;
-            gridControl.Cols.Hidden.SetRange(6, 12, true);
-            gridControl.Cols.Hidden.SetRange(15, 15, true);
-            gridControl.Cols.Hidden.SetRange(19, 19, true);
+            //gridControl.Cols.Hidden.SetRange(6, 12, true);
+            //gridControl.Cols.Hidden.SetRange(15, 15, true);
+            //gridControl.Cols.Hidden.SetRange(19, 19, true);
 
             Positions = new Dictionary<string, APosition>()
             {
@@ -70,7 +70,6 @@ namespace modDisplay.templates.tienluong
         public void updateData()
         {
             Style();
-
             // thêm công việc vào dòng đang chọn
             int selectedIndexRow = Display.Row;
             if (Positions["Body"].HasRow(selectedIndexRow))
@@ -87,7 +86,6 @@ namespace modDisplay.templates.tienluong
                 IsEditting = false;
             }
             ((Body)Positions["Body"]).Style();
-
         }
 
         public override void selectCell()
@@ -107,7 +105,6 @@ namespace modDisplay.templates.tienluong
                     //Display.Cell.IsReadOnly = true;
                     break;
             }
-            var b = Display.ActiveGrid[Display.Row, Util.CellUtility.GetExcelColumnNumber(Display.Col)];
         }
 
         public override void afterCellInput()
@@ -130,9 +127,6 @@ namespace modDisplay.templates.tienluong
         }
         public override void insertRow(int indexRow, int count)
         {
-
-            //((Body)Position("Body")).end += count;
-
             Positions = new Dictionary<string, APosition>()
             {
                 { "Header", new HeaderGroup(gridControl, workingsheet) },
@@ -219,7 +213,6 @@ namespace modDisplay.templates.tienluong
 
         public override void deleteRow(int indexRow, int count)
         {
-            //((Body)Position("Body")).end -= count;
             Positions = new Dictionary<string, APosition>()
             {
                 { "Header", new HeaderGroup(gridControl, workingsheet) },

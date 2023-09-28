@@ -1,4 +1,5 @@
 ﻿using modDisplay.CustomGrid;
+using Syncfusion.GridExcelConverter;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Spreadsheet;
 using Syncfusion.XlsIO;
@@ -37,6 +38,8 @@ namespace modDisplay
         public static GridCurrentCell Cell;
         public static string Col;
         public static int Row;
+        public static int SelectedCol;
+
 
         public static bool IsChangeTab = false;
 
@@ -84,7 +87,7 @@ namespace modDisplay
 
             ExcelEngine excelEngine = new ExcelEngine();
             var application = excelEngine.Excel;
-            WorkingBook = application.Workbooks.Open(AppConst.templateFolder + "Default.xlsx");
+            WorkingBook = application.Workbooks.Open(AppConst.path + "/Data/Templates/Default.xlsx");
             //WorkingBook.SetSeparators(';', ',');
             WorkingBook.CalculationOptions.CalculationMode = ExcelCalculationMode.Automatic;
             Workingsheets = WorkingBook.Worksheets;
@@ -142,6 +145,8 @@ namespace modDisplay
                 }
             }
         }
+
+
 
         
         private static void setTemplate(string filePath)
@@ -218,6 +223,7 @@ namespace modDisplay
         /// </summary>
         public static void showDataDebug()
         {
+            return;
             Workingsheet.EnableSheetCalculations(); // bắt buộc khi chuyển sheet để tính toán dữ liệu
             // Duyệt qua các ô trên tờ và lấy giá trị của từng ô
             for (int row = 1; row <= Workingsheet.Rows.Length; row++)
@@ -424,11 +430,44 @@ namespace modDisplay
             Cell = currentCell;
             Col = Cell.ColIndex > 0 ? Util.CellUtility.GetExcelColumnLetter(Cell.ColIndex) : "A";
             Row = Cell.RowIndex > 0 ? Cell.RowIndex : 1;
+            SelectedCol = Cell.ColIndex > 0 ? Cell.ColIndex : 1;
             hook("SelectCell");
         }
         public static void contextMenuOpen(object sender, EventArgs e)
         {
             tab().addMenu();
+        }
+        public static void ChangeTab(WorkBook workBook,string activeSheetName)
+        {
+            IsChangeTab = true;
+            if (ActiveSheet != null)
+            {
+                GridExcelConverterControl gecc1 = new GridExcelConverterControl();
+                gecc1.GridToExcel(workBook._grid.Model, ActiveSheet);
+                //Get the row and column indexes from the IRange
+
+                int startRow = ActiveSheet.UsedRange.Row;
+                int endRow = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Length - 1;
+                endRow = endRow > 0 ? endRow : 0;
+                int startColumn = ActiveSheet.UsedRange.Column;
+                int endColumn = ActiveSheet.UsedRange.Column + ActiveSheet.UsedRange.Columns.Length - 1;
+                endColumn = endColumn > 0 ? endColumn : 0;
+                GridRangeInfo gridRangeInfo = GridRangeInfo.Cells(startRow, startColumn, endRow, endColumn);
+                workBook._grid.Model.ClearCells(gridRangeInfo, true);
+                workBook._grid.CoveredRanges.Clear();
+            }
+            GridExcelConverterControl gecc = new GridExcelConverterControl();
+            ActiveSheet = WorkSheets[activeSheetName];
+
+            gecc.ExcelToGrid(ActiveSheet, workBook._grid.Model);
+            workBook._grid.Refresh();
+
+            setControl(workBook);
+
+            SetActiveWorkingSheet("Tiên lượng");
+            showData();
+            IsChangeTab = false;
+
         }
 
     }

@@ -11,7 +11,7 @@ namespace modDisplay.row
         public ACell(ARowObject r)
         {
             Row = r;
-            modBLContainer = SimpleInjectionDI.dynamicContainer.GetInstance<IModBL>();
+            modBLContainer = modDisplay.SimpleInjectionDI.dynamicContainer.GetInstance<IModBL>();
             BL = new ACellBl(this);
             Data = new ACellDt(this, "");
             HangMucId = r.HangMucId;
