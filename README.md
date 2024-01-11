@@ -1,24 +1,14 @@
 # C sharp patterns & practises
-Just some practices for patterns in C sharp
+Just some practices for WinForm in C sharp
 
-## Worksheet:
+## Purpose:
 
-How we deal with 2 dimensions of data model, which you can't apply POV or RDBM.
+1- winform progress bar
 
-Pattern for data mapping in strong type language.
+2- download from remote
 
-Todo:
+3- CLI call exe with parameters
 
-- Print a grid of data to paper.
-- Consider SyncFusion instead of ReoGrid
+4- frameworks
 
-## DI_MVP:
-
-MVP with MicrosoftInjection and SimpleInjection
-
-## DI_MVC:
-
-MVC with SimpleInjection
-## DI_Storage:
-
-Storage + repository with SimpleInjection
+5- installer
